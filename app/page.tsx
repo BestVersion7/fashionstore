@@ -1,10 +1,11 @@
 import { CartTotal } from "./components/CartTotal";
 import { Product } from "./components/Product";
 import { ProductType } from "./types";
-import { getAllProducts } from "./utils/serverAPICalls";
+import { getAllProducts, getCartTotal } from "./utils/serverAPICalls";
 
-export default async function Consume() {
+export default async function Home() {
     const products: ProductType[] = await getAllProducts();
+
     return (
         <div>
             <div className="p-1 ">

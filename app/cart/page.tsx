@@ -51,7 +51,7 @@ export default async function CartPage() {
                     <div className="text-right mt-5">
                         <Link
                             className="text-right text-2xl no-underline p-2 border-2 border-solid rounded-xl border-red-400  bg-green-200 text-purple-800 hover:cursor-pointer hover:bg-yellow-200"
-                            href="/consume/checkout"
+                            href="/checkout"
                         >
                             Checkout{" "}
                             <span className="text-green-800">{`>>`}</span>

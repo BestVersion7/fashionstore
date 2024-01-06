@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 
 export async function CartTotal() {
     const totalQuantity = await getCartTotal(
-        cookies().get("cartcookie")?.value
+        cookies().get("cookiecart")?.value
     );
 
     return (

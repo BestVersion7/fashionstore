@@ -14,9 +14,9 @@ import { ConsumeCheckoutItem } from "./CheckoutItem";
 import {
     createCustomer,
     createInvoice,
-    deleteCartCookie,
     getCartByCookie,
 } from "../utils/serverAPICalls";
+import { deleteCartCookie } from "../utils/clientAPICalls";
 import { CartType } from "../types";
 
 export function StripeForm() {

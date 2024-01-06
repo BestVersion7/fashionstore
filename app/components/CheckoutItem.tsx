@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { CartProps } from "./CartQChange";
 import { getProductById } from "../utils/serverAPICalls";
+import { CartType } from "../types";
 
-export function ConsumeCheckoutItem(props: CartProps) {
+export function CheckoutItem(props: CartType) {
     const [itemName, setItemName] = useState();
 
     async function getPrice() {

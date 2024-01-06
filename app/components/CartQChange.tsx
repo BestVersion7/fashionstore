@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { updateCart, deleteCartItemByPriceId } from "../utils/serverAPICalls";
+import { updateCart, deleteCartItemByPriceId } from "../utils/clientAPICalls";
 import { getCookie } from "cookies-next";
 import { CartType } from "../types";
 
@@ -24,14 +24,14 @@ export const CartQChange = (props: CartType) => {
         router.refresh();
     };
     const handleDelete = async () => {
-        console.log(getCookie("cookiecart"));
-        // await deleteCartItemByPriceId(getCookie("cookiecart"), props.price_id);
-        // router.refresh();
+        await deleteCartItemByPriceId(getCookie("cookiecart"), props.price_id);
+        router.refresh();
     };
 
     return (
         <>
-            <select
+            {props.quantity}
+            {/* <select
                 title="changeQ"
                 onChange={handleChangeQuantity}
                 name="quantity"
@@ -42,7 +42,7 @@ export const CartQChange = (props: CartType) => {
                         {item}
                     </option>
                 ))}
-            </select>
+            </select> */}
             <button
                 onClick={handleDelete}
                 type="button"

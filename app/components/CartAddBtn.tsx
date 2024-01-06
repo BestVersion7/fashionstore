@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { createCart, createCartCookie } from "../utils/serverAPICalls";
+import { createCart, createCartCookie } from "../utils/clientAPICalls";
 import { CartType } from "../types";
 
 export const CartAddBtn = (props: CartType) => {

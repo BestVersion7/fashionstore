@@ -1,9 +1,8 @@
 import { CartType, CustomerType } from "../types";
+import { cookies } from "next/headers";
 
 const stripeOrigin = "https://www.hunterkf.com/api/v2/stripe";
 const cartOriginServer = "https://www.hunterkf.com/api/v2/cart";
-
-let cartOrigin = "/api/cart";
 
 const options = {
     headers: {
@@ -14,7 +13,8 @@ const options = {
 export const getAllProducts = async () => {
     const res = await fetch(`${stripeOrigin}/product`, {
         ...options,
-        next: { revalidate: 60 * 60 * 24 * 1 },
+        // next: { revalidate: 60 * 60 * 24 * 1 },
+        cache: "no-store",
     });
     const { data } = await res.json();
     return data;
@@ -86,55 +86,6 @@ export const getCartByCookie = async (cookie: string | undefined) => {
     const res = await fetch(`${cartOriginServer}?cookie_id=${cookie}`, {
         ...options,
         cache: "no-cache",
-    });
-    const data = await res.json();
-    return data;
-};
-
-// THESE ARE ALL CLIENT RENDERED SO WE ARE USING OWN API ROUTE
-export const createCartCookie = async () => {
-    const res = await fetch("/api/cookie", { method: "post" });
-    const data = await res.json();
-    return data;
-};
-
-export const deleteCartCookie = async () => {
-    const res = await fetch("/api/cookie", { method: "delete" });
-    const data = await res.json();
-    return data;
-};
-
-export const createCart = async (
-    cookie: string | undefined,
-    cart: CartType
-) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
-        method: "POST",
-        body: JSON.stringify(cart),
-    });
-    const data = await res.json();
-    return data;
-};
-
-export const updateCart = async (
-    cookie: string | undefined,
-    cart: Pick<CartType, "price_id" | "quantity">
-) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
-        method: "PUT",
-        body: JSON.stringify(cart),
-    });
-    const data = await res.json();
-    return data;
-};
-
-export const deleteCartItemByPriceId = async (
-    cookie: string | undefined,
-    priceId: string
-) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
-        method: "DELETE",
-        body: JSON.stringify({ price_id: priceId }),
     });
     const data = await res.json();
     return data;
