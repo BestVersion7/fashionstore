@@ -1,59 +1,115 @@
+import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
-const cartOrigin = "https://www.hunterkf.com/api/v2/cart";
-const options = {
-    headers: {
-        authorization: `${process.env.API_KEY}`,
-    },
-};
+export async function GET() {
+    try {
+        // check for cookies
+        const cartCookie = cookies().get("cookiecart")?.value;
 
-export async function GET(req: NextRequest) {
-    const cartCookie = req.nextUrl.searchParams.get("cookie_id");
-
-    const res = await fetch(`${cartOrigin}?cookie_id=${cartCookie}`, {
-        ...options,
-        cache: "no-cache",
-    });
-    const data = await res.json();
-    return NextResponse.json(data);
+        if (!cartCookie || cartCookie === "undefined") {
+            return NextResponse.json([]);
+        } else {
+            const data2 = await prisma.cartInfo.findMany({
+                where: {
+                    cookie_id: cartCookie,
+                },
+                orderBy: {
+                    cart_id: "desc",
+                },
+            });
+            const data = JSON.parse(
+                JSON.stringify(
+                    data2,
+                    (_, value) =>
+                        typeof value === "bigint" ? value.toString() : value // return everything else unchanged
+                )
+            );
+            return NextResponse.json(data);
+        }
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+    }
 }
 
 export async function POST(req: NextRequest) {
-    const cartCookie = req.nextUrl.searchParams.get("cookie_id");
-    const body = await req.json();
+    // const price = req.nextUrl.searchParams.get('price')
+    const { quantity, price_id, product_id, product_price } = await req.json();
 
-    const res = await fetch(`${cartOrigin}?cookie_id=${cartCookie}`, {
-        ...options,
-        method: "post",
-        body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    console.log(data);
-    return NextResponse.json("data");
+    try {
+        const cartCookie = cookies().get("cookiecart")?.value;
+
+        const find = await prisma.cartInfo.findMany({
+            where: {
+                cookie_id: cartCookie,
+                price_id,
+            },
+        });
+
+        if (find.length < 1) {
+            await prisma.cartInfo.create({
+                data: {
+                    price_id,
+                    product_id,
+                    quantity,
+                    cookie_id: `${cartCookie}`,
+                    product_price,
+                },
+            });
+        } else {
+            await prisma.cartInfo.updateMany({
+                where: {
+                    cookie_id: `${cartCookie}`,
+                    price_id,
+                },
+                data: {
+                    quantity: Number(find[0].quantity) + quantity,
+                },
+            });
+        }
+
+        return NextResponse.json("create success", { status: 200 });
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+    }
 }
 
 export async function PUT(req: NextRequest) {
-    const cartCookie = req.nextUrl.searchParams.get("cookie_id");
-    const body = await req.json();
+    const { price_id, quantity } = await req.json();
 
-    const res = await fetch(`${cartOrigin}?cookie_id=${cartCookie}`, {
-        ...options,
-        method: "put",
-        body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    return NextResponse.json(data);
+    try {
+        // check for cookies
+        const cartCookie = cookies().get("cookiecart")?.value;
+
+        await prisma.cartInfo.updateMany({
+            where: {
+                cookie_id: `${cartCookie}`,
+                price_id,
+            },
+            data: {
+                quantity,
+            },
+        });
+        return NextResponse.json("update success", { status: 201 });
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+    }
 }
 
-export async function DELETE(req: NextRequest) {
-    const cartCookie = req.nextUrl.searchParams.get("cookie_id");
+export async function DELETE(req: Request) {
     const { price_id } = await req.json();
 
-    const res = await fetch(`${cartOrigin}?cookie_id=${cartCookie}`, {
-        ...options,
-        method: "delete",
-        body: JSON.stringify({ price_id }),
-    });
-    const data = await res.json();
-    return NextResponse.json(data);
+    try {
+        const cartCookie = cookies().get("cookiecart")?.value;
+
+        await prisma.cartInfo.deleteMany({
+            where: {
+                price_id,
+                cookie_id: cartCookie,
+            },
+        });
+        return NextResponse.json("update success", { status: 201 });
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+    }
 }

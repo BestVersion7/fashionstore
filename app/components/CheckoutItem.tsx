@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProductById } from "../utils/serverAPICalls";
+import { getProductById } from "../utils/apiCalls";
 import { CartType } from "../types";
 
 export function CheckoutItem(props: CartType) {

@@ -24,7 +24,7 @@ export const CartAddBtn = (props: CartType) => {
             console.log("create cookie");
         }
 
-        await createCart(cookieCart, {
+        await createCart({
             product_id: props.product_id,
             price_id: props.price_id,
             quantity,

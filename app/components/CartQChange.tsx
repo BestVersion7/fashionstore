@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { updateCart, deleteCartItemByPriceId } from "../utils/clientAPICalls";
-import { getCookie } from "cookies-next";
 import { CartType } from "../types";
 
 export const CartQChange = (props: CartType) => {
@@ -16,7 +15,7 @@ export const CartQChange = (props: CartType) => {
     const handleChangeQuantity = async (
         e: React.ChangeEvent<HTMLSelectElement>
     ) => {
-        await updateCart(getCookie("cookiecart"), {
+        await updateCart({
             ...props,
             quantity: Number(e.target.value),
         });
@@ -24,14 +23,13 @@ export const CartQChange = (props: CartType) => {
         router.refresh();
     };
     const handleDelete = async () => {
-        await deleteCartItemByPriceId(getCookie("cookiecart"), props.price_id);
+        await deleteCartItemByPriceId(props.price_id);
         router.refresh();
     };
 
     return (
         <>
-            {props.quantity}
-            {/* <select
+            <select
                 title="changeQ"
                 onChange={handleChangeQuantity}
                 name="quantity"
@@ -42,7 +40,7 @@ export const CartQChange = (props: CartType) => {
                         {item}
                     </option>
                 ))}
-            </select> */}
+            </select>
             <button
                 onClick={handleDelete}
                 type="button"

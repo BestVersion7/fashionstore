@@ -1,4 +1,4 @@
-import { getInvoiceById, getPaymentIntent } from "@/app/utils/serverAPICalls";
+import { getInvoiceById, getPaymentIntent } from "@/app/utils/apiCalls";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { InvoiceType } from "@/app/types";
 

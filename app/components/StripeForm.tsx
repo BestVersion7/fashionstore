@@ -9,13 +9,15 @@ import {
 
 import { useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
-import { ConsumeCheckoutItem } from "./CheckoutItem";
+import { getCookie, getCookies } from "cookies-next";
+import { CheckoutItem } from "./CheckoutItem";
+
 import {
     createCustomer,
     createInvoice,
     getCartByCookie,
-} from "../utils/serverAPICalls";
+    getCartTotal,
+} from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/clientAPICalls";
 import { CartType } from "../types";
 
@@ -26,10 +28,11 @@ export function StripeForm() {
 
     useEffect(() => {
         async function getCart() {
-            const data: CartType[] = await getCartByCookie(
+            const data: CartType[] = await getCartTotal(
                 getCookie("cookiecart")
             );
             setCartItems(data);
+            console.log(data);
 
             const totalData = data
                 .map((item) => (item.quantity * item.product_price) / 100)
@@ -41,7 +44,7 @@ export function StripeForm() {
 
     const stripe = useStripe();
     const elements = useElements();
-    const emailRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>("jane@gmail.com");
     const router = useRouter();
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -53,22 +56,22 @@ export function StripeForm() {
         if (!stripe || !cardElement) return null;
 
         try {
-            setDisablePay(true);
+            // setDisablePay(true);
 
             // creat the customer if all fields are filled
             const data1 = await addressElement?.getValue();
             if (data1?.complete) {
                 // create the customer and it will return an id
-                const customer = await createCustomer({
+                const customerId = await createCustomer({
                     name: data1.value.name,
                     email: emailRef.current?.value,
                     shipping: data1.value,
                 });
-
-                const customerId = await customer.json();
+                console.log(customerId);
 
                 //create an invoice, add items, finalize invoice, get payment intent
                 const clientSecret = await createInvoice(customerId, cartItems);
+                console.log(clientSecret);
 
                 // verify the card works
                 const { paymentIntent, error } =
@@ -82,7 +85,7 @@ export function StripeForm() {
                     router.push(`/checkout/success/${paymentIntent.id}`);
                 }
             }
-            setDisablePay(false);
+            // setDisablePay(false);
         } catch (err) {
             console.log(err);
         }
@@ -103,10 +106,11 @@ export function StripeForm() {
                     <AddressElement options={{ mode: "shipping" }} />
                     <h3>3. Payment Details</h3>
                     <CardElement />
+                    4242424242424242
                     <h3>4. Review Cart</h3>
-                    {cartItems.map((item, index) => (
-                        <ConsumeCheckoutItem key={index} {...item} />
-                    ))}
+                    {/* {cartItems.map((item, index) => (
+                        <CheckoutItem key={index} {...item} />
+                    ))} */}
                 </div>
                 <div>
                     <p>Your total is ${total}</p>

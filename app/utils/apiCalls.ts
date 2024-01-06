@@ -1,6 +1,3 @@
-import { CartType, CustomerType } from "../types";
-import { cookies } from "next/headers";
-
 const stripeOrigin = "https://www.hunterkf.com/api/v2/stripe";
 const cartOriginServer = "https://www.hunterkf.com/api/v2/cart";
 
@@ -38,37 +35,8 @@ export const getPriceById = async (id: string) => {
     return data;
 };
 
-export const getPaymentIntent = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`, options);
-    const data = await res.json();
-    return data;
-};
-
-export const createCustomer = async (customerData: CustomerType) => {
-    const res = await fetch(`${stripeOrigin}/customer`, {
-        ...options,
-        method: "post",
-        body: JSON.stringify(customerData),
-    });
-    const data = await res.json();
-    return data;
-};
-
 export const getInvoiceById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/invoice?invoiceid=${id}`, options);
-    const data = await res.json();
-    return data;
-};
-
-export const createInvoice = async (
-    customer: string,
-    invoiceData: CartType[]
-) => {
-    const res = await fetch(`${stripeOrigin}/invoice`, {
-        ...options,
-        method: "post",
-        body: JSON.stringify({ customerId: customer, invoiceData }),
-    });
     const data = await res.json();
     return data;
 };

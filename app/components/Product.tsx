@@ -2,7 +2,7 @@ import Image from "next/image";
 import { CartAddBtn } from "./CartAddBtn";
 import { formatCurrency } from "../utils/formatCurrency";
 import { PriceType, ProductType } from "../types";
-import { getPriceById } from "../utils/serverAPICalls";
+import { getPriceById } from "../utils/apiCalls";
 
 export const Product = async (props: ProductType) => {
     // get the prices

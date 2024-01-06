@@ -1,6 +1,6 @@
 import { CartQChange } from "./CartQChange";
 import { CartType } from "../types";
-import { getProductById } from "../utils/serverAPICalls";
+import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
 
 export const CartProducts = async (props: CartType) => {
