@@ -50,5 +50,6 @@ export type CartType = {
     quantity: number;
     price_id: string;
     product_id: string;
-    product_price: number;
+    product_price?: number;
+    purchased: boolean;
 };

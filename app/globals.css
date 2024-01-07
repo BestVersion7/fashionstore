@@ -4,17 +4,22 @@
 
 @layer components {
     .stripe-h2 {
-        @apply text-2xl font-semibold;
+        @apply text-xl font-semibold;
     }
 }
 
 @layer utilities {
     h2 {
-        @apply text-2xl;
+        @apply text-xl;
     }
 }
 
 body {
     margin: auto;
     max-width: 90em;
+
+}
+
+main {
+    margin: 0 .5rem
 }

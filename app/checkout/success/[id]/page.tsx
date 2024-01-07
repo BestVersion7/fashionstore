@@ -19,7 +19,7 @@ export default async function SuccessPage({
     const { customer_name, customer_email, lines, amount_paid } = invoiceData;
 
     return (
-        <div>
+        <main>
             <h2>
                 Thank you for your purchase <mark>{customer_name}</mark>
             </h2>
@@ -41,6 +41,6 @@ export default async function SuccessPage({
                 </p>
                 <Link href="/">Back to Home</Link>
             </section>
-        </div>
+        </main>
     );
 }

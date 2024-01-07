@@ -7,7 +7,7 @@ export default async function Home() {
     const products: ProductType[] = await getAllProducts();
 
     return (
-        <div>
+        <main>
             <div className="p-1 ">
                 <CartTotal />
             </div>
@@ -17,6 +17,6 @@ export default async function Home() {
                     <Product key={item.id} {...item} />
                 ))}
             </div>
-        </div>
+        </main>
     );
 }

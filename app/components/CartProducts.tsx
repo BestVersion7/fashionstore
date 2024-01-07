@@ -9,7 +9,7 @@ export const CartProducts = async (props: CartType) => {
 
     return (
         <>
-            <div className="grid grid-cols-[220px,_1fr] h-44 gap-4 my-4 ">
+            <div className="grid grid-cols-[150px,_1fr] h-32 gap-4 my-4 md:grid-cols-[220px,_1fr] md:h-44  ">
                 <div className="relative ">
                     <Image
                         className="object-contain absolute "

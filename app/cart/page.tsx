@@ -21,7 +21,7 @@ export default async function CartPage() {
         <div>
             <Link href="/">Home</Link>
             <main>
-                <div className="mx-2  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
+                <div className="  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
                     {cartItems.length === 0 ? (
                         <span className="text-red-400">
                             You have no items in your cart
@@ -51,12 +51,13 @@ export default async function CartPage() {
                             </span>
                         </p>{" "}
                         <br />
-                        <button
-                            type="button"
+                        <Link
                             className="py-2 px-3 rounded-xl w-full bg-yellow-300  hover:cursor-pointer hover:bg-yellow-400"
+                            type="button"
+                            href="/checkout"
                         >
-                            <Link href="/checkout">Proceed to checkout </Link>
-                        </button>
+                            Proceed to checkout{" "}
+                        </Link>
                     </div>
                 </div>
             </main>

@@ -1,5 +1,6 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
+const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 export async function GET(req: NextRequest) {
     try {
@@ -32,7 +33,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { quantity, price_id, product_id, product_price } = await req.json();
+    const { quantity, price_id, product_id } = await req.json();
 
     try {
         const cartCookie = req.nextUrl.searchParams.get("cookie_id");
@@ -45,13 +46,15 @@ export async function POST(req: NextRequest) {
         });
 
         if (find.length < 1) {
+            const price = await stripe.prices.retrieve(price_id);
+            // prevent entering your own price
             await prisma.cartInfo.create({
                 data: {
                     price_id,
                     product_id,
                     quantity,
                     cookie_id: `${cartCookie}`,
-                    product_price,
+                    product_price: price.unit_amount,
                 },
             });
         } else {
@@ -73,7 +76,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-    const { price_id, quantity } = await req.json();
+    const { price_id, quantity, purchased } = await req.json();
 
     try {
         // check for cookies
@@ -86,6 +89,7 @@ export async function PUT(req: NextRequest) {
             },
             data: {
                 quantity,
+                purchased,
             },
         });
         return NextResponse.json("update success");

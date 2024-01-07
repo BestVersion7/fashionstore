@@ -28,7 +28,7 @@ export const CartAddBtn = (props: CartType) => {
             product_id: props.product_id,
             price_id: props.price_id,
             quantity,
-            product_price: props.product_price,
+            purchased: false,
         });
 
         router.refresh();

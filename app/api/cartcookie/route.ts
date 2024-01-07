@@ -12,8 +12,8 @@ export async function POST() {
             value: data.cookie_id,
             secure: true,
             // httpOnly: true,
-            // max 4 days
-            maxAge: 60 * 60 * 24 * 4,
+            // max 30 days
+            maxAge: 60 * 60 * 24 * 30,
         });
 
         return response;

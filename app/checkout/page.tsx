@@ -10,11 +10,21 @@ export default async function CheckoutPage() {
     );
 
     return (
-        <div>
+        <main>
+            <div className="flex justify-around text-3xl">
+                <span>Checkout (1 item)</span>
+                <span>Lock</span>
+            </div>
+            {/* <main className="lg:grid lg:grid-cols-[700px,_1fr]"> */}
             <Checkout {...cartData} />
-            {cartData.map((item, index) => (
-                <CartProducts key={index} {...item} />
-            ))}
-        </div>
+            <br />
+            <h2 className="stripe-h2">4. Review Items</h2>
+            <div className=" bg-white">
+                {cartData.map((item, index) => (
+                    <CartProducts key={index} {...item} />
+                ))}
+            </div>
+            <br />
+        </main>
     );
 }

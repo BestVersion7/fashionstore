@@ -94,6 +94,18 @@ export const updateCart = async (
     return data;
 };
 
+export const updateCartPurchased = async (
+    cookieId: string | undefined,
+    cart: Pick<CartType, "purchased">
+) => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
+        method: "PUT",
+        body: JSON.stringify(cart),
+    });
+    const data = await res.json();
+    return data;
+};
+
 export const deleteCartItemByProductId = async (
     cookieId: string | undefined,
     productId: string
