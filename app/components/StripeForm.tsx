@@ -7,38 +7,19 @@ import {
     AddressElement,
 } from "@stripe/react-stripe-js";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCookie } from "cookies-next";
-import { CheckoutItem } from "./CheckoutItem";
 
-import {
-    createCustomer,
-    createInvoice,
-    getCartByCookie,
-} from "../utils/apiCalls";
+import { createCustomer, createInvoice } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 
-export function StripeForm() {
-    const [cartItems, setCartItems] = useState<CartType[]>([]);
-    const [total, setTotal] = useState(0);
+export function StripeForm(props: CartType[]) {
+    const total = Object.values(props)
+        .map((item) => (item.quantity * item.product_price) / 100)
+        .reduce((arr, val) => arr + val);
+
     const [disablePay, setDisablePay] = useState(false);
-
-    useEffect(() => {
-        async function getCart() {
-            const data: CartType[] = await getCartByCookie(
-                getCookie("cookiecart")
-            );
-            setCartItems(data);
-
-            const totalData = data
-                .map((item) => (item.quantity * item.product_price) / 100)
-                .reduce((arr, val) => arr + val);
-            setTotal(totalData);
-        }
-        getCart();
-    }, []);
 
     const stripe = useStripe();
     const elements = useElements();
@@ -67,7 +48,10 @@ export function StripeForm() {
                 });
 
                 //create an invoice, add items, finalize invoice, get payment intent
-                const clientSecret = await createInvoice(customerId, cartItems);
+                const clientSecret = await createInvoice(
+                    customerId,
+                    Object.values(props)
+                );
 
                 // verify the card works
                 const { paymentIntent, error } =
@@ -106,9 +90,6 @@ export function StripeForm() {
                     4242424242424242
                     <CardElement /> <br />
                     <h2 className="stripe-h2">4. Review Items</h2>
-                    {cartItems.map((item, index) => (
-                        <CheckoutItem key={index} {...item} />
-                    ))}
                 </div>
                 <div>
                     <p>Your total is ${total}</p>

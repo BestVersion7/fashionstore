@@ -2,6 +2,7 @@ import { getInvoiceById, getPaymentIntent } from "@/app/utils/apiCalls";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { InvoiceType } from "@/app/types";
 import NotFound from "@/app/not-found";
+import Link from "next/link";
 
 export default async function SuccessPage({
     params,
@@ -38,6 +39,7 @@ export default async function SuccessPage({
                 <p>
                     Total: <mark>{formatCurrency(amount_paid)}</mark>{" "}
                 </p>
+                <Link href="/">Back to Home</Link>
             </section>
         </div>
     );
