@@ -1,11 +1,10 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { cookies } from "next/headers";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
         // check for cookies
-        const cartCookie = cookies().get("cookiecart")?.value;
+        const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
         if (!cartCookie || cartCookie === "undefined") {
             return NextResponse.json([]);
@@ -33,15 +32,15 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-    // const price = req.nextUrl.searchParams.get('price')
+    const price = req.nextUrl.searchParams.get("price");
     const { quantity, price_id, product_id, product_price } = await req.json();
 
     try {
-        const cartCookie = cookies().get("cookiecart")?.value;
+        const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
         const find = await prisma.cartInfo.findMany({
             where: {
-                cookie_id: cartCookie,
+                cookie_id: `${cartCookie}`,
                 price_id,
             },
         });
@@ -68,7 +67,7 @@ export async function POST(req: NextRequest) {
             });
         }
 
-        return NextResponse.json("create success", { status: 200 });
+        return NextResponse.json("create success", { status: 201 });
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }
@@ -79,7 +78,7 @@ export async function PUT(req: NextRequest) {
 
     try {
         // check for cookies
-        const cartCookie = cookies().get("cookiecart")?.value;
+        const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
         await prisma.cartInfo.updateMany({
             where: {
@@ -90,25 +89,25 @@ export async function PUT(req: NextRequest) {
                 quantity,
             },
         });
-        return NextResponse.json("update success", { status: 201 });
+        return NextResponse.json("update success");
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }
 }
 
-export async function DELETE(req: Request) {
+export async function DELETE(req: NextRequest) {
     const { price_id } = await req.json();
 
     try {
-        const cartCookie = cookies().get("cookiecart")?.value;
+        const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
         await prisma.cartInfo.deleteMany({
             where: {
                 price_id,
-                cookie_id: cartCookie,
+                cookie_id: `${cartCookie}`,
             },
         });
-        return NextResponse.json("update success", { status: 201 });
+        return NextResponse.json("delete success");
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

@@ -1,18 +1,19 @@
 import { CartType, CustomerType } from "../types";
 
-const options = {
-    headers: {
-        authorization: `${process.env.API_KEY}`,
-    },
-};
+// const options = {
+//     headers: {
+//         authorization: `${process.env.API_KEY}`,
+//     },
+// };
 
-const stripeOrigin = "/api/stripe";
-const cartOrigin = "/api/cart";
-const cartCookieOrigin = "/api/cartcookie";
+let host = "http://localhost:3000";
+
+const stripeOrigin = `${host}/api/stripe`;
+const cartOrigin = `${host}/api/cart`;
+const cartCookieOrigin = `${host}/api/cartcookie`;
 
 export const getAllProducts = async () => {
     const res = await fetch(`${stripeOrigin}/product`, {
-        ...options,
         next: { revalidate: 60 * 60 * 24 * 1 },
     });
     const { data } = await res.json();
@@ -21,7 +22,6 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/product?product_id=${id}`, {
-        ...options,
         next: { revalidate: 60 * 60 * 24 * 7 },
     });
     const data = await res.json();
@@ -30,7 +30,6 @@ export const getProductById = async (id: string) => {
 
 export const getPriceById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/price?price_id=${id}`, {
-        ...options,
         next: { revalidate: 60 * 60 * 24 * 7 },
     });
     const data = await res.json();
@@ -38,14 +37,13 @@ export const getPriceById = async (id: string) => {
 };
 
 export const getInvoiceById = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/invoice?invoiceid=${id}`, options);
+    const res = await fetch(`${stripeOrigin}/invoice?invoiceid=${id}`);
     const data = await res.json();
     return data;
 };
 
 export const getCartTotal = async () => {
     const res = await fetch(`${cartOrigin}/total`, {
-        ...options,
         cache: "no-cache",
     });
     const data = await res.json();
@@ -54,7 +52,6 @@ export const getCartTotal = async () => {
 
 export const getCartByCookie = async () => {
     const res = await fetch(cartOrigin, {
-        ...options,
         cache: "no-cache",
     });
     const data = await res.json();
@@ -62,20 +59,22 @@ export const getCartByCookie = async () => {
 };
 
 export const createCartCookie = async () => {
-    const res = await fetch(cartCookieOrigin, { ...options, method: "post" });
+    const res = await fetch(cartCookieOrigin, { method: "post" });
     const data = await res.json();
     return data;
 };
 
 export const deleteCartCookie = async () => {
-    const res = await fetch(cartCookieOrigin, { ...options, method: "delete" });
+    const res = await fetch(cartCookieOrigin, { method: "delete" });
     const data = await res.json();
     return data;
 };
 
-export const createCart = async (cart: CartType) => {
-    const res = await fetch(cartOrigin, {
-        ...options,
+export const createCart = async (
+    cookieId: string | undefined,
+    cart: CartType
+) => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "POST",
         body: JSON.stringify(cart),
     });
@@ -84,10 +83,10 @@ export const createCart = async (cart: CartType) => {
 };
 
 export const updateCart = async (
+    cookieId: string | undefined,
     cart: Pick<CartType, "price_id" | "quantity">
 ) => {
-    const res = await fetch(cartOrigin, {
-        ...options,
+    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "PUT",
         body: JSON.stringify(cart),
     });
@@ -95,9 +94,11 @@ export const updateCart = async (
     return data;
 };
 
-export const deleteCartItemByPriceId = async (priceId: string) => {
-    const res = await fetch(cartOrigin, {
-        ...options,
+export const deleteCartItemByPriceId = async (
+    cookieId: string | undefined,
+    priceId: string
+) => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "DELETE",
         body: JSON.stringify({ price_id: priceId }),
     });
@@ -106,14 +107,13 @@ export const deleteCartItemByPriceId = async (priceId: string) => {
 };
 
 export const getPaymentIntent = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}?id=${id}`, { ...options });
+    const res = await fetch(`${stripeOrigin}?id=${id}`);
     const data = await res.json();
     return data;
 };
 
 export const createCustomer = async (customerData: CustomerType) => {
     const res = await fetch(`${stripeOrigin}/customer`, {
-        ...options,
         method: "post",
         body: JSON.stringify(customerData),
     });
@@ -126,7 +126,6 @@ export const createInvoice = async (
     invoiceData: CartType[]
 ) => {
     const res = await fetch(`${stripeOrigin}`, {
-        ...options,
         method: "post",
         body: JSON.stringify({ customerId: customer, invoiceData }),
     });
