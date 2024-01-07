@@ -13,3 +13,8 @@
         @apply text-2xl;
     }
 }
+
+body {
+    margin: auto;
+    max-width: 90em;
+}

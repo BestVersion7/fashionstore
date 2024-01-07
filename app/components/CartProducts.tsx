@@ -1,34 +1,37 @@
 import { CartQChange } from "./CartQChange";
-import { CartType } from "../types";
+import { CartType, ProductType } from "../types";
 import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
+import Image from "next/image";
 
 export const CartProducts = async (props: CartType) => {
-    const findProductInfo = async () => {
-        try {
-            const productData = await getProductById(props.product_id);
-            const { name, description } = productData;
-
-            return { name, description };
-        } catch (err) {
-            console.log("server error");
-        }
-    };
-    const productInfo = await findProductInfo();
+    const productInfo: ProductType = await getProductById(props.product_id);
 
     return (
-        <tr className="border border-l-purple-500 bg-blue-200">
-            <td>{productInfo?.name}</td>
-            <td>{productInfo?.description}</td>
-            <td>{formatCurrency(Number(props.product_price))}</td>
-            <td>
-                <CartQChange {...props} />
-            </td>
-            <td>
-                {formatCurrency(
-                    Number(props.quantity) * Number(props.product_price)
-                )}
-            </td>
-        </tr>
+        <>
+            <div className="grid grid-cols-[220px,_1fr] h-44 gap-4 my-4 ">
+                <div className="relative ">
+                    <Image
+                        className="object-contain absolute "
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        // height={"200"}
+                        // width={"200"}
+                        alt={productInfo.name}
+                        src={productInfo.images[0]}
+                    />
+                </div>
+                <div className="md:justify-between md:flex">
+                    <div>
+                        <p>{productInfo.name}</p>
+                        <CartQChange {...props} />
+                    </div>
+                    <p className="text-red-600 font-bold text-2xl">
+                        {formatCurrency(props.product_price)}
+                    </p>
+                </div>
+            </div>
+            <hr className="h-[.1rem] bg-gray-300" />
+        </>
     );
 };

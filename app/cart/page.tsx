@@ -13,49 +13,50 @@ export default async function CartPage() {
     const total = cartItems
         .map((item) => item.product_price * item.quantity)
         .reduce((arr, val) => arr + val, 0);
+    const totalQ = cartItems
+        .map((item) => Number(item.quantity))
+        .reduce((arr, val) => arr + val, 0);
 
     return (
         <div>
             <Link href="/">Home</Link>
             <main>
-                <div className="max-w-md">
-                    <h3>Your cart: </h3>
+                <div className="mx-2  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
                     {cartItems.length === 0 ? (
                         <span className="text-red-400">
                             You have no items in your cart
                         </span>
                     ) : (
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item Name:</th>
-                                    <th>Item Description:</th>
-                                    <th>Item Price</th>
-                                    <th>Item Quantity</th>
-                                    <th>Item Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {cartItems.map((item, index) => (
-                                    <CartProducts key={index} {...item} />
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
-                    <div className="text-right">
-                        <div className="border border-solid border-red-300 bg-red-50 pt-4">
-                            Total: {formatCurrency(total)}
-                        </div>
-                    </div>
+                        <div className="bg-white shadow-md rounded-l">
+                            <div className="flex justify-between mx-5 my-3">
+                                <h2 className="text-3xl">Shopping Cart: </h2>
+                                <h3 className="hidden lg:block">Price</h3>
+                            </div>
+                            <hr className="h-[.1rem] bg-gray-300" />
 
-                    <div className="text-right mt-5">
-                        <Link
-                            className="text-right text-2xl no-underline p-2 border-2 border-solid rounded-xl border-red-400  bg-green-200 text-purple-800 hover:cursor-pointer hover:bg-yellow-200"
-                            href="/checkout"
+                            {cartItems.map((item, index) => (
+                                <CartProducts key={index} {...item} />
+                            ))}
+                        </div>
+                    )}
+                    <div className="text-center px-4 py-7 bg-white shadow-md lg:h-52">
+                        <p className="italic text-sm text-green-600 ">
+                            All orders greater than $50.00 qualify for free
+                            shipping.
+                        </p>
+                        <p>
+                            Subtotal ({totalQ} items):{" "}
+                            <span className="font-semibold">
+                                {formatCurrency(total)}
+                            </span>
+                        </p>{" "}
+                        <br />
+                        <button
+                            type="button"
+                            className="py-2 px-3 rounded-xl w-full bg-yellow-300  hover:cursor-pointer hover:bg-yellow-400"
                         >
-                            Checkout{" "}
-                            <span className="text-green-800">{`>>`}</span>
-                        </Link>
+                            <Link href="/checkout">Proceed to checkout </Link>
+                        </button>
                     </div>
                 </div>
             </main>

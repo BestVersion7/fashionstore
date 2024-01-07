@@ -38,16 +38,18 @@ export const CartQChange = (props: CartType) => {
                 onChange={handleChangeQuantity}
                 name="quantity"
                 id="quantity"
+                className="border border-black border-solid bg-gray-200 shadow-md rounded-md px-1"
             >
                 {quantityMap.map((item) => (
                     <option key={item} value={item}>
-                        {item}
+                        Qty: {item}
                     </option>
                 ))}
             </select>
+            <br />
             <button
                 type="submit"
-                className="italic bg-inherit border-none font-medium text-xs text-red-500 hover:cursor-pointer hover:underline"
+                className=" bg-inherit border-none font-medium text-xs text-blue-700 hover:cursor-pointer hover:underline"
             >
                 Delete
             </button>
