@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { getCookie, getCookies } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { createCart, createCartCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
@@ -15,14 +15,14 @@ export const CartAddBtn = (props: CartType) => {
     };
 
     const handleAddCart = async () => {
-        // const cookieCart = getCookie("cookiecart");
+        const cookieCart = getCookie("cookiecart");
 
-        // if (typeof cookieCart !== "undefined") {
-        //     console.log("cookie already exist");
-        // } else {
-        //     await createCartCookie();
-        //     console.log("create cookie");
-        // }
+        if (typeof cookieCart !== "undefined") {
+            console.log("cookie already exist");
+        } else {
+            await createCartCookie();
+            console.log("create cookie");
+        }
 
         await createCart(getCookie("cookiecart"), {
             product_id: props.product_id,

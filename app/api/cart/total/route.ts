@@ -1,9 +1,9 @@
 import prisma from "@/app/lib/prisma";
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-    const cartCookie = cookies().get("cookiecart")?.value;
+export async function GET(req: NextRequest) {
+    const cartCookie = req.nextUrl.searchParams.get("cookie_id");
+
     try {
         // check for cookies
         if (!cartCookie) {

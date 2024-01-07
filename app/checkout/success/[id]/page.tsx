@@ -1,6 +1,7 @@
 import { getInvoiceById, getPaymentIntent } from "@/app/utils/apiCalls";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { InvoiceType } from "@/app/types";
+import NotFound from "@/app/not-found";
 
 export default async function SuccessPage({
     params,
@@ -8,8 +9,12 @@ export default async function SuccessPage({
     params: { id: string };
 }) {
     const invoiceId = await getPaymentIntent(params.id);
-    const invoiceData: InvoiceType = await getInvoiceById(invoiceId);
 
+    if (invoiceId.statusCode === 404) {
+        return <NotFound />;
+    }
+
+    const invoiceData: InvoiceType = await getInvoiceById(invoiceId.invoice);
     const { customer_name, customer_email, lines, amount_paid } = invoiceData;
 
     return (

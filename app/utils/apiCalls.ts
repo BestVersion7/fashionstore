@@ -42,16 +42,16 @@ export const getInvoiceById = async (id: string) => {
     return data;
 };
 
-export const getCartTotal = async () => {
-    const res = await fetch(`${cartOrigin}/total`, {
+export const getCartTotal = async (cookie: string | undefined) => {
+    const res = await fetch(`${cartOrigin}/total?cookie_id=${cookie}`, {
         cache: "no-cache",
     });
     const data = await res.json();
     return data;
 };
 
-export const getCartByCookie = async () => {
-    const res = await fetch(cartOrigin, {
+export const getCartByCookie = async (cookie: string | undefined) => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
         cache: "no-cache",
     });
     const data = await res.json();
@@ -94,20 +94,20 @@ export const updateCart = async (
     return data;
 };
 
-export const deleteCartItemByPriceId = async (
+export const deleteCartItemByProductId = async (
     cookieId: string | undefined,
-    priceId: string
+    productId: string
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "DELETE",
-        body: JSON.stringify({ price_id: priceId }),
+        body: JSON.stringify({ product_id: productId }),
     });
     const data = await res.json();
     return data;
 };
 
 export const getPaymentIntent = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}?id=${id}`);
+    const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
     const data = await res.json();
     return data;
 };
@@ -125,9 +125,9 @@ export const createInvoice = async (
     customer: string,
     invoiceData: CartType[]
 ) => {
-    const res = await fetch(`${stripeOrigin}`, {
+    const res = await fetch(`${stripeOrigin}/invoice`, {
         method: "post",
-        body: JSON.stringify({ customerId: customer, invoiceData }),
+        body: JSON.stringify({ customerId: customer, cartItems: invoiceData }),
     });
     const data = await res.json();
     return data;

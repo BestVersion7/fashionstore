@@ -32,7 +32,6 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const price = req.nextUrl.searchParams.get("price");
     const { quantity, price_id, product_id, product_price } = await req.json();
 
     try {
@@ -96,14 +95,14 @@ export async function PUT(req: NextRequest) {
 }
 
 export async function DELETE(req: NextRequest) {
-    const { price_id } = await req.json();
+    const { product_id } = await req.json();
 
     try {
         const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
         await prisma.cartInfo.deleteMany({
             where: {
-                price_id,
+                product_id,
                 cookie_id: `${cartCookie}`,
             },
         });

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProductById } from "../utils/apiCalls";
 import { CartType } from "../types";
+import { formatCurrency } from "../utils/formatCurrency";
 
 export function CheckoutItem(props: CartType) {
     const [itemName, setItemName] = useState();
@@ -17,7 +18,11 @@ export function CheckoutItem(props: CartType) {
     return (
         <div>
             <p>
-                <i>{itemName}</i> Quantity:<mark>{props.quantity}</mark>
+                <i>{itemName}</i> Quantity:
+                {props.quantity}{" "}
+                <mark>
+                    {formatCurrency(props.quantity * props.product_price)}
+                </mark>
             </p>
         </div>
     );
