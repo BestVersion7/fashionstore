@@ -31,7 +31,6 @@ export function StripeForm() {
                 getCookie("cookiecart")
             );
             setCartItems(data);
-            console.log(data);
 
             const totalData = data
                 .map((item) => (item.quantity * item.product_price) / 100)
