@@ -1,6 +1,9 @@
 import { CartType, CustomerType } from "../types";
 
-let host = "https://afashionstore.vercel.app/";
+let host = "http://localhost:3000";
+if (process.env.NODE_ENV === "production") {
+    host = "https://www.afashionstore.vercel.app/";
+}
 
 const stripeOrigin = `${host}/api/stripe`;
 const cartOrigin = `${host}/api/cart`;
