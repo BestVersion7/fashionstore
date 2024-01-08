@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 export async function GET(req: NextRequest) {
-  try {
-    const priceId = req.nextUrl.searchParams.get("price_id");
-    const data = await stripe.prices.retrieve(priceId);
-    return NextResponse.json(data);
-  } catch (err) {
-    return NextResponse.json(err, { status: 500 });
-  }
+    try {
+        const priceId = req.nextUrl.searchParams.get("price_id");
+        const data = await stripe.prices.retrieve(priceId);
+        return NextResponse.json(data);
+    } catch (err) {
+        return NextResponse.json(err, { status: 500 });
+    }
 }
 
 // export async function POST() {

@@ -21,7 +21,9 @@ export function CheckoutItem(props: CartType) {
                 <i>{itemName}</i> Quantity:
                 {props.quantity}{" "}
                 <mark>
-                    {formatCurrency(props.quantity * props.product_price)}
+                    {formatCurrency(
+                        props.quantity * Number(props.product_price)
+                    )}
                 </mark>
             </p>
         </div>

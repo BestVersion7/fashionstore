@@ -40,10 +40,11 @@ model CartInfo {
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model CookieInfo {
-  cookie_id  String     @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at DateTime   @default(now()) @db.Timestamptz(6)
-  account_id BigInt?
-  CartInfo   CartInfo[]
+  cookie_id      String     @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at     DateTime   @default(now()) @db.Timestamptz(6)
+  account_id     BigInt?
+  payment_intent String?    @unique
+  CartInfo       CartInfo[]
 }
 
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

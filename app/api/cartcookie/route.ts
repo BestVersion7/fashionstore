@@ -1,6 +1,20 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/app/lib/prisma";
 import { cookies } from "next/headers";
+
+export async function GET(req: NextRequest) {
+    try {
+        const cartCookie = req.nextUrl.searchParams.get("cookie_id");
+
+        const paymentIntent = await prisma.cookieInfo.findUnique({
+            where: { cookie_id: `${cartCookie}` },
+            select: { payment_intent: true },
+        });
+        return NextResponse.json(paymentIntent?.payment_intent);
+    } catch (err) {
+        return NextResponse.json("fail get", { status: 500 });
+    }
+}
 
 export async function POST() {
     try {

@@ -84,7 +84,7 @@ export const createCart = async (
 
 export const updateCart = async (
     cookieId: string | undefined,
-    cart: Pick<CartType, "price_id" | "quantity">
+    cart: Pick<CartType, "price_id" | "quantity" | "purchased">
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "PUT",
@@ -141,6 +141,44 @@ export const createInvoice = async (
         method: "post",
         body: JSON.stringify({ customerId: customer, cartItems: invoiceData }),
     });
+    const data = await res.json();
+    return data;
+};
+
+export const createPaymentIntent = async (
+    cookieId: string | undefined,
+    amount: number
+) => {
+    const res = await fetch(
+        `${stripeOrigin}/paymentintent?cookie_id=${cookieId}`,
+        {
+            method: "post",
+            body: JSON.stringify({ amount }),
+        }
+    );
+    const data = await res.json();
+    return data;
+};
+
+export const updatePaymentIntent = async (
+    id: string,
+    body: {
+        email: string | undefined;
+        amount: number;
+    }
+) => {
+    const res = await fetch(`${stripeOrigin}/paymentintent?payment_id=${id}`, {
+        method: "put",
+        body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getPaymentIntentFromCookie = async (
+    cookieId: string | undefined
+) => {
+    const res = await fetch(`${cartCookieOrigin}?cookie_id=${cookieId}`);
     const data = await res.json();
     return data;
 };

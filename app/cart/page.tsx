@@ -11,7 +11,7 @@ export default async function CartPage() {
     );
 
     const total = cartItems
-        .map((item) => item.product_price * item.quantity)
+        .map((item) => Number(item.product_price) * item.quantity)
         .reduce((arr, val) => arr + val, 0);
     const totalQ = cartItems
         .map((item) => Number(item.quantity))

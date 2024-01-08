@@ -8,6 +8,8 @@ import { CartType } from "../types";
 
 export const CartAddBtn = (props: CartType) => {
     const [quantity, setQuantity] = useState(props.quantity);
+    const [disableAdd, setDisableAdd] = useState(false);
+
     const router = useRouter();
 
     const handleChangeQuantity = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -15,6 +17,7 @@ export const CartAddBtn = (props: CartType) => {
     };
 
     const handleAddCart = async () => {
+        setDisableAdd(() => true);
         const cookieCart = getCookie("cookiecart");
 
         if (typeof cookieCart !== "undefined") {
@@ -32,6 +35,7 @@ export const CartAddBtn = (props: CartType) => {
         });
 
         router.refresh();
+        setDisableAdd(() => false);
     };
 
     return (
@@ -54,6 +58,7 @@ export const CartAddBtn = (props: CartType) => {
                 type="button"
                 className="bg-blue-200"
                 onClick={handleAddCart}
+                disabled={disableAdd}
             >
                 Add to Cart
             </button>

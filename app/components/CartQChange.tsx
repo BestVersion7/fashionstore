@@ -18,6 +18,7 @@ export const CartQChange = (props: CartType) => {
         await updateCart(getCookie("cookiecart"), {
             price_id: props.price_id,
             quantity: Number(e.target.value),
+            purchased: false,
         });
 
         router.refresh();
