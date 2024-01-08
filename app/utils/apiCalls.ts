@@ -1,6 +1,6 @@
 import { CartType, CustomerType } from "../types";
 
-let host = "https://www.fashionstore-27tcv5bry-info-speedruntrav.vercel.app";
+let host = "https://afashionstore.vercel.app/";
 
 const stripeOrigin = `${host}/api/stripe`;
 const cartOrigin = `${host}/api/cart`;
