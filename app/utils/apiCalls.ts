@@ -1,12 +1,6 @@
 import { CartType, CustomerType } from "../types";
 
-// const options = {
-//     headers: {
-//         authorization: `${process.env.API_KEY}`,
-//     },
-// };
-
-let host = "http://localhost:3000";
+let host = window.location.origin;
 
 const stripeOrigin = `${host}/api/stripe`;
 const cartOrigin = `${host}/api/cart`;
