@@ -29,6 +29,7 @@ export const Product = async (props: ProductType) => {
                 price_id={props.default_price}
                 product_price={prices.unit_amount}
                 quantity={1}
+                purchased={false}
             />
         </div>
     );
