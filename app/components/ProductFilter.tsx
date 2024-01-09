@@ -1,20 +1,28 @@
 "use client";
 
-export const ProductFilter = () => {
-    const handleChangeCategory = () => {};
+import Link from "next/link";
+
+export const ProductFilter = (props: { category?: string }) => {
+    const noHighlight =
+        "border border-solid rounded-lg  border-black font-medium px-4 py-1 hover:bg-green-300 ";
+    const highlight =
+        "border border-solid rounded-lg bg-green-300 border-black font-medium px-4 py-1 hover:bg-green-300 ";
+
     return (
-        <select
-            className="bg-yellow-100 border-2 py-1 px-2 border-black hover:cursor-pointer "
-            title="changeQ"
-            onChange={handleChangeCategory}
-            name="quantity"
-            id="quantity"
-        >
-            {["tops, dresses"].map((item) => (
-                <option key={item} value={item}>
+        <div className="flex items-center gap-4 mt-3">
+            Filters:
+            {["tops", "dress"].map((item) => (
+                <Link
+                    href={`/shop/${item}`}
+                    key={item}
+                    className={props.category == item ? highlight : noHighlight}
+                >
                     {item}
-                </option>
+                </Link>
             ))}
-        </select>
+            <Link href="/shop" className="underline hover:text-red-600">
+                Clear filters
+            </Link>
+        </div>
     );
 };

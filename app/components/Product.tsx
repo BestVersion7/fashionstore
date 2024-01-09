@@ -21,14 +21,18 @@ export const Product = async (props: ProductType) => {
                     priority
                 />
             </div>
-            <div className="text-center px-8 grid grid-rows-[auto,95px,auto]">
+            <div className="text-center px-8 grid grid-rows-[70px,80px,_1fr,_2fr] items-center">
                 <h2 className="text-2xl font-bold text-orange-600">
                     {props.name}
                 </h2>
 
                 {/* overflow-hidden */}
-                <p className="font-thin text-xl ">{props.description}</p>
-                <p>Cost: {formatCurrency(prices.unit_amount)}</p>
+                <p className="font-thin text-xl overflow-hidden">
+                    {props.description}
+                </p>
+                <p className="text-2xl text-purple-800 font-bold">
+                    Price: {formatCurrency(prices.unit_amount)}
+                </p>
                 <CartAddBtn
                     product_id={props.id}
                     price_id={props.default_price}

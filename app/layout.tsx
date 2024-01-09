@@ -22,8 +22,8 @@ export default function RootLayout({
         <html lang="en">
             <body>
                 <header className="sticky top-0 z-10">
-                    <nav className="flex px-6 text-slate-100 py-4 justify-between bg-slate-600">
-                        <div className="flex md:inline">
+                    <nav className="flex px-6 text-slate-100 py-4 justify-between bg-slate-600 items-center">
+                        <div className="flex ">
                             <Link
                                 href="/"
                                 className="hidden text-3xl text-purple-100 font-bold md:inline"
@@ -53,7 +53,7 @@ export default function RootLayout({
                             </Link> */}
                         </div>
 
-                        <div className="flex ">
+                        <div className="flex gap-5">
                             <span className="hidden italic text-base lg:block w-32 leading-4 text-slate-100 lg:mr-3">
                                 Free U.S. Shipping & Returns
                             </span>

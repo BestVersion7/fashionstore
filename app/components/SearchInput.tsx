@@ -2,13 +2,17 @@
 import { IoSearchOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
 import { getProductBySearchName } from "../utils/apiCalls";
+import Link from "next/link";
+import { ProductType } from "../types";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);
-    const [productMap, setProductMap] = useState<{ name: string }[]>([]);
+    const [productMap, setProductMap] = useState<ProductType[]>([]);
+    const [showSearch, setShowSearch] = useState(true);
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
+        setShowSearch(() => true);
         const products = await getProductBySearchName(searchRef.current?.value);
         setProductMap(products);
     };
@@ -28,13 +32,16 @@ export const SearchInput = () => {
 
             <div className="absolute w-full top-9 left-0 z-10 bg-slate-50">
                 {productMap &&
+                    showSearch &&
                     productMap.map((item, index) => (
-                        <p
-                            className="p-2 text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
+                        <Link
+                            className="p-2 grid text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
                             key={index}
+                            href={`/shop/${item.metadata.category}/${item.id}`}
+                            onClick={() => setShowSearch(() => false)}
                         >
-                            <span>{item.name}</span>
-                        </p>
+                            {item.name}
+                        </Link>
                     ))}
             </div>
         </div>

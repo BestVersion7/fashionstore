@@ -1,6 +1,11 @@
 import { getProductBySearchCategory } from "@/app/utils/apiCalls";
 import { ProductType } from "@/app/types";
 import { Product } from "@/app/components/Product";
+import { SearchInput } from "@/app/components/SearchInput";
+import { ProductFilter } from "@/app/components/ProductFilter";
+
+// All products not returned in the api call will be 404
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
     return [
@@ -42,10 +47,15 @@ export default async function CategoryShop({
 
     return (
         <main>
-            {/* Product Page */}
             <h2 className="text-2xl font-semibold  text-blue-800">
                 Browse our best selling products
             </h2>
+
+            <div className="border border-solid border-black bg-white py-1">
+                <SearchInput />
+            </div>
+
+            <ProductFilter category={params.category} />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {products.map((item) => (
                     <Product key={item.id} {...item} />
