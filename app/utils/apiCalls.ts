@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === "production") {
 const stripeOrigin = `${host}/api/stripe`;
 const cartOrigin = `${host}/api/cart`;
 const cartCookieOrigin = `${host}/api/cartcookie`;
+const searchOrigin = `${host}/api/stripe/search`;
 
 export const getAllProducts = async () => {
     const res = await fetch(`${stripeOrigin}/product`, {
@@ -177,5 +178,11 @@ export const getPaymentIntentFromCookie = async (
 ) => {
     const res = await fetch(`${cartCookieOrigin}?cookie_id=${cookieId}`);
     const data = await res.json();
+    return data;
+};
+
+export const getProductBySearchName = async (input: string | undefined) => {
+    const res = await fetch(`${searchOrigin}?product_name=${input}`);
+    const { data } = await res.json();
     return data;
 };
