@@ -9,10 +9,11 @@ export const Product = async (props: ProductType) => {
     const prices: PriceType = await getPriceById(props.default_price);
 
     return (
-        <div className="rounded-md border-solid border-2 my-3 text-sm hover:bg-blue-300 hover:scale-[1.00] hover:cursor-pointer">
-            <div className="relative min-h-40 bg-slate-300 ">
+        <article className="rounded-md border-black shadow-sm bg-green-50 border-solid border-2 my-3 ">
+            <div className="relative h-72 border-b-2 border-black ">
                 <Image
-                    className="object-cover"
+                    // object-top
+                    className="object-cover "
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={props.images[0]}
@@ -20,17 +21,22 @@ export const Product = async (props: ProductType) => {
                     priority
                 />
             </div>
-            <h2>{props.name}</h2>
-            <p>{props.description}</p>
-            <p>Cost: {formatCurrency(prices.unit_amount)}</p>
+            <div className="text-center px-8 grid grid-rows-[auto,95px,auto]">
+                <h2 className="text-2xl font-bold text-orange-600">
+                    {props.name}
+                </h2>
 
-            <CartAddBtn
-                product_id={props.id}
-                price_id={props.default_price}
-                product_price={prices.unit_amount}
-                quantity={1}
-                purchased={false}
-            />
-        </div>
+                {/* overflow-hidden */}
+                <p className="font-thin text-xl ">{props.description}</p>
+                <p>Cost: {formatCurrency(prices.unit_amount)}</p>
+                <CartAddBtn
+                    product_id={props.id}
+                    price_id={props.default_price}
+                    product_price={prices.unit_amount}
+                    quantity={1}
+                    purchased={false}
+                />
+            </div>
+        </article>
     );
 };

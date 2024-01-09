@@ -9,7 +9,9 @@ export async function GET(req: NextRequest) {
         if (productId) {
             data = await stripe.products.retrieve(productId);
         } else {
-            data = await stripe.products.list();
+            data = await stripe.products.list({
+                limit: 10,
+            });
         }
         return NextResponse.json(data);
     } catch (err) {
@@ -17,46 +19,59 @@ export async function GET(req: NextRequest) {
     }
 }
 
-export async function POST() {
-    try {
-        // await stripe.products.create({
-        //   name: "Shirt",
-        //   images: [
-        //     "https://res.cloudinary.com/crimson-flamingo/image/upload/v1663019587/travelsite2022/richmond%2C%20va/6.jpg",
-        //   ],
-        //   default_price_data: {
-        //     currency: "usd",
-        //     unit_amount: 30 * 100,
-        //   },
-        //   description: "This is a shirt",
-        // });
-        // await stripe.products.create({
-        //   name: "Pants",
-        //   images: [
-        //     "https://res.cloudinary.com/crimson-flamingo/image/upload/h_665,w_1000/v1659363059/travelsite2022/0108tips/5.jpg",
-        //   ],
-        //   default_price_data: {
-        //     currency: "usd",
-        //     unit_amount: 50 * 100,
-        //   },
-        //   description: "This pants",
-        // });
-        // await stripe.products.create({
-        //   name: "Tie",
-        //   images: [
-        //     "https://res.cloudinary.com/crimson-flamingo/image/upload/v1659363059/travelsite2022/0108tips/2.jpg",
-        //   ],
-        //   default_price_data: {
-        //     currency: "usd",
-        //     unit_amount: 20 * 100,
-        //   },
-        //   description: "This tie",
-        // });
-        return NextResponse.json("success", { status: 201 });
-    } catch (err) {
-        return NextResponse.json(err, { status: 500 });
-    }
-}
+// export async function POST() {
+//     try {
+// await stripe.products.create({
+//     name: "Dress",
+//     images: [
+//         "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704822688/ecommerce/5.jpg",
+//     ],
+//     default_price_data: {
+//         currency: "usd",
+//         unit_amount: 45 * 100,
+//     },
+//     description: "This is a shirt",
+// });
+// await stripe.products.create({
+//   name: "Pants",
+//   images: [
+//     "https://res.cloudinary.com/crimson-flamingo/image/upload/h_665,w_1000/v1659363059/travelsite2022/0108tips/5.jpg",
+//   ],
+//   default_price_data: {
+//     currency: "usd",
+//     unit_amount: 50 * 100,
+//   },
+//   description: "This pants",
+// });
+// await stripe.products.create({
+//   name: "Tie",
+//   images: [
+//     "https://res.cloudinary.com/crimson-flamingo/image/upload/v1659363059/travelsite2022/0108tips/2.jpg",
+//   ],
+//   default_price_data: {
+//     currency: "usd",
+//     unit_amount: 20 * 100,
+//   },
+//   description: "This tie",
+// });
+//         return NextResponse.json("success", { status: 201 });
+//     } catch (err) {
+//         return NextResponse.json(err, { status: 500 });
+//     }
+// }
+
+// export async function PUT() {
+// try {
+//     await stripe.products.update("prod_PLQCvUcD3DkxaS", {
+//         images: [
+//             "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704822688/ecommerce/1.jpg",
+//         ],
+//     });
+//     return NextResponse.json("success");
+// } catch (err) {
+//     return NextResponse.json(err, { status: 500 });
+// }
+// }
 
 // export async function DELETE() {
 //   try {

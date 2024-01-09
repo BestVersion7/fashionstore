@@ -20,7 +20,7 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/product?product_id=${id}`, {
-        next: { revalidate: 60 * 60 * 24 * 7 },
+        next: { revalidate: 60 * 60 * 24 * 1 },
     });
     const data = await res.json();
     return data;
@@ -28,7 +28,7 @@ export const getProductById = async (id: string) => {
 
 export const getPriceById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/price?price_id=${id}`, {
-        next: { revalidate: 60 * 60 * 24 * 7 },
+        next: { revalidate: 60 * 60 * 24 * 1 },
     });
     const data = await res.json();
     return data;
@@ -183,6 +183,12 @@ export const getPaymentIntentFromCookie = async (
 
 export const getProductBySearchName = async (input: string | undefined) => {
     const res = await fetch(`${searchOrigin}?product_name=${input}`);
+    const { data } = await res.json();
+    return data;
+};
+
+export const getProductBySearchCategory = async (input: string | undefined) => {
+    const res = await fetch(`${searchOrigin}?product_category=${input}`);
     const { data } = await res.json();
     return data;
 };

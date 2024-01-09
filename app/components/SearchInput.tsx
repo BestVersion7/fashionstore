@@ -14,8 +14,8 @@ export const SearchInput = () => {
     };
 
     return (
-        <div className="relative md:flex justify-end hidden ">
-            <span className="text-3xl">
+        <div className="grid px-2 grid-cols-[45px,_1fr] relative">
+            <span className="text-3xl text-black">
                 <IoSearchOutline />
             </span>
             <input
@@ -23,14 +23,14 @@ export const SearchInput = () => {
                 ref={searchRef}
                 onChange={handleChange}
                 type="text"
-                className=" text-lg pl-4 w-44 border-slate-400 border-2 border-solid"
+                className="w-full bg-inherit text-lg text-black  focus:outline-none placeholder:text-slate-800 italic"
             />
 
-            <div className="absolute top-7 z-10 bg-slate-50">
+            <div className="absolute w-full top-9 left-0 z-10 bg-slate-50">
                 {productMap &&
                     productMap.map((item, index) => (
                         <p
-                            className="p-2 border border-solid border-black hover:cursor-pointer hover:bg-yellow-200"
+                            className="p-2 text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
                             key={index}
                         >
                             <span>{item.name}</span>

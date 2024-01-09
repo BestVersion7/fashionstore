@@ -10,18 +10,19 @@ export async function CartTotal() {
 
     if (typeof totalQuantity === "object") {
         cartTotal = 0;
-    } else if (totalQuantity > 9) {
-        cartTotal = `9+`;
     }
+    // else if (totalQuantity > 9) {
+    //     cartTotal = totalQuantity;
+    // }
 
     return (
-        <>
-            <span className="absolute left-3 right-0 bottom-[1.1rem] z-10 text-orange-300 font-bold">
-                {cartTotal > 0 && cartTotal}
-            </span>
+        <div className="relative text-center ">
             <span className="text-3xl">
                 <LuShoppingCart />
             </span>
-        </>
+            <span className="absolute right-0 left-0 bottom-[1.32rem] text-orange-300 font-bold">
+                {cartTotal > 0 && cartTotal}
+            </span>
+        </div>
     );
 }

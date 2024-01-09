@@ -57,13 +57,14 @@ export default function RootLayout({
                             <span className="hidden italic text-base lg:block w-32 leading-4 text-slate-100 lg:mr-3">
                                 Free U.S. Shipping & Returns
                             </span>
-                            <SearchInput />
+
+                            <div className="hidden items-center w-56 bg-white  md:grid">
+                                <SearchInput />
+                            </div>
 
                             <Link href="/cart" className="">
                                 <span className="flex">
-                                    <span className="relative">
-                                        <CartTotal />
-                                    </span>
+                                    <CartTotal />
                                     <span className="text-2xl  font-bold">
                                         Cart
                                     </span>

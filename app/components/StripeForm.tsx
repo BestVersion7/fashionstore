@@ -10,6 +10,7 @@ import {
 import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ImSpinner2 } from "react-icons/im";
+import Link from "next/link";
 
 import {
     createCustomer,
@@ -20,7 +21,6 @@ import {
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
-import { CheckoutProps } from "./Checkout";
 import { formatCurrency } from "../utils/formatCurrency";
 
 export function StripeForm(props: { totalAmount: number }) {
@@ -38,10 +38,10 @@ export function StripeForm(props: { totalAmount: number }) {
         if (!stripe || !elements) return null;
 
         try {
+            setIsProcessing(true);
             const paymentId = await getPaymentIntentFromCookie(
                 getCookie("cookiecart")
             );
-            setIsProcessing(true);
             // find the payment intent
 
             // update the total and email
@@ -132,7 +132,7 @@ export function StripeForm(props: { totalAmount: number }) {
                         </div>{" "}
                         <br />
                         <button
-                            className=" z-10 w-full py-4 border border-gray-500 border-solid text-xl rounded-xl bg-yellow-300  hover:cursor-pointer hover:bg-yellow-400 lg:"
+                            className=" z-10 w-full py-4 border border-gray-500 border-solid text-xl rounded-xl bg-yellow-300  hover:bg-yellow-400 lg:"
                             disabled={isProcessing}
                             type="submit"
                         >
@@ -143,7 +143,8 @@ export function StripeForm(props: { totalAmount: number }) {
                             <span className="text-red-500">{errorMessage}</span>
                         )}
                         <p className="text-center">
-                            By placing your order, you agree to our privacy
+                            By placing your order, you agree to our{" "}
+                            <Link href="/privacy">privacy</Link>
                             notice and terms of use.
                         </p>
                     </div>

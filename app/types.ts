@@ -4,6 +4,9 @@ export type ProductType = {
     description: string;
     images: string[];
     name: string;
+    metadata: {
+        category: "tops" | "dress";
+    };
 };
 
 export type InvoiceType = {
