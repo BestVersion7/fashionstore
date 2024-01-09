@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    main {
+        @apply px-4 py-2 md:px-8 bg-blue-50 border border-solid border-purple-200 shadow-lg
+    }
+
+    header {
+        @apply border-t border-x border-solid border-purple-200 shadow-lg
+    }
+
+    footer {
+        @apply border-b border-x border-solid border-purple-200
+    }
+
+    body {
+        @apply m-auto max-w-[1440px] bg-purple-50
+    }
+
+}
+
 @layer components {
     .stripe-h2 {
         @apply text-xl font-semibold;
@@ -12,14 +31,4 @@
     /* h2 {
         @apply text-xl;
     } */
-}
-
-body {
-    margin: auto;
-    max-width: 90em;
-    background-color: rgb(239, 244, 250);
-}
-
-main {
-    margin: 0 0.5rem;
 }

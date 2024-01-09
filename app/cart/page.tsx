@@ -18,9 +18,11 @@ export default async function CartPage() {
         .reduce((arr, val) => arr + val, 0);
 
     return (
-        <div>
-            <Link href="/">Home</Link>
-            <main>
+        <main>
+            <Link href="/shop" className="underline text-orange-600">
+                Go back
+            </Link>
+            <div>
                 <div className="  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
                     {cartItems.length === 0 ? (
                         <span className="text-red-400">
@@ -60,7 +62,8 @@ export default async function CartPage() {
                         </Link>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+            <br />
+        </main>
     );
 }

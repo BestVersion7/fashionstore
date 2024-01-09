@@ -9,8 +9,8 @@ export default async function Shop() {
 
     return (
         <main>
-            <h2 className="text-2xl font-semibold  text-blue-800">
-                Browse our best selling products
+            <h2 className="text-2xl mb-3 font-semibold  text-orange-600">
+                Browse our collection
             </h2>
 
             <div className="border border-solid border-black bg-white py-1">
