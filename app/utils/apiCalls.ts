@@ -10,9 +10,11 @@ const cartOrigin = `${host}/api/cart`;
 const cartCookieOrigin = `${host}/api/cartcookie`;
 const searchOrigin = `${host}/api/stripe/search`;
 
+const revalidateTime = 60 * 60 * 24 * 1;
+
 export const getAllProducts = async () => {
     const res = await fetch(`${stripeOrigin}/product`, {
-        next: { revalidate: 60 * 60 * 24 * 1 },
+        next: { revalidate: revalidateTime },
     });
     const { data } = await res.json();
     return data;
@@ -20,7 +22,7 @@ export const getAllProducts = async () => {
 
 export const getProductById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/product?product_id=${id}`, {
-        next: { revalidate: 60 * 60 * 24 * 1 },
+        next: { revalidate: revalidateTime },
     });
     const data = await res.json();
     return data;
@@ -28,7 +30,7 @@ export const getProductById = async (id: string) => {
 
 export const getPriceById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/price?price_id=${id}`, {
-        next: { revalidate: 60 * 60 * 24 * 1 },
+        next: { revalidate: revalidateTime },
     });
     const data = await res.json();
     return data;

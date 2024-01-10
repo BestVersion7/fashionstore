@@ -4,16 +4,13 @@
 
 @layer base {
     main {
-        @apply px-4 py-2 md:px-8 bg-blue-50 border-x border-solid border-purple-200 shadow-lg
+        @apply px-4 py-2 md:px-8 bg-blue-50
     }
 
     header {
-        @apply border-t border-x border-solid border-purple-200 shadow-lg
+        @apply shadow-lg
     }
 
-    footer {
-        @apply border-b border-x border-solid border-purple-200
-    }
 
     body {
         @apply m-auto max-w-[1440px] bg-purple-50
