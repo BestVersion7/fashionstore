@@ -11,7 +11,7 @@ import { ProductFilter } from "@/app/components/ProductFilter";
 export async function generateStaticParams() {
     const allProducts: ProductType[] = await getAllProducts();
     return allProducts.map((item) => [
-        { id: item.id, category: item.metadata.category },
+        { category: item.metadata.category, id: item.id },
     ]);
 }
 
