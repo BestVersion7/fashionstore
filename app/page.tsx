@@ -86,7 +86,7 @@ export default function Home() {
             </div>
 
             <section className="bg-orange-200 gap-4 text-center py-10 flex flex-col items-center">
-                <p className="">We'd love to hear what you think!</p>
+                <p className="">We{`'`}d love to hear what you think!</p>
                 <Link
                     className="rounded-lg font-bold  bg-slate-50 py-3 border w-40 border-black border-solid hover:bg-green-100"
                     href="/"
