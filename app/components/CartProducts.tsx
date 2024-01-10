@@ -21,12 +21,12 @@ export const CartProducts = async (props: CartType) => {
                         src={productInfo.images[0]}
                     />
                 </div>
-                <div className="md:justify-between md:flex">
+                <div className="md:justify-between md:flex mr-3">
                     <div>
                         <p className="font-bold">{productInfo.name}</p>
                         <CartQChange {...props} />
                     </div>
-                    <p className="text-red-600 font-bold text-2xl">
+                    <p className="text-red-600 font-bold text-2xl ">
                         {formatCurrency(Number(props.product_price))}
                     </p>
                 </div>

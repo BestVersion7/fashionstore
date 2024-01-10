@@ -38,7 +38,7 @@ export default async function CheckoutPage() {
 
     return (
         <div>
-            <div className="flex justify-around text-3xl py-3 font-semibold">
+            <div className="flex justify-around text-3xl py-3 font-semibold bg-blue-50">
                 <span>
                     Checkout ({totalQ ? totalQ : 0}{" "}
                     {totalQ === 1 ? "item" : "items"})

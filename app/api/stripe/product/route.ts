@@ -21,39 +21,18 @@ export async function GET(req: NextRequest) {
 
 // export async function POST() {
 //     try {
-// await stripe.products.create({
-//     name: "Dress",
-//     images: [
-//         "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704822688/ecommerce/5.jpg",
-//     ],
-//     default_price_data: {
-//         currency: "usd",
-//         unit_amount: 45 * 100,
-//     },
-//     description: "This is a shirt",
-// });
-// await stripe.products.create({
-//   name: "Pants",
-//   images: [
-//     "https://res.cloudinary.com/crimson-flamingo/image/upload/h_665,w_1000/v1659363059/travelsite2022/0108tips/5.jpg",
-//   ],
-//   default_price_data: {
-//     currency: "usd",
-//     unit_amount: 50 * 100,
-//   },
-//   description: "This pants",
-// });
-// await stripe.products.create({
-//   name: "Tie",
-//   images: [
-//     "https://res.cloudinary.com/crimson-flamingo/image/upload/v1659363059/travelsite2022/0108tips/2.jpg",
-//   ],
-//   default_price_data: {
-//     currency: "usd",
-//     unit_amount: 20 * 100,
-//   },
-//   description: "This tie",
-// });
+//         await stripe.products.create({
+//             name: "Elegant Silk Dress",
+//             images: [
+//                 "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704865241/ecommerce/6.jpg",
+//             ],
+//             default_price_data: {
+//                 currency: "usd",
+//                 unit_amount: 85 * 100,
+//             },
+//             description:
+//                 "A classic that layers beautifully with any outfit for an effortlessly chic look.",
+//         });
 //         return NextResponse.json("success", { status: 201 });
 //     } catch (err) {
 //         return NextResponse.json(err, { status: 500 });

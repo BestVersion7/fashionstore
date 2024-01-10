@@ -4,7 +4,7 @@
 
 @layer base {
     main {
-        @apply px-4 py-2 md:px-8 bg-blue-50 border border-solid border-purple-200 shadow-lg
+        @apply px-4 py-2 md:px-8 bg-blue-50 border-x border-solid border-purple-200 shadow-lg
     }
 
     header {

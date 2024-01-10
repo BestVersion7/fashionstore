@@ -144,7 +144,9 @@ export function StripeForm(props: { totalAmount: number }) {
                         )}
                         <p className="text-center">
                             By placing your order, you agree to our{" "}
-                            <Link href="/privacy">privacy</Link>
+                            <Link className="underline" href="/privacy">
+                                privacy
+                            </Link>{" "}
                             notice and terms of use.
                         </p>
                     </div>

@@ -56,3 +56,11 @@ export type CartType = {
     product_price?: number;
     purchased: boolean;
 };
+
+export type HomeProductCardProps = {
+    title1?: string;
+    title2: string;
+    description: string;
+    link: string;
+    linktext: string;
+};
