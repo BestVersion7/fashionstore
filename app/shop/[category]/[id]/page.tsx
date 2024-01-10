@@ -8,12 +8,12 @@ import { ProductFilter } from "@/app/components/ProductFilter";
 // All products not returned in the api call will be 404
 // export const dynamicParams = false;
 
-export async function generateStaticParams() {
-    const allProducts: ProductType[] = await getAllProducts();
-    return allProducts.map((item) => [
-        { category: item.metadata.category, id: item.id },
-    ]);
-}
+// export async function generateStaticParams() {
+//     const allProducts: ProductType[] = await getAllProducts();
+//     return allProducts.map((item) => [
+//         { category: item.metadata.category, id: item.id },
+//     ]);
+// }
 
 export async function generateMetadata({
     params,
