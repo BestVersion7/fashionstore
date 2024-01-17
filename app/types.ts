@@ -68,3 +68,9 @@ export type HomeProductCardProps = {
 export type ModalProps = {
     modal: "t" | "f";
 };
+
+export type EmailProps = {
+    name: string | undefined;
+    email: string | undefined;
+    message: string | undefined;
+};

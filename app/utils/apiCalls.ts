@@ -1,10 +1,11 @@
-import { CartType, CustomerType } from "../types";
+import { CartType, CustomerType, EmailProps } from "../types";
 
 let host = "http://localhost:3000";
 if (process.env.NODE_ENV === "production") {
     host = "https://afashionstore.vercel.app";
 }
 
+const emailOrigin = `${host}/api/contact`;
 const stripeOrigin = `${host}/api/stripe`;
 const cartOrigin = `${host}/api/cart`;
 const cartCookieOrigin = `${host}/api/cartcookie`;
@@ -192,5 +193,14 @@ export const getProductBySearchName = async (input: string | undefined) => {
 export const getProductBySearchCategory = async (input: string | undefined) => {
     const res = await fetch(`${searchOrigin}?product_category=${input}`);
     const { data } = await res.json();
+    return data;
+};
+
+export const createEmail = async (props: EmailProps) => {
+    const res = await fetch(emailOrigin, {
+        method: "post",
+        body: JSON.stringify(props),
+    });
+    const data = await res.json();
     return data;
 };

@@ -2,20 +2,32 @@
 
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
+import { createEmail } from "../utils/apiCalls";
 
 export const ContactForm = () => {
-    const nameRef = useRef(null);
-    const emailRef = useRef(null);
-    const msgRef = useRef(null);
+    const nameRef = useRef<HTMLInputElement>(null);
+    const emailRef = useRef<HTMLInputElement>(null);
+    const msgRef = useRef<HTMLTextAreaElement>(null);
 
     const [completeForm, setCompleteForm] = useState(false);
 
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("submit");
-        setCompleteForm(true);
+        try {
+            // console.log(nameRef.current?.value);
+            // console.log(emailRef.current?.value);
+            // console.log(msgRef.current?.value);
+            await createEmail({
+                name: nameRef.current?.value,
+                email: emailRef.current?.value,
+                message: msgRef.current?.value,
+            });
+            setCompleteForm(true);
+        } catch (err) {
+            alert(err);
+        }
     };
 
     const handleClose = () => {
@@ -55,6 +67,7 @@ export const ContactForm = () => {
                         title="name"
                         type="text"
                         ref={nameRef}
+                        required
                     />
                     <br />
                     <label>Email:</label>
@@ -64,6 +77,7 @@ export const ContactForm = () => {
                         title="Email"
                         type="text"
                         ref={emailRef}
+                        required
                     />
                     <br />
                     <label>Message:</label>
@@ -72,6 +86,7 @@ export const ContactForm = () => {
                         title="Message"
                         className="w-full h-24"
                         ref={msgRef}
+                        required
                     />
 
                     <div className="flex justify-center gap-1">
