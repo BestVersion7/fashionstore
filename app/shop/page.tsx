@@ -3,6 +3,7 @@ import { SearchInput } from "../components/SearchInput";
 import { ProductType } from "../types";
 import { getAllProducts } from "../utils/apiCalls";
 import { ProductFilter } from "../components/ProductFilter";
+import { ContactBtn } from "../components/ContactBtn";
 
 export default async function Shop() {
     const products: ProductType[] = await getAllProducts();
@@ -24,6 +25,8 @@ export default async function Shop() {
                     <Product key={item.id} {...item} />
                 ))}
             </div>
+
+            <ContactBtn />
         </main>
     );
 }

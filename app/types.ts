@@ -64,3 +64,7 @@ export type HomeProductCardProps = {
     link: string;
     linktext: string;
 };
+
+export type ModalProps = {
+    modal: "t" | "f";
+};

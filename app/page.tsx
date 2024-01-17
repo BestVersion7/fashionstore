@@ -1,9 +1,9 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
+import { ContactBtn } from "./components/ContactBtn";
 
 export default function Home() {
-    // https://res.cloudinary.com/crimson-flamingo/image/upload/v1704865506/ecommerce/home1.jpg
     return (
         <main className="px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
@@ -136,55 +136,8 @@ export default function Home() {
                     Give feedback
                 </Link>
             </section>
+
+            <ContactBtn />
         </main>
     );
-}
-
-{
-    /* <div className="grid lg:grid-cols-2 gap-[0px]">
-<div className="w-full h-[550px] relative bg-center bg-cover bg-[url(https://res.cloudinary.com/crimson-flamingo/image/upload/v1704864566/ecommerce/bg1new.png)]">
-    <div className="absolute w-64 h-80 top-20 left-8">
-        <HomeProductCard
-            title1="100% ULTRA-PREMIUM SILK"
-            title2="Silk Blouses and Tops"
-            description="Shop our luxury silk button-up blouses made with ultra-soft, washable silk."
-            link="/shop/tops"
-            linktext="SHOP TOPS"
-        />
-    </div>
-</div>
- 
-<div className="relative w-full h-[550px]  bg-cover bg-[url(https://res.cloudinary.com/crimson-flamingo/image/upload/v1704864563/ecommerce/bg3new.png)]">
-    <div className="absolute w-64 h-80 top-20 right-8">
-        <HomeProductCard
-            title1="100% LUXURY CASHMERE"
-            title2="Luxurious Silk Dresses"
-            description="Shop the finest luxury silk dresses for casual or formal evening wear."
-            link="/shop/dress"
-            linktext="SHOP DRESSES"
-        />
-    </div>
-</div>
-
-<div className="relative w-full h-[550px]  bg-cover bg-[url(https://res.cloudinary.com/crimson-flamingo/image/upload/v1704868154/ecommerce/home1new.png)]">
-    <div className="absolute w-64 h-80 top-20 left-8">
-        <HomeProductCard
-            title2="Dry cleaning and caring instructions"
-            link="/"
-            linktext="Care Instructions"
-            description="How to care for your garments that will last many years."
-        />
-    </div>
-</div>
-
-<div className="relative w-full h-[550px]  bg-cover bg-[url(https://res.cloudinary.com/crimson-flamingo/image/upload/v1704868572/ecommerce/origin2new.png)]">
-    <div className="absolute w-64 h-80 top-20 right-8">
-        <HomeProductCard
-            title2="About our unique products"
-            link="/"
-            linktext="Our Story"
-            description="Discover the origins of FashionStore and how we can serve you."
-        />
-    </div>
-</div> */
 }
