@@ -7,6 +7,7 @@ import { PiShootingStarBold } from "react-icons/pi";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FooterInput } from "./components/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 export const metadata: Metadata = {
     title: "Fashion Store",
@@ -20,6 +21,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <GoogleAnalytics />
             <body>
                 <header className="sticky top-0 z-10">
                     <nav className="flex px-6 text-slate-100 py-4 justify-between bg-slate-600 items-center">

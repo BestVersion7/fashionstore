@@ -1,15 +1,11 @@
 import { CartType, CustomerType, EmailProps } from "../types";
+import { BASE_URL } from "../lib/constants";
 
-let host = "http://localhost:3000";
-if (process.env.NODE_ENV === "production") {
-    host = "https://afashionstore.vercel.app";
-}
-
-const emailOrigin = `${host}/api/contact`;
-const stripeOrigin = `${host}/api/stripe`;
-const cartOrigin = `${host}/api/cart`;
-const cartCookieOrigin = `${host}/api/cartcookie`;
-const searchOrigin = `${host}/api/stripe/search`;
+const emailOrigin = `${BASE_URL}/api/contact`;
+const stripeOrigin = `${BASE_URL}/api/stripe`;
+const cartOrigin = `${BASE_URL}/api/cart`;
+const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
+const searchOrigin = `${BASE_URL}/api/stripe/search`;
 
 const revalidateTime = 60 * 60 * 24 * 1;
 

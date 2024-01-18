@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /checkout/
+Disallow: /cart/
+
+Sitemap: https://afashionstore.vercel.app/sitemap.xml
