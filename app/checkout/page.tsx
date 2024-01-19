@@ -5,6 +5,12 @@ import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { FaLock } from "react-icons/fa";
 import { createPaymentIntent } from "../utils/apiCalls";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Checkout",
+    description: "No name, no brand, no premium clothing.",
+};
 
 export default async function CheckoutPage() {
     const cartData: CartType[] = await getCartByCookie(

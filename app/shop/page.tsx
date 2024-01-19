@@ -4,6 +4,12 @@ import { ProductType } from "../types";
 import { getAllProducts } from "../utils/apiCalls";
 import { ProductFilter } from "../components/ProductFilter";
 import { ContactBtn } from "../components/ContactBtn";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Shop",
+    description: "No name, no brand, no premium clothing.",
+};
 
 export default async function Shop() {
     const products: ProductType[] = await getAllProducts();

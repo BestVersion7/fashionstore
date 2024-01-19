@@ -4,6 +4,12 @@ import { formatCurrency } from "../utils/formatCurrency";
 import { getCartByCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Cart",
+    description: "No name, no brand, no premium clothing.",
+};
 
 export default async function CartPage() {
     const cartItems: CartType[] = await getCartByCookie(
