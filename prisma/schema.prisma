@@ -7,24 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Account {
-  id                String  @id
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-}
-
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model CartInfo {
   cart_id       BigInt     @id @default(autoincrement())
@@ -47,32 +29,6 @@ model CookieInfo {
   CartInfo       CartInfo[]
 }
 
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model OrderInfo {
-  order_id       Int      @id(map: "orderinfo_pkey") @default(autoincrement())
-  order_date     DateTime @default(now()) @db.Timestamptz(6)
-  account_id     BigInt
-  order_products Json[]
-}
-
-model Session {
-  id           String   @id
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  Account       Account[]
-  Session       Session[]
-}
-
 /// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model UserInfo {
@@ -80,14 +36,6 @@ model UserInfo {
   created_at DateTime @default(now()) @db.Timestamptz(6)
   username   String?  @unique @default("ciao") @db.VarChar
   password   String?  @default("ster") @db.VarChar
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
 }
 
 model blog {
@@ -192,4 +140,72 @@ model survey {
   survey_name   String?   @db.VarChar(100)
   survey_email  String?   @db.VarChar(200)
   survey_choice String    @db.VarChar(100)
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model ScrapeProductName {
+  product_id         BigInt               @id(map: "scraptable_pkey") @default(autoincrement())
+  created_at         DateTime             @default(now()) @db.Timestamptz(6)
+  product_name       String               @unique(map: "scraptable_product_name_key")
+  ScrapeProductPrice ScrapeProductPrice[]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ScrapeProductPrice {
+  id                BigInt             @id @default(autoincrement())
+  created_at        DateTime           @default(now()) @db.Timestamptz(6)
+  product_name      String?
+  product_price     Decimal?           @db.Decimal
+  ScrapeProductName ScrapeProductName? @relation(fields: [product_name], references: [product_name], onDelete: Cascade)
+}
+
+model usertb {
+  account_id Int      @id @default(autoincrement())
+  last_name  String?  @db.VarChar(10)
+  gender     String?  @db.VarChar(1)
+  lastmod    DateTime @default(now()) @db.Timestamptz(6)
+  first_name String?
 }
