@@ -19,7 +19,7 @@ import { ContactBtn } from "@/app/components/ContactBtn";
 export async function generateMetadata({
     params,
 }: {
-    params: { category: string; id: string };
+    params: { category: string };
 }) {
     return {
         title: `Shop for ${

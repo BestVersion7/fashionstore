@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
     params,
 }: {
-    params: { category: string; id: string };
+    params: { category: string };
 }) {
     return {
         title: `Shop for ${
