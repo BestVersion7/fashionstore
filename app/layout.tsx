@@ -8,6 +8,8 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FooterInput } from "./components/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import GoogleAnalytics from "./components/GoogleAnalytics";
+import { RiAccountCircleLine } from "react-icons/ri";
+import { AccountHover } from "./components/AccountHover";
 
 export const metadata: Metadata = {
     title: "Fashion Store",
@@ -25,7 +27,7 @@ export default function RootLayout({
             <body>
                 <header className="sticky top-0 z-10">
                     <nav className="flex px-6 text-slate-100 py-4 justify-between bg-slate-600 items-center">
-                        <div className="flex ">
+                        <div className="flex items-center gap-4">
                             <Link
                                 href="/"
                                 className="hidden text-3xl text-purple-100 font-bold md:inline"
@@ -42,23 +44,41 @@ export default function RootLayout({
                             </Link>
 
                             <Link
-                                className=" pl-4 text-orange-300 font-bold text-2xl "
+                                className="  text-orange-300 font-bold text-xl "
                                 href="/shop"
                             >
                                 SHOP
                             </Link>
                             {/* <Link
-                                className=" pl-4 text-orange-300 font-bold text-2xl "
-                                href="/about"
+                                className=" flex items-center text-yellow-300  font-medium text-xl"
+                                href="/account"
                             >
-                                DEALS
+                                <span className="text-2xl">
+                                    <RiAccountCircleLine />
+                                </span>
+                                Account
                             </Link> */}
                         </div>
 
-                        <div className="flex gap-5">
+                        <div className="flex gap-2">
                             <span className="hidden italic text-base lg:block w-32 leading-4 text-slate-100 lg:mr-3">
                                 Free U.S. Shipping & Returns
                             </span>
+
+                            {/* <div className=" flex gap-1 items-center text-white hover:cursor-pointer ">
+                                <span className="text-3xl">
+                                    <RiAccountCircleLine />
+                                </span>
+                                <div className="flex flex-col items-center">
+                                    <span className="text-xs tracking-wider leading-3">
+                                        Hello, signin
+                                    </span>
+                                    <span className=" font-medium leading-4">
+                                        Account
+                                    </span>
+                                </div>
+                            </div> */}
+                            <AccountHover />
 
                             <div className="hidden items-center w-56 bg-white  md:grid">
                                 <SearchInput />

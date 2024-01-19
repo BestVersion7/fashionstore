@@ -20,6 +20,14 @@
     .stripe-h2 {
         @apply text-xl font-semibold;
     }
+
+    .dropdown:hover .dropdown-menu {
+        display: block
+    }
+
+    /* .dropdown:hover .dropdown-bg {
+        display: block;
+    } */
 }
 
 @layer utilities {
