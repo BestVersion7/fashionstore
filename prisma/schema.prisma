@@ -1,5 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -189,24 +190,24 @@ model OrderInfo {
 }
 
 model PriceInfo {
-  price_id                                         String        @id
-  created_at                                       DateTime      @default(now()) @db.Timestamptz(6)
-  unit_amount                                      Decimal?      @db.Decimal
-  product_id                                       String?
-  updated_at                                       DateTime?     @default(now()) @db.Timestamptz(6)
-  ProductInfo_PriceInfo_product_idToProductInfo    ProductInfo?  @relation("PriceInfo_product_idToProductInfo", fields: [product_id], references: [product_id], onDelete: Cascade)
-  ProductInfo_ProductInfo_default_priceToPriceInfo ProductInfo[] @relation("ProductInfo_default_priceToPriceInfo")
+  price_id    String        @id
+  created_at  DateTime      @default(now()) @db.Timestamptz(6)
+  unit_amount Decimal?      @db.Decimal
+  product_id  String?
+  updated_at  DateTime?     @default(now()) @db.Timestamptz(6)
+  currency    String        @default("usd")
+  ProductInfo ProductInfo[]
 }
 
 model ProductInfo {
-  product_id                                     String      @id
-  created_at                                     DateTime    @default(now()) @db.Timestamptz(6)
-  default_price                                  String?
-  description                                    String?
-  images                                         String[]
-  name                                           String?
-  metadata                                       Json?
-  quantity_available                             Decimal?    @db.Decimal
-  PriceInfo_PriceInfo_product_idToProductInfo    PriceInfo[] @relation("PriceInfo_product_idToProductInfo")
-  PriceInfo_ProductInfo_default_priceToPriceInfo PriceInfo?  @relation("ProductInfo_default_priceToPriceInfo", fields: [default_price], references: [price_id], onDelete: Restrict)
+  product_id         String     @id
+  created_at         DateTime   @default(now()) @db.Timestamptz(6)
+  default_price      String?
+  description        String?
+  images             String[]
+  name               String?
+  metadata           Json?
+  quantity_available Decimal?   @default(2) @db.Decimal
+  updated_at         DateTime?  @default(now()) @db.Timestamptz(6)
+  PriceInfo          PriceInfo? @relation(fields: [default_price], references: [price_id], onDelete: Restrict)
 }

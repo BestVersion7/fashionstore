@@ -25,13 +25,15 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { order_total, cookie_id, user_id } = await req.json();
+    const { order_total, order_items, payment_intent, user_id } =
+        await req.json();
     try {
         await prisma.orderInfo.create({
             data: {
                 order_total,
-                cookie_id,
                 user_id,
+                order_items,
+                payment_intent,
             },
         });
         return NextResponse.json("success");
