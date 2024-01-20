@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { FaLock } from "react-icons/fa";
-import { createPaymentIntent } from "../utils/apiCalls";
+import { createOrFindPaymentIntent } from "../utils/apiCalls";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default async function CheckoutPage() {
 
     let clientSecret;
     if (totalAmount > 0) {
-        clientSecret = await createPaymentIntent(
+        clientSecret = await createOrFindPaymentIntent(
             cookies().get("cookiecart")?.value,
             totalAmount
         );

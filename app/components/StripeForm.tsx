@@ -13,8 +13,6 @@ import { ImSpinner2 } from "react-icons/im";
 import Link from "next/link";
 
 import {
-    createCustomer,
-    createInvoice,
     updateCartPurchased,
     updatePaymentIntent,
     getPaymentIntentFromCookie,
@@ -85,8 +83,8 @@ export function StripeForm(props: { totalAmount: number }) {
                     <h2 className="stripe-h2">1. Enter your email</h2>
                     <input
                         className=" w-full border border-solid border-gray-300 shadow-sm rounded-md leading-8 pl-3"
-                        type="text"
-                        placeholder="Email"
+                        type="email"
+                        placeholder="email@example.com"
                         ref={emailRef}
                     />
                     <br />

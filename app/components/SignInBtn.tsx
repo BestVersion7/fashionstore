@@ -61,6 +61,7 @@ export const SignInBtn = () => {
                     ref={emailRef}
                     title="email"
                     placeholder="email@example.com"
+                    type="email"
                     required
                     className="w-full pl-4 py-1 rounded-lg border border-slate-400 placeholder:text-slate-500"
                 />

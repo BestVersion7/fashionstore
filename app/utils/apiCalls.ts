@@ -1,4 +1,4 @@
-import { CartType, CustomerType, EmailProps } from "../types";
+import { CartType, CustomerType, EmailProps, OrderProps } from "../types";
 import { BASE_URL } from "../lib/constants";
 
 const emailOrigin = `${BASE_URL}/api/contact`;
@@ -6,6 +6,7 @@ const stripeOrigin = `${BASE_URL}/api/stripe`;
 const cartOrigin = `${BASE_URL}/api/cart`;
 const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
 const searchOrigin = `${BASE_URL}/api/stripe/search`;
+const orderOrigin = `${BASE_URL}/api/order`;
 
 const revalidateTime = 60 * 60 * 24 * 1;
 
@@ -29,12 +30,6 @@ export const getPriceById = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/price?price_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
-    const data = await res.json();
-    return data;
-};
-
-export const getInvoiceById = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/invoice?invoiceid=${id}`);
     const data = await res.json();
     return data;
 };
@@ -121,28 +116,7 @@ export const getPaymentIntent = async (id: string) => {
     return data;
 };
 
-export const createCustomer = async (customerData: CustomerType) => {
-    const res = await fetch(`${stripeOrigin}/customer`, {
-        method: "post",
-        body: JSON.stringify(customerData),
-    });
-    const data = await res.json();
-    return data;
-};
-
-export const createInvoice = async (
-    customer: string,
-    invoiceData: CartType[]
-) => {
-    const res = await fetch(`${stripeOrigin}/invoice`, {
-        method: "post",
-        body: JSON.stringify({ customerId: customer, cartItems: invoiceData }),
-    });
-    const data = await res.json();
-    return data;
-};
-
-export const createPaymentIntent = async (
+export const createOrFindPaymentIntent = async (
     cookieId: string | undefined,
     amount: number
 ) => {
@@ -194,6 +168,15 @@ export const getProductBySearchCategory = async (input: string | undefined) => {
 
 export const createEmail = async (props: EmailProps) => {
     const res = await fetch(emailOrigin, {
+        method: "post",
+        body: JSON.stringify(props),
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const createOrder = async (props: OrderProps) => {
+    const res = await fetch(orderOrigin, {
         method: "post",
         body: JSON.stringify(props),
     });

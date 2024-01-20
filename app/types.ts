@@ -1,5 +1,6 @@
 export type ProductType = {
-    id: string;
+    product_id: string;
+    created_at?: Date;
     default_price: string;
     description: string;
     images: string[];
@@ -7,24 +8,16 @@ export type ProductType = {
     metadata: {
         category: "tops" | "dress";
     };
-};
-
-export type InvoiceType = {
-    customer_name: string;
-    customer_email: string;
-    lines: { data: { description: string; quantity: number }[] };
-    amount_paid: number;
-};
-
-export type InvoiceCreationType = {
-    customerId: string;
+    quantity_available?: number;
+    updated_at?: Date;
 };
 
 export type PriceType = {
+    price_id: string;
+    created_at: Date;
     unit_amount: number;
-    name: string;
-    description: string;
-    images: string[];
+    updated_at: Date;
+    product_id: string;
 };
 
 export type CustomerType = {
@@ -54,7 +47,7 @@ export type CartType = {
     price_id: string;
     product_id: string;
     product_price?: number;
-    purchased: boolean;
+    purchased?: boolean;
 };
 
 export type HomeProductCardProps = {
@@ -73,4 +66,13 @@ export type EmailProps = {
     name: string | undefined;
     email: string | undefined;
     message: string | undefined;
+};
+
+export type OrderProps = {
+    order_id?: number;
+    created_at?: Date;
+    order_total: number;
+    user_id: string;
+    order_items: CartType[];
+    payment_intent: string;
 };
