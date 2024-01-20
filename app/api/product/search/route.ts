@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_KEY);
+// const stripe = require("stripe")(process.env.STRIPE_KEY);
 import prisma from "@/app/lib/prisma";
 
 export async function GET(req: NextRequest) {

@@ -1,4 +1,4 @@
-import { CartType, CustomerType, EmailProps, OrderProps } from "../types";
+import { CartType, EmailProps, OrderProps } from "../types";
 import { BASE_URL } from "../lib/constants";
 
 const emailOrigin = `${BASE_URL}/api/contact`;
@@ -7,19 +7,22 @@ const cartOrigin = `${BASE_URL}/api/cart`;
 const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
 const searchOrigin = `${BASE_URL}/api/stripe/search`;
 const orderOrigin = `${BASE_URL}/api/order`;
+const productOrigin = `${BASE_URL}/api/product`;
+const priceOrigin = `${BASE_URL}/api/price`;
 
-const revalidateTime = 60 * 60 * 24 * 1;
+// const revalidateTime = 60 * 60 * 24 * 1;
+const revalidateTime = 1;
 
 export const getAllProducts = async () => {
-    const res = await fetch(`${stripeOrigin}/product`, {
+    const res = await fetch(productOrigin, {
         next: { revalidate: revalidateTime },
     });
-    const { data } = await res.json();
+    const data = await res.json();
     return data;
 };
 
 export const getProductById = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/product?product_id=${id}`, {
+    const res = await fetch(`${productOrigin}?product_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
     const data = await res.json();
@@ -27,7 +30,7 @@ export const getProductById = async (id: string) => {
 };
 
 export const getPriceById = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/price?price_id=${id}`, {
+    const res = await fetch(`${priceOrigin}?price_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
     const data = await res.json();
@@ -155,14 +158,16 @@ export const getPaymentIntentFromCookie = async (
 };
 
 export const getProductBySearchName = async (input: string | undefined) => {
-    const res = await fetch(`${searchOrigin}?product_name=${input}`);
-    const { data } = await res.json();
+    const res = await fetch(`${productOrigin}/search?product_name=${input}`);
+    const data = await res.json();
     return data;
 };
 
 export const getProductBySearchCategory = async (input: string | undefined) => {
-    const res = await fetch(`${searchOrigin}?product_category=${input}`);
-    const { data } = await res.json();
+    const res = await fetch(
+        `${productOrigin}/search?product_category=${input}`
+    );
+    const data = await res.json();
     return data;
 };
 

@@ -34,7 +34,7 @@ export const Product = async (props: ProductType) => {
                     Price: {formatCurrency(prices.unit_amount)}
                 </p>
                 <CartAddBtn
-                    product_id={props.id}
+                    product_id={props.product_id}
                     price_id={props.default_price}
                     product_price={prices.unit_amount}
                     quantity={1}

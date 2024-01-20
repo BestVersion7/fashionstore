@@ -16,10 +16,13 @@ export async function GET(req: NextRequest) {
         } else {
             data = await prisma.productInfo.findMany({
                 take: 10,
+                orderBy: {
+                    created_at: "asc",
+                },
             });
         }
 
-        return NextResponse.json("created", { status: 201 });
+        return NextResponse.json(data);
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

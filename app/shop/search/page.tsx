@@ -26,7 +26,7 @@ export default async function CategoryShop({
             <ProductFilter />
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {products.map((item) => (
-                    <Product key={item.id} {...item} />
+                    <Product key={item.product_id} {...item} />
                 ))}
             </div>
         </main>

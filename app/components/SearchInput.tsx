@@ -48,13 +48,13 @@ export const SearchInput = () => {
             </form>
 
             <div className="absolute w-full top-9 left-0 z-10 bg-slate-50">
-                {productMap &&
+                {productMap.length > 0 &&
                     showSearch &&
                     productMap.map((item, index) => (
                         <Link
                             className="p-2 grid text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
                             key={index}
-                            href={`/shop/${item.metadata.category}/${item.id}`}
+                            href={`/shop/${item.metadata.category}/${item.product_id}`}
                             onClick={() => setShowSearch(() => false)}
                         >
                             {item.name}
