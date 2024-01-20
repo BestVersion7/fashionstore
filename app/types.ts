@@ -72,7 +72,7 @@ export type OrderProps = {
     order_id?: number;
     created_at?: Date;
     order_total: number;
-    user_id: string;
+    email: string;
     order_items: CartType[];
     payment_intent: string;
 };

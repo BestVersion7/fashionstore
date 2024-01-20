@@ -152,7 +152,6 @@ model User {
   image         String?
   accounts      Account[]
   CookieInfo    CookieInfo[]
-  OrderInfo     OrderInfo[]
   sessions      Session[]
 }
 
@@ -183,10 +182,9 @@ model OrderInfo {
   order_number   BigInt   @id @default(autoincrement())
   created_at     DateTime @default(now()) @db.Timestamptz(6)
   order_total    Decimal? @db.Decimal
-  user_id        String?
   order_items    Json[]
   payment_intent String?
-  User           User?    @relation(fields: [user_id], references: [id], onDelete: Restrict, onUpdate: Restrict)
+  email          String
 }
 
 model PriceInfo {

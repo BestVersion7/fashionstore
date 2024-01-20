@@ -27,13 +27,15 @@ export function StripeForm(props: {
     totalAmount: number;
     cartData: CartType[];
 }) {
-    const orderItems = props.cartData.map((item) => {
-        return {
-            product_id: item.product_id,
-            product_price: item.product_price,
-            quantity: item.quantity,
-        };
-    });
+    const orderItems = Object.values(
+        props.cartData.map((item) => {
+            return {
+                product_id: item.product_id,
+                product_price: item.product_price,
+                quantity: item.quantity,
+            };
+        })
+    );
 
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | undefined>("");
@@ -77,12 +79,13 @@ export function StripeForm(props: {
                 await updateCartPurchased(getCookie("cookiecart"), {
                     purchased: true,
                 });
-                // craete the invoice
+
+                // create the order
                 await createOrder({
                     order_items: orderItems,
                     order_total: props.totalAmount,
-                    payment_intent: `${paymentIntent}`,
-                    user_id: "2",
+                    payment_intent: paymentIntent.id,
+                    email: `${emailRef.current?.value}`,
                 });
 
                 await deleteCartCookie();
