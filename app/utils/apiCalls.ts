@@ -5,13 +5,11 @@ const emailOrigin = `${BASE_URL}/api/contact`;
 const stripeOrigin = `${BASE_URL}/api/stripe`;
 const cartOrigin = `${BASE_URL}/api/cart`;
 const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
-const searchOrigin = `${BASE_URL}/api/stripe/search`;
 const orderOrigin = `${BASE_URL}/api/order`;
 const productOrigin = `${BASE_URL}/api/product`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-// const revalidateTime = 60 * 60 * 24 * 1;
-const revalidateTime = 1;
+const revalidateTime = 60 * 60 * 24 * 1;
 
 export const getAllProducts = async () => {
     const res = await fetch(productOrigin, {
