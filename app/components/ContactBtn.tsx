@@ -1,9 +1,8 @@
 "use client";
 
 import { IoIosText } from "react-icons/io";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ContactForm } from "./ContactForm";
-import { useSearchParams } from "next/navigation";
 
 export const ContactBtn = () => {
     const router = useRouter();

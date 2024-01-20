@@ -17,14 +17,14 @@ export const AccountHover = async () => {
 
                 {/* this is to make bg gray */}
                 {/* <div className="dropdown-bg hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
-                <ul className="absolute top-8 dropdown-menu hidden text-black bg-violet-50 border border-solid border-violet-500 text-center w-52 py-2">
+                <ul className="absolute top-8 dropdown-menu hidden text-black bg-violet-50 border border-solid border-violet-500 text-center w-40 py-2">
                     {/* check for session user different hover screen */}
 
                     {!session ? (
                         <>
                             <li className="text-sm">
                                 <Link
-                                    className="bg-yellow-200 text-lg px-2 border border-solid border-black shadow-md hover:bg-yellow-300"
+                                    className="hover:underline"
                                     href="/signin"
                                 >
                                     Sign In / Sign Up
@@ -34,11 +34,13 @@ export const AccountHover = async () => {
                     ) : (
                         <>
                             <li className="text-l font-bold">Your Account</li>
-                            <li className="text-sm">
+                            <li className="text-sm hover:underline">
                                 <Link href="/account">Account</Link>
                             </li>
-                            <li className="text-sm">Orders</li>
-                            <li className="text-sm">
+                            <li className="text-sm hover:underline">
+                                <Link href="/account/orders">Orders</Link>
+                            </li>
+                            <li className="text-sm ">
                                 <SignOutBtn />
                             </li>
                         </>

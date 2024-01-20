@@ -19,7 +19,9 @@ export default async function SignInPage() {
 
             {!session && (
                 <div>
-                    <h2>Please create an account below or sign in:</h2>
+                    <h2 className="py-2">
+                        Please create an account below or sign in:
+                    </h2>
                     <SignInBtn />
                     <p>
                         By continuing, you agree to our{" "}
