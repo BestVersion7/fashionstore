@@ -16,6 +16,9 @@ export async function GET(req: NextRequest) {
         } else {
             data = await prisma.productInfo.findMany({
                 take: 10,
+                orderBy: {
+                    created_at: "desc",
+                },
             });
         }
 

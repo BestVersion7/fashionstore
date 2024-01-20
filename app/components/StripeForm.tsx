@@ -66,9 +66,10 @@ export function StripeForm(props: { totalAmount: number }) {
 
                 await deleteCartCookie();
 
+                router.push(`/checkout/success/${paymentIntent.id}`);
+
                 // this is to clear the cart total
                 router.refresh();
-                router.push(`/checkout/success/${paymentIntent.id}`);
             } else {
                 setErrorMessage("Please try again later.");
             }
