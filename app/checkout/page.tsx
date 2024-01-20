@@ -59,6 +59,7 @@ export default async function CheckoutPage() {
                     <Checkout
                         totalAmount={totalAmount}
                         clientSecret={clientSecret}
+                        cartData={cartData}
                     />
                 )}
                 <br />

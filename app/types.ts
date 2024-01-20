@@ -44,7 +44,7 @@ export type CartType = {
     created_at?: Date;
     cookie_id?: string;
     quantity: number;
-    price_id: string;
+    price_id?: string;
     product_id: string;
     product_price?: number;
     purchased?: boolean;

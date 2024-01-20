@@ -1,6 +1,5 @@
 import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 export async function GET(req: NextRequest) {
     try {
@@ -46,7 +45,9 @@ export async function POST(req: NextRequest) {
         });
 
         if (find.length < 1) {
-            const price = await stripe.prices.retrieve(price_id);
+            const price = await prisma.priceInfo.findUnique({
+                where: { price_id },
+            });
             // prevent entering your own price
             await prisma.cartInfo.create({
                 data: {
@@ -54,7 +55,7 @@ export async function POST(req: NextRequest) {
                     product_id,
                     quantity,
                     cookie_id: `${cartCookie}`,
-                    product_price: price.unit_amount,
+                    product_price: Number(price?.unit_amount),
                 },
             });
         } else {

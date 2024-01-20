@@ -16,12 +16,25 @@ import {
     updateCartPurchased,
     updatePaymentIntent,
     getPaymentIntentFromCookie,
+    createOrder,
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
 import { formatCurrency } from "../utils/formatCurrency";
+import { CartType } from "../types";
 
-export function StripeForm(props: { totalAmount: number }) {
+export function StripeForm(props: {
+    totalAmount: number;
+    cartData: CartType[];
+}) {
+    const orderItems = props.cartData.map((item) => {
+        return {
+            product_id: item.product_id,
+            product_price: item.product_price,
+            quantity: item.quantity,
+        };
+    });
+
     const [isProcessing, setIsProcessing] = useState(false);
     const [errorMessage, setErrorMessage] = useState<string | undefined>("");
 
@@ -37,10 +50,11 @@ export function StripeForm(props: { totalAmount: number }) {
 
         try {
             setIsProcessing(true);
+
+            // find the payment intent
             const paymentId = await getPaymentIntentFromCookie(
                 getCookie("cookiecart")
             );
-            // find the payment intent
 
             // update the total and email
             await updatePaymentIntent(paymentId, {
@@ -62,6 +76,13 @@ export function StripeForm(props: { totalAmount: number }) {
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
                 await updateCartPurchased(getCookie("cookiecart"), {
                     purchased: true,
+                });
+                // craete the invoice
+                await createOrder({
+                    order_items: orderItems,
+                    order_total: props.totalAmount,
+                    payment_intent: `${paymentIntent}`,
+                    user_id: "2",
                 });
 
                 await deleteCartCookie();

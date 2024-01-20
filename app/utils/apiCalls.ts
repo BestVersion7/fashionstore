@@ -156,14 +156,19 @@ export const getPaymentIntentFromCookie = async (
 };
 
 export const getProductBySearchName = async (input: string | undefined) => {
-    const res = await fetch(`${productOrigin}/search?product_name=${input}`);
+    const res = await fetch(`${productOrigin}/search?product_name=${input}`, {
+        next: { revalidate: revalidateTime },
+    });
     const data = await res.json();
     return data;
 };
 
 export const getProductBySearchCategory = async (input: string | undefined) => {
     const res = await fetch(
-        `${productOrigin}/search?product_category=${input}`
+        `${productOrigin}/search?product_category=${input}`,
+        {
+            next: { revalidate: revalidateTime },
+        }
     );
     const data = await res.json();
     return data;
