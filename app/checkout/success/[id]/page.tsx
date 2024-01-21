@@ -16,7 +16,6 @@ export default async function SuccessPage({
         params.id
     );
     const orderData: OrderType = await getOrderByPaymentIntent(params.id);
-    console.log(orderData);
 
     return (
         <main>
@@ -28,6 +27,12 @@ export default async function SuccessPage({
                 Order Number:{" "}
                 <span className="font-bold">
                     V-{orderData.order_number.toString().padStart(5, "0")}
+                </span>
+            </p>
+            <p>
+                Order Date:{" "}
+                <span className="font-bold">
+                    {orderData.created_at.toString().split("T")[0]}
                 </span>
             </p>
             <p>

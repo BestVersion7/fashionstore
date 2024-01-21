@@ -7,7 +7,12 @@ import { createCart, createCartCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { FaCheck } from "react-icons/fa";
 
-export const CartAddBtn = (props: CartType) => {
+export const CartAddBtn = (
+    props: Pick<
+        CartType,
+        "product_id" | "price_id" | "product_price" | "quantity" | "purchased"
+    >
+) => {
     const [quantity, setQuantity] = useState(props.quantity);
     const [disableAdd, setDisableAdd] = useState(false);
     const [inCart, setInCart] = useState(false);

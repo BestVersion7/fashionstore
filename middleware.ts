@@ -10,7 +10,7 @@ const ratelimit = new Ratelimit({
 });
 
 export async function middleware(req: NextRequest) {
-    if (req.nextUrl.pathname.startsWith("/api/order?email=")) {
+    if (req.nextUrl.pathname.startsWith("/api/order/search")) {
         const apiKey = req.headers.get("authorization");
 
         if (apiKey !== process.env.API_KEY) {
@@ -19,7 +19,7 @@ export async function middleware(req: NextRequest) {
             return NextResponse.next();
         }
     }
-    // const session = await getToken({ req });
+    const session = await getToken({ req });
     // if (req.nextUrl.pathname.startsWith("/api")) {
     //     const ip = req.ip ?? "127.0.0.1";
     //     const res = await ratelimit.limit(ip);
@@ -34,11 +34,11 @@ export async function middleware(req: NextRequest) {
     //         return NextResponse.next();
     //     }
     // }
-    // if (req.nextUrl.pathname.startsWith("/account")) {
-    //     if (!session) {
-    //         return NextResponse.redirect(new URL("/signin", req.url));
-    //     } else if (session) {
-    //         return NextResponse.next();
-    //     }
-    // }
+    if (req.nextUrl.pathname.startsWith("/account")) {
+        if (!session) {
+            return NextResponse.redirect(new URL("/signin", req.url));
+        } else if (session) {
+            return NextResponse.next();
+        }
+    }
 }

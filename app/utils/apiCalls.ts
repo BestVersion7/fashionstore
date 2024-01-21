@@ -65,7 +65,7 @@ export const deleteCartCookie = async () => {
 
 export const createCart = async (
     cookieId: string | undefined,
-    cart: CartType
+    cart: Pick<CartType, "price_id" | "product_id" | "quantity" | "purchased">
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "POST",
@@ -201,7 +201,7 @@ export const getOrderByPaymentIntent = async (paymentIntent: string) => {
 };
 
 export const getOrdersByEmail = async (email: string) => {
-    const res = await fetch(`${orderOrigin}?email=${email}`, {
+    const res = await fetch(`${orderOrigin}/search?email=${email}`, {
         cache: "no-cache",
         headers: {
             authorization: `${process.env.API_KEY}`,

@@ -1,6 +1,6 @@
 export type ProductType = {
     product_id: string;
-    created_at?: Date;
+    created_at: Date;
     default_price: string;
     description: string;
     images: string[];
@@ -8,8 +8,8 @@ export type ProductType = {
     metadata: {
         category: "tops" | "dress";
     };
-    quantity_available?: number;
-    updated_at?: Date;
+    quantity_available: number;
+    updated_at: Date;
 };
 
 export type PriceType = {
@@ -39,18 +39,18 @@ export type PaymentIntentType = {
 };
 
 export type CartType = {
-    cart_id?: number;
-    created_at?: Date;
-    cookie_id?: string;
+    cart_id: number;
+    created_at: Date;
+    cookie_id: string;
     quantity: number;
-    price_id?: string;
+    price_id: string;
     product_id: string;
-    product_price?: number;
-    purchased?: boolean;
+    product_price: number;
+    purchased: boolean;
 };
 
 export type HomeProductCardProps = {
-    title1?: string;
+    title1: string;
     title2: string;
     description: string;
     link: string;
@@ -69,7 +69,7 @@ export type EmailProps = {
 
 export type OrderType = {
     order_number: number;
-    created_at?: Date;
+    created_at: Date;
     order_total: number;
     email: string;
     order_items: CartType[];
