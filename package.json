@@ -22,6 +22,7 @@
     "nodemailer": "^6.9.8",
     "react": "^18",
     "react-dom": "^18",
+    "react-highlight-words": "^0.20.0",
     "react-icons": "^4.12.0",
     "sharp": "^0.33.1",
     "stripe": "^14.11.0"
@@ -30,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-highlight-words": "^0.16.7",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",

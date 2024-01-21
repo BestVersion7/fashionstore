@@ -6,6 +6,7 @@ import Link from "next/link";
 import { ProductType } from "../types";
 import { useRouter } from "next/navigation";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import Highlighter from "react-highlight-words";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);
@@ -57,7 +58,16 @@ export const SearchInput = () => {
                             href={`/shop/${item.metadata.category}/${item.product_id}`}
                             onClick={() => setShowSearch(() => false)}
                         >
-                            {item.name}
+                            <Highlighter
+                                highlightClassName="YourHighlightClass"
+                                searchWords={[`${searchRef.current?.value}`]}
+                                autoEscape={true}
+                                textToHighlight={item.name}
+                                // highlightStyle={{
+                                // color: "rgb(234 88 12)",
+                                // backgroundColor: "yellow",
+                                // }}
+                            />
                         </Link>
                     ))}
             </div>
