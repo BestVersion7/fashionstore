@@ -4,12 +4,18 @@ import Link from "next/link";
 import { SearchInput } from "./components/SearchInput";
 import { CartTotal } from "./components/CartTotal";
 import { PiShootingStarBold } from "react-icons/pi";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import {
+    FaFacebook,
+    FaInstagram,
+    FaShoePrints,
+    FaShoppingBag,
+} from "react-icons/fa";
 import { FooterInput } from "./components/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { RiAccountCircleLine } from "react-icons/ri";
 import { AccountHover } from "./components/AccountHover";
+import { LuShoppingCart } from "react-icons/lu";
 
 export const metadata: Metadata = {
     title: "Fashion Store",
@@ -38,6 +44,7 @@ export default function RootLayout({
                             {/* this icon when small screen */}
                             <Link
                                 href="/"
+                                title="Fashion"
                                 className="md:hidden text-purple-100 text-3xl  font-bold"
                             >
                                 <PiShootingStarBold />
@@ -60,24 +67,11 @@ export default function RootLayout({
                             </Link> */}
                         </div>
 
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 items-center">
                             <span className="hidden italic text-base lg:block w-32 leading-4 text-slate-100 lg:mr-3">
                                 Free U.S. Shipping & Returns
                             </span>
 
-                            {/* <div className=" flex gap-1 items-center text-white hover:cursor-pointer ">
-                                <span className="text-3xl">
-                                    <RiAccountCircleLine />
-                                </span>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-xs tracking-wider leading-3">
-                                        Hello, signin
-                                    </span>
-                                    <span className=" font-medium leading-4">
-                                        Account
-                                    </span>
-                                </div>
-                            </div> */}
                             <AccountHover />
 
                             <div className="hidden items-center w-56 bg-white  md:grid">
@@ -85,12 +79,12 @@ export default function RootLayout({
                             </div>
 
                             <Link href="/cart" className="">
-                                <span className="flex">
+                                <div className="flex items-center">
                                     <CartTotal />
-                                    <span className="text-2xl  font-bold">
+                                    <span className="text-lg font-medium ">
                                         Cart
                                     </span>
-                                </span>
+                                </div>
                             </Link>
                         </div>
                     </nav>
@@ -107,18 +101,21 @@ export default function RootLayout({
                             <Link
                                 href="https://facebook.com"
                                 className="text-blue-400"
+                                title="Facebook"
                             >
                                 <FaFacebook />
                             </Link>
                             <Link
                                 href="https://instagram.com"
                                 className="text-orange-500"
+                                title="Instagram"
                             >
                                 <FaInstagram />
                             </Link>
                             <Link
                                 className="text-white"
                                 href="https://twitter.com"
+                                title="Twitter"
                             >
                                 <FaSquareXTwitter />
                             </Link>

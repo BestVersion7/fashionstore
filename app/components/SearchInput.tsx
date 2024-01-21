@@ -40,6 +40,8 @@ export const SearchInput = () => {
                     ref={searchRef}
                     onChange={handleChange}
                     type="text"
+                    name="search"
+                    autoComplete="off"
                     className="w-full bg-inherit text-lg text-black  focus:outline-none placeholder:text-slate-800 italic"
                 />
                 <button className=" text-green-700 text-2xl pl-2" type="submit">

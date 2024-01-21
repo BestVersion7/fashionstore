@@ -16,11 +16,11 @@ export async function CartTotal() {
     // }
 
     return (
-        <div className="relative text-center ">
-            <span className="text-3xl">
+        <div className="relative text-center">
+            <span className="text-2xl">
                 <LuShoppingCart />
             </span>
-            <span className="absolute right-0 left-0 bottom-[1.32rem] text-orange-300 font-bold">
+            <span className="absolute text-sm right-0 left-0 bottom-[1.0rem] text-orange-300 font-bold">
                 {cartTotal > 0 && cartTotal}
             </span>
         </div>

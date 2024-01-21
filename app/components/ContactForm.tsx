@@ -57,9 +57,10 @@ export const ContactForm = () => {
                     >
                         Contact me
                     </h3>
-                    <label>Name:</label>
+                    <label htmlFor="nameInput">Name:</label>
                     <br />
                     <input
+                        id="nameInput"
                         className="w-full"
                         title="name"
                         type="text"
@@ -67,9 +68,10 @@ export const ContactForm = () => {
                         required
                     />
                     <br />
-                    <label>Email:</label>
+                    <label htmlFor="emailInput">Email:</label>
                     <br />
                     <input
+                        id="emailInput"
                         className="w-full"
                         title="Email"
                         type="text"
@@ -77,9 +79,10 @@ export const ContactForm = () => {
                         required
                     />
                     <br />
-                    <label>Message:</label>
+                    <label htmlFor="msgInput">Message:</label>
                     <br />
                     <textarea
+                        id="msgInput"
                         title="Message"
                         className="w-full h-24"
                         ref={msgRef}
