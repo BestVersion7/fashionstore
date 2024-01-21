@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: number;
     }[] = products.map((item) => {
         return {
-            url: `${BASE_URL}/shop/${item.metadata.category}/${item.id}`,
+            url: `${BASE_URL}/shop/${item.metadata.category}/${item.product_id}`,
             lastModified: new Date(),
             changeFrequency: "weekly",
             priority: 0.8,
