@@ -9,6 +9,9 @@ export async function GET(req: NextRequest) {
             where: {
                 email: `${email}`,
             },
+            orderBy: {
+                order_number: "desc",
+            },
         });
 
         const data = JSON.parse(
