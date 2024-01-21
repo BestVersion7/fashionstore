@@ -22,7 +22,8 @@ export async function GET(req: NextRequest) {
             data = await prisma.productInfo.findMany({
                 where: {
                     name: {
-                        search: productName,
+                        contains: productName,
+                        mode: "insensitive",
                     },
                 },
             });

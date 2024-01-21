@@ -28,7 +28,7 @@ export default async function OrdersPage() {
             {orders.length < 1 ? (
                 <p className="text-center">You have no past orders.</p>
             ) : (
-                <div className="flex flex-col items-center gap-3 text-center ">
+                <div className="flex flex-col items-center gap-3  ">
                     {orders.map((item) => (
                         <OrderPaper key={item.order_number} {...item} />
                     ))}

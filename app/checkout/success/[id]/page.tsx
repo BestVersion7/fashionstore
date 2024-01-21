@@ -18,14 +18,12 @@ export default async function SuccessPage({
 
     return (
         <main>
-            <p className="text-2xl font-medium">
-                Thank you for your purchase {paymentIntentData.shipping.name}.
+            <p className="text-xl font-bold">
+                Thank you for your purchase {paymentIntentData.shipping.name}!
             </p>
-            <p>A receipt will be sent to you.</p>
-
             <p>
-                Email:{" "}
-                <span className="font-bold">
+                A receipt will be sent to{" "}
+                <span className=" bg-yellow-200 px-1">
                     {paymentIntentData.receipt_email}
                 </span>
             </p>

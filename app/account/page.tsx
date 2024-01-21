@@ -9,12 +9,12 @@ export default async function AccountPage() {
         <main>
             <h2>Thanks for signing in {session?.user?.name}.</h2>
             <p className="mt-3">
-                View your past purchases:{" "}
+                View past purchases:{" "}
                 <Link
                     className="rounded-md bg-orange-300  px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-orange-400 hover:cursor-pointer"
                     href="/account/orders"
                 >
-                    Orders
+                    Purchases
                 </Link>
             </p>{" "}
             <br />
