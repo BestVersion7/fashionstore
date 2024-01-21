@@ -4,7 +4,9 @@ import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
 import Image from "next/image";
 
-export const CartProductsV2 = async (props: CartType) => {
+export const CartProductsV2 = async (
+    props: Pick<CartType, "product_id" | "quantity" | "product_price">
+) => {
     const productInfo: ProductType = await getProductById(props.product_id);
 
     return (

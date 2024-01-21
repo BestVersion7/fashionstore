@@ -3,5 +3,6 @@ Allow: /
 Disallow: /api/
 Disallow: /checkout/
 Disallow: /cart/
+Disallow: /account/
 
 Sitemap: https://afashionstore.vercel.app/sitemap.xml
