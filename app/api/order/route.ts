@@ -3,13 +3,25 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     const paymentIntent = req.nextUrl.searchParams.get("payment_intent");
-
+    const email = req.nextUrl.searchParams.get("email");
+    let data2;
     try {
-        const data2 = await prisma.orderInfo.findFirst({
-            where: {
-                payment_intent: paymentIntent,
-            },
-        });
+        if (paymentIntent) {
+            data2 = await prisma.orderInfo.findFirst({
+                where: {
+                    payment_intent: paymentIntent,
+                },
+            });
+        } else if (email) {
+            data2 = await prisma.orderInfo.findMany({
+                where: {
+                    email: `${email}`,
+                },
+                orderBy: {
+                    order_number: "desc",
+                },
+            });
+        }
 
         const data = JSON.parse(
             JSON.stringify(

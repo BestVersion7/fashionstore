@@ -10,7 +10,7 @@ const ratelimit = new Ratelimit({
 });
 
 export async function middleware(req: NextRequest) {
-    if (req.nextUrl.pathname.startsWith("/api/order/search")) {
+    if (req.nextUrl.pathname.startsWith("/api/order") && req.method === "GET") {
         const apiKey = req.headers.get("authorization");
 
         if (apiKey !== process.env.API_KEY) {

@@ -200,13 +200,16 @@ export const createOrder = async (
 export const getOrderByPaymentIntent = async (paymentIntent: string) => {
     const res = await fetch(`${orderOrigin}?payment_intent=${paymentIntent}`, {
         next: { revalidate: revalidateTime },
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
     });
     const data = await res.json();
     return data;
 };
 
 export const getOrdersByEmail = async (email: string) => {
-    const res = await fetch(`${orderOrigin}/search?email=${email}`, {
+    const res = await fetch(`${orderOrigin}?email=${email}`, {
         cache: "no-cache",
         headers: {
             authorization: `${process.env.API_KEY}`,
