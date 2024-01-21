@@ -37,9 +37,9 @@ export async function generateMetadata({
 export default async function CategoryShop({
     params,
 }: {
-    params: { category: string; id: string };
+    params: { category: string; product_id: string };
 }) {
-    const products: ProductType = await getProductById(params.id);
+    const products: ProductType = await getProductById(params.product_id);
 
     return (
         <main>
