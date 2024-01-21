@@ -183,7 +183,12 @@ export const createEmail = async (props: EmailProps) => {
     return data;
 };
 
-export const createOrder = async (orderData: OrderType) => {
+export const createOrder = async (
+    orderData: Pick<
+        OrderType,
+        "order_total" | "email" | "order_items" | "payment_intent"
+    >
+) => {
     const res = await fetch(orderOrigin, {
         method: "post",
         body: JSON.stringify(orderData),

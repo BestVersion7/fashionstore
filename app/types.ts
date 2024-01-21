@@ -72,6 +72,6 @@ export type OrderType = {
     created_at: Date;
     order_total: number;
     email: string;
-    order_items: CartType[];
+    order_items: Pick<CartType, "product_id" | "product_price" | "quantity">[];
     payment_intent: string;
 };
