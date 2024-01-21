@@ -24,34 +24,39 @@ export default async function OrdersPage() {
             <h2 className="mt-2 text-xl font-bold text-violet-700 tracking-wider">
                 Past Orders:
             </h2>
-            {orders.map((item) => (
-                <div key={item.order_number}>
-                    <h3>
-                        Order Number:{" "}
-                        <span className="font-bold">
-                            V-{item.order_number.toString().padStart(5, "0")}
-                        </span>
-                    </h3>
-                    <p>
-                        Date:{" "}
-                        <span className="font-bold">
-                            {item.created_at.toString().split("T")[0]}
-                        </span>
-                    </p>
-                    <p>
-                        Total:{" "}
-                        <span className="font-bold">
-                            {formatCurrency(item.order_total)}
-                        </span>
-                    </p>
-                    <div className="grid max-w-md gap-1">
-                        <p>Purchased Items:</p>
-                        {item.order_items.map((orderItem, index) => (
-                            <CartProductsV2 key={index} {...orderItem} />
-                        ))}
+            {orders.length < 1 ? (
+                <p>You have no past orders.</p>
+            ) : (
+                orders.map((item) => (
+                    <div key={item.order_number}>
+                        <h3>
+                            Order Number:{" "}
+                            <span className="font-bold">
+                                V-
+                                {item.order_number.toString().padStart(5, "0")}
+                            </span>
+                        </h3>
+                        <p>
+                            Date:{" "}
+                            <span className="font-bold">
+                                {item.created_at.toString().split("T")[0]}
+                            </span>
+                        </p>
+                        <p>
+                            Total:{" "}
+                            <span className="font-bold">
+                                {formatCurrency(item.order_total)}
+                            </span>
+                        </p>
+                        <div className="grid max-w-md gap-1">
+                            <p>Purchased Items:</p>
+                            {item.order_items.map((orderItem, index) => (
+                                <CartProductsV2 key={index} {...orderItem} />
+                            ))}
+                        </div>
                     </div>
-                </div>
-            ))}
+                ))
+            )}
         </main>
     );
 }
