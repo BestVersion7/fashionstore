@@ -16,9 +16,6 @@ export const ContactForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            // console.log(nameRef.current?.value);
-            // console.log(emailRef.current?.value);
-            // console.log(msgRef.current?.value);
             await createEmail({
                 name: nameRef.current?.value,
                 email: emailRef.current?.value,

@@ -20,13 +20,11 @@ export type PriceType = {
     product_id: string;
 };
 
-export type CustomerType = {
-    name: string;
-    email: string | undefined;
+export type PaymentIntentType = {
+    id: string;
+    amount: number;
+    receipt_email: string;
     shipping: {
-        name: string;
-        firstName?: string | undefined;
-        lastName?: string | undefined;
         address: {
             line1: string;
             line2: string | null;
@@ -34,8 +32,9 @@ export type CustomerType = {
             state: string;
             postal_code: string;
             country: string;
+            phone: string;
         };
-        phone?: string | undefined;
+        name: string;
     };
 };
 
@@ -68,8 +67,8 @@ export type EmailProps = {
     message: string | undefined;
 };
 
-export type OrderProps = {
-    order_id?: number;
+export type OrderType = {
+    order_number: number;
     created_at?: Date;
     order_total: number;
     email: string;

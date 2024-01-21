@@ -10,6 +10,15 @@ const ratelimit = new Ratelimit({
 });
 
 export async function middleware(req: NextRequest) {
+    if (req.nextUrl.pathname.startsWith("/api/order?email=")) {
+        const apiKey = req.headers.get("authorization");
+
+        if (apiKey !== process.env.API_KEY) {
+            return NextResponse.json("unauthorized", { status: 401 });
+        } else {
+            return NextResponse.next();
+        }
+    }
     // const session = await getToken({ req });
     // if (req.nextUrl.pathname.startsWith("/api")) {
     //     const ip = req.ip ?? "127.0.0.1";

@@ -1,4 +1,4 @@
-import { CartType, EmailProps, OrderProps } from "../types";
+import { CartType, EmailProps, OrderType } from "../types";
 import { BASE_URL } from "../lib/constants";
 
 const emailOrigin = `${BASE_URL}/api/contact`;
@@ -183,10 +183,29 @@ export const createEmail = async (props: EmailProps) => {
     return data;
 };
 
-export const createOrder = async (props: OrderProps) => {
+export const createOrder = async (orderData: OrderType) => {
     const res = await fetch(orderOrigin, {
         method: "post",
-        body: JSON.stringify(props),
+        body: JSON.stringify(orderData),
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getOrderByPaymentIntent = async (paymentIntent: string) => {
+    const res = await fetch(`${orderOrigin}?payment_intent=${paymentIntent}`, {
+        next: { revalidate: revalidateTime },
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getOrdersByEmail = async (email: string) => {
+    const res = await fetch(`${orderOrigin}?email=${email}`, {
+        cache: "no-cache",
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
     });
     const data = await res.json();
     return data;

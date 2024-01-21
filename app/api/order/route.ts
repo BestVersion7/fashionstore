@@ -2,15 +2,24 @@ import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    const userId = req.nextUrl.searchParams.get("user_id");
-    try {
-        const email = req.nextUrl.searchParams.get("email");
+    const email = req.nextUrl.searchParams.get("email");
+    const paymentIntent = req.nextUrl.searchParams.get("payment_intent");
+    let data2;
 
-        const data2 = await prisma.orderInfo.findMany({
-            where: {
-                email: `${email}`,
-            },
-        });
+    try {
+        if (email) {
+            data2 = await prisma.orderInfo.findMany({
+                where: {
+                    email: `${email}`,
+                },
+            });
+        } else if (paymentIntent) {
+            data2 = await prisma.orderInfo.findFirst({
+                where: {
+                    payment_intent: paymentIntent,
+                },
+            });
+        }
 
         const data = JSON.parse(
             JSON.stringify(
