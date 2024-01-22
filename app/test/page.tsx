@@ -1,6 +1,6 @@
 "use client";
 
-export default function TestPage(props: { quantity: number }) {
+export default function TestPage() {
     return (
         <main>
             <div className="relative"></div>
