@@ -31,9 +31,9 @@ export const SearchInput = () => {
         setProductMap(products);
     };
 
-    const handleClickInput = () => {
-        setShowSearch(() => true);
-    };
+    // const handleClickInput = () => {
+    //     setShowSearch(() => true);
+    // };
 
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
@@ -53,7 +53,7 @@ export const SearchInput = () => {
                     ref={searchRef}
                     defaultValue={query ?? ""}
                     onChange={handleChange}
-                    onClick={handleClickInput}
+                    // onClick={handleClickInput}
                     type="text"
                     name="search"
                     autoComplete="off"
