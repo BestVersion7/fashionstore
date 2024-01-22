@@ -14,7 +14,7 @@ export const CartQChange = (props: CartType) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const dropdownRef = useRef(null);
-    // useOnClickOutside(dropdownRef, () => setShowDropdown(false));
+    useOnClickOutside(dropdownRef, () => setShowDropdown(false));
 
     const router = useRouter();
 
