@@ -2,6 +2,11 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 
+export const metadata = {
+    title: "Account",
+    description: "Account for Afashionstore",
+};
+
 export default async function AccountPage() {
     const session = await getServerSession(authOptions);
 

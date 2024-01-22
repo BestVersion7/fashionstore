@@ -8,7 +8,7 @@ import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
 
-export const CartQChange = (props: CartType) => {
+export const CartQUpdate = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(props.quantity);
     const [showInput, setShowInput] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);

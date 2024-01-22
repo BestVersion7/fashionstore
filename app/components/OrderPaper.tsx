@@ -7,6 +7,9 @@ export const OrderPaper = async (props: OrderType) => {
     const shippingAddress: PaymentIntentType = await getPaymentIntent(
         props.payment_intent
     );
+    const totalQuantity = props.order_items
+        .map((item) => Number(item.quantity))
+        .reduce((arr, val) => arr + val);
 
     return (
         <article className="border-2 border-slate-600 py-2 px-3 bg-orange-50 w-[80vw] md:w-[600px]">
@@ -20,10 +23,14 @@ export const OrderPaper = async (props: OrderType) => {
                         </span>
                     </h3>
                     <p>
-                        Order Date:{" "}
+                        Purchase Date:{" "}
                         <span className="font-bold">
                             {props.created_at.toString().split("T")[0]}
                         </span>
+                    </p>
+                    <p>
+                        Item Count:{" "}
+                        <span className="font-bold">{totalQuantity}</span>
                     </p>
 
                     <p>

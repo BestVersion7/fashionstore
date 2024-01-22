@@ -8,11 +8,17 @@ export function useOnClickOutside(
         () => {
             const listener = (event: MouseEvent | TouchEvent) => {
                 // Do nothing if clicking ref's element or descendent elements
-                if (!ref.current || ref.current.contains(event.target)) {
+                if (
+                    !ref.current ||
+                    ref.current.contains(event.target)
+                    // ||event.type === "keydown"
+                ) {
                     return;
                 }
+
                 handler(event);
             };
+
             console.log("custom");
             document.addEventListener("mousedown", listener);
             document.addEventListener("touchstart", listener);

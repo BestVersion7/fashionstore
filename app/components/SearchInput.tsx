@@ -8,19 +8,18 @@ import { useRouter } from "next/navigation";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 import { useOnClickOutside } from "../utils/customHooks";
+import { useSearchParams } from "next/navigation";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);
     const [productMap, setProductMap] = useState<ProductType[]>([]);
     const [showSearch, setShowSearch] = useState(false);
     const dropdownRef = useRef(null);
-    const linkRef = useRef(null);
 
+    const query = useSearchParams().get("q");
     const router = useRouter();
 
-    useOnClickOutside(dropdownRef && searchRef && linkRef, () =>
-        setShowSearch(false)
-    );
+    useOnClickOutside(dropdownRef || searchRef, () => setShowSearch(false));
 
     const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -52,6 +51,7 @@ export const SearchInput = () => {
                     aria-label="Search"
                     placeholder="Search"
                     ref={searchRef}
+                    defaultValue={query ?? ""}
                     onChange={handleChange}
                     onClick={handleClickInput}
                     type="text"
@@ -66,18 +66,16 @@ export const SearchInput = () => {
                 </button>
             </form>
 
-            <div
-                className="absolute w-full top-9 left-0 z-10 bg-slate-50"
-                ref={dropdownRef}
-            >
-                {productMap.length > 0 &&
-                    showSearch &&
-                    productMap.map((item, index) => (
+            {showSearch && (
+                <div
+                    className="absolute w-full top-9 left-0 z-10 bg-slate-50"
+                    ref={dropdownRef}
+                >
+                    {productMap.map((item, index) => (
                         <Link
                             className="p-2 grid text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
-                            key={index}
-                            ref={linkRef}
                             href={`/shop/${item.metadata.category}/${item.product_id}`}
+                            key={index}
                             onClick={() => setShowSearch(() => false)}
                         >
                             <Highlighter
@@ -92,7 +90,8 @@ export const SearchInput = () => {
                             />
                         </Link>
                     ))}
-            </div>
+                </div>
+            )}
         </div>
     );
 };

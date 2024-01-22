@@ -104,16 +104,18 @@ export function StripeForm(props: {
     };
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} name="checkout-form">
             <div className="lg:grid lg:grid-cols-[800px,_1fr] xl:grid-cols-[950px,_1fr] lg:gap-5">
                 <div>
                     <div id="address"></div>
                     <h2 className="stripe-h2">1. Enter your email</h2>
                     <input
-                        className=" w-full border border-solid border-gray-300 shadow-sm rounded-md leading-8 pl-3"
+                        className=" w-full border border-solid border-gray-300 shadow-sm rounded-md leading-8 pl-4 py-[7px] placeholder:text-slate-600 focus:outline-none focus:shadow-[0_0_0_3px]"
                         type="email"
                         placeholder="email@example.com"
                         ref={emailRef}
+                        name="email"
+                        autoComplete="on"
                     />
                     <br />
                     <br />

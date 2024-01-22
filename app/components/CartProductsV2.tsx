@@ -1,4 +1,3 @@
-import { CartQChange } from "./CartQChange";
 import { CartType, ProductType } from "../types";
 import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";

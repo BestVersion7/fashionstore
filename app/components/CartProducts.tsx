@@ -1,4 +1,4 @@
-import { CartQChange } from "./CartQChange";
+import { CartQUpdate } from "./CartQUpdate";
 import { CartType, ProductType } from "../types";
 import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
@@ -26,7 +26,7 @@ export const CartProducts = async (props: CartType) => {
                     <div>
                         <p className="font-bold">{productInfo.name}</p>
                         <div className="">
-                            <CartQChange {...props} />
+                            <CartQUpdate {...props} />
                             <CartDeleteBtn product_id={props.product_id} />
                         </div>
                     </div>

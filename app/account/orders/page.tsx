@@ -2,10 +2,13 @@ import { getOrdersByEmail } from "@/app/utils/apiCalls";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { OrderType } from "@/app/types";
-import { CartProductsV2 } from "@/app/components/CartProductsV2";
 import Link from "next/link";
-import { formatCurrency } from "@/app/utils/formatCurrency";
 import { OrderPaper } from "@/app/components/OrderPaper";
+
+export const metadata = {
+    title: "Orders",
+    description: "Orders for Afashionstore",
+};
 
 export default async function OrdersPage() {
     const session = await getServerSession(authOptions);

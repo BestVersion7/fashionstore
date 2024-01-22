@@ -18,8 +18,7 @@
 
 @layer components {
     .stripe-h2 {
-        @apply text-xl font-semibold;
-        color: darkolivegreen
+        @apply text-xl font-semibold text-purple-700;
     }
 
     .dropdown:hover .dropdown-menu {
