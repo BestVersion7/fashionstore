@@ -3,15 +3,19 @@
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { createEmail } from "../utils/apiCalls";
+import { useOnClickOutside } from "../utils/customHooks";
 
 export const ContactForm = () => {
     const nameRef = useRef<HTMLInputElement>(null);
     const emailRef = useRef<HTMLInputElement>(null);
     const msgRef = useRef<HTMLTextAreaElement>(null);
 
+    const formRef = useRef(null);
     const [completeForm, setCompleteForm] = useState(false);
 
     const router = useRouter();
+
+    useOnClickOutside(formRef, () => router.push("/"));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +35,10 @@ export const ContactForm = () => {
         router.push(window.location.pathname, { scroll: false });
     };
     return (
-        <div className=" ">
+        <div
+            ref={formRef}
+            className="fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-blue-100 h-[360px] w-80 md:w-[400px] md:h-[400px]"
+        >
             {completeForm ? (
                 <div className="text-center">
                     <p>

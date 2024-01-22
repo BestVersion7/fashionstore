@@ -77,7 +77,7 @@ export const createCart = async (
 
 export const updateCart = async (
     cookieId: string | undefined,
-    cart: Pick<CartType, "price_id" | "quantity" | "purchased">
+    cart: Pick<CartType, "product_id" | "quantity" | "purchased">
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "PUT",

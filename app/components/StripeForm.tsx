@@ -45,7 +45,7 @@ export function StripeForm(props: {
     const emailRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
 
-    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!stripe || !elements) return null;

@@ -4,18 +4,11 @@ import Link from "next/link";
 import { SearchInput } from "./components/SearchInput";
 import { CartTotal } from "./components/CartTotal";
 import { PiShootingStarBold } from "react-icons/pi";
-import {
-    FaFacebook,
-    FaInstagram,
-    FaShoePrints,
-    FaShoppingBag,
-} from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { FooterInput } from "./components/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import GoogleAnalytics from "./components/GoogleAnalytics";
-import { RiAccountCircleLine } from "react-icons/ri";
 import { AccountHover } from "./components/AccountHover";
-import { LuShoppingCart } from "react-icons/lu";
 
 export const metadata: Metadata = {
     title: "Fashion Store",

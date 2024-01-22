@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-    const { price_id, quantity, purchased } = await req.json();
+    const { product_id, quantity, purchased } = await req.json();
 
     try {
         // check for cookies
@@ -86,7 +86,7 @@ export async function PUT(req: NextRequest) {
         await prisma.cartInfo.updateMany({
             where: {
                 cookie_id: `${cartCookie}`,
-                price_id,
+                product_id,
             },
             data: {
                 quantity,

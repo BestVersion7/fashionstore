@@ -23,9 +23,7 @@ export const ContactBtn = () => {
                 >
                     <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
 
-                    <div className="fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-blue-100 h-80 w-80 md:w-[400px] md:h-[400px]">
-                        <ContactForm />
-                    </div>
+                    <ContactForm />
                 </div>
             )}
 
