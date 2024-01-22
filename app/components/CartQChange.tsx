@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { updateCart, deleteCartItemByProductId } from "../utils/apiCalls";
+import { updateCart } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { getCookie } from "cookies-next";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
 
@@ -12,15 +12,13 @@ export const CartQChange = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(props.quantity);
     const [showInput, setShowInput] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [showUpdateBtn, setShowUpdateBtn] = useState(false);
 
     const dropdownRef = useRef(null);
-    useOnClickOutside(dropdownRef, () => setShowDropdown(false));
+    // useOnClickOutside(dropdownRef, () => setShowDropdown(false));
 
     const router = useRouter();
 
     const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setShowUpdateBtn(() => true);
         setInputQuantity(Number(e.currentTarget.value));
     };
 
@@ -42,7 +40,7 @@ export const CartQChange = (props: CartType) => {
     const handleDropDownChangeQuantity = async (
         e: React.MouseEvent<HTMLLIElement>
     ) => {
-        if (e.currentTarget.value !== 5) {
+        if (e.currentTarget.value < 5) {
             // change the number for dropdown
             setInputQuantity(e.currentTarget.value);
 
@@ -58,52 +56,20 @@ export const CartQChange = (props: CartType) => {
         }
     };
 
-    const handleDelete = async (e: React.FormEvent) => {
-        e.preventDefault();
-        await deleteCartItemByProductId(
-            getCookie("cookiecart"),
-            props.product_id
-        );
-        router.refresh();
-    };
-
     return (
         <div className="relative">
-            {props.quantity > 4 ? (
-                <form
-                    onSubmit={handleFormUpdateQuantity}
-                    className="flex gap-2"
-                >
-                    <input
-                        className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
-                        onChange={handleChangeInput}
-                        title="quantity"
-                        value={inputQuantity}
-                        maxLength={2}
-                    />
-                    {showUpdateBtn && (
-                        <button
-                            className="bg-yellow-400 px-2 rounded-lg  hover:cursor-pointer hover:bg-orange-300"
-                            type="submit"
-                        >
-                            Update
-                        </button>
-                    )}
-                </form>
-            ) : (
-                <button
-                    type="button"
-                    onClick={handleShowDropdown}
-                    className="flex w-20 justify-center items-center border border-black border-solid bg-gray-200 shadow-md rounded-md px-1"
-                >
-                    Qty: {inputQuantity} <FaAngleDown />
-                </button>
-            )}
+            <button
+                type="button"
+                onClick={handleShowDropdown}
+                className="flex w-20 justify-center items-center border border-black border-solid bg-gray-200 shadow-md rounded-md px-1"
+            >
+                Qty: {props.quantity} <FaAngleDown />
+            </button>
 
             {/* dropdown list */}
             {showDropdown && (
                 <div className="absolute top-0" ref={dropdownRef}>
-                    {showInput ? (
+                    {props.quantity > 5 ? (
                         <form
                             onSubmit={handleFormUpdateQuantity}
                             className="flex gap-2"
@@ -112,7 +78,26 @@ export const CartQChange = (props: CartType) => {
                                 className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
                                 onChange={handleChangeInput}
                                 title="quantity"
-                                value={inputQuantity}
+                                defaultValue={props.quantity}
+                                maxLength={2}
+                            />
+                            <button
+                                className="bg-yellow-400 px-2 rounded-lg  hover:cursor-pointer hover:bg-orange-300"
+                                type="submit"
+                            >
+                                Update
+                            </button>
+                        </form>
+                    ) : showInput ? (
+                        <form
+                            onSubmit={handleFormUpdateQuantity}
+                            className="flex gap-2"
+                        >
+                            <input
+                                className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
+                                onChange={handleChangeInput}
+                                title="quantity"
+                                defaultValue={props.quantity}
                                 maxLength={2}
                             />
                             <button
@@ -142,15 +127,6 @@ export const CartQChange = (props: CartType) => {
                     )}
                 </div>
             )}
-
-            <form onSubmit={handleDelete}>
-                <button
-                    type="submit"
-                    className=" bg-inherit border-none font-medium text-xs text-blue-700 hover:cursor-pointer hover:underline"
-                >
-                    Delete
-                </button>
-            </form>
         </div>
     );
 };

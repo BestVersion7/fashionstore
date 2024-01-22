@@ -3,6 +3,7 @@ import { CartType, ProductType } from "../types";
 import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
 import Image from "next/image";
+import { CartDeleteBtn } from "./CartDeleteBtn";
 
 export const CartProducts = async (props: CartType) => {
     const productInfo: ProductType = await getProductById(props.product_id);
@@ -24,7 +25,10 @@ export const CartProducts = async (props: CartType) => {
                 <div className="md:justify-between md:flex mr-3">
                     <div>
                         <p className="font-bold">{productInfo.name}</p>
-                        <CartQChange {...props} />
+                        <div className="">
+                            <CartQChange {...props} />
+                            <CartDeleteBtn product_id={props.product_id} />
+                        </div>
                     </div>
                     <p className="text-red-600 font-bold text-2xl ">
                         {formatCurrency(Number(props.product_price))}
