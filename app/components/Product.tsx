@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CartAddBtn } from "./CartAddBtn";
+import { CartQPost } from "./CartQPost";
 import { formatCurrency } from "../utils/formatCurrency";
 import { PriceType, ProductType } from "../types";
 import { getPriceById } from "../utils/apiCalls";
@@ -33,11 +33,10 @@ export const Product = async (props: ProductType) => {
                 <p className="text-2xl text-purple-800 font-bold">
                     Price: {formatCurrency(prices.unit_amount)}
                 </p>
-                <CartAddBtn
+                <CartQPost
                     product_id={props.product_id}
                     price_id={props.default_price}
                     product_price={prices.unit_amount}
-                    quantity={1}
                     purchased={false}
                 />
             </div>

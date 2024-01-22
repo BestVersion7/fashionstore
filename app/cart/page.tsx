@@ -5,7 +5,7 @@ import { getCartByCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { Metadata } from "next";
-import { TestAdd } from "../components/TestAdd";
+// import { TestAdd } from "../components/TestAdd";
 
 export const metadata: Metadata = {
     title: "Cart",
@@ -29,9 +29,9 @@ export default async function CartPage() {
             <Link href="/shop" className="underline text-orange-600">
                 Go back
             </Link>
-            <div className="bg-green-100 border border-black w-24 text-4xl">
+            {/* <div className="bg-green-100 border border-black w-24 text-4xl">
                 <TestAdd />
-            </div>
+            </div> */}
             <div>
                 <div className="  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
                     {cartItems.length === 0 ? (
