@@ -3,7 +3,7 @@
 export default function TestPage() {
     return (
         <main>
-            <div className="relative"></div>
+            <div className="fixed"></div>
         </main>
     );
 }

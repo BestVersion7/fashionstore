@@ -4,16 +4,16 @@
 
 @layer base {
     main {
-        @apply px-4 py-2 md:px-8 bg-blue-50;
+        @apply m-auto max-w-[1550px] px-4 py-2 md:px-8 bg-blue-50;
     }
 
     header {
         @apply shadow-lg;
     }
 
-    body {
+    /* body {
         @apply m-auto max-w-[1440px] bg-purple-50;
-    }
+    } */
 }
 
 @layer components {
