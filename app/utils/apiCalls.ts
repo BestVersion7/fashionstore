@@ -220,7 +220,7 @@ export const getOrdersByEmail = async (email: string) => {
     return data;
 };
 
-export const getAvailableQuantity = async (productId: string) => {
+export const getProductAvailableQuantity = async (productId: string) => {
     const res = await fetch(
         `${productAvailabilityOrigin}?product_id=${productId}`,
         {
@@ -230,7 +230,8 @@ export const getAvailableQuantity = async (productId: string) => {
     const data = await res.json();
     return data;
 };
-export const updateAvailableQuantity = async (
+
+export const updateProductAvailableQuantity = async (
     productId: string,
     quantity: number
 ) => {

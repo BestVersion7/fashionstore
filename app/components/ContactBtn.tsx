@@ -16,7 +16,7 @@ export const ContactBtn = () => {
         <>
             {modal === "t" && (
                 <div
-                    className="relative z-10"
+                    className="relative z-20"
                     aria-labelledby="modal-title"
                     role="dialog"
                     aria-modal="true"
@@ -28,7 +28,7 @@ export const ContactBtn = () => {
             )}
 
             <button
-                className="fixed flex items-center gap-2 bottom-4 right-4 text-xl p-4 bg-yellow-300 text-blue-800 font-bold rounded-xl hover:bg-yellow-400 hover:cursor-pointer"
+                className="z-20 fixed flex items-center gap-2 bottom-4 right-4 text-xl p-4 bg-yellow-300 text-blue-800 font-bold rounded-xl hover:bg-yellow-400 hover:cursor-pointer"
                 type="button"
                 onClick={handleOpen}
             >

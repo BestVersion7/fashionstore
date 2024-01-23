@@ -33,7 +33,7 @@ export default async function CartPage() {
                 <TestAdd />
             </div> */}
             <div>
-                <div className="  lg:gap-7 lg:grid lg:grid-cols-[830px,_1fr] xl:grid-cols-[900px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
+                <div className="  lg:gap-7 lg:grid lg:grid-cols-[680px,_1fr] xl:grid-cols-[950px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
                     {cartItems.length === 0 ? (
                         <span className="text-red-400">
                             You have no items in your cart

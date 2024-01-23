@@ -2,14 +2,23 @@ import Image from "next/image";
 import { CartQPost } from "./CartQPost";
 import { formatCurrency } from "../utils/formatCurrency";
 import { PriceType, ProductType } from "../types";
-import { getPriceById } from "../utils/apiCalls";
+import { getProductAvailableQuantity, getPriceById } from "../utils/apiCalls";
+import { StockLabel } from "./StockLabel";
 
 export const Product = async (props: ProductType) => {
-    // get the prices
+    // get the prices and availability
     const prices: PriceType = await getPriceById(props.default_price);
+    const availableQuantity: number = await getProductAvailableQuantity(
+        props.product_id
+    );
 
     return (
-        <article className="rounded-md border-black shadow-sm bg-green-50 border-solid border-2 my-3 ">
+        <article className="relative  rounded-md border-black shadow-sm bg-green-50 border-solid border-2 my-3 ">
+            {/* only show when out of stock */}
+            <div className="absolute w-full top-0 z-10">
+                <StockLabel quantity={availableQuantity} />
+            </div>
+
             <div className="relative h-72 border-b-2 border-black ">
                 <Image
                     // object-top
@@ -21,24 +30,27 @@ export const Product = async (props: ProductType) => {
                     priority
                 />
             </div>
-            <div className="text-center px-8 grid grid-rows-[70px,80px,_1fr,_2fr] items-center">
-                <h2 className="text-2xl font-bold text-orange-600">
+            {/* grid grid-rows-[70px,80px,_5px,_1fr,_2fr] */}
+            <div className="text-center px-6 flex flex-col gap-2">
+                <h2 className="text-xl font-bold text-orange-600">
                     {props.name}
                 </h2>
 
-                {/* overflow-hidden */}
-                <p className="font-thin text-xl overflow-hidden">
-                    {props.description}
-                </p>
+                <p className="">{props.description}</p>
                 <p className="text-2xl text-purple-800 font-bold">
-                    Price: {formatCurrency(prices.unit_amount)}
+                    {formatCurrency(prices.unit_amount)}
                 </p>
+
                 <CartQPost
                     product_id={props.product_id}
                     price_id={props.default_price}
                     product_price={prices.unit_amount}
                     purchased={false}
                 />
+                {/* {availableQuantity ? (
+                ) : (
+                    <StockLabel quantity={availableQuantity} />
+                )} */}
             </div>
         </article>
     );

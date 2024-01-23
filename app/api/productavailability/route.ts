@@ -4,7 +4,6 @@ import prisma from "@/app/lib/prisma";
 export async function GET(req: NextRequest) {
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
-        let quantity;
 
         if (productId) {
             const data = await prisma.productAvailabilityInfo.findUnique({
@@ -12,12 +11,8 @@ export async function GET(req: NextRequest) {
                     product_id: productId,
                 },
             });
-            if (data?.available_quantity) {
-                quantity = Number(data.available_quantity);
-            } else {
-                quantity = 0;
-            }
-            return NextResponse.json(quantity);
+
+            return NextResponse.json(Number(data?.available_quantity) || 0);
         } else {
             return NextResponse.json("noquery", { status: 400 });
         }

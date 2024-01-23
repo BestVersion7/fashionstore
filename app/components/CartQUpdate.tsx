@@ -7,11 +7,14 @@ import { getCookie } from "cookies-next";
 import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
+import { NotificationMsg } from "./NotificationMsg";
 
 export const CartQUpdate = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(props.quantity);
     const [showInput, setShowInput] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [notificationReload, setNotificationReload] = useState(false);
+    const [cartMsg, setCartMsg] = useState("");
 
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setShowDropdown(false));
@@ -29,11 +32,14 @@ export const CartQUpdate = (props: CartType) => {
     // this is for the input form
     const handleFormUpdateQuantity = async (e: React.FormEvent) => {
         e.preventDefault();
-        await updateCart(getCookie("cookiecart"), {
+        const msg = await updateCart(getCookie("cookiecart"), {
             product_id: props.product_id,
             quantity: inputQuantity,
             purchased: false,
         });
+        setCartMsg(msg);
+        setNotificationReload((val) => !val);
+
         router.refresh();
     };
 
@@ -45,11 +51,14 @@ export const CartQUpdate = (props: CartType) => {
             setInputQuantity(e.currentTarget.value);
 
             setShowDropdown(() => false);
-            await updateCart(getCookie("cookiecart"), {
+            const msg = await updateCart(getCookie("cookiecart"), {
                 product_id: props.product_id,
                 quantity: Number(e.currentTarget.value),
                 purchased: false,
             });
+            setCartMsg(msg);
+            setNotificationReload((val) => !val);
+
             router.refresh();
         } else {
             setShowInput(() => true);
@@ -58,6 +67,10 @@ export const CartQUpdate = (props: CartType) => {
 
     return (
         <div className="relative">
+            <NotificationMsg
+                message={cartMsg}
+                notificationReload={notificationReload}
+            />
             <button
                 type="button"
                 onClick={handleShowDropdown}

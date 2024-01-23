@@ -9,15 +9,16 @@ datasource db {
 }
 
 model CartInfo {
-  cart_id       BigInt     @id @default(autoincrement())
-  created_at    DateTime   @default(now()) @db.Timestamptz(6)
-  quantity      Decimal    @db.Decimal
+  cart_id       BigInt       @id @default(autoincrement())
+  created_at    DateTime     @default(now()) @db.Timestamptz(6)
+  quantity      Decimal      @db.Decimal
   price_id      String
   product_id    String?
-  product_price Decimal    @db.Decimal
-  cookie_id     String     @db.Uuid
-  purchased     Boolean    @default(false)
-  CookieInfo    CookieInfo @relation(fields: [cookie_id], references: [cookie_id], onDelete: Cascade)
+  product_price Decimal      @db.Decimal
+  cookie_id     String       @db.Uuid
+  purchased     Boolean      @default(false)
+  CookieInfo    CookieInfo   @relation(fields: [cookie_id], references: [cookie_id], onDelete: Cascade)
+  ProductInfo   ProductInfo? @relation(fields: [product_id], references: [product_id], onDelete: Restrict)
 }
 
 model CookieInfo {
@@ -207,6 +208,7 @@ model ProductInfo {
   metadata                Json?
   updated_at              DateTime?                @default(now()) @db.Timestamptz(6)
   active                  Boolean?                 @default(true)
+  CartInfo                CartInfo[]
   ProductAvailabilityInfo ProductAvailabilityInfo?
   PriceInfo               PriceInfo?               @relation(fields: [default_price], references: [price_id], onDelete: Restrict)
 }
@@ -214,6 +216,6 @@ model ProductInfo {
 model ProductAvailabilityInfo {
   product_id         String      @id
   updated_at         DateTime    @default(now()) @db.Timestamptz(6)
-  available_quantity Decimal?    @default(0) @db.Decimal
+  available_quantity Decimal     @default(0) @db.Decimal
   ProductInfo        ProductInfo @relation(fields: [product_id], references: [product_id])
 }

@@ -37,14 +37,36 @@ export async function POST(req: NextRequest) {
     try {
         const cartCookie = req.nextUrl.searchParams.get("cookie_id");
 
-        const find = await prisma.cartInfo.findMany({
+        const findCart = await prisma.cartInfo.findMany({
             where: {
                 cookie_id: `${cartCookie}`,
-                price_id,
+                product_id,
             },
         });
 
-        if (find.length < 1) {
+        // find available quantity
+        const findAvailQuantity =
+            await prisma.productAvailabilityInfo.findUnique({
+                where: {
+                    product_id,
+                },
+                select: {
+                    available_quantity: true,
+                },
+            });
+        const availableQuantity =
+            Number(findAvailQuantity?.available_quantity) || 0;
+
+        // error if too many units
+        if (quantity > availableQuantity) {
+            return NextResponse.json(
+                `The maximum quantity is ${availableQuantity}.`,
+                { status: 400 }
+            );
+        }
+
+        // create if not exists
+        if (findCart.length < 1) {
             const price = await prisma.priceInfo.findUnique({
                 where: { price_id },
             });
@@ -58,19 +80,28 @@ export async function POST(req: NextRequest) {
                     product_price: Number(price?.unit_amount),
                 },
             });
+            return NextResponse.json(
+                `${quantity} Item(s) added to your cart.`,
+                { status: 201 }
+            );
         } else {
+            if (Number(findCart[0].quantity) + quantity > availableQuantity) {
+                return NextResponse.json(
+                    `The maximum quantity is ${availableQuantity}.`,
+                    { status: 400 }
+                );
+            }
             await prisma.cartInfo.updateMany({
                 where: {
                     cookie_id: `${cartCookie}`,
                     price_id,
                 },
                 data: {
-                    quantity: Number(find[0].quantity) + quantity,
+                    quantity: Number(findCart[0].quantity) + quantity,
                 },
             });
+            return NextResponse.json(`Item quantity updated to ${quantity}`);
         }
-
-        return NextResponse.json("create success", { status: 201 });
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }
@@ -82,6 +113,26 @@ export async function PUT(req: NextRequest) {
     try {
         // check for cookies
         const cartCookie = req.nextUrl.searchParams.get("cookie_id");
+        const findAvailQuantity =
+            await prisma.productAvailabilityInfo.findUnique({
+                where: {
+                    product_id,
+                },
+                select: {
+                    available_quantity: true,
+                },
+            });
+
+        const availableQuantity =
+            Number(findAvailQuantity?.available_quantity) || 0;
+
+        // error if too many units
+        if (quantity > availableQuantity) {
+            return NextResponse.json(
+                `The maximum quantity is ${availableQuantity}.`,
+                { status: 400 }
+            );
+        }
 
         await prisma.cartInfo.updateMany({
             where: {
@@ -93,7 +144,7 @@ export async function PUT(req: NextRequest) {
                 purchased,
             },
         });
-        return NextResponse.json("update success");
+        return NextResponse.json(`Item quantity updated to ${quantity}`);
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

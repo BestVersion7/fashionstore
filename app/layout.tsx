@@ -24,7 +24,7 @@ export default function RootLayout({
         <html lang="en">
             <GoogleAnalytics />
             <body>
-                <header className="sticky top-0 z-10">
+                <header className="sticky top-0 z-40">
                     <nav className="flex px-6 text-slate-100 py-4 justify-between bg-slate-600 items-center">
                         <div className="flex items-center gap-4">
                             <Link

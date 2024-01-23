@@ -4,9 +4,10 @@ import { useState, useRef } from "react";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { createCart, createCartCookie } from "../utils/apiCalls";
-import { CartType } from "../types";
+import { CartType, ProductAvailabilityType } from "../types";
 import { FaCheck, FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
+import { NotificationMsg } from "./NotificationMsg";
 
 export const CartQPost = (
     props: Pick<
@@ -19,6 +20,8 @@ export const CartQPost = (
     const [inCart, setInCart] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [showInput, setShowInput] = useState(false);
+    const [cartMsg, setCartMsg] = useState("");
+    const [notificationReload, setNotificationReload] = useState(false);
 
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setShowDropdown(false));
@@ -26,7 +29,6 @@ export const CartQPost = (
     const router = useRouter();
 
     const handleAddCart = async () => {
-        setInCart(() => true);
         setDisableAdd(() => true);
         const cookieCart = getCookie("cookiecart");
 
@@ -37,14 +39,18 @@ export const CartQPost = (
             console.log("create cookie");
         }
 
-        await createCart(getCookie("cookiecart"), {
+        const msg = await createCart(getCookie("cookiecart"), {
             product_id: props.product_id,
             price_id: props.price_id,
             quantity,
             purchased: false,
         });
 
+        setCartMsg(msg);
+        setNotificationReload((val) => !val);
+
         router.refresh();
+        setInCart(() => true);
         setDisableAdd(() => false);
     };
 
@@ -65,6 +71,13 @@ export const CartQPost = (
 
     return (
         <div className="relative flex flex-col items-center">
+            {/* disappearing notification */}
+
+            <NotificationMsg
+                message={cartMsg}
+                notificationReload={notificationReload}
+            />
+
             <button
                 type="button"
                 onClick={() => setShowDropdown((val) => !val)}
@@ -107,7 +120,6 @@ export const CartQPost = (
                     )}
                 </div>
             )}
-
             <div>
                 <button
                     type="button"

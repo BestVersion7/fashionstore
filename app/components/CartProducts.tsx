@@ -1,19 +1,22 @@
 import { CartQUpdate } from "./CartQUpdate";
 import { CartType, ProductType } from "../types";
-import { getProductById } from "../utils/apiCalls";
+import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/formatCurrency";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";
 
 export const CartProducts = async (props: CartType) => {
     const productInfo: ProductType = await getProductById(props.product_id);
+    const productAvailability = await getProductAvailableQuantity(
+        props.product_id
+    );
 
     return (
         <>
-            <div className="grid grid-cols-[150px,_1fr] h-32 gap-4 my-4 md:grid-cols-[220px,_1fr] md:h-44  ">
+            <div className="grid grid-cols-[150px,_1fr]  gap-4 my-2 md:grid-cols-[220px,_1fr] md:h-44  ">
                 <div className="relative ">
                     <Image
-                        className="object-contain absolute "
+                        className="object-cover "
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         // height={"200"}
@@ -25,9 +28,16 @@ export const CartProducts = async (props: CartType) => {
                 <div className="md:justify-between md:flex mr-3">
                     <div>
                         <p className="font-bold">{productInfo.name}</p>
-                        <div className="">
+                        <div className=" ">
                             <CartQUpdate {...props} />
                             <CartDeleteBtn product_id={props.product_id} />
+                            {props.quantity > productAvailability && (
+                                <p className="text-sm text-red-500">
+                                    The quantity in your cart is greater than in
+                                    stock {productAvailability}. Please update
+                                    your cart.
+                                </p>
+                            )}
                         </div>
                     </div>
                     <p className="text-red-600 font-bold text-2xl ">
