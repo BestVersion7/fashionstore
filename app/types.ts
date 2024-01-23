@@ -8,7 +8,6 @@ export type ProductType = {
     metadata: {
         category: "tops" | "dress";
     };
-    quantity_available: number;
     updated_at: Date;
 };
 
@@ -74,4 +73,9 @@ export type OrderType = {
     email: string;
     order_items: Pick<CartType, "product_id" | "product_price" | "quantity">[];
     payment_intent: string;
+};
+
+export type ProductAvailabilityType = {
+    product_id: string;
+    available_quantity: number;
 };

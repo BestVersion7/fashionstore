@@ -7,6 +7,7 @@ const cartOrigin = `${BASE_URL}/api/cart`;
 const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
 const orderOrigin = `${BASE_URL}/api/order`;
 const productOrigin = `${BASE_URL}/api/product`;
+const productAvailabilityOrigin = `${BASE_URL}/api/productavailability`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
 const revalidateTime = 60 * 60 * 24 * 1;
@@ -215,6 +216,33 @@ export const getOrdersByEmail = async (email: string) => {
             authorization: `${process.env.API_KEY}`,
         },
     });
+    const data = await res.json();
+    return data;
+};
+
+export const getAvailableQuantity = async (productId: string) => {
+    const res = await fetch(
+        `${productAvailabilityOrigin}?product_id=${productId}`,
+        {
+            cache: "no-cache",
+        }
+    );
+    const data = await res.json();
+    return data;
+};
+export const updateAvailableQuantity = async (
+    productId: string,
+    quantity: number
+) => {
+    const res = await fetch(
+        `${productAvailabilityOrigin}?product_id=${productId}`,
+        {
+            method: "put",
+            body: JSON.stringify({
+                quantity,
+            }),
+        }
+    );
     const data = await res.json();
     return data;
 };
