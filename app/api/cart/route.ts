@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-    const { product_id, quantity, purchased } = await req.json();
+    const { product_id, quantity } = await req.json();
 
     try {
         // check for cookies
@@ -141,7 +141,6 @@ export async function PUT(req: NextRequest) {
             },
             data: {
                 quantity,
-                purchased,
             },
         });
         return NextResponse.json(`Item quantity updated to ${quantity}`);

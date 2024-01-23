@@ -35,7 +35,6 @@ export const CartQUpdate = (props: CartType) => {
         const msg = await updateCart(getCookie("cookiecart"), {
             product_id: props.product_id,
             quantity: inputQuantity,
-            purchased: false,
         });
         setCartMsg(msg);
         setNotificationReload((val) => !val);
@@ -54,7 +53,6 @@ export const CartQUpdate = (props: CartType) => {
             const msg = await updateCart(getCookie("cookiecart"), {
                 product_id: props.product_id,
                 quantity: Number(e.currentTarget.value),
-                purchased: false,
             });
             setCartMsg(msg);
             setNotificationReload((val) => !val);

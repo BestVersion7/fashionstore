@@ -45,7 +45,6 @@ export const Product = async (props: ProductType) => {
                     product_id={props.product_id}
                     price_id={props.default_price}
                     product_price={prices.unit_amount}
-                    purchased={false}
                 />
                 {/* {availableQuantity ? (
                 ) : (

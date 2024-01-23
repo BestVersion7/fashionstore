@@ -39,7 +39,33 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
     const { order_total, order_items, payment_intent, email } =
         await req.json();
+
     try {
+        // check the quantity to real time availability
+        // const orderLength = order_items.length;
+        // for (let i = 0; i < orderLength; i++) {
+        //     const findAvailability =
+        //         await prisma.productAvailabilityInfo.findUnique({
+        //             where: {
+        //                 product_id: order_items[i].product_id,
+        //             },
+        //             select: {
+        //                 available_quantity: true,
+        //             },
+        //         });
+        //     const availability =
+        //         Number(findAvailability?.available_quantity) || 0;
+
+        //     if (Number(order_items[i].quantity) > availability) {
+        //         return NextResponse.json(
+        //             `An item in your cart exceeds availability.`,
+        //             {
+        //                 status: 400,
+        //             }
+        //         );
+        //     }
+        // }
+
         await prisma.orderInfo.create({
             data: {
                 order_total,
@@ -48,7 +74,7 @@ export async function POST(req: NextRequest) {
                 payment_intent,
             },
         });
-        return NextResponse.json("success");
+        return NextResponse.json("Order created");
     } catch (err) {
         return NextResponse.json("fail", { status: 500 });
     }

@@ -66,7 +66,7 @@ export const deleteCartCookie = async () => {
 
 export const createCart = async (
     cookieId: string | undefined,
-    cart: Pick<CartType, "price_id" | "product_id" | "quantity" | "purchased">
+    cart: Pick<CartType, "price_id" | "product_id" | "quantity">
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "POST",
@@ -78,7 +78,7 @@ export const createCart = async (
 
 export const updateCart = async (
     cookieId: string | undefined,
-    cart: Pick<CartType, "product_id" | "quantity" | "purchased">
+    cart: Pick<CartType, "product_id" | "quantity">
 ) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
         method: "PUT",
@@ -88,17 +88,16 @@ export const updateCart = async (
     return data;
 };
 
-export const updateCartPurchased = async (
-    cookieId: string | undefined,
-    cart: Pick<CartType, "purchased">
-) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
-        method: "PUT",
-        body: JSON.stringify(cart),
-    });
-    const data = await res.json();
-    return data;
-};
+// export const updateCartPurchased = async (
+//     cookieId: string | undefined,
+// ) => {
+//     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
+//         method: "PUT",
+//         body: JSON.stringify(cart),
+//     });
+//     const data = await res.json();
+//     return data;
+// };
 
 export const deleteCartItemByProductId = async (
     cookieId: string | undefined,

@@ -10,10 +10,7 @@ import { useOnClickOutside } from "../utils/customHooks";
 import { NotificationMsg } from "./NotificationMsg";
 
 export const CartQPost = (
-    props: Pick<
-        CartType,
-        "product_id" | "price_id" | "product_price" | "purchased"
-    >
+    props: Pick<CartType, "product_id" | "price_id" | "product_price">
 ) => {
     const [quantity, setQuantity] = useState(1);
     const [disableAdd, setDisableAdd] = useState(false);
@@ -43,7 +40,6 @@ export const CartQPost = (
             product_id: props.product_id,
             price_id: props.price_id,
             quantity,
-            purchased: false,
         });
 
         setCartMsg(msg);

@@ -13,10 +13,11 @@ import { ImSpinner2 } from "react-icons/im";
 import Link from "next/link";
 
 import {
-    updateCartPurchased,
     updatePaymentIntent,
     getPaymentIntentFromCookie,
     createOrder,
+    getProductAvailableQuantity,
+    updateProductAvailableQuantity,
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
@@ -51,12 +52,27 @@ export function StripeForm(props: {
         if (!stripe || !elements) return null;
 
         try {
-            setIsProcessing(true);
+            setIsProcessing(() => true);
 
             // find the payment intent
             const paymentId = await getPaymentIntentFromCookie(
                 getCookie("cookiecart")
             );
+
+            // check quantity does not exceed
+            const orderLength = orderItems.length;
+            for (let i = 0; i < orderLength; i++) {
+                const availability = await getProductAvailableQuantity(
+                    orderItems[i].product_id
+                );
+                if (orderItems[i].quantity > availability) {
+                    setErrorMessage(
+                        "An item in your cart exceeds availability."
+                    );
+                    setIsProcessing(() => false);
+                    return;
+                }
+            }
 
             // update the total and email
             await updatePaymentIntent(paymentId, {
@@ -76,10 +92,6 @@ export function StripeForm(props: {
                 console.log(error.message);
                 setErrorMessage(error.message);
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
-                await updateCartPurchased(getCookie("cookiecart"), {
-                    purchased: true,
-                });
-
                 // create the order
                 await createOrder({
                     order_items: orderItems,
@@ -87,6 +99,15 @@ export function StripeForm(props: {
                     payment_intent: paymentIntent.id,
                     email: `${emailRef.current?.value}`,
                 });
+
+                // update  availability
+                const orderLength = orderItems.length;
+                for (let i = 0; i < orderLength; i++) {
+                    await updateProductAvailableQuantity(
+                        orderItems[i].product_id,
+                        orderItems[i].quantity
+                    );
+                }
 
                 await deleteCartCookie();
 

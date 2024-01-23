@@ -34,21 +34,22 @@ export async function PUT(req: NextRequest) {
                         available_quantity: true,
                     },
                 });
-            const availQuantity = Number(searchQuantity?.available_quantity);
+            const availQuantity =
+                Number(searchQuantity?.available_quantity) || 0;
 
-            if (!quantity || typeof quantity !== "number") {
+            if (!quantity) {
                 return NextResponse.json("Quantity error", { status: 400 });
             }
 
             // quantity cannot be negative
-            if (quantity > availQuantity) {
+            if (Number(quantity) > availQuantity) {
                 return NextResponse.json(
                     "The quantity exceeds the available quantity"
                 );
             } else {
                 await prisma.productAvailabilityInfo.update({
                     data: {
-                        available_quantity: availQuantity - quantity,
+                        available_quantity: availQuantity - Number(quantity),
                     },
                     where: {
                         product_id: productId,
