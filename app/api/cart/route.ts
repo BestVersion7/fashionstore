@@ -44,7 +44,6 @@ export async function POST(req: NextRequest) {
             },
         });
 
-        // find available quantity
         const findAvailQuantity =
             await prisma.productAvailabilityInfo.findUnique({
                 where: {
@@ -65,7 +64,7 @@ export async function POST(req: NextRequest) {
             );
         }
 
-        // create if not exists
+        // // create if not exists
         if (findCart.length < 1) {
             const price = await prisma.priceInfo.findUnique({
                 where: { price_id },
@@ -85,7 +84,10 @@ export async function POST(req: NextRequest) {
                 { status: 201 }
             );
         } else {
-            if (Number(findCart[0].quantity) + quantity > availableQuantity) {
+            if (
+                Number(findCart[0].quantity) + Number(quantity) >
+                availableQuantity
+            ) {
                 return NextResponse.json(
                     `The maximum quantity is ${availableQuantity}.`,
                     { status: 400 }
@@ -97,10 +99,14 @@ export async function POST(req: NextRequest) {
                     price_id,
                 },
                 data: {
-                    quantity: Number(findCart[0].quantity) + quantity,
+                    quantity: Number(findCart[0].quantity) + Number(quantity),
                 },
             });
-            return NextResponse.json(`Item quantity updated to ${quantity}`);
+            return NextResponse.json(
+                `Item quantity updated to ${
+                    Number(findCart[0].quantity) + Number(quantity)
+                }`
+            );
         }
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
