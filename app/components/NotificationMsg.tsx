@@ -1,7 +1,9 @@
-import { useState, memo, useEffect } from "react";
+"use client";
+
+import { useState, useEffect } from "react";
 import { IoMdClose } from "react-icons/io";
 
-export const NotificationMsg = memo((props: { message: string }) => {
+export const NotificationMsg = (props: { message: string }) => {
     const [showNotification, setShowNotification] = useState(true);
 
     useEffect(() => {
@@ -29,4 +31,4 @@ export const NotificationMsg = memo((props: { message: string }) => {
             )}
         </>
     );
-});
+};
