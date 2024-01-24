@@ -1,7 +1,6 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
-import { ContactBtn } from "./components/ContactBtn";
 
 export default function Home() {
     return (
@@ -136,8 +135,6 @@ export default function Home() {
                     Give feedback
                 </Link>
             </section>
-
-            <ContactBtn />
         </main>
     );
 }

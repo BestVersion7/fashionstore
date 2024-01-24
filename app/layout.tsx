@@ -9,6 +9,8 @@ import { FooterInput } from "./components/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import { AccountHover } from "./components/AccountHover";
+import { ContactBtn } from "./components/ContactBtn";
+import { NotificationMap } from "./components/NotificationMap";
 
 export const metadata: Metadata = {
     title: "Fashion Store",
@@ -84,6 +86,8 @@ export default function RootLayout({
                 </header>
 
                 {children}
+                <NotificationMap />
+                <ContactBtn />
 
                 <footer className="bg-gray-800  text-slate-200  px-4 py-2 ">
                     <section className="flex justify-between mb-4  sm:justify-center gap-5">

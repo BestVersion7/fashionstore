@@ -1,29 +1,38 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, memo, useEffect } from "react";
+import { IoMdClose } from "react-icons/io";
 
 type props = {
     message: string;
-    notificationReload: boolean;
 };
 
-export const NotificationMsg = (props: props) => {
-    const [showNotification, setShowNotification] = useState(false);
+export const NotificationMsg = memo((props: props) => {
+    const [showNotification, setShowNotification] = useState(true);
 
     useEffect(() => {
-        setShowNotification(() => true);
-        setTimeout(() => setShowNotification(() => false), 5000);
-    }, [props.notificationReload]);
+        setTimeout(() => {
+            setShowNotification(() => false);
+        }, 5000);
+    }, []);
+
+    const handleShowNotification = () => {
+        setShowNotification(() => false);
+    };
 
     return (
         <>
-            {props.message && (
-                <div className="fixed top-20 right-5 w-80  bg-green-600 rounded-md text-left pl-3 text-white font-medium z-20">
-                    {showNotification && (
-                        <p className="py-1">{props.message}</p>
-                    )}
+            {showNotification && (
+                <div className="min-w-72 flex justify-between items-center bg-green-400 rounded-md text-left px-4  text-lg font-medium">
+                    <p className="py-1">{props.message}</p>
+                    <span
+                        onClick={handleShowNotification}
+                        className="text-2xl hover:bg-white hover:cursor-pointer"
+                    >
+                        <IoMdClose />
+                    </span>
                 </div>
             )}
         </>
     );
-};
+});

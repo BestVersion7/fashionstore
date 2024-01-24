@@ -7,14 +7,12 @@ import { getCookie } from "cookies-next";
 import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
-import { NotificationMsg } from "./NotificationMsg";
+import { notificationsArray } from "../utils/notifications";
 
 export const CartQUpdate = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(props.quantity);
     const [showInput, setShowInput] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [notificationReload, setNotificationReload] = useState(false);
-    const [cartMsg, setCartMsg] = useState("");
 
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setShowDropdown(false));
@@ -36,8 +34,7 @@ export const CartQUpdate = (props: CartType) => {
             product_id: props.product_id,
             quantity: inputQuantity,
         });
-        setCartMsg(msg);
-        setNotificationReload((val) => !val);
+        notificationsArray.push({ message: msg });
 
         router.refresh();
     };
@@ -54,8 +51,7 @@ export const CartQUpdate = (props: CartType) => {
                 product_id: props.product_id,
                 quantity: Number(e.currentTarget.value),
             });
-            setCartMsg(msg);
-            setNotificationReload((val) => !val);
+            notificationsArray.push({ message: msg });
 
             router.refresh();
         } else {
@@ -65,10 +61,6 @@ export const CartQUpdate = (props: CartType) => {
 
     return (
         <div className="relative">
-            <NotificationMsg
-                message={cartMsg}
-                notificationReload={notificationReload}
-            />
             <button
                 type="button"
                 onClick={handleShowDropdown}

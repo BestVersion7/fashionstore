@@ -4,7 +4,6 @@ import { Product } from "@/app/components/Product";
 import Link from "next/link";
 import { SearchInput } from "@/app/components/SearchInput";
 import { ProductFilter } from "@/app/components/ProductFilter";
-import { ContactBtn } from "@/app/components/ContactBtn";
 
 // All products not returned in the api call will be 404
 // export const dynamicParams = false;
@@ -65,8 +64,6 @@ export default async function CategoryShop({
                     </Link>
                 )}
             </div>
-
-            <ContactBtn />
         </main>
     );
 }

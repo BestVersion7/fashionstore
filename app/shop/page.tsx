@@ -3,7 +3,6 @@ import { SearchInput } from "../components/SearchInput";
 import { ProductType } from "../types";
 import { getAllProducts } from "../utils/apiCalls";
 import { ProductFilter } from "../components/ProductFilter";
-import { ContactBtn } from "../components/ContactBtn";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -31,8 +30,6 @@ export default async function Shop() {
                     <Product key={item.product_id} {...item} />
                 ))}
             </div>
-
-            <ContactBtn />
         </main>
     );
 }

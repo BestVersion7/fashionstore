@@ -4,10 +4,10 @@ import { useState, useRef } from "react";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { createCart, createCartCookie } from "../utils/apiCalls";
-import { CartType, ProductAvailabilityType } from "../types";
+import { CartType } from "../types";
 import { FaCheck, FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
-import { NotificationMsg } from "./NotificationMsg";
+import { notificationsArray } from "../utils/notifications";
 
 export const CartQPost = (
     props: Pick<CartType, "product_id" | "price_id" | "product_price">
@@ -17,8 +17,6 @@ export const CartQPost = (
     const [inCart, setInCart] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [showInput, setShowInput] = useState(false);
-    const [cartMsg, setCartMsg] = useState("");
-    const [notificationReload, setNotificationReload] = useState(false);
 
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setShowDropdown(false));
@@ -42,8 +40,7 @@ export const CartQPost = (
             quantity,
         });
 
-        setCartMsg(msg);
-        setNotificationReload((val) => !val);
+        notificationsArray.push({ message: msg });
 
         router.refresh();
         setInCart(() => true);
@@ -67,13 +64,6 @@ export const CartQPost = (
 
     return (
         <div className="relative flex flex-col items-center">
-            {/* disappearing notification */}
-
-            <NotificationMsg
-                message={cartMsg}
-                notificationReload={notificationReload}
-            />
-
             <button
                 type="button"
                 onClick={() => setShowDropdown((val) => !val)}

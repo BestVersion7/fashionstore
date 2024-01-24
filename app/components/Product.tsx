@@ -41,15 +41,17 @@ export const Product = async (props: ProductType) => {
                     {formatCurrency(prices.unit_amount)}
                 </p>
 
-                <CartQPost
-                    product_id={props.product_id}
-                    price_id={props.default_price}
-                    product_price={prices.unit_amount}
-                />
-                {/* {availableQuantity ? (
+                {availableQuantity ? (
+                    <CartQPost
+                        product_id={props.product_id}
+                        price_id={props.default_price}
+                        product_price={prices.unit_amount}
+                    />
                 ) : (
-                    <StockLabel quantity={availableQuantity} />
-                )} */}
+                    <span className="mb-4 ">
+                        <StockLabel quantity={availableQuantity} />
+                    </span>
+                )}
             </div>
         </article>
     );

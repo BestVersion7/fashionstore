@@ -3,7 +3,6 @@ import { ProductType } from "@/app/types";
 import { Product } from "@/app/components/Product";
 import { SearchInput } from "@/app/components/SearchInput";
 import { ProductFilter } from "@/app/components/ProductFilter";
-import { ContactBtn } from "@/app/components/ContactBtn";
 
 export default async function CategoryShop({
     searchParams,
@@ -30,7 +29,6 @@ export default async function CategoryShop({
                     <Product key={item.product_id} {...item} />
                 ))}
             </div>
-            <ContactBtn />
         </main>
     );
 }
