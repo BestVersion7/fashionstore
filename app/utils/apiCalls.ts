@@ -1,5 +1,6 @@
-import { CartType, EmailProps, OrderType } from "../types";
+import { CartType, EmailProps, OrderType, ProductReviewType } from "../types";
 import { BASE_URL } from "../lib/constants";
+import { notificationsArray } from "./notifications";
 
 const emailOrigin = `${BASE_URL}/api/contact`;
 const stripeOrigin = `${BASE_URL}/api/stripe`;
@@ -75,6 +76,7 @@ export const createCart = async (
         body: JSON.stringify(cart),
     });
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -87,6 +89,7 @@ export const updateCart = async (
         body: JSON.stringify(cart),
     });
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -110,6 +113,7 @@ export const deleteCartItemByProductId = async (
         body: JSON.stringify({ product_id: productId }),
     });
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -196,6 +200,7 @@ export const createOrder = async (
         body: JSON.stringify(orderData),
     });
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -246,6 +251,7 @@ export const updateProductAvailableQuantity = async (
         }
     );
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -255,6 +261,7 @@ export const createUser = async (email: string | undefined) => {
         body: JSON.stringify({ email }),
     });
     const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 
@@ -292,5 +299,21 @@ export const getUserNameByEmail = async (email: string) => {
         },
     });
     const data = await res.json();
+    return data;
+};
+
+export const createProductReview = async (
+    product_id: string,
+    reviewData: Pick<
+        ProductReviewType,
+        "product_id" | "review_message" | "review_star" | "user_email"
+    >
+) => {
+    const res = await fetch(`${reviewOrigin}?product_id=${product_id}`, {
+        method: "post",
+        body: JSON.stringify(reviewData),
+    });
+    const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };

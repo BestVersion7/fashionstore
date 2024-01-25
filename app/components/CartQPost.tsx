@@ -7,7 +7,6 @@ import { createCart, createCartCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { FaCheck, FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
-import { notificationsArray } from "../utils/notifications";
 
 export const CartQPost = (
     props: Pick<CartType, "product_id" | "price_id" | "product_price">
@@ -34,13 +33,11 @@ export const CartQPost = (
             console.log("create cookie");
         }
 
-        const msg = await createCart(getCookie("cookiecart"), {
+        await createCart(getCookie("cookiecart"), {
             product_id: props.product_id,
             price_id: props.price_id,
             quantity,
         });
-
-        notificationsArray.push({ message: msg });
 
         router.refresh();
         setInCart(() => true);

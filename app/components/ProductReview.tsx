@@ -7,7 +7,7 @@ export const ProductReview = (props: ProductReviewType) => {
     // console.log(typeof props.created_at);
 
     return (
-        <article className=" border my-1 py-2 bg-white">
+        <article className=" px-2 border border-gray-400  py-2 ">
             <p className="font-medium">{userName}</p>
 
             <div className="flex gap-1 items-center">

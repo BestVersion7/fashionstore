@@ -226,7 +226,7 @@ model ProductReviewInfo {
   created_at     DateTime     @default(now()) @db.Timestamptz(6)
   review_message String?
   product_id     String?
-  review_star    Decimal?     @default(5) @db.Decimal
+  review_star    Decimal      @default(5) @db.Decimal
   user_email     String?      @default("hunterkfan@gmail.com")
   ProductInfo    ProductInfo? @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   User           User?        @relation(fields: [user_email], references: [email], onDelete: SetDefault)

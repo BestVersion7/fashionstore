@@ -30,11 +30,10 @@ export const CartQUpdate = (props: CartType) => {
     // this is for the input form
     const handleFormUpdateQuantity = async (e: React.FormEvent) => {
         e.preventDefault();
-        const msg = await updateCart(getCookie("cookiecart"), {
+        await updateCart(getCookie("cookiecart"), {
             product_id: props.product_id,
             quantity: inputQuantity,
         });
-        notificationsArray.push({ message: msg });
 
         router.refresh();
     };
@@ -47,11 +46,10 @@ export const CartQUpdate = (props: CartType) => {
             setInputQuantity(e.currentTarget.value);
 
             setShowDropdown(() => false);
-            const msg = await updateCart(getCookie("cookiecart"), {
+            await updateCart(getCookie("cookiecart"), {
                 product_id: props.product_id,
                 quantity: Number(e.currentTarget.value),
             });
-            notificationsArray.push({ message: msg });
 
             router.refresh();
         } else {

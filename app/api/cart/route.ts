@@ -167,7 +167,7 @@ export async function DELETE(req: NextRequest) {
                 cookie_id: `${cartCookie}`,
             },
         });
-        return NextResponse.json("delete success");
+        return NextResponse.json("Item removed from inventory");
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

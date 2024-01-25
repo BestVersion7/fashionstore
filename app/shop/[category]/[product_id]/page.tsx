@@ -14,6 +14,10 @@ import { formatCurrency } from "@/app/utils/formatCurrency";
 import { ReviewStar } from "@/app/components/ReviewStar";
 import { CartQPost } from "@/app/components/CartQPost";
 import { ProductReview } from "@/app/components/ProductReview";
+import { FaStar } from "react-icons/fa";
+import { ProductReviewForm } from "@/app/components/ProductReviewForm";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
 // All products not returned in the api call will be 404
 // export const dynamicParams = false;
@@ -62,6 +66,10 @@ export default async function CategoryShop({
         params.product_id
     );
 
+    // pass down username
+    const user = await getServerSession(authOptions);
+    const email = user?.user?.email;
+
     return (
         <>
             <ProductFilter category={params.category} />
@@ -105,16 +113,41 @@ export default async function CategoryShop({
             </div>
 
             {/* Reviews */}
-            <p>
-                Average Rating:{" "}
-                <span className="font-bold">{reviewRating}</span>
-            </p>
-            <h2>Reviews:</h2>
-            <div>
-                {reviews.map((item, index) => (
-                    <ProductReview key={index} {...item} />
-                ))}
-            </div>
+            <section className="max-w-lg">
+                {!email ? (
+                    <p>Please create an account to write a review</p>
+                ) : (
+                    <>
+                        <h3 className="text-xl font-bold">
+                            Please leave a review:
+                        </h3>
+                        <ProductReviewForm
+                            email={email}
+                            product_id={params.product_id}
+                        />
+                    </>
+                )}
+
+                <div>
+                    <p className="flex gap-1 text-xl font-bold">
+                        <span>Average Rating: </span>
+                        <span className="flex items-center">
+                            {reviewRating > 1
+                                ? Number(reviewRating).toFixed(2)
+                                : "Be the first to review."}
+                            <span className="text-orange-400">
+                                <FaStar />
+                            </span>
+                        </span>
+                    </p>
+                </div>
+                <h2>Reviews ({reviewCount}):</h2>
+                <div>
+                    {reviews.map((item, index) => (
+                        <ProductReview key={index} {...item} />
+                    ))}
+                </div>
+            </section>
         </>
     );
 }
