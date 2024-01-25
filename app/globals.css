@@ -4,11 +4,15 @@
 
 @layer base {
     main {
-        @apply m-auto max-w-[1550px] px-4 py-2 md:px-8 bg-blue-50;
+        @apply m-auto max-w-[1550px] px-4 py-2 md:px-8;
     }
 
     header {
         @apply shadow-lg;
+    }
+
+    body {
+        @apply bg-slate-50
     }
 
     /* body {

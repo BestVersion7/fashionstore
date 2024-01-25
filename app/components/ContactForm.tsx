@@ -15,7 +15,7 @@ export const ContactForm = () => {
 
     const router = useRouter();
 
-    useOnClickOutside(formRef, () => router.push("/"));
+    // useOnClickOutside(formRef, () => router.push("/"));
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

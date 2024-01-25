@@ -63,7 +63,7 @@ export const CartQPost = (
     };
 
     return (
-        <div className="relative flex flex-col items-center">
+        <div className="relative flex flex-col">
             <button
                 type="button"
                 onClick={() => setShowDropdown((val) => !val)}
@@ -109,18 +109,14 @@ export const CartQPost = (
             <div>
                 <button
                     type="button"
-                    className="bg-orange-300 mt-2 mb-3 border border-black px-4 py-2 hover:bg-orange-400"
+                    className="bg-yellow-400 my-2 border rounded-2xl text-sm px-3 font-medium py-1 hover:bg-yellow-500"
                     onClick={handleAddCart}
                     disabled={disableAdd}
                 >
-                    <span className="flex gap-2 text-xl font-medium items-center">
-                        {inCart ? `Added` : `Add to Cart`}
+                    <span className="flex gap-1 items-center">
+                        {inCart ? `Added` : `Add to cart`}
 
-                        {inCart && (
-                            <span className="text-2xl">
-                                <FaCheck />
-                            </span>
-                        )}
+                        {inCart && <FaCheck />}
                     </span>
                 </button>
             </div>

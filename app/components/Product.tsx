@@ -13,13 +13,13 @@ export const Product = async (props: ProductType) => {
     );
 
     return (
-        <article className="relative  rounded-md border-black shadow-sm bg-green-50 border-solid border-2 my-3 ">
+        <article className="relative  rounded-md border shadow-sm  my-3 ">
             {/* only show when out of stock */}
-            <div className="absolute w-full top-0 z-10">
+            {/* <div className="absolute w-full top-0 z-10">
                 <StockLabel quantity={availableQuantity} />
-            </div>
+            </div> */}
 
-            <div className="relative h-72 border-b-2 border-black ">
+            <div className="relative h-72 ">
                 <Image
                     // object-top
                     className="object-cover "
@@ -30,14 +30,11 @@ export const Product = async (props: ProductType) => {
                     priority
                 />
             </div>
-            {/* grid grid-rows-[70px,80px,_5px,_1fr,_2fr] */}
-            <div className="text-center px-6 flex flex-col gap-2">
-                <h2 className="text-xl font-bold text-orange-600">
-                    {props.name}
-                </h2>
+            <div className=" px-4 py-1 flex flex-col gap-1">
+                <h2 className="text-xl font-medium ">{props.name}</h2>
 
                 <p className="">{props.description}</p>
-                <p className="text-2xl text-purple-800 font-bold">
+                <p className="text-2xl  font-medium tracking-wide">
                     {formatCurrency(prices.unit_amount)}
                 </p>
 
