@@ -71,7 +71,7 @@ export const CartQUpdate = (props: CartType) => {
 
             {/* dropdown list */}
             {showDropdown && (
-                <div className="absolute top-0" ref={dropdownRef}>
+                <div className="absolute top-0 z-10" ref={dropdownRef}>
                     {props.quantity > 5 ? (
                         <form
                             onSubmit={handleFormUpdateQuantity}
@@ -111,7 +111,7 @@ export const CartQUpdate = (props: CartType) => {
                             </button>
                         </form>
                     ) : (
-                        <ul className=" border-slate-700 border shadow-sm shadow-yellow-300">
+                        <ul className=" border-slate-700 border ">
                             {[1, 2, 3, 4, "5+"].map((item) => (
                                 <li
                                     key={item}

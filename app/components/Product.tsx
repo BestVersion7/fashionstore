@@ -2,8 +2,14 @@ import Image from "next/image";
 import { CartQPost } from "./CartQPost";
 import { formatCurrency } from "../utils/formatCurrency";
 import { PriceType, ProductType } from "../types";
-import { getProductAvailableQuantity, getPriceById } from "../utils/apiCalls";
+import {
+    getProductAvailableQuantity,
+    getPriceById,
+    getProductReviewCount,
+    getProductRatingAverage,
+} from "../utils/apiCalls";
 import { StockLabel } from "./StockLabel";
+import { ReviewStar } from "./ReviewStar";
 
 export const Product = async (props: ProductType) => {
     // get the prices and availability
@@ -11,6 +17,9 @@ export const Product = async (props: ProductType) => {
     const availableQuantity: number = await getProductAvailableQuantity(
         props.product_id
     );
+    // get reviews
+    const reviewCount = await getProductReviewCount(props.product_id);
+    const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
         <article className="relative  rounded-md border shadow-sm  my-3 ">
@@ -37,7 +46,12 @@ export const Product = async (props: ProductType) => {
                 <p className="text-2xl  font-medium tracking-wide">
                     {formatCurrency(prices.unit_amount)}
                 </p>
-
+                <ReviewStar
+                    count={reviewCount}
+                    average={reviewRating}
+                    link={`/shop/${props.metadata.category}/${props.product_id}`}
+                />
+                {/* <p>{props.product_id}</p> */}
                 {availableQuantity ? (
                     <CartQPost
                         product_id={props.product_id}

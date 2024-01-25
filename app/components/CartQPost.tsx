@@ -73,7 +73,7 @@ export const CartQPost = (
             </button>
 
             {showDropdown && (
-                <div className="absolute top-0" ref={dropdownRef}>
+                <div className="absolute top-0 z-10" ref={dropdownRef}>
                     {quantity > 5 ? (
                         <input
                             className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
@@ -91,7 +91,7 @@ export const CartQPost = (
                             maxLength={2}
                         />
                     ) : (
-                        <ul className=" border-slate-700 border shadow-sm shadow-yellow-300">
+                        <ul className=" border-slate-700 border ">
                             {[1, 2, 3, 4, "5+"].map((item) => (
                                 <li
                                     key={item}
