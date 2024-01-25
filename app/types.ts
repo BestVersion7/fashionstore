@@ -78,3 +78,12 @@ export type ProductAvailabilityType = {
     product_id: string;
     available_quantity: number;
 };
+
+export type ProductReviewType = {
+    review_id: string;
+    created_at: string;
+    user_email: string;
+    review_message: string | null;
+    product_id: string;
+    review_star: number;
+};

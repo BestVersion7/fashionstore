@@ -261,9 +261,6 @@ export const createUser = async (email: string | undefined) => {
 export const getProductReviewCount = async (product_id: string) => {
     const res = await fetch(`${reviewOrigin}/count?product_id=${product_id}`, {
         cache: "no-cache",
-        // next: {
-        //     revalidate: revalidateTime,
-        // },
     });
     const data = await res.json();
     return data;
@@ -274,11 +271,26 @@ export const getProductRatingAverage = async (product_id: string) => {
         `${reviewOrigin}/averagerating?product_id=${product_id}`,
         {
             cache: "no-cache",
-            // next: {
-            //     revalidate: revalidateTime,
-            // },
         }
     );
+    const data = await res.json();
+    return data;
+};
+
+export const getProductReviews = async (product_id: string) => {
+    const res = await fetch(`${reviewOrigin}?product_id=${product_id}`, {
+        cache: "no-cache",
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getUserNameByEmail = async (email: string) => {
+    const res = await fetch(`${userOrigin}?email=${email}`, {
+        next: {
+            revalidate: revalidateTime,
+        },
+    });
     const data = await res.json();
     return data;
 };

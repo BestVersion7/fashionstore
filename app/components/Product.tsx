@@ -22,7 +22,7 @@ export const Product = async (props: ProductType) => {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article className="relative  rounded-md border shadow-sm  my-3 ">
+        <article className="rounded-md border shadow-sm  my-3 ">
             {/* only show when out of stock */}
             {/* <div className="absolute w-full top-0 z-10">
                 <StockLabel quantity={availableQuantity} />
