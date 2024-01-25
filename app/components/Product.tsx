@@ -19,7 +19,7 @@ export const Product = async (props: ProductType) => {
                 <StockLabel quantity={availableQuantity} />
             </div> */}
 
-            <div className="relative h-72 ">
+            <div className="relative h-56 ">
                 <Image
                     // object-top
                     className="object-cover "
@@ -31,7 +31,7 @@ export const Product = async (props: ProductType) => {
                 />
             </div>
             <div className=" px-4 py-1 flex flex-col gap-1">
-                <h2 className="text-xl font-medium ">{props.name}</h2>
+                <h2 className="text-lg font-medium ">{props.name}</h2>
 
                 <p className="">{props.description}</p>
                 <p className="text-2xl  font-medium tracking-wide">

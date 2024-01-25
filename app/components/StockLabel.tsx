@@ -14,7 +14,7 @@ export const StockLabel = ({ quantity }: { quantity: number }) => {
         <>
             {label && (
                 <div
-                    className={`text-xl text-center py-1 ${bgColour} text-white font-medium tracking-wider`}
+                    className={`text-sm text-center py-1 ${bgColour} text-white font-medium`}
                 >
                     {label}
                 </div>

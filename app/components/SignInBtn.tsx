@@ -4,19 +4,24 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { createUser } from "../utils/apiCalls";
 
 export const SignInBtn = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // create the User if not exists
+        await createUser(emailRef.current?.value);
+
         signIn("email", {
             email: emailRef.current?.value,
             redirect: false,
             callbackUrl: "/account",
         });
-        router.push(`${window.location.href}?modal=t`, {
+
+        router.push(`${window.location.href}?signinmodal=t`, {
             scroll: false,
         });
     };
@@ -24,7 +29,7 @@ export const SignInBtn = () => {
     const handleClose = () => {
         router.push(window.location.pathname, { scroll: false });
     };
-    const modal = useSearchParams().get("modal");
+    const modal = useSearchParams().get("signinmodal");
 
     return (
         <div className="grid w-72 gap-4">

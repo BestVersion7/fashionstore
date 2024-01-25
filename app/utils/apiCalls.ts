@@ -9,6 +9,8 @@ const orderOrigin = `${BASE_URL}/api/order`;
 const productOrigin = `${BASE_URL}/api/product`;
 const productAvailabilityOrigin = `${BASE_URL}/api/productavailability`;
 const priceOrigin = `${BASE_URL}/api/price`;
+const userOrigin = `${BASE_URL}/api/user`;
+const reviewOrigin = `${BASE_URL}/api/review`;
 
 const revalidateTime = 60 * 60 * 24 * 1;
 
@@ -241,6 +243,38 @@ export const updateProductAvailableQuantity = async (
             body: JSON.stringify({
                 quantity,
             }),
+        }
+    );
+    const data = await res.json();
+    return data;
+};
+
+export const createUser = async (email: string | undefined) => {
+    const res = await fetch(userOrigin, {
+        method: "post",
+        body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getProductReviewCount = async (product_id: string) => {
+    const res = await fetch(`${reviewOrigin}/count?product_id=${product_id}`, {
+        next: {
+            revalidate: revalidateTime,
+        },
+    });
+    const data = await res.json();
+    return data;
+};
+
+export const getProductRatingAverage = async (product_id: string) => {
+    const res = await fetch(
+        `${reviewOrigin}/averagerating?product_id=${product_id}`,
+        {
+            next: {
+                revalidate: revalidateTime,
+            },
         }
     );
     const data = await res.json();
