@@ -2,6 +2,23 @@ export const formatCurrency = (total: number) => {
     return `$${(total / 100).toFixed(2)}`;
 };
 
+export const formatProductNameToUrl = (name: string) => {
+    return name.toLowerCase().replaceAll(" ", "-");
+};
+
+export const formatUrlToProductName = (name: string) => {
+    const split = name.split("-");
+    const length = split.length;
+    let newName: string[] = [];
+
+    for (let i = 0; i < length; i++) {
+        const properWord = split[i][0].toUpperCase() + split[i].slice(1);
+        newName.push(properWord);
+    }
+    const newString = newName.reduce((arr, val) => arr + " " + val);
+    return newString;
+};
+
 const months = [
     "Jan",
     "Feb",

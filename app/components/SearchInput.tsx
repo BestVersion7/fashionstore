@@ -9,6 +9,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 import { useOnClickOutside } from "../utils/customHooks";
 import { useSearchParams } from "next/navigation";
+import { formatProductNameToUrl } from "../utils/format";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);
@@ -74,7 +75,9 @@ export const SearchInput = () => {
                     {productMap.map((item, index) => (
                         <Link
                             className="p-2 grid text-orange-600 font-bold border border-solid border-black hover:cursor-pointer hover:bg-slate-300"
-                            href={`/shop/${item.metadata.category}/${item.product_id}`}
+                            href={`/${formatProductNameToUrl(item.name)}/${
+                                item.product_id
+                            }`}
                             key={index}
                             onClick={() => setShowSearch(() => false)}
                         >

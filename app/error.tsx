@@ -10,14 +10,14 @@ export default function Error({ error, reset }: { error: any; reset: any }) {
 
     return (
         <main>
-            <h2>Something went wrong</h2>{" "}
-            <button type="button" onClick={() => reset()}>
-                Try again
-            </button>
-            <br />
             <Link href="/" className="underline text-2xl text-orange-600">
                 Back to Home
             </Link>
+            <h2>Something went wrong</h2>{" "}
+            {/* <button type="button" onClick={() => reset()}>
+                Try again
+            </button>
+            <br /> */}
         </main>
     );
 }

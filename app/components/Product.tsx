@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CartQPost } from "./CartQPost";
-import { formatCurrency } from "../utils/format";
+import { formatCurrency, formatProductNameToUrl } from "../utils/format";
 import { PriceType, ProductType } from "../types";
 import {
     getProductAvailableQuantity,
@@ -49,7 +49,9 @@ export const Product = async (props: ProductType) => {
                 <ProductReviewStar
                     count={reviewCount}
                     average={reviewRating}
-                    link={`/shop/${props.metadata.category}/${props.product_id}`}
+                    link={`/${formatProductNameToUrl(props.name)}/${
+                        props.product_id
+                    }`}
                 />
                 {/* <p>{props.product_id}</p> */}
                 {availableQuantity ? (

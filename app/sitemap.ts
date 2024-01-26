@@ -5,19 +5,19 @@ import { ProductType } from "./types";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const products: ProductType[] = await getAllProducts();
-    const mappedProducts: {
-        url: string;
-        lastModified: Date;
-        changeFrequency: "weekly";
-        priority: number;
-    }[] = products.map((item) => {
-        return {
-            url: `${BASE_URL}/shop/${item.metadata.category}/${item.product_id}`,
-            lastModified: new Date(),
-            changeFrequency: "weekly",
-            priority: 0.8,
-        };
-    });
+    // const mappedProducts: {
+    //     url: string;
+    //     lastModified: Date;
+    //     changeFrequency: "weekly";
+    //     priority: number;
+    // }[] = products.map((item) => {
+    //     return {
+    //         url: `${BASE_URL}/shop/${item.metadata.category}/${item.product_id}`,
+    //         lastModified: new Date(),
+    //         changeFrequency: "weekly",
+    //         priority: 0.8,
+    //     };
+    // });
 
     return [
         {
@@ -44,6 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: "monthly",
             priority: 0.5,
         },
-        ...mappedProducts,
+        // ...mappedProducts,
     ];
 }

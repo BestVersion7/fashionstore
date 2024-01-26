@@ -10,7 +10,7 @@ import {
 } from "@/app/utils/apiCalls";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/StockLabel";
-import { formatCurrency } from "@/app/utils/format";
+import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";
 import { ProductReviewStar } from "@/app/components/ProductReviewStar";
 import { CartQPost } from "@/app/components/CartQPost";
 import { ProductReview } from "@/app/components/ProductReview";
@@ -19,38 +19,22 @@ import { ProductReviewForm } from "@/app/components/ProductReviewForm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 
-// All products not returned in the api call will be 404
-// export const dynamicParams = false;
-
-// export async function generateStaticParams() {
-//     const allProducts: ProductType[] = await getAllProducts();
-//     return allProducts.map((item) => [
-//         { category: item.metadata.category, id: item.id },
-//     ]);
-// }
-
 export async function generateMetadata({
     params,
 }: {
-    params: { category: string };
+    params: { product_name: string; product_id: string };
 }) {
     return {
-        title: `Shop for ${
-            params.category.charAt(0).toUpperCase() + params.category.slice(1)
-        }`,
-        description: `Shop for ${
-            params.category.charAt(0).toUpperCase() + params.category.slice(1)
-        }`,
-        keywords: `Shop for ${
-            params.category.charAt(0).toUpperCase() + params.category.slice(1)
-        }`,
+        title: `${formatUrlToProductName(params.product_name)}`,
+        description: `${formatUrlToProductName(params.product_name)}`,
+        keywords: `${formatUrlToProductName(params.product_name)}`,
     };
 }
 
 export default async function CategoryShop({
     params,
 }: {
-    params: { category: string; product_id: string };
+    params: { product_name: string; product_id: string };
 }) {
     const product: ProductType = await getProductById(params.product_id);
 
@@ -70,9 +54,11 @@ export default async function CategoryShop({
     const user = await getServerSession(authOptions);
     const email = user?.user?.email;
 
+    console.log(formatUrlToProductName(params.product_name));
+
     return (
-        <>
-            <ProductFilter category={params.category} />
+        <main>
+            <ProductFilter />
 
             <div className="rounded-md  my-3 flex gap-2">
                 <div className="relative w-40">
@@ -148,6 +134,6 @@ export default async function CategoryShop({
                     ))}
                 </div>
             </section>
-        </>
+        </main>
     );
 }
