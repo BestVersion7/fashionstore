@@ -4,17 +4,22 @@ import prisma from "@/app/lib/prisma";
 export async function GET(req: NextRequest) {
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
+        let data;
 
         if (productId) {
-            const data = await prisma.productAvailabilityInfo.findUnique({
+            data = await prisma.productAvailabilityInfo.findUnique({
                 where: {
                     product_id: productId,
                 },
             });
-
-            return NextResponse.json(Number(data?.available_quantity) || 0);
+            data = await prisma.productAvailabilityInfo.findMany({
+                take: 5,
+                orderBy: {
+                    quantity_sold: "desc",
+                },
+            });
         } else {
-            return NextResponse.json("noquery", { status: 400 });
+            return NextResponse.json(data);
         }
     } catch (err) {
         return NextResponse.json(err, { status: 500 });

@@ -18,7 +18,6 @@ import {
     createOrder,
     getProductAvailableQuantity,
     updateProductAvailableQuantity,
-    updateCartPurchased,
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
@@ -63,10 +62,13 @@ export function StripeForm(props: {
             // check quantity does not exceed
             const orderLength = orderItems.length;
             for (let i = 0; i < orderLength; i++) {
-                const availability = await getProductAvailableQuantity(
+                const productAvailability = await getProductAvailableQuantity(
                     orderItems[i].product_id
                 );
-                if (orderItems[i].quantity > availability) {
+                if (
+                    orderItems[i].quantity >
+                    productAvailability.available_quantity
+                ) {
                     setErrorMessage(
                         "An item in your cart exceeds availability."
                     );
@@ -99,11 +101,6 @@ export function StripeForm(props: {
                     order_total: props.totalAmount,
                     payment_intent: paymentIntent.id,
                     email: `${emailRef.current?.value}`,
-                });
-
-                // change cart to purchased (this is for checking total sales)
-                await updateCartPurchased(getCookie("cookiecart"), {
-                    purchased: true,
                 });
 
                 // update  availability

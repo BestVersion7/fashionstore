@@ -1,4 +1,4 @@
-import { CartType, OrderType, PaymentIntentType } from "../types";
+import { OrderType, PaymentIntentType } from "../types";
 import {
     getPaymentIntent,
     getCartByCookie,
@@ -12,7 +12,7 @@ export const OrderPaper = async (props: OrderType) => {
         props.payment_intent
     );
 
-    const orderItems: CartType[] = await getCartByCookie(props.cookie_id);
+    const orderItems = await getCartByCookie(props.cookie_id);
     const totalQuantity = await getCartTotal(props.cookie_id);
 
     return (

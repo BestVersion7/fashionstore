@@ -1,8 +1,13 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
+import { getAllProducts } from "./utils/apiCalls";
+import { ProductType } from "./types";
+import { BestSellerCard } from "./components/BestSellerCard";
 
-export default function Home() {
+export default async function Home() {
+    // change  this in future
+    const hotProducts: ProductType[] = await getAllProducts();
     return (
         <main className="px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
@@ -107,8 +112,15 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="h-44 bg-red-50">
+            <section className=" bg-red-50">
                 <h3>New & Hot</h3>
+                <div className="grid grid-cols-8 overflow-hidden">
+                    {hotProducts.map((item, index) => (
+                        <div key={index}>
+                            <BestSellerCard {...item} />
+                        </div>
+                    ))}
+                </div>
             </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8">

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CartQPost } from "./CartQPost";
 import { formatCurrency, formatProductNameToUrl } from "../utils/format";
-import { PriceType, ProductAvailabilityType, ProductType } from "../types";
+import { PriceType, ProductType } from "../types";
 import {
     getProductAvailableQuantity,
     getPriceById,
@@ -12,11 +12,12 @@ import { StockLabel } from "./StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";
 
-export const Product = async (props: ProductType) => {
+export const BestSellerCard = async (props: ProductType) => {
     // get the prices and availability
     const prices: PriceType = await getPriceById(props.default_price);
-    const productAvailability: ProductAvailabilityType =
-        await getProductAvailableQuantity(props.product_id);
+    const availableQuantity: number = await getProductAvailableQuantity(
+        props.product_id
+    );
     // get reviews
     const reviewCount = await getProductReviewCount(props.product_id);
     const reviewRating = await getProductRatingAverage(props.product_id);
@@ -32,7 +33,7 @@ export const Product = async (props: ProductType) => {
                 href={`/${formatProductNameToUrl(props.name)}/${
                     props.product_id
                 }`}
-                className="relative h-56 "
+                className="relative h-32 "
             >
                 <Image
                     // object-top
@@ -66,7 +67,7 @@ export const Product = async (props: ProductType) => {
                     }`}
                 />
                 {/* <p>{props.product_id}</p> */}
-                {productAvailability.available_quantity ? (
+                {availableQuantity ? (
                     <CartQPost
                         product_id={props.product_id}
                         price_id={props.default_price}
@@ -74,9 +75,7 @@ export const Product = async (props: ProductType) => {
                     />
                 ) : (
                     <span className="mb-4 ">
-                        <StockLabel
-                            quantity={productAvailability.available_quantity}
-                        />
+                        <StockLabel quantity={availableQuantity} />
                     </span>
                 )}
             </div>

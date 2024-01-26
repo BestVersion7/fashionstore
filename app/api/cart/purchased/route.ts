@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     try {
-        // check for cookies
         const productId = req.nextUrl.searchParams.get("product_id");
 
         if (!productId) {

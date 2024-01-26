@@ -1,4 +1,4 @@
-import { CartType, ProductType } from "../types";
+import { CartType } from "../types";
 import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/format";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import Image from "next/image";
 export const CartProductsV2 = async (
     props: Pick<CartType, "product_id" | "quantity" | "product_price">
 ) => {
-    const productInfo: ProductType = await getProductById(props.product_id);
+    const productInfo = await getProductById(props.product_id);
     return (
         <>
             <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-[100px,_1fr] h-full gap-2 w-full ">

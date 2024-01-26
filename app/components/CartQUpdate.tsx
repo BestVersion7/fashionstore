@@ -7,7 +7,6 @@ import { getCookie } from "cookies-next";
 import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
-import { notificationsArray } from "../utils/notifications";
 
 export const CartQUpdate = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(props.quantity);

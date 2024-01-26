@@ -2,7 +2,11 @@ import {
     CartType,
     EmailProps,
     OrderType,
+    PaymentIntentType,
+    PriceType,
+    ProductAvailabilityType,
     ProductReviewType,
+    ProductType,
     UserType,
 } from "../types";
 import { BASE_URL } from "../lib/constants";
@@ -25,7 +29,7 @@ export const getAllProducts = async () => {
     const res = await fetch(productOrigin, {
         next: { revalidate: revalidateTime },
     });
-    const data = await res.json();
+    const data: ProductType[] = await res.json();
     return data;
 };
 
@@ -33,7 +37,7 @@ export const getProductById = async (id: string) => {
     const res = await fetch(`${productOrigin}?product_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
-    const data = await res.json();
+    const data: ProductType = await res.json();
     return data;
 };
 
@@ -41,7 +45,7 @@ export const getPriceById = async (id: string) => {
     const res = await fetch(`${priceOrigin}?price_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
-    const data = await res.json();
+    const data: PriceType = await res.json();
     return data;
 };
 
@@ -49,7 +53,7 @@ export const getCartTotal = async (cookie: string | undefined) => {
     const res = await fetch(`${cartOrigin}/total?cookie_id=${cookie}`, {
         cache: "no-cache",
     });
-    const data = await res.json();
+    const data: number = await res.json();
     return data;
 };
 
@@ -57,13 +61,13 @@ export const getCartByCookie = async (cookie: string | undefined) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
         cache: "no-cache",
     });
-    const data = await res.json();
+    const data: CartType[] = await res.json();
     return data;
 };
 
 export const createCartCookie = async () => {
     const res = await fetch(cartCookieOrigin, { method: "post" });
-    const data = await res.json();
+    const data: CartType = await res.json();
     return data;
 };
 
@@ -81,7 +85,7 @@ export const createCart = async (
         method: "POST",
         body: JSON.stringify(cart),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
     return data;
 };
@@ -94,19 +98,8 @@ export const updateCart = async (
         method: "PUT",
         body: JSON.stringify(cart),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
-    return data;
-};
-export const updateCartPurchased = async (
-    cookieId: string | undefined,
-    cart: Pick<CartType, "purchased">
-) => {
-    const res = await fetch(`${cartOrigin}/purchased?cookie_id=${cookieId}`, {
-        method: "PUT",
-        body: JSON.stringify(cart),
-    });
-    const data = await res.json();
     return data;
 };
 
@@ -121,6 +114,18 @@ export const updateCartPurchased = async (
 //     return data;
 // };
 
+export const updateQuantitySold = async (
+    productId: string,
+    quantity: number
+) => {
+    const res = await fetch(
+        `${productAvailabilityOrigin}/quantitysold?product_id=${productId}`,
+        { method: "put", body: JSON.stringify({ quantity }) }
+    );
+    const data: number = await res.json();
+    return data;
+};
+
 export const deleteCartItemByProductId = async (
     cookieId: string | undefined,
     productId: string
@@ -129,14 +134,14 @@ export const deleteCartItemByProductId = async (
         method: "DELETE",
         body: JSON.stringify({ product_id: productId }),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
     return data;
 };
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
-    const data = await res.json();
+    const data: PaymentIntentType = await res.json();
     return data;
 };
 
@@ -151,7 +156,7 @@ export const createOrFindPaymentIntent = async (
             body: JSON.stringify({ amount }),
         }
     );
-    const data = await res.json();
+    const data: PaymentIntentType = await res.json();
     return data;
 };
 
@@ -166,7 +171,7 @@ export const updatePaymentIntent = async (
         method: "put",
         body: JSON.stringify(body),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     return data;
 };
 
@@ -174,7 +179,7 @@ export const getPaymentIntentFromCookie = async (
     cookieId: string | undefined
 ) => {
     const res = await fetch(`${cartCookieOrigin}?cookie_id=${cookieId}`);
-    const data = await res.json();
+    const data: PaymentIntentType = await res.json();
     return data;
 };
 
@@ -182,7 +187,7 @@ export const getProductBySearchName = async (input: string | undefined) => {
     const res = await fetch(`${productOrigin}/search?product_name=${input}`, {
         next: { revalidate: revalidateTime },
     });
-    const data = await res.json();
+    const data: ProductType = await res.json();
     return data;
 };
 
@@ -193,7 +198,7 @@ export const getProductBySearchCategory = async (input: string | undefined) => {
             next: { revalidate: revalidateTime },
         }
     );
-    const data = await res.json();
+    const data: ProductType = await res.json();
     return data;
 };
 
@@ -202,7 +207,7 @@ export const createEmail = async (props: EmailProps) => {
         method: "post",
         body: JSON.stringify(props),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     return data;
 };
 
@@ -216,8 +221,7 @@ export const createOrder = async (
         method: "post",
         body: JSON.stringify(orderData),
     });
-    const data = await res.json();
-    console.log(data);
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
     return data;
 };
@@ -229,7 +233,7 @@ export const getOrderByPaymentIntent = async (paymentIntent: string) => {
             authorization: `${process.env.API_KEY}`,
         },
     });
-    const data = await res.json();
+    const data: OrderType = await res.json();
     return data;
 };
 
@@ -240,7 +244,7 @@ export const getOrdersByEmail = async (email: string) => {
             authorization: `${process.env.API_KEY}`,
         },
     });
-    const data = await res.json();
+    const data: OrderType[] = await res.json();
     return data;
 };
 
@@ -251,7 +255,7 @@ export const getProductAvailableQuantity = async (productId: string) => {
             cache: "no-cache",
         }
     );
-    const data = await res.json();
+    const data: ProductAvailabilityType = await res.json();
     return data;
 };
 
@@ -268,7 +272,7 @@ export const updateProductAvailableQuantity = async (
             }),
         }
     );
-    const data = await res.json();
+    const data: string = await res.json();
     return data;
 };
 
@@ -277,7 +281,7 @@ export const createUser = async (email: string | undefined) => {
         method: "post",
         body: JSON.stringify({ email }),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
     return data;
 };
@@ -286,7 +290,7 @@ export const getProductReviewCount = async (product_id: string) => {
     const res = await fetch(`${reviewOrigin}/count?product_id=${product_id}`, {
         cache: "no-cache",
     });
-    const data = await res.json();
+    const data: number = await res.json();
     return data;
 };
 
@@ -297,7 +301,7 @@ export const getProductRatingAverage = async (product_id: string) => {
             cache: "no-cache",
         }
     );
-    const data = await res.json();
+    const data: number = await res.json();
     return data;
 };
 
@@ -305,7 +309,7 @@ export const getProductReviews = async (product_id: string) => {
     const res = await fetch(`${reviewOrigin}?product_id=${product_id}`, {
         cache: "no-cache",
     });
-    const data = await res.json();
+    const data: ProductReviewType = await res.json();
     return data;
 };
 
@@ -319,7 +323,7 @@ export const getUserInfoByEmail = async (email: string) => {
         },
         cache: "no-cache",
     });
-    const data = await res.json();
+    const data: UserType = await res.json();
     return data;
 };
 
@@ -331,7 +335,7 @@ export const updateUserNameByEmail = async (
         method: "put",
         body: JSON.stringify(body),
     });
-    const data = await res.json();
+    const data: string = await res.json();
     notificationsArray.push({ message: data });
     return data;
 };
@@ -347,7 +351,7 @@ export const createProductReview = async (
         method: "post",
         body: JSON.stringify(reviewData),
     });
-    const data = await res.json();
+    const data: { message: string } = await res.json();
     notificationsArray.push({ message: data.message });
     return data;
 };

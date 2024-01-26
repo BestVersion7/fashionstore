@@ -1,13 +1,13 @@
 import { CartQUpdate } from "./CartQUpdate";
-import { CartType, ProductType } from "../types";
 import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
 import { formatCurrency, formatProductNameToUrl } from "../utils/format";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";
 import Link from "next/link";
+import { CartType } from "../types";
 
 export const CartProducts = async (props: CartType) => {
-    const productInfo: ProductType = await getProductById(props.product_id);
+    const productInfo = await getProductById(props.product_id);
     const productAvailability = await getProductAvailableQuantity(
         props.product_id
     );
@@ -37,11 +37,13 @@ export const CartProducts = async (props: CartType) => {
                         <div className=" ">
                             <CartQUpdate {...props} />
                             <CartDeleteBtn product_id={props.product_id} />
-                            {props.quantity > productAvailability && (
+                            {props.quantity >
+                                productAvailability.available_quantity && (
                                 <p className="text-sm text-red-500">
                                     The quantity in your cart is greater than in
-                                    stock {productAvailability}. Please update
-                                    your cart.
+                                    stock{" "}
+                                    {productAvailability.available_quantity}.
+                                    Please update your cart.
                                 </p>
                             )}
                         </div>
