@@ -98,6 +98,17 @@ export const updateCart = async (
     notificationsArray.push({ message: data });
     return data;
 };
+export const updateCartPurchased = async (
+    cookieId: string | undefined,
+    cart: Pick<CartType, "purchased">
+) => {
+    const res = await fetch(`${cartOrigin}/purchased?cookie_id=${cookieId}`, {
+        method: "PUT",
+        body: JSON.stringify(cart),
+    });
+    const data = await res.json();
+    return data;
+};
 
 // export const updateCartPurchased = async (
 //     cookieId: string | undefined,
@@ -198,7 +209,7 @@ export const createEmail = async (props: EmailProps) => {
 export const createOrder = async (
     orderData: Pick<
         OrderType,
-        "order_total" | "email" | "order_items" | "payment_intent"
+        "order_total" | "email" | "cookie_id" | "payment_intent"
     >
 ) => {
     const res = await fetch(orderOrigin, {

@@ -18,7 +18,7 @@ export default function Home() {
                 </Link>
             </section>
 
-            <div className="grid lg:grid-cols-2 ">
+            <section className="grid lg:grid-cols-2 ">
                 <div className="relative h-[550px] ">
                     <Image
                         className="object-cover"
@@ -105,9 +105,13 @@ export default function Home() {
                         />
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div className="flex flex-col text-center items-center gap-10 py-8">
+            <section className="h-44 bg-red-50">
+                <h3>New & Hot</h3>
+            </section>
+
+            <section className="flex flex-col text-center items-center gap-10 py-8">
                 <h2 className="text-2xl tracking-wide font-extrabold ">
                     Live Beautifully
                 </h2>
@@ -124,7 +128,7 @@ export default function Home() {
                         description="We accept most returns on unworn items in original packaging."
                     />
                 </div>
-            </div>
+            </section>
 
             <section className="bg-orange-200 gap-4 text-center py-10 flex flex-col items-center">
                 <p className="">We{`'`}d love to hear what you think!</p>

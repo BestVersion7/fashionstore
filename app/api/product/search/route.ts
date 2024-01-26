@@ -12,10 +12,7 @@ export async function GET(req: NextRequest) {
         if (productCategtory) {
             data = await prisma.productInfo.findMany({
                 where: {
-                    metadata: {
-                        path: ["category"],
-                        equals: productCategtory,
-                    },
+                    category: productCategtory,
                 },
             });
         } else if (productName) {

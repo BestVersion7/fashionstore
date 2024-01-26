@@ -10,6 +10,7 @@ import {
 } from "../utils/apiCalls";
 import { StockLabel } from "./StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
+import Link from "next/link";
 
 export const Product = async (props: ProductType) => {
     // get the prices and availability
@@ -22,13 +23,18 @@ export const Product = async (props: ProductType) => {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article className="rounded-md border shadow-sm  my-3 ">
+        <article className="rounded-md border shadow-sm  my-3 flex flex-col">
             {/* only show when out of stock */}
             {/* <div className="absolute w-full top-0 z-10">
                 <StockLabel quantity={availableQuantity} />
             </div> */}
 
-            <div className="relative h-56 ">
+            <Link
+                href={`/${formatProductNameToUrl(props.name)}/${
+                    props.product_id
+                }`}
+                className="relative h-56 "
+            >
                 <Image
                     // object-top
                     className="object-cover "
@@ -38,11 +44,18 @@ export const Product = async (props: ProductType) => {
                     alt={props.name}
                     priority
                 />
-            </div>
+            </Link>
             <div className=" px-4 py-1 flex flex-col gap-1">
-                <h2 className="text-lg font-medium ">{props.name}</h2>
+                <Link
+                    href={`/${formatProductNameToUrl(props.name)}/${
+                        props.product_id
+                    }`}
+                    className="text-lg font-medium hover:text-violet-600"
+                >
+                    {props.name}
+                </Link>
 
-                <p className="">{props.description}</p>
+                {/* <p className="">{props.description}</p> */}
                 <p className="text-2xl  font-medium tracking-wide">
                     {formatCurrency(prices.unit_amount)}
                 </p>

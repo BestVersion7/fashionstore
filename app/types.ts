@@ -5,9 +5,7 @@ export type ProductType = {
     description: string;
     images: string[];
     name: string;
-    metadata: {
-        category: "tops" | "dress";
-    };
+    category: "tops" | "dress";
     updated_at: string;
 };
 
@@ -45,6 +43,7 @@ export type CartType = {
     price_id: string;
     product_id: string;
     product_price: number;
+    purchased: boolean;
 };
 
 export type HomeProductCardProps = {
@@ -70,8 +69,8 @@ export type OrderType = {
     created_at: string;
     order_total: number;
     email: string;
-    order_items: Pick<CartType, "product_id" | "product_price" | "quantity">[];
     payment_intent: string;
+    cookie_id: string;
 };
 
 export type ProductAvailabilityType = {

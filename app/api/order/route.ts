@@ -37,8 +37,7 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const { order_total, order_items, payment_intent, email } =
-        await req.json();
+    const { order_total, cookie_id, payment_intent, email } = await req.json();
 
     try {
         // check the quantity to real time availability
@@ -70,7 +69,7 @@ export async function POST(req: NextRequest) {
             data: {
                 order_total,
                 email,
-                order_items,
+                cookie_id,
                 payment_intent,
             },
         });

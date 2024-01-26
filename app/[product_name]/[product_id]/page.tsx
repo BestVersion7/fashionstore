@@ -18,6 +18,7 @@ import { FaStar } from "react-icons/fa";
 import { ProductReviewForm } from "@/app/components/ProductReviewForm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
+import { SearchInput } from "@/app/components/SearchInput";
 
 export async function generateMetadata({
     params,
@@ -56,6 +57,12 @@ export default async function CategoryShop({
 
     return (
         <main>
+            <h2 className="text-2xl mb-3 font-semibold  text-orange-600">
+                Browse our collection
+            </h2>
+            <div className="border border-solid border-black bg-white py-1">
+                <SearchInput />
+            </div>
             <ProductFilter />
 
             <div className="rounded-md  my-3 flex gap-2">
@@ -80,7 +87,7 @@ export default async function CategoryShop({
                     <ProductReviewStar
                         count={reviewCount}
                         average={reviewRating}
-                        link={`/shop/${product.metadata.category}/${product.product_id}`}
+                        // link={`/shop/${product.category}/${product.product_id}`}
                     />
                     {availableQuantity ? (
                         <CartQPost

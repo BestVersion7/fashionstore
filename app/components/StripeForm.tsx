@@ -18,6 +18,7 @@ import {
     createOrder,
     getProductAvailableQuantity,
     updateProductAvailableQuantity,
+    updateCartPurchased,
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
@@ -94,10 +95,15 @@ export function StripeForm(props: {
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
                 // create the order
                 await createOrder({
-                    order_items: orderItems,
+                    cookie_id: getCookie("cookiecart") || "",
                     order_total: props.totalAmount,
                     payment_intent: paymentIntent.id,
                     email: `${emailRef.current?.value}`,
+                });
+
+                // change cart to purchased (this is for checking total sales)
+                await updateCartPurchased(getCookie("cookiecart"), {
+                    purchased: true,
                 });
 
                 // update  availability
