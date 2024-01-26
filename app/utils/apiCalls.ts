@@ -206,6 +206,7 @@ export const createOrder = async (
         body: JSON.stringify(orderData),
     });
     const data = await res.json();
+    console.log(data);
     notificationsArray.push({ message: data });
     return data;
 };

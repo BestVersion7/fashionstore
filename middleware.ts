@@ -12,7 +12,8 @@ import { getToken } from "next-auth/jwt";
 export async function middleware(req: NextRequest) {
     const apiKey = req.headers.get("authorization");
     if (
-        req.nextUrl.pathname.startsWith("/api/order") ||
+        (req.nextUrl.pathname.startsWith("/api/order") &&
+            req.method === "GET") ||
         (req.nextUrl.pathname.startsWith("/api/user") && req.method === "GET")
     ) {
         if (apiKey !== process.env.API_KEY) {

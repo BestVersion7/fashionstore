@@ -54,8 +54,6 @@ export default async function CategoryShop({
     const user = await getServerSession(authOptions);
     const email = user?.user?.email;
 
-    console.log(formatUrlToProductName(params.product_name));
-
     return (
         <main>
             <ProductFilter />
