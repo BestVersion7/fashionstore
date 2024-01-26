@@ -2,9 +2,8 @@ import { getUserNameByEmail } from "../utils/apiCalls";
 import { ProductReviewType } from "../types";
 import { ReviewStar } from "./ReviewStar";
 
-export const ProductReview = (props: ProductReviewType) => {
-    const userName = getUserNameByEmail(props.user_email);
-    // console.log(typeof props.created_at);
+export const ProductReview = async (props: ProductReviewType) => {
+    const userName = await getUserNameByEmail(props.user_email);
 
     return (
         <article className=" px-2 border border-gray-400  py-2 ">

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 import { createProductReview } from "../utils/apiCalls";
 import { useRouter } from "next/navigation";
 
@@ -29,10 +29,11 @@ export const ProductReviewForm = (props: {
     return (
         <form onSubmit={handleSubmitReview} className="grid gap-2">
             <div>
-                <h3>Overall Rating:</h3>
-                <div className="flex items-center gap-1">
+                <h3>Product Rating:</h3>
+                <div className="flex items-center gap-1 ">
                     {[1, 2, 3, 4, 5].map((item) => (
                         <button
+                            className="relative"
                             title={`${item} star`}
                             type="button"
                             key={item}
@@ -41,18 +42,24 @@ export const ProductReviewForm = (props: {
                                 setReviewStar(Number(e.currentTarget.value))
                             }
                         >
-                            <span className="text-orange-400 hover:text-orange-600 ">
-                                <FaRegStar />
-                            </span>
+                            <FaRegStar
+                                className="text-orange-400 hover:text-orange-600 
+                                "
+                            />
+                            <FaStar
+                                className={`${
+                                    item <= reviewStar ? "block" : "hidden"
+                                } absolute text-sm top-[1px] left-[1px] text-orange-400`}
+                            />
                         </button>
                     ))}
-                    {reviewStar < 1 ? (
+                    {/* {reviewStar < 1 ? (
                         ""
                     ) : (
-                        <span className="text-lg text-blue-600 font-bold">
+                        <span className="text-lg text-orange-500 font-bold">
                             {reviewStar}
                         </span>
-                    )}
+                    )} */}
                 </div>
             </div>
 

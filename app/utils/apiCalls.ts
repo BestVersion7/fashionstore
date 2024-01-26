@@ -251,7 +251,6 @@ export const updateProductAvailableQuantity = async (
         }
     );
     const data = await res.json();
-    notificationsArray.push({ message: data });
     return data;
 };
 
