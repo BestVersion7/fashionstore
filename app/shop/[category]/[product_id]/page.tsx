@@ -10,8 +10,8 @@ import {
 } from "@/app/utils/apiCalls";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/StockLabel";
-import { formatCurrency } from "@/app/utils/formatCurrency";
-import { ReviewStar } from "@/app/components/ReviewStar";
+import { formatCurrency } from "@/app/utils/format";
+import { ProductReviewStar } from "@/app/components/ProductReviewStar";
 import { CartQPost } from "@/app/components/CartQPost";
 import { ProductReview } from "@/app/components/ProductReview";
 import { FaStar } from "react-icons/fa";
@@ -93,7 +93,7 @@ export default async function CategoryShop({
                     <p className="text-2xl  font-medium tracking-wide">
                         {formatCurrency(prices.unit_amount)}
                     </p>
-                    <ReviewStar
+                    <ProductReviewStar
                         count={reviewCount}
                         average={reviewRating}
                         link={`/shop/${product.metadata.category}/${product.product_id}`}

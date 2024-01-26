@@ -1,7 +1,7 @@
 import { FaRegStar, FaStar, FaStarHalfAlt } from "react-icons/fa";
 import Link from "next/link";
 
-export const ReviewStar = (props: {
+export const ProductReviewStar = (props: {
     count: number;
     average: number;
     link?: string;

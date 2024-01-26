@@ -21,7 +21,7 @@ import {
 } from "../utils/apiCalls";
 import { deleteCartCookie } from "../utils/apiCalls";
 import { getCookie } from "cookies-next";
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../utils/format";
 import { CartType } from "../types";
 
 export function StripeForm(props: {

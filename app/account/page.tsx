@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
+import { AccountForm } from "../components/AccountForm";
+import { getUserInfoByEmail } from "../utils/apiCalls";
+import { UserType } from "../types";
 
 export const metadata = {
     title: "Account",
@@ -9,6 +12,7 @@ export const metadata = {
 
 export default async function AccountPage() {
     const session = await getServerSession(authOptions);
+    const user: UserType = await getUserInfoByEmail(session?.user?.email || "");
 
     return (
         <main>
@@ -32,6 +36,13 @@ export default async function AccountPage() {
                     Shop
                 </Link>
             </p>
+            <br />
+            <section className="">
+                <h2 className="text-violet-500 font-bold">
+                    Update your Account Information
+                </h2>
+                <AccountForm {...user} />
+            </section>
         </main>
     );
 }

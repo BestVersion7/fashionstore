@@ -1,1 +1,1 @@
-https://afashionstore.vercel.app/
+https://afashionstore.vercel.app

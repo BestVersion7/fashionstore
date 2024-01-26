@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { cookies } from "next/headers";
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../utils/format";
 import { getCartByCookie } from "../utils/apiCalls";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";

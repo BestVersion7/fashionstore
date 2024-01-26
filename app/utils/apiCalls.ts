@@ -1,4 +1,10 @@
-import { CartType, EmailProps, OrderType, ProductReviewType } from "../types";
+import {
+    CartType,
+    EmailProps,
+    OrderType,
+    ProductReviewType,
+    UserType,
+} from "../types";
 import { BASE_URL } from "../lib/constants";
 import { notificationsArray } from "./notifications";
 
@@ -291,13 +297,30 @@ export const getProductReviews = async (product_id: string) => {
     return data;
 };
 
-export const getUserNameByEmail = async (email: string) => {
+export const getUserInfoByEmail = async (email: string) => {
     const res = await fetch(`${userOrigin}?email=${email}`, {
-        next: {
-            revalidate: revalidateTime,
+        // next: {
+        //     revalidate: revalidateTime,
+        // },
+        headers: {
+            authorization: `${process.env.API_KEY}`,
         },
+        cache: "no-cache",
     });
     const data = await res.json();
+    return data;
+};
+
+export const updateUserNameByEmail = async (
+    email: string,
+    body: Pick<UserType, "name">
+) => {
+    const res = await fetch(`${userOrigin}?email=${email}`, {
+        method: "put",
+        body: JSON.stringify(body),
+    });
+    const data = await res.json();
+    notificationsArray.push({ message: data });
     return data;
 };
 

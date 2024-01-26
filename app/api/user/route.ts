@@ -6,13 +6,10 @@ export async function GET(req: NextRequest) {
     try {
         const data = await prisma.user.findUnique({
             where: { email: `${email}` },
-            select: {
-                name: true,
-            },
         });
 
         if (email) {
-            return NextResponse.json(data?.name);
+            return NextResponse.json(data);
         } else {
             return NextResponse.json("No Id");
         }
@@ -35,6 +32,30 @@ export async function POST(req: NextRequest) {
             },
         });
         return NextResponse.json("user created", { status: 201 });
+    } catch (err) {
+        return NextResponse.json("err", { status: 500 });
+    }
+}
+
+export async function PUT(req: NextRequest) {
+    const email = req.nextUrl.searchParams.get("email");
+    if (!email) {
+        return NextResponse.json("no email", { status: 401 });
+    }
+    const { name } = await req.json();
+    if (name === "") {
+        return NextResponse.json("Please enter a name.", { status: 400 });
+    }
+    try {
+        await prisma.user.update({
+            data: {
+                name,
+            },
+            where: {
+                email,
+            },
+        });
+        return NextResponse.json(`Your name has been updated.`);
     } catch (err) {
         return NextResponse.json("err", { status: 500 });
     }

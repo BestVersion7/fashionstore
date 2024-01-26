@@ -1,6 +1,6 @@
 import { OrderType, PaymentIntentType } from "../types";
 import { getPaymentIntent } from "../utils/apiCalls";
-import { formatCurrency } from "../utils/formatCurrency";
+import { formatCurrency } from "../utils/format";
 import { CartProductsV2 } from "./CartProductsV2";
 
 export const OrderPaper = async (props: OrderType) => {

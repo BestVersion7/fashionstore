@@ -15,12 +15,17 @@ export const ProductReviewForm = (props: {
     const handleSubmitReview = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        await createProductReview(props.product_id, {
-            product_id: props.product_id,
-            review_message: reviewMsg,
-            user_email: props.email,
-            review_star: reviewStar,
-        });
+        try {
+            const dad = await createProductReview(props.product_id, {
+                product_id: props.product_id,
+                review_message: reviewMsg,
+                user_email: props.email,
+                review_star: reviewStar,
+            });
+            console.log(dad);
+        } catch (err) {
+            alert(err);
+        }
 
         setReviewStar(0);
         router.refresh();
@@ -67,12 +72,12 @@ export const ProductReviewForm = (props: {
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     setReviewMsg(e.target.value)
                 }
-                value={reviewMsg}
+                defaultValue={reviewMsg}
                 placeholder="What's most important to know?"
                 name="reviewform"
                 id="reviewform"
-                rows={4}
-                className="border border-black"
+                rows={3}
+                className="border border-black px-2"
             />
 
             <button
