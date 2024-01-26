@@ -38,13 +38,16 @@ export async function POST(req: NextRequest) {
 
     try {
         if (!product_id) {
-            return NextResponse.json("no id");
+            return NextResponse.json({ message: "No User id." });
         }
 
         if (review_star === 0) {
-            return NextResponse.json("Please select review rating.", {
-                status: 400,
-            });
+            return NextResponse.json(
+                { message: "Please select review rating.", status: 400 },
+                {
+                    status: 400,
+                }
+            );
         }
 
         await prisma.productReviewInfo.create({
@@ -56,7 +59,10 @@ export async function POST(req: NextRequest) {
             },
         });
 
-        return NextResponse.json("Review posted.", { status: 201 });
+        return NextResponse.json(
+            { message: "Review posted." },
+            { status: 201 }
+        );
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

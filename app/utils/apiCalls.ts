@@ -336,6 +336,6 @@ export const createProductReview = async (
         body: JSON.stringify(reviewData),
     });
     const data = await res.json();
-    notificationsArray.push({ message: data });
+    notificationsArray.push({ message: data.message });
     return data;
 };

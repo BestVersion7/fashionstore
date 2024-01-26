@@ -15,20 +15,20 @@ export const ProductReviewForm = (props: {
     const handleSubmitReview = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        try {
-            const dad = await createProductReview(props.product_id, {
-                product_id: props.product_id,
-                review_message: reviewMsg,
-                user_email: props.email,
-                review_star: reviewStar,
-            });
-            console.log(dad);
-        } catch (err) {
-            alert(err);
-        }
+        const data = await createProductReview(props.product_id, {
+            product_id: props.product_id,
+            review_message: reviewMsg,
+            user_email: props.email,
+            review_star: reviewStar,
+        });
 
-        setReviewStar(0);
-        router.refresh();
+        if (data.status === 400) {
+            router.refresh();
+        } else {
+            setReviewMsg("");
+            setReviewStar(0);
+            router.refresh();
+        }
     };
 
     return (
@@ -72,7 +72,7 @@ export const ProductReviewForm = (props: {
                 onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
                     setReviewMsg(e.target.value)
                 }
-                defaultValue={reviewMsg}
+                value={reviewMsg}
                 placeholder="What's most important to know?"
                 name="reviewform"
                 id="reviewform"
