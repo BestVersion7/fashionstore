@@ -33,7 +33,7 @@ export const ProductPopularCard = async (props: {
     return (
         <article
             id={`hot-${props.index}`}
-            className=" border border-black pb-2 flex flex-col bg-green-100"
+            className=" border border-black pb-2 flex flex-col bg-green-100 "
         >
             <Link
                 href={`/${formatProductNameToUrl(productInfo.name)}/${
@@ -61,7 +61,7 @@ export const ProductPopularCard = async (props: {
                     href={`/${formatProductNameToUrl(productInfo.name)}/${
                         props.product_id
                     }`}
-                    className=" font-medium hover:text-violet-600"
+                    className=" hover:text-violet-600 hidden sm:block"
                 >
                     {productInfo.name}
                 </Link>

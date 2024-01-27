@@ -6,6 +6,7 @@ import {
     getProductReviewCount,
     getPriceById,
     getProductById,
+    getPopularProducts,
 } from "@/app/utils/apiCalls";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/StockLabel";
@@ -18,6 +19,9 @@ import { ProductReviewForm } from "@/app/components/ProductReviewForm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { SearchInput } from "@/app/components/SearchInput";
+import { ProductPopularCard } from "@/app/components/ProductPopularCard";
+import { GiClothes } from "react-icons/gi";
+import { SignInBtn } from "@/app/components/SignInBtn";
 
 export async function generateMetadata({
     params,
@@ -52,6 +56,9 @@ export default async function CategoryShop({
     const user = await getServerSession(authOptions);
     const email = user?.user?.email;
 
+    // popular products
+    const popularProducts = await getPopularProducts();
+
     return (
         <main>
             <h2 className="text-2xl mb-3 font-semibold  text-orange-600">
@@ -62,10 +69,10 @@ export default async function CategoryShop({
             </div>
             <ProductFilter />
 
-            <div className="rounded-md my-3 flex">
-                <div className="relative w-40">
+            <div className="px-2 my-3 grid grid-rows-[200px,auto] gap-2 sm:flex">
+                <div className="relative sm:w-40">
                     <Image
-                        className="object-cover object-center"
+                        className="object-contain object-left sm:object-top"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         src={product.images[0]}
@@ -73,7 +80,7 @@ export default async function CategoryShop({
                         priority
                     />
                 </div>
-                <div className=" px-4  flex flex-col gap-1">
+                <div className="  flex flex-col gap-1">
                     <h2 className="leading-4 text-lg font-medium ">
                         {product.name}
                     </h2>
@@ -84,7 +91,7 @@ export default async function CategoryShop({
                     <ProductReviewStar
                         count={reviewCount}
                         average={reviewRating}
-                        // link={`/shop/${product.category}/${product.product_id}`}
+                        link={`/${params.product_name}/${params.product_id}`}
                     />
                     {availableQuantity.available_quantity > 0 ? (
                         <CartQPost
@@ -104,22 +111,26 @@ export default async function CategoryShop({
                 </div>
             </div>
 
+            {/* popular */}
+            <section className="  p-2">
+                <div className="flex items-center text-red-600 ">
+                    <GiClothes className=" text-2xl" />
+                    <h3 className="text-2xl font-bold ">New & Hot</h3>
+                    <GiClothes className=" text-2xl" />
+                </div>
+                <div className=" grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 overflow-hidden">
+                    {popularProducts.map((item, index) => (
+                        <ProductPopularCard
+                            key={index}
+                            {...item}
+                            index={index}
+                        />
+                    ))}
+                </div>
+            </section>
+
             {/* Reviews */}
             <section className="max-w-lg">
-                {!email ? (
-                    <p>Please create an account to write a review</p>
-                ) : (
-                    <>
-                        <h3 className="text-xl font-bold">
-                            Please leave a review:
-                        </h3>
-                        <ProductReviewForm
-                            email={email}
-                            product_id={params.product_id}
-                        />
-                    </>
-                )}
-
                 <div>
                     <p className="flex gap-1 text-xl font-bold">
                         <span>Average Rating: </span>
@@ -133,7 +144,28 @@ export default async function CategoryShop({
                         </span>
                     </p>
                 </div>
-                <h2>Reviews ({reviewCount}):</h2>
+
+                {!email ? (
+                    <>
+                        <textarea
+                            placeholder="Please sign in to comment."
+                            rows={1}
+                            className="border border-black px-2 w-full"
+                            disabled={true}
+                        />
+                        <SignInBtn />
+                    </>
+                ) : (
+                    <>
+                        <ProductReviewForm
+                            email={email}
+                            product_id={params.product_id}
+                        />
+                    </>
+                )}
+                <h2 className="text-lg font-semibold">
+                    Reviews ({reviewCount}):
+                </h2>
                 <div>
                     {reviews.map((item, index) => (
                         <ProductReview key={index} {...item} />
