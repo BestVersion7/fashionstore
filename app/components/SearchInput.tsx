@@ -1,7 +1,7 @@
 "use client";
 import { IoSearchOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
-import { getProductBySearchName } from "../utils/apiCalls";
+import { getProductBySearchName } from "../utils/apiCallsClient";
 import Link from "next/link";
 import { ProductType } from "../types";
 import { useRouter } from "next/navigation";

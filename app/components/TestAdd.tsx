@@ -1,6 +1,5 @@
 "use client";
-import { getCookie } from "cookies-next";
-import { createCart } from "../utils/apiCalls";
+import { createCart } from "../utils/apiCallsClient";
 import { useRouter } from "next/navigation";
 
 export const TestAdd = () => {
@@ -42,10 +41,10 @@ export const TestAdd = () => {
     const router = useRouter();
     const handleAddCart = async () => {
         for (let i = 0; i < 7; i++) {
-            await createCart(getCookie("cookiecart"), {
+            await createCart({
                 product_id: allProds[i].product_id,
                 price_id: allProds[i].price_id,
-                quantity: i + 1,
+                quantity: `${i + 1}`,
             });
         }
 

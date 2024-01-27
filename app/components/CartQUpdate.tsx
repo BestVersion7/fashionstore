@@ -1,15 +1,14 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { updateCart } from "../utils/apiCalls";
+import { updateCart } from "../utils/apiCallsClient";
 import { CartType } from "../types";
-import { getCookie } from "cookies-next";
 import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
 
 export const CartQUpdate = (props: CartType) => {
-    const [inputQuantity, setInputQuantity] = useState(props.quantity);
+    const [inputQuantity, setInputQuantity] = useState(Number(props.quantity));
     const [showInput, setShowInput] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
 
@@ -29,9 +28,9 @@ export const CartQUpdate = (props: CartType) => {
     // this is for the input form
     const handleFormUpdateQuantity = async (e: React.FormEvent) => {
         e.preventDefault();
-        await updateCart(getCookie("cookiecart"), {
+        await updateCart({
             product_id: props.product_id,
-            quantity: inputQuantity,
+            quantity: `${inputQuantity}`,
         });
 
         router.refresh();
@@ -45,9 +44,9 @@ export const CartQUpdate = (props: CartType) => {
             setInputQuantity(e.currentTarget.value);
 
             setShowDropdown(() => false);
-            await updateCart(getCookie("cookiecart"), {
+            await updateCart({
                 product_id: props.product_id,
-                quantity: Number(e.currentTarget.value),
+                quantity: `${e.currentTarget.value}`,
             });
 
             router.refresh();
@@ -69,7 +68,7 @@ export const CartQUpdate = (props: CartType) => {
             {/* dropdown list */}
             {showDropdown && (
                 <div className="absolute top-0 z-10" ref={dropdownRef}>
-                    {props.quantity > 5 ? (
+                    {Number(props.quantity) > 5 ? (
                         <form
                             onSubmit={handleFormUpdateQuantity}
                             className="flex gap-2"

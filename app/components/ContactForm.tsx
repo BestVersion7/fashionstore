@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { createEmail } from "../utils/apiCalls";
+import { createEmail } from "../utils/apiCallsClient";
 import { useOnClickOutside } from "../utils/customHooks";
 
 export const ContactForm = () => {

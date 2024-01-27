@@ -1,11 +1,8 @@
-import { getCartTotal } from "../utils/apiCalls";
-import { cookies } from "next/headers";
+import { getCartTotal } from "../utils/apiCallsServer";
 import { LuShoppingCart } from "react-icons/lu";
 
 export async function CartTotal() {
-    const totalQuantity = await getCartTotal(
-        cookies().get("cookiecart")?.value
-    );
+    const totalQuantity = await getCartTotal();
     let cartTotal = totalQuantity;
 
     if (typeof totalQuantity === "object") {

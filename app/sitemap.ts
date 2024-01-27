@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getAllProducts } from "./utils/apiCalls";
+import { getAllProducts } from "./utils/apiCallsClient";
 import { BASE_URL } from "./lib/constants";
 import { ProductType } from "./types";
 

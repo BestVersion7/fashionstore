@@ -1,4 +1,4 @@
-import { getProductBySearchCategory } from "@/app/utils/apiCalls";
+import { getProductBySearchCategory } from "@/app/utils/apiCallsServer";
 import { ProductType } from "@/app/types";
 import { SearchInput } from "@/app/components/SearchInput";
 import { ProductFilter } from "@/app/components/ProductFilter";
@@ -41,9 +41,7 @@ export default async function CategoryShop({
 }: {
     params: { category: string };
 }) {
-    const products: ProductType[] = await getProductBySearchCategory(
-        params.category
-    );
+    const products = await getProductBySearchCategory(params.category);
 
     return (
         <>

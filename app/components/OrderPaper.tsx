@@ -3,7 +3,7 @@ import {
     getPaymentIntent,
     getCartByCookie,
     getCartTotal,
-} from "../utils/apiCalls";
+} from "../utils/apiCallsServer";
 import { formatCurrency } from "../utils/format";
 import { CartProductsV2 } from "./CartProductsV2";
 
@@ -12,8 +12,8 @@ export const OrderPaper = async (props: OrderType) => {
         props.payment_intent
     );
 
-    const orderItems = await getCartByCookie(props.cookie_id);
-    const totalQuantity = await getCartTotal(props.cookie_id);
+    const orderItems = await getCartByCookie();
+    const totalQuantity = await getCartTotal();
 
     return (
         <article className="border-2 border-slate-600 py-2 px-3 bg-orange-50 w-[80vw] md:w-[600px]">

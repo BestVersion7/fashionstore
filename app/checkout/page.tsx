@@ -1,10 +1,10 @@
 import { Checkout } from "../components/Checkout";
-import { getCartByCookie } from "../utils/apiCalls";
+import { getCartByCookie } from "../utils/apiCallsClient";
 import { cookies } from "next/headers";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { FaLock } from "react-icons/fa";
-import { createOrFindPaymentIntent } from "../utils/apiCalls";
+import { createOrFindPaymentIntent } from "../utils/apiCallsClient";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

@@ -1,7 +1,6 @@
 import { Product } from "../components/Product";
 import { SearchInput } from "../components/SearchInput";
-import { ProductType } from "../types";
-import { getAllProducts } from "../utils/apiCalls";
+import { getAllProducts } from "../utils/apiCallsServer";
 import { ProductFilter } from "../components/ProductFilter";
 import { Metadata } from "next";
 import { ProductMapped } from "../components/ProductMapped";
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Shop() {
-    const products: ProductType[] = await getAllProducts();
+    const products = await getAllProducts();
 
     return (
         <>

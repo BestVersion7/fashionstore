@@ -18,8 +18,8 @@ import {
     createOrder,
     getProductAvailableQuantity,
     updateProductAvailableQuantity,
-} from "../utils/apiCalls";
-import { deleteCartCookie } from "../utils/apiCalls";
+} from "../utils/apiCallsClient";
+import { deleteCartCookie } from "../utils/apiCallsClient";
 import { getCookie } from "cookies-next";
 import { formatCurrency } from "../utils/format";
 import { CartType } from "../types";

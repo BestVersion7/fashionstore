@@ -1,5 +1,8 @@
 import { CartQUpdate } from "./CartQUpdate";
-import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
+import {
+    getProductAvailableQuantity,
+    getProductById,
+} from "../utils/apiCallsClient";
 import { formatCurrency, formatProductNameToUrl } from "../utils/format";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";

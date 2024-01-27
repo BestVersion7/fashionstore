@@ -1,7 +1,7 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllProducts } from "./utils/apiCalls";
+import { getAllProducts } from "./utils/apiCallsServer";
 import { ProductType } from "./types";
 import { BestSellerCard } from "./components/BestSellerCard";
 

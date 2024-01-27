@@ -1,5 +1,5 @@
 import { CartType } from "../types";
-import { getProductById } from "../utils/apiCalls";
+import { getProductById } from "../utils/apiCallsServer";
 import { formatCurrency } from "../utils/format";
 import Image from "next/image";
 
@@ -32,11 +32,14 @@ export const CartProductsV2 = async (
                     <span>Quantity:</span>
                     <span>{props.quantity}</span>
                     <span>Price:</span>
-                    <span> {formatCurrency(Number(props.product_price))}</span>
+                    <span> {formatCurrency(props.product_price)}</span>
                     <span>Subtotal:</span>
                     <span>
                         {formatCurrency(
-                            Number(props.product_price) * props.quantity
+                            `${
+                                Number(props.product_price) *
+                                Number(props.quantity)
+                            }`
                         )}
                     </span>
                 </div>

@@ -1,5 +1,5 @@
 "use client";
-import { updateUserNameByEmail } from "../utils/apiCalls";
+import { updateUserNameByEmail } from "../utils/apiCallsClient";
 import { useRef, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { UserType } from "../types";

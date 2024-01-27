@@ -1,4 +1,4 @@
-import { getProductById } from "@/app/utils/apiCalls";
+import { getProductById } from "@/app/utils/apiCallsClient";
 import { ProductType, PriceType, ProductReviewType } from "@/app/types";
 import { ProductFilter } from "@/app/components/ProductFilter";
 import {
@@ -7,7 +7,7 @@ import {
     getProductRatingAverage,
     getProductReviewCount,
     getPriceById,
-} from "@/app/utils/apiCalls";
+} from "@/app/utils/apiCallsClient";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/StockLabel";
 import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";

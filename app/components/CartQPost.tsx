@@ -3,7 +3,7 @@
 import { useState, useRef } from "react";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { createCart, createCartCookie } from "../utils/apiCalls";
+import { createCart, createCartCookie } from "../utils/apiCallsClient";
 import { CartType } from "../types";
 import { FaCheck, FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
@@ -33,10 +33,10 @@ export const CartQPost = (
             console.log("create cookie");
         }
 
-        await createCart(getCookie("cookiecart"), {
+        await createCart({
             product_id: props.product_id,
             price_id: props.price_id,
-            quantity,
+            quantity: `${quantity}`,
         });
 
         router.refresh();

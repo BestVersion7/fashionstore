@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 import { AccountForm } from "../components/AccountForm";
-import { getUserInfoByEmail } from "../utils/apiCalls";
+import { getUserInfoByEmail } from "../utils/apiCallsClient";
 import { UserType } from "../types";
 
 export const metadata = {

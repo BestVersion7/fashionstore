@@ -1,7 +1,6 @@
 "use client";
 import { CartType } from "../types";
-import { deleteCartItemByProductId } from "../utils/apiCalls";
-import { getCookie } from "cookies-next";
+import { deleteCartItemByProductId } from "../utils/apiCallsClient";
 import { useRouter } from "next/navigation";
 
 export function CartDeleteBtn(props: Pick<CartType, "product_id">) {
@@ -9,10 +8,7 @@ export function CartDeleteBtn(props: Pick<CartType, "product_id">) {
 
     const handleDelete = async (e: React.FormEvent) => {
         e.preventDefault();
-        await deleteCartItemByProductId(
-            getCookie("cookiecart"),
-            props.product_id
-        );
+        await deleteCartItemByProductId(props.product_id);
         router.refresh();
     };
 
