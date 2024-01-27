@@ -6,6 +6,7 @@ import {
     getProductRatingAverage,
     getProductById,
     getProductAvailableQuantity,
+    getQuantitySold,
 } from "../utils/apiCalls";
 import { StockLabel } from "./StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
@@ -21,6 +22,9 @@ export const ProductPopularCard = async (props: {
     const productInfo = await getProductById(props.product_id);
     const prices = await getPriceById(productInfo.default_price);
     const availability = await getProductAvailableQuantity(props.product_id);
+
+    // the quantity sold no cache so run again
+    const quantitySold = await getQuantitySold(props.product_id);
 
     // get reviews
     const reviewCount = await getProductReviewCount(props.product_id);
@@ -50,7 +54,7 @@ export const ProductPopularCard = async (props: {
             <div className="px-1 pt-1 flex flex-col gap-1">
                 <p className="flex italic bg-orange-200 font-semibold rounded-lg items-center justify-center">
                     <FaFire className="text-red-600" />
-                    <span> {props._sum.quantity} sold past month</span>
+                    <span> {quantitySold} sold past month</span>
                     <FaFire className="text-red-600" />
                 </p>
                 <Link
