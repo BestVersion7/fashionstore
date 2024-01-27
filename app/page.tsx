@@ -1,15 +1,13 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllProducts, getProductAvailableQuantity } from "./utils/apiCalls";
-import { BestSellerCard } from "./components/BestSellerCard";
+import { getPopularProducts } from "./utils/apiCalls";
+import { ProductPopularCard } from "./components/ProductPopularCard";
+import { GiClothes } from "react-icons/gi";
 
 export default async function Home() {
-    // change  this in future
-    const hotProducts = await getProductAvailableQuantity(
-        "prod_PI4yezOWxk8uzz"
-    );
-    // console.log(hotProducts);
+    const popularProducts = await getPopularProducts();
+
     return (
         <main className="px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
@@ -114,18 +112,24 @@ export default async function Home() {
                 </div>
             </section>
 
-            <section className=" bg-red-50">
-                <h3>New & Hot</h3>
-                <div className="grid grid-cols-5 overflow-hidden">
-                    {/* {hotProducts.map((item, index) => (
-                        <div key={index}>
-                            <BestSellerCard {...item} />
-                        </div>
-                    ))} */}
+            <section className="  p-2">
+                <div className="flex items-center text-red-600 ">
+                    <GiClothes className=" text-2xl" />
+                    <h3 className="text-2xl font-bold ">New & Hot</h3>
+                    <GiClothes className=" text-2xl" />
+                </div>
+                <div className=" grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 overflow-hidden">
+                    {popularProducts.map((item, index) => (
+                        <ProductPopularCard
+                            key={index}
+                            {...item}
+                            index={index}
+                        />
+                    ))}
                 </div>
             </section>
 
-            <section className="flex flex-col text-center items-center gap-10 py-8">
+            <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">
                 <h2 className="text-2xl tracking-wide font-extrabold ">
                     Live Beautifully
                 </h2>

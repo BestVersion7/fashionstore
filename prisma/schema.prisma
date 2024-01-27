@@ -16,6 +16,7 @@ model CartInfo {
   product_id    String?
   product_price Decimal      @db.Decimal
   cookie_id     String       @db.Uuid
+  purchased     Boolean      @default(false)
   CookieInfo    CookieInfo   @relation(fields: [cookie_id], references: [cookie_id], onDelete: Cascade)
   ProductInfo   ProductInfo? @relation(fields: [product_id], references: [product_id], onDelete: Restrict)
 }
@@ -221,7 +222,6 @@ model ProductAvailabilityInfo {
   product_id         String      @id
   updated_at         DateTime    @default(now()) @db.Timestamptz(6)
   available_quantity Decimal     @default(0) @db.Decimal
-  quantity_sold      Decimal     @default(0) @db.Decimal
   ProductInfo        ProductInfo @relation(fields: [product_id], references: [product_id])
 }
 

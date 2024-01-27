@@ -12,15 +12,10 @@ export async function GET(req: NextRequest) {
                     product_id: productId,
                 },
             });
+            return NextResponse.json(data);
         } else {
-            data = await prisma.productAvailabilityInfo.findMany({
-                take: 5,
-                orderBy: {
-                    quantity_sold: "desc",
-                },
-            });
+            return NextResponse.json("noId", { status: 400 });
         }
-        return NextResponse.json(data);
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

@@ -43,6 +43,7 @@ export type CartType = {
     price_id: string;
     product_id: string;
     product_price: number;
+    purchased: boolean;
 };
 
 export type HomeProductCardProps = {
@@ -75,7 +76,6 @@ export type OrderType = {
 export type ProductAvailabilityType = {
     product_id: string;
     available_quantity: number;
-    quantity_sold: number;
 };
 
 export type ProductReviewType = {

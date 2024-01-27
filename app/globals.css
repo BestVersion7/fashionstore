@@ -29,6 +29,18 @@
         display: block
     }
 
+    #hot-3 {
+        @apply hidden sm:flex
+    }
+
+    #hot-4 {
+        @apply hidden md:flex
+    }
+
+    #hot-5 {
+        @apply hidden lg:flex
+    }
+
     /* .dropdown:hover .dropdown-bg {
         display: block;
     } */

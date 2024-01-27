@@ -62,10 +62,10 @@ export default async function CategoryShop({
             </div>
             <ProductFilter />
 
-            <div className="rounded-md  my-3 flex gap-2">
+            <div className="rounded-md my-3 flex">
                 <div className="relative w-40">
                     <Image
-                        className="object-contain object-top"
+                        className="object-cover object-center"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         src={product.images[0]}

@@ -167,14 +167,13 @@ export const deleteCartCookie = async () => {
     return data;
 };
 
-export const updateQuantitySold = async (
-    productId: string,
-    quantity: number
-) => {
+export const updateCartPurchased = async () => {
     const res = await fetch(
-        `${productAvailabilityOrigin}/quantitysold?product_id=${productId}`,
-        { method: "put", body: JSON.stringify({ quantity }) }
+        `${cartOrigin}/purchased?cookie_id=${getCookieClient()}`,
+        {
+            method: "put",
+        }
     );
-    const data: string = await res.json();
+    const data = await res.json();
     return data;
 };

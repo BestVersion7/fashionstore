@@ -14,7 +14,7 @@ import Link from "next/link";
 
 import {
     getPaymentIntentFromCookie,
-    updateQuantitySold,
+    updateCartPurchased,
 } from "../utils/apiCallsClient";
 import { getProductAvailableQuantity } from "../utils/apiCalls";
 import {
@@ -104,14 +104,14 @@ export function StripeForm(props: {
                     email: emailRef.current?.value || "",
                 });
 
+                // change purchased to true in cart table
+                // this is for getting the analytics by date sold
+                await updateCartPurchased();
+
                 // update  availability
                 const orderLength = orderItems.length;
                 for (let i = 0; i < orderLength; i++) {
                     await updateProductAvailableQuantity(
-                        orderItems[i].product_id,
-                        orderItems[i].quantity
-                    );
-                    await updateQuantitySold(
                         orderItems[i].product_id,
                         orderItems[i].quantity
                     );

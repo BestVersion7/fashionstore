@@ -159,3 +159,20 @@ export const getCartTotal = async (cookieId: string) => {
     const data: number = await res.json();
     return data;
 };
+
+export const getPopularProducts = async () => {
+    const res = await fetch(`${cartOrigin}/purchased`, {
+        cache: "no-cache",
+    });
+    const data: { _sum: { quantity: number }; product_id: string }[] =
+        await res.json();
+    return data;
+};
+
+export const getQuantitySold = async (productId: string) => {
+    const res = await fetch(`${cartOrigin}/purchased?product_id=${productId}`, {
+        cache: "no-cache",
+    });
+    const data: number = await res.json();
+    return data;
+};

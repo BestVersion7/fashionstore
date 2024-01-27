@@ -1,48 +1,20 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { createCart, createCartCookie } from "../utils/apiCallsClient";
 import { CartType } from "../types";
-import { FaCheck, FaAngleDown } from "react-icons/fa";
+import { FaAngleDown } from "react-icons/fa";
 import { useOnClickOutside } from "../utils/customHooks";
+import { AddCartBtn } from "./AddCartBtn";
 
 export const CartQPost = (
     props: Pick<CartType, "product_id" | "price_id" | "product_price">
 ) => {
     const [quantity, setQuantity] = useState(1);
-    const [disableAdd, setDisableAdd] = useState(false);
-    const [inCart, setInCart] = useState(false);
     const [showDropdown, setShowDropdown] = useState(false);
     const [showInput, setShowInput] = useState(false);
 
     const dropdownRef = useRef(null);
     useOnClickOutside(dropdownRef, () => setShowDropdown(false));
-
-    const router = useRouter();
-
-    const handleAddCart = async () => {
-        setDisableAdd(() => true);
-        const cookieCart = getCookie("cookiecart");
-
-        if (typeof cookieCart !== "undefined") {
-            console.log("cookie already exist");
-        } else {
-            await createCartCookie();
-            console.log("create cookie");
-        }
-
-        await createCart({
-            product_id: props.product_id,
-            price_id: props.price_id,
-            quantity,
-        });
-
-        router.refresh();
-        setInCart(() => true);
-        setDisableAdd(() => false);
-    };
 
     const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuantity(Number(e.target.value));
@@ -103,19 +75,13 @@ export const CartQPost = (
                     )}
                 </div>
             )}
-            <div>
-                <button
-                    type="button"
-                    className="bg-yellow-400 my-2 border rounded-2xl text-sm px-3 font-medium py-1 hover:bg-yellow-500"
-                    onClick={handleAddCart}
-                    disabled={disableAdd}
-                >
-                    <span className="flex gap-1 items-center">
-                        {inCart ? `Added` : `Add to cart`}
-
-                        {inCart && <FaCheck />}
-                    </span>
-                </button>
+            <div className="py-2">
+                <AddCartBtn
+                    product_id={props.product_id}
+                    product_price={props.product_price}
+                    quantity={quantity}
+                    price_id={props.price_id}
+                />
             </div>
         </div>
     );

@@ -23,11 +23,6 @@ export const Product = async (props: ProductType) => {
 
     return (
         <article className="rounded-md border shadow-sm  my-3 flex flex-col">
-            {/* only show when out of stock */}
-            {/* <div className="absolute w-full top-0 z-10">
-                <StockLabel quantity={availableQuantity} />
-            </div> */}
-
             <Link
                 href={`/${formatProductNameToUrl(props.name)}/${
                     props.product_id
