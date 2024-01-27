@@ -7,7 +7,7 @@ import { ContactForm } from "./ContactForm";
 export const ContactBtn = () => {
     const router = useRouter();
     const handleOpen = () => {
-        router.push(`${window.location.href}?modal=t`, {
+        router.push(`${window.location.pathname}?modal=t`, {
             scroll: false,
         });
     };
