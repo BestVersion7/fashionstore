@@ -1,11 +1,9 @@
 import { getProductBySearchCategory } from "@/app/utils/apiCalls";
-import { ProductType } from "@/app/types";
-import { SearchInput } from "@/app/components/SearchInput";
 import { ProductFilter } from "@/app/components/ProductFilter";
 import { ProductMapped } from "@/app/components/ProductMapped";
 
 // All products not returned in the api call will be 404
-export const dynamicParams = false;
+// export const dynamicParams = false;
 
 export async function generateStaticParams() {
     return [
