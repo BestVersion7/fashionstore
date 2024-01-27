@@ -75,7 +75,9 @@ export const Product = async (props: ProductType) => {
                 ) : (
                     <span className="mb-4 ">
                         <StockLabel
-                            quantity={productAvailability.available_quantity}
+                            quantity={Number(
+                                productAvailability.available_quantity
+                            )}
                         />
                     </span>
                 )}

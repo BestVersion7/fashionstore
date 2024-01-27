@@ -2,7 +2,6 @@ import Link from "next/link";
 import { cookies } from "next/headers";
 import { formatCurrency } from "../utils/format";
 import { getCartByCookie } from "../utils/apiCalls";
-import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { Metadata } from "next";
 // import { TestAdd } from "../components/TestAdd";
@@ -13,12 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
-    const cartItems: CartType[] = await getCartByCookie(
-        cookies().get("cookiecart")?.value
-    );
+    const cartItems = await getCartByCookie(cookies().get("cookiecart")?.value);
 
     const total = cartItems
-        .map((item) => Number(item.product_price) * item.quantity)
+        .map((item) => Number(item.product_price) * Number(item.quantity))
         .reduce((arr, val) => arr + val, 0);
     const totalQ = cartItems
         .map((item) => Number(item.quantity))

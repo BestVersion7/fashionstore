@@ -11,6 +11,7 @@ import {
 } from "../types";
 import { BASE_URL } from "../lib/constants";
 import { notificationsArray } from "./notifications";
+import { getCookieClient, getCookieServer } from "./getCookie";
 
 const emailOrigin = `${BASE_URL}/api/contact`;
 const stripeOrigin = `${BASE_URL}/api/stripe`;
@@ -49,16 +50,19 @@ export const getPriceById = async (id: string) => {
     return data;
 };
 
-export const getCartTotal = async (cookie: string | undefined) => {
-    const res = await fetch(`${cartOrigin}/total?cookie_id=${cookie}`, {
-        cache: "no-cache",
-    });
+export const getCartTotal = async () => {
+    const res = await fetch(
+        `${cartOrigin}/total?cookie_id=${getCookieServer()}`,
+        {
+            cache: "no-cache",
+        }
+    );
     const data: number = await res.json();
     return data;
 };
 
-export const getCartByCookie = async (cookie: string | undefined) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookie}`, {
+export const getCartByCookie = async () => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieServer}`, {
         cache: "no-cache",
     });
     const data: CartType[] = await res.json();
@@ -78,10 +82,9 @@ export const deleteCartCookie = async () => {
 };
 
 export const createCart = async (
-    cookieId: string | undefined,
     cart: Pick<CartType, "price_id" | "product_id" | "quantity">
 ) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
+    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient}`, {
         method: "POST",
         body: JSON.stringify(cart),
     });
@@ -91,10 +94,9 @@ export const createCart = async (
 };
 
 export const updateCart = async (
-    cookieId: string | undefined,
     cart: Pick<CartType, "product_id" | "quantity">
 ) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
+    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient()}`, {
         method: "PUT",
         body: JSON.stringify(cart),
     });
@@ -102,17 +104,6 @@ export const updateCart = async (
     notificationsArray.push({ message: data });
     return data;
 };
-
-// export const updateCartPurchased = async (
-//     cookieId: string | undefined,
-// ) => {
-//     const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
-//         method: "PUT",
-//         body: JSON.stringify(cart),
-//     });
-//     const data = await res.json();
-//     return data;
-// };
 
 export const updateQuantitySold = async (
     productId: string,
@@ -126,11 +117,8 @@ export const updateQuantitySold = async (
     return data;
 };
 
-export const deleteCartItemByProductId = async (
-    cookieId: string | undefined,
-    productId: string
-) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${cookieId}`, {
+export const deleteCartItemByProductId = async (productId: string) => {
+    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient()}`, {
         method: "DELETE",
         body: JSON.stringify({ product_id: productId }),
     });
@@ -145,12 +133,9 @@ export const getPaymentIntent = async (id: string) => {
     return data;
 };
 
-export const createOrFindPaymentIntent = async (
-    cookieId: string | undefined,
-    amount: number
-) => {
+export const createOrFindPaymentIntent = async (amount: number) => {
     const res = await fetch(
-        `${stripeOrigin}/paymentintent?cookie_id=${cookieId}`,
+        `${stripeOrigin}/paymentintent?cookie_id=${getCookieServer()}`,
         {
             method: "post",
             body: JSON.stringify({ amount }),
@@ -175,10 +160,10 @@ export const updatePaymentIntent = async (
     return data;
 };
 
-export const getPaymentIntentFromCookie = async (
-    cookieId: string | undefined
-) => {
-    const res = await fetch(`${cartCookieOrigin}?cookie_id=${cookieId}`);
+export const getPaymentIntentFromCookie = async () => {
+    const res = await fetch(
+        `${cartCookieOrigin}?cookie_id=${getCookieServer()}`
+    );
     const data: PaymentIntentType = await res.json();
     return data;
 };
@@ -187,7 +172,7 @@ export const getProductBySearchName = async (input: string | undefined) => {
     const res = await fetch(`${productOrigin}/search?product_name=${input}`, {
         next: { revalidate: revalidateTime },
     });
-    const data: ProductType = await res.json();
+    const data: ProductType[] = await res.json();
     return data;
 };
 

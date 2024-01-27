@@ -15,7 +15,7 @@ import Link from "next/link";
 export const BestSellerCard = async (props: ProductType) => {
     // get the prices and availability
     const prices: PriceType = await getPriceById(props.default_price);
-    const availableQuantity: number = await getProductAvailableQuantity(
+    const availableQuantity = await getProductAvailableQuantity(
         props.product_id
     );
     // get reviews

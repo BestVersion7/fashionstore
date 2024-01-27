@@ -12,14 +12,14 @@ export type ProductType = {
 export type PriceType = {
     price_id: string;
     created_at: string;
-    unit_amount: number;
+    unit_amount: string;
     updated_at: string;
     product_id: string;
 };
 
 export type PaymentIntentType = {
     id: string;
-    amount: number;
+    amount: string;
     receipt_email: string;
     shipping: {
         address: {
@@ -39,10 +39,10 @@ export type CartType = {
     cart_id: number;
     created_at: string;
     cookie_id: string;
-    quantity: number;
+    quantity: string;
     price_id: string;
     product_id: string;
-    product_price: number;
+    product_price: string;
 };
 
 export type HomeProductCardProps = {
@@ -64,9 +64,9 @@ export type EmailProps = {
 };
 
 export type OrderType = {
-    order_number: number;
+    order_number: string;
     created_at: string;
-    order_total: number;
+    order_total: string;
     email: string;
     payment_intent: string;
     cookie_id: string;
@@ -74,7 +74,7 @@ export type OrderType = {
 
 export type ProductAvailabilityType = {
     product_id: string;
-    available_quantity: number;
+    available_quantity: string;
     quantity_sold: number;
 };
 

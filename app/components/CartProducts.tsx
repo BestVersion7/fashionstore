@@ -11,10 +11,11 @@ export const CartProducts = async (props: CartType) => {
     const productAvailability = await getProductAvailableQuantity(
         props.product_id
     );
+    console.log(productAvailability.quantity_sold + 2);
 
     return (
         <>
-            <div className="grid grid-cols-[150px,_1fr]  gap-4 my-2 md:grid-cols-[220px,_1fr] md:h-44  ">
+            {/* <div className="grid grid-cols-[150px,_1fr]  gap-4 my-2 md:grid-cols-[220px,_1fr] md:h-44  ">
                 <Link
                     href={`/${formatProductNameToUrl(productInfo.name)}/${
                         props.product_id
@@ -53,7 +54,7 @@ export const CartProducts = async (props: CartType) => {
                     </p>
                 </div>
             </div>
-            <hr className="h-[.1rem] bg-gray-300" />
+            <hr className="h-[.1rem] bg-gray-300" /> */}
         </>
     );
 };

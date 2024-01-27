@@ -114,12 +114,12 @@ export default async function Home() {
 
             <section className=" bg-red-50">
                 <h3>New & Hot</h3>
-                <div className="grid grid-cols-8 overflow-hidden">
-                    {hotProducts.map((item, index) => (
+                <div className="grid grid-cols-5 overflow-hidden">
+                    {/* {hotProducts.map((item, index) => (
                         <div key={index}>
                             <BestSellerCard {...item} />
                         </div>
-                    ))}
+                    ))} */}
                 </div>
             </section>
 
