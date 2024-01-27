@@ -48,6 +48,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.5,
         },
 
-        // ...mappedProducts,
+        ...mappedProducts,
     ];
 }
