@@ -1,16 +1,14 @@
-import { OrderType, PaymentIntentType } from "../types";
+import { OrderType } from "../types";
 import { getPaymentIntent, getCartByCookieProp } from "../utils/apiCalls";
-import { getCartTotal } from "../utils/apiCallsServer";
+import { getCartTotal } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/format";
 import { CartProductsV2 } from "./CartProductsV2";
 
 export const OrderPaper = async (props: OrderType) => {
-    const shippingAddress: PaymentIntentType = await getPaymentIntent(
-        props.payment_intent
-    );
+    const shippingAddress = await getPaymentIntent(props.payment_intent);
 
     const orderItems = await getCartByCookieProp(props.cookie_id);
-    const totalQuantity = await getCartTotal();
+    const totalQuantity = await getCartTotal(props.cookie_id);
 
     return (
         <article className="border-2 border-slate-600 py-2 px-3 bg-orange-50 w-[80vw] md:w-[600px]">

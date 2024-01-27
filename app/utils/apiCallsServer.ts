@@ -5,7 +5,7 @@ import { getCookieServer } from "./getCookieServer";
 const stripeOrigin = `${BASE_URL}/api/stripe`;
 const cartOrigin = `${BASE_URL}/api/cart`;
 
-export const getCartTotal = async () => {
+export const getCartTotalByCookie = async () => {
     const res = await fetch(
         `${cartOrigin}/total?cookie_id=${getCookieServer()}`,
         {

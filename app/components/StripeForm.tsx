@@ -101,7 +101,7 @@ export function StripeForm(props: {
                     cookie_id: getCookieClient() || "",
                     order_total: props.totalAmount,
                     payment_intent: paymentIntent.id,
-                    email: `${emailRef.current?.value}`,
+                    email: emailRef.current?.value || "",
                 });
 
                 // update  availability
@@ -145,6 +145,7 @@ export function StripeForm(props: {
                         ref={emailRef}
                         name="email"
                         autoComplete="on"
+                        required
                     />
                     <br />
                     <br />

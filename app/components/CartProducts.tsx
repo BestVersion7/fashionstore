@@ -38,7 +38,9 @@ export const CartProducts = async (props: CartType) => {
                             <CartQUpdate {...props} />
                             <CartDeleteBtn product_id={props.product_id} />
                             {props.quantity >
-                                productAvailability.available_quantity && (
+                                Number(
+                                    productAvailability.available_quantity
+                                ) && (
                                 <p className="text-sm text-red-500">
                                     The quantity in your cart is greater than in
                                     stock{" "}

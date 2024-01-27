@@ -151,3 +151,11 @@ export const getUserInfoByEmail = async (email: string) => {
     const data: UserType = await res.json();
     return data;
 };
+
+export const getCartTotal = async (cookieId: string) => {
+    const res = await fetch(`${cartOrigin}/total?cookie_id=${cookieId}`, {
+        cache: "no-cache",
+    });
+    const data: number = await res.json();
+    return data;
+};

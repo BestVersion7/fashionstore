@@ -3,7 +3,6 @@ import {
     getPaymentIntent,
 } from "@/app/utils/apiCalls";
 import Link from "next/link";
-import { PaymentIntentType, OrderType } from "@/app/types";
 import { OrderPaper } from "@/app/components/OrderPaper";
 
 export default async function SuccessPage({
@@ -11,10 +10,8 @@ export default async function SuccessPage({
 }: {
     params: { id: string };
 }) {
-    const paymentIntentData: PaymentIntentType = await getPaymentIntent(
-        params.id
-    );
-    const orderData: OrderType = await getOrderByPaymentIntent(params.id);
+    const paymentIntentData = await getPaymentIntent(params.id);
+    const orderData = await getOrderByPaymentIntent(params.id);
 
     return (
         <main>
