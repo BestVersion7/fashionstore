@@ -86,7 +86,7 @@ export default async function CategoryShop({
                         average={reviewRating}
                         // link={`/shop/${product.category}/${product.product_id}`}
                     />
-                    {availableQuantity ? (
+                    {availableQuantity.available_quantity > 0 ? (
                         <CartQPost
                             product_id={product.product_id}
                             price_id={product.default_price}
@@ -94,7 +94,11 @@ export default async function CategoryShop({
                         />
                     ) : (
                         <span className="mb-4 ">
-                            <StockLabel quantity={availableQuantity} />
+                            <StockLabel
+                                quantity={Number(
+                                    availableQuantity.available_quantity
+                                )}
+                            />
                         </span>
                     )}
                 </div>

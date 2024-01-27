@@ -61,7 +61,7 @@ export const Product = async (props: ProductType) => {
                     }`}
                 />
                 {/* <p>{props.product_id}</p> */}
-                {Number(productAvailability.available_quantity) ? (
+                {productAvailability.available_quantity > 0 ? (
                     <CartQPost
                         product_id={props.product_id}
                         price_id={props.default_price}
