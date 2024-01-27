@@ -77,7 +77,7 @@ export const ProductPopularCard = async (props: {
                     {formatCurrency(prices.unit_amount)}
                 </p>
 
-                {availability.available_quantity ? (
+                {availability.available_quantity > 0 ? (
                     <AddCartBtn
                         price_id={productInfo.default_price}
                         product_id={props.product_id}
@@ -87,7 +87,7 @@ export const ProductPopularCard = async (props: {
                 ) : (
                     <span className="mb-4 ">
                         <StockLabel
-                            quantity={availability.available_quantity}
+                            quantity={Number(availability.available_quantity)}
                         />
                     </span>
                 )}
