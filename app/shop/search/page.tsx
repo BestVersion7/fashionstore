@@ -1,4 +1,4 @@
-import { getProductBySearchName } from "@/app/utils/apiCallsServer";
+import { getProductBySearchName } from "@/app/utils/apiCalls";
 import { ProductType } from "@/app/types";
 import { ProductMapped } from "@/app/components/ProductMapped";
 import { ProductFilter } from "@/app/components/ProductFilter";

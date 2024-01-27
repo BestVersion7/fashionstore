@@ -13,19 +13,22 @@ import { ImSpinner2 } from "react-icons/im";
 import Link from "next/link";
 
 import {
-    updatePaymentIntent,
     getPaymentIntentFromCookie,
-    createOrder,
-    getProductAvailableQuantity,
-    updateProductAvailableQuantity,
+    updateQuantitySold,
 } from "../utils/apiCallsClient";
-import { deleteCartCookie } from "../utils/apiCallsClient";
+import { getProductAvailableQuantity } from "../utils/apiCalls";
+import {
+    deleteCartCookie,
+    updatePaymentIntent,
+    updateProductAvailableQuantity,
+    createOrder,
+} from "../utils/apiCallsClient";
 import { getCookie } from "cookies-next";
 import { formatCurrency } from "../utils/format";
 import { CartType } from "../types";
 
 export function StripeForm(props: {
-    totalAmount: number;
+    totalAmount: string;
     cartData: CartType[];
 }) {
     const orderItems = Object.values(
@@ -55,9 +58,7 @@ export function StripeForm(props: {
             setIsProcessing(() => true);
 
             // find the payment intent
-            const paymentId = await getPaymentIntentFromCookie(
-                getCookie("cookiecart")
-            );
+            const paymentId = await getPaymentIntentFromCookie();
 
             // check quantity does not exceed
             const orderLength = orderItems.length;
@@ -98,7 +99,7 @@ export function StripeForm(props: {
                 // create the order
                 await createOrder({
                     cookie_id: getCookie("cookiecart") || "",
-                    order_total: props.totalAmount,
+                    order_total: `${props.totalAmount}`,
                     payment_intent: paymentIntent.id,
                     email: `${emailRef.current?.value}`,
                 });
@@ -107,6 +108,10 @@ export function StripeForm(props: {
                 const orderLength = orderItems.length;
                 for (let i = 0; i < orderLength; i++) {
                     await updateProductAvailableQuantity(
+                        orderItems[i].product_id,
+                        orderItems[i].quantity
+                    );
+                    await updateQuantitySold(
                         orderItems[i].product_id,
                         orderItems[i].quantity
                     );

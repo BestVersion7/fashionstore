@@ -1,6 +1,6 @@
 import { Product } from "../components/Product";
 import { SearchInput } from "../components/SearchInput";
-import { getAllProducts } from "../utils/apiCallsServer";
+import { getAllProducts } from "../utils/apiCalls";
 import { ProductFilter } from "../components/ProductFilter";
 import { Metadata } from "next";
 import { ProductMapped } from "../components/ProductMapped";

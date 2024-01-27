@@ -1,11 +1,9 @@
 import {
     CartType,
-    EmailProps,
     OrderType,
-    PaymentIntentType,
     ProductReviewType,
-    ProductType,
     UserType,
+    EmailProps,
 } from "../types";
 import { BASE_URL } from "../lib/constants";
 import { notificationsArray } from "./notifications";
@@ -16,29 +14,14 @@ const stripeOrigin = `${BASE_URL}/api/stripe`;
 const cartOrigin = `${BASE_URL}/api/cart`;
 const cartCookieOrigin = `${BASE_URL}/api/cartcookie`;
 const orderOrigin = `${BASE_URL}/api/order`;
-const productOrigin = `${BASE_URL}/api/product`;
 const productAvailabilityOrigin = `${BASE_URL}/api/productavailability`;
 const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 
-const revalidateTime = 60 * 60 * 24 * 1;
-
-export const createCartCookie = async () => {
-    const res = await fetch(cartCookieOrigin, { method: "post" });
-    const data: CartType = await res.json();
-    return data;
-};
-
-export const deleteCartCookie = async () => {
-    const res = await fetch(cartCookieOrigin, { method: "delete" });
-    const data = await res.json();
-    return data;
-};
-
 export const createCart = async (
     cart: Pick<CartType, "price_id" | "product_id" | "quantity">
 ) => {
-    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient}`, {
+    const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient()}`, {
         method: "POST",
         body: JSON.stringify(cart),
     });
@@ -59,18 +42,6 @@ export const updateCart = async (
     return data;
 };
 
-export const updateQuantitySold = async (
-    productId: string,
-    quantity: number
-) => {
-    const res = await fetch(
-        `${productAvailabilityOrigin}/quantitysold?product_id=${productId}`,
-        { method: "put", body: JSON.stringify({ quantity }) }
-    );
-    const data: number = await res.json();
-    return data;
-};
-
 export const deleteCartItemByProductId = async (productId: string) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient()}`, {
         method: "DELETE",
@@ -81,54 +52,17 @@ export const deleteCartItemByProductId = async (productId: string) => {
     return data;
 };
 
-export const getPaymentIntent = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
-    const data: PaymentIntentType = await res.json();
-    return data;
-};
-
-export const updatePaymentIntent = async (
-    id: string,
-    body: {
-        email: string | undefined;
-        amount: number;
-    }
-) => {
-    const res = await fetch(`${stripeOrigin}/paymentintent?payment_id=${id}`, {
-        method: "put",
-        body: JSON.stringify(body),
-    });
+export const getPaymentIntentFromCookie = async () => {
+    const res = await fetch(
+        `${cartCookieOrigin}?cookie_id=${getCookieClient()}`
+    );
     const data: string = await res.json();
-    return data;
-};
-
-export const createEmail = async (props: EmailProps) => {
-    const res = await fetch(emailOrigin, {
-        method: "post",
-        body: JSON.stringify(props),
-    });
-    const data: string = await res.json();
-    return data;
-};
-
-export const createOrder = async (
-    orderData: Pick<
-        OrderType,
-        "order_total" | "email" | "cookie_id" | "payment_intent"
-    >
-) => {
-    const res = await fetch(orderOrigin, {
-        method: "post",
-        body: JSON.stringify(orderData),
-    });
-    const data: string = await res.json();
-    notificationsArray.push({ message: data });
     return data;
 };
 
 export const updateProductAvailableQuantity = async (
     productId: string,
-    quantity: number
+    quantity: string
 ) => {
     const res = await fetch(
         `${productAvailabilityOrigin}?product_id=${productId}`,
@@ -179,5 +113,68 @@ export const createProductReview = async (
     });
     const data: { message: string; status: number } = await res.json();
     notificationsArray.push({ message: data.message });
+    return data;
+};
+
+export const createEmail = async (props: EmailProps) => {
+    const res = await fetch(emailOrigin, {
+        method: "post",
+        body: JSON.stringify(props),
+    });
+    const data: string = await res.json();
+    return data;
+};
+
+export const createOrder = async (
+    orderData: Pick<
+        OrderType,
+        "order_total" | "email" | "cookie_id" | "payment_intent"
+    >
+) => {
+    const res = await fetch(orderOrigin, {
+        method: "post",
+        body: JSON.stringify(orderData),
+    });
+    const data: string = await res.json();
+    notificationsArray.push({ message: data });
+    return data;
+};
+
+export const updatePaymentIntent = async (
+    id: string,
+    body: {
+        email: string | undefined;
+        amount: string;
+    }
+) => {
+    const res = await fetch(`${stripeOrigin}/paymentintent?payment_id=${id}`, {
+        method: "put",
+        body: JSON.stringify(body),
+    });
+    const data: string = await res.json();
+    return data;
+};
+
+export const createCartCookie = async () => {
+    const res = await fetch(cartCookieOrigin, { method: "post" });
+    const data: CartType = await res.json();
+    return data;
+};
+
+export const deleteCartCookie = async () => {
+    const res = await fetch(cartCookieOrigin, { method: "delete" });
+    const data = await res.json();
+    return data;
+};
+
+export const updateQuantitySold = async (
+    productId: string,
+    quantity: string
+) => {
+    const res = await fetch(
+        `${productAvailabilityOrigin}/quantitysold?product_id=${productId}`,
+        { method: "put", body: JSON.stringify({ quantity }) }
+    );
+    const data: string = await res.json();
     return data;
 };

@@ -1,5 +1,5 @@
 import { CartType } from "../types";
-import { getProductById } from "../utils/apiCallsServer";
+import { getProductById } from "../utils/apiCalls";
 import { formatCurrency } from "../utils/format";
 import Image from "next/image";
 
@@ -10,9 +10,9 @@ export const CartProductsV2 = async (
     return (
         <>
             <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-[100px,_1fr] h-full gap-2 w-full ">
-                <div className="relative ">
+                <div className="relative h-28">
                     <Image
-                        className="object-contain absolute rounded-sm"
+                        className="object-contain object-left"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         // height={"200"}

@@ -7,7 +7,7 @@ import {
     getPriceById,
     getProductReviewCount,
     getProductRatingAverage,
-} from "../utils/apiCallsServer";
+} from "../utils/apiCalls";
 import { StockLabel } from "./StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";

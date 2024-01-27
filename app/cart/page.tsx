@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { formatCurrency } from "../utils/format";
-import { getCartByCookie } from "../utils/apiCallsClient";
+import { getCartByCookie } from "../utils/apiCallsServer";
 import { CartProducts } from "../components/CartProducts";
 import { Metadata } from "next";
 // import { TestAdd } from "../components/TestAdd";
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CartPage() {
-    const cartItems = await getCartByCookie(cookies().get("cookiecart")?.value);
+    const cartItems = await getCartByCookie();
 
     const total = cartItems
         .map((item) => Number(item.product_price) * Number(item.quantity))
@@ -57,7 +56,7 @@ export default async function CartPage() {
                         <p>
                             Subtotal ({totalQ} items):{" "}
                             <span className="font-semibold">
-                                {formatCurrency(total)}
+                                {formatCurrency(`${total}`)}
                             </span>
                         </p>{" "}
                         <br />

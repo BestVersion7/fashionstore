@@ -1,10 +1,9 @@
 import { Checkout } from "../components/Checkout";
-import { getCartByCookie } from "../utils/apiCallsClient";
-import { cookies } from "next/headers";
+import { getCartByCookie } from "../utils/apiCallsServer";
 import { CartType } from "../types";
 import { CartProducts } from "../components/CartProducts";
 import { FaLock } from "react-icons/fa";
-import { createOrFindPaymentIntent } from "../utils/apiCallsClient";
+import { createOrFindPaymentIntent } from "../utils/apiCallsServer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,9 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function CheckoutPage() {
-    const cartData: CartType[] = await getCartByCookie(
-        cookies().get("cookiecart")?.value
-    );
+    const cartData: CartType[] = await getCartByCookie();
 
     const totalQ =
         cartData.length > 0
@@ -36,10 +33,7 @@ export default async function CheckoutPage() {
 
     let clientSecret;
     if (totalAmount > 0) {
-        clientSecret = await createOrFindPaymentIntent(
-            cookies().get("cookiecart")?.value,
-            totalAmount
-        );
+        clientSecret = await createOrFindPaymentIntent(totalAmount);
     }
 
     return (
@@ -58,7 +52,7 @@ export default async function CheckoutPage() {
                 {totalAmount > 0 && (
                     <Checkout
                         totalAmount={totalAmount}
-                        clientSecret={clientSecret}
+                        clientSecret={`${clientSecret}`}
                         cartData={cartData}
                     />
                 )}

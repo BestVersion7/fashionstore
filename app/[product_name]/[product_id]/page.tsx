@@ -1,5 +1,3 @@
-import { getProductById } from "@/app/utils/apiCallsClient";
-import { ProductType, PriceType, ProductReviewType } from "@/app/types";
 import { ProductFilter } from "@/app/components/ProductFilter";
 import {
     getProductReviews,
@@ -7,7 +5,8 @@ import {
     getProductRatingAverage,
     getProductReviewCount,
     getPriceById,
-} from "@/app/utils/apiCallsClient";
+    getProductById,
+} from "@/app/utils/apiCalls";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/StockLabel";
 import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";
@@ -37,19 +36,17 @@ export default async function CategoryShop({
 }: {
     params: { product_name: string; product_id: string };
 }) {
-    const product: ProductType = await getProductById(params.product_id);
+    const product = await getProductById(params.product_id);
 
     // get the prices and availability
-    const prices: PriceType = await getPriceById(product.default_price);
-    const availableQuantity: number = await getProductAvailableQuantity(
+    const prices = await getPriceById(product.default_price);
+    const availableQuantity = await getProductAvailableQuantity(
         params.product_id
     );
     // get reviews
     const reviewCount = await getProductReviewCount(params.product_id);
     const reviewRating = await getProductRatingAverage(params.product_id);
-    const reviews: ProductReviewType[] = await getProductReviews(
-        params.product_id
-    );
+    const reviews = await getProductReviews(params.product_id);
 
     // pass down username
     const user = await getServerSession(authOptions);

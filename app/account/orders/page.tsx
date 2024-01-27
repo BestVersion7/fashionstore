@@ -1,4 +1,4 @@
-import { getOrdersByEmail } from "@/app/utils/apiCallsClient";
+import { getOrdersByEmail } from "@/app/utils/apiCalls";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { OrderType } from "@/app/types";

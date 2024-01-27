@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
             Number(findAvailQuantity?.available_quantity) || 0;
 
         // error if too many units
-        if (quantity > availableQuantity) {
+        if (Number(quantity) > availableQuantity) {
             return NextResponse.json(
                 `The maximum quantity is ${availableQuantity}.`,
                 { status: 400 }

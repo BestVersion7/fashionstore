@@ -1,4 +1,4 @@
-import { getProductBySearchCategory } from "@/app/utils/apiCallsServer";
+import { getProductBySearchCategory } from "@/app/utils/apiCalls";
 import { ProductType } from "@/app/types";
 import { SearchInput } from "@/app/components/SearchInput";
 import { ProductFilter } from "@/app/components/ProductFilter";

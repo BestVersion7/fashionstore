@@ -1,7 +1,7 @@
 import {
     getOrderByPaymentIntent,
     getPaymentIntent,
-} from "@/app/utils/apiCallsClient";
+} from "@/app/utils/apiCalls";
 import Link from "next/link";
 import { PaymentIntentType, OrderType } from "@/app/types";
 import { OrderPaper } from "@/app/components/OrderPaper";

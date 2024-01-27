@@ -1,4 +1,4 @@
-import { getUserInfoByEmail } from "../utils/apiCallsServer";
+import { getUserInfoByEmail } from "../utils/apiCalls";
 import { ProductReviewType, UserType } from "../types";
 import { ProductReviewStar } from "./ProductReviewStar";
 import { FaCircleUser } from "react-icons/fa6";
