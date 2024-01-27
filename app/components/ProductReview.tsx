@@ -1,11 +1,11 @@
 import { getUserInfoByEmail } from "../utils/apiCalls";
-import { ProductReviewType, UserType } from "../types";
+import { ProductReviewType } from "../types";
 import { ProductReviewStar } from "./ProductReviewStar";
 import { FaCircleUser } from "react-icons/fa6";
 import { formatTimeDifference } from "../utils/format";
 
 export const ProductReview = async (props: ProductReviewType) => {
-    const user: UserType = await getUserInfoByEmail(props.user_email);
+    const user = await getUserInfoByEmail(props.user_email);
 
     return (
         <article className=" px-2 border border-gray-400  py-2 ">

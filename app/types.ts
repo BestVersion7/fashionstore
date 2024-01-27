@@ -1,6 +1,6 @@
 export type ProductType = {
     product_id: string;
-    created_at: string;
+    created_at: Date;
     default_price: string;
     description: string;
     images: string[];
@@ -11,15 +11,15 @@ export type ProductType = {
 
 export type PriceType = {
     price_id: string;
-    created_at: string;
-    unit_amount: string;
-    updated_at: string;
+    created_at: Date;
+    unit_amount: number;
+    updated_at: Date;
     product_id: string;
 };
 
 export type PaymentIntentType = {
     id: string;
-    amount: string;
+    amount: number;
     receipt_email: string;
     shipping: {
         address: {
@@ -37,12 +37,12 @@ export type PaymentIntentType = {
 
 export type CartType = {
     cart_id: number;
-    created_at: string;
+    created_at: Date;
     cookie_id: string;
-    quantity: string;
+    quantity: number;
     price_id: string;
     product_id: string;
-    product_price: string;
+    product_price: number;
 };
 
 export type HomeProductCardProps = {
@@ -64,9 +64,9 @@ export type EmailProps = {
 };
 
 export type OrderType = {
-    order_number: string;
-    created_at: string;
-    order_total: string;
+    order_number: number;
+    created_at: Date;
+    order_total: number;
     email: string;
     payment_intent: string;
     cookie_id: string;
@@ -74,13 +74,13 @@ export type OrderType = {
 
 export type ProductAvailabilityType = {
     product_id: string;
-    available_quantity: string;
+    available_quantity: number;
     quantity_sold: number;
 };
 
 export type ProductReviewType = {
     review_id: string;
-    created_at: string;
+    created_at: Date;
     user_email: string;
     review_message: string | null;
     product_id: string;

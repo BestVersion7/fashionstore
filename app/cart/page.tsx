@@ -56,7 +56,7 @@ export default async function CartPage() {
                         <p>
                             Subtotal ({totalQ} items):{" "}
                             <span className="font-semibold">
-                                {formatCurrency(`${total}`)}
+                                {formatCurrency(total)}
                             </span>
                         </p>{" "}
                         <br />

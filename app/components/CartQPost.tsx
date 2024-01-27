@@ -36,7 +36,7 @@ export const CartQPost = (
         await createCart({
             product_id: props.product_id,
             price_id: props.price_id,
-            quantity: `${quantity}`,
+            quantity,
         });
 
         router.refresh();

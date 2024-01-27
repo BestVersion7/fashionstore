@@ -1,5 +1,5 @@
-export const formatCurrency = (total: string) => {
-    return `$${(Number(total) / 100).toFixed(2)}`;
+export const formatCurrency = (total: number) => {
+    return `$${(total / 100).toFixed(2)}`;
 };
 
 export const formatProductNameToUrl = (name: string) => {
@@ -34,7 +34,7 @@ const months = [
     "Dec",
 ];
 
-export const formatTimeDifference = (date: string) => {
+export const formatTimeDifference = (date: Date) => {
     let age: string;
     let divide: number;
 

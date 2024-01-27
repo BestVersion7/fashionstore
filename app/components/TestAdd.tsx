@@ -44,7 +44,7 @@ export const TestAdd = () => {
             await createCart({
                 product_id: allProds[i].product_id,
                 price_id: allProds[i].price_id,
-                quantity: `${i + 1}`,
+                quantity: i + 1,
             });
         }
 

@@ -1,13 +1,15 @@
 import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllProducts } from "./utils/apiCallsServer";
-import { ProductType } from "./types";
+import { getAllProducts, getProductAvailableQuantity } from "./utils/apiCalls";
 import { BestSellerCard } from "./components/BestSellerCard";
 
 export default async function Home() {
     // change  this in future
-    const hotProducts: ProductType[] = await getAllProducts();
+    const hotProducts = await getProductAvailableQuantity(
+        "prod_PI4yezOWxk8uzz"
+    );
+    console.log(hotProducts);
     return (
         <main className="px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">

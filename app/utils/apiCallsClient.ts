@@ -62,7 +62,7 @@ export const getPaymentIntentFromCookie = async () => {
 
 export const updateProductAvailableQuantity = async (
     productId: string,
-    quantity: string
+    quantity: number
 ) => {
     const res = await fetch(
         `${productAvailabilityOrigin}?product_id=${productId}`,
@@ -144,7 +144,7 @@ export const updatePaymentIntent = async (
     id: string,
     body: {
         email: string | undefined;
-        amount: string;
+        amount: number;
     }
 ) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?payment_id=${id}`, {
@@ -169,7 +169,7 @@ export const deleteCartCookie = async () => {
 
 export const updateQuantitySold = async (
     productId: string,
-    quantity: string
+    quantity: number
 ) => {
     const res = await fetch(
         `${productAvailabilityOrigin}/quantitysold?product_id=${productId}`,

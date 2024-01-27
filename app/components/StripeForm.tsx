@@ -23,12 +23,12 @@ import {
     updateProductAvailableQuantity,
     createOrder,
 } from "../utils/apiCallsClient";
-import { getCookie } from "cookies-next";
 import { formatCurrency } from "../utils/format";
 import { CartType } from "../types";
+import { getCookieClient } from "../utils/getCookieClient";
 
 export function StripeForm(props: {
-    totalAmount: string;
+    totalAmount: number;
     cartData: CartType[];
 }) {
     const orderItems = Object.values(
@@ -98,8 +98,8 @@ export function StripeForm(props: {
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
                 // create the order
                 await createOrder({
-                    cookie_id: getCookie("cookiecart") || "",
-                    order_total: `${props.totalAmount}`,
+                    cookie_id: getCookieClient() || "",
+                    order_total: props.totalAmount,
                     payment_intent: paymentIntent.id,
                     email: `${emailRef.current?.value}`,
                 });

@@ -35,12 +35,7 @@ export const CartProductsV2 = async (
                     <span> {formatCurrency(props.product_price)}</span>
                     <span>Subtotal:</span>
                     <span>
-                        {formatCurrency(
-                            `${
-                                Number(props.product_price) *
-                                Number(props.quantity)
-                            }`
-                        )}
+                        {formatCurrency(props.product_price * props.quantity)}
                     </span>
                 </div>
                 {/* <table className="">

@@ -30,7 +30,7 @@ export const CartQUpdate = (props: CartType) => {
         e.preventDefault();
         await updateCart({
             product_id: props.product_id,
-            quantity: `${inputQuantity}`,
+            quantity: inputQuantity,
         });
 
         router.refresh();
@@ -46,7 +46,7 @@ export const CartQUpdate = (props: CartType) => {
             setShowDropdown(() => false);
             await updateCart({
                 product_id: props.product_id,
-                quantity: `${e.currentTarget.value}`,
+                quantity: e.currentTarget.value,
             });
 
             router.refresh();
