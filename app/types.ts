@@ -1,7 +1,7 @@
 export type ProductType = {
-    product_id: string;
+    product_id: number;
     created_at: Date;
-    default_price: string;
+    default_price: number;
     description: string;
     images: string[];
     name: string;
@@ -36,8 +36,8 @@ export type CartType = {
     created_at: Date;
     cookie_id: string;
     quantity: number;
-    price_id: string;
-    product_id: string;
+    price_id: number;
+    product_id: number;
     product_price: number;
     purchased: boolean;
 };
@@ -74,11 +74,11 @@ export type ProductAvailabilityType = {
 };
 
 export type ProductReviewType = {
-    review_id: string;
+    review_id: number;
     created_at: Date;
     user_email: string;
     review_message: string | null;
-    product_id: string;
+    product_id: number;
     review_star: number;
 };
 
@@ -90,5 +90,5 @@ export type UserType = {
 
 export type PopularProductType = {
     _sum: { quantity: number };
-    product_id: string;
+    product_id: number;
 };

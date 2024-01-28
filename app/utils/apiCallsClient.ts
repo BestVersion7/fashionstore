@@ -47,7 +47,7 @@ export const updateCart = async (
     return data;
 };
 
-export const deleteCartItemByProductId = async (productId: string) => {
+export const deleteCartItemByProductId = async (productId: number) => {
     const res = await fetch(`${cartOrigin}?cookie_id=${getCookieClient()}`, {
         method: "DELETE",
         body: JSON.stringify({ product_id: productId }),
@@ -66,7 +66,7 @@ export const getPaymentIntentFromCookie = async () => {
 };
 
 export const updateProductAvailableQuantity = async (
-    productId: string,
+    productId: number,
     quantity: number
 ) => {
     const res = await fetch(
@@ -106,7 +106,7 @@ export const updateUserNameByEmail = async (
 };
 
 export const createProductReview = async (
-    product_id: string,
+    product_id: number,
     reviewData: Pick<
         ProductReviewType,
         "product_id" | "review_message" | "review_star" | "user_email"

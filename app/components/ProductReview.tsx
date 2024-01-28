@@ -12,7 +12,7 @@ import { ProductReviewForm } from "./ProductReviewForm";
 import { SignInBtn } from "./SignInBtn";
 
 type props = {
-    product_id: string;
+    product_id: number;
     email: string | undefined | null;
 };
 

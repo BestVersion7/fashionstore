@@ -44,7 +44,7 @@ export const getAllProducts = async () => {
     return data;
 };
 
-export const getProductById = async (id: string) => {
+export const getProductById = async (id: number) => {
     const res = await fetch(`${productOrigin}?product_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
@@ -52,7 +52,7 @@ export const getProductById = async (id: string) => {
     return data;
 };
 
-export const getPriceById = async (id: string) => {
+export const getPriceById = async (id: number) => {
     const res = await fetch(`${priceOrigin}?price_id=${id}`, {
         next: { revalidate: revalidateTime },
     });
@@ -101,7 +101,7 @@ export const getOrdersByEmail = async (email: string) => {
     return data;
 };
 
-export const getProductAvailableQuantity = async (productId: string) => {
+export const getProductAvailableQuantity = async (productId: number) => {
     const res = await fetch(
         `${productAvailabilityOrigin}?product_id=${productId}`,
         {
@@ -112,7 +112,7 @@ export const getProductAvailableQuantity = async (productId: string) => {
     return data;
 };
 
-export const getProductReviewCount = async (product_id: string) => {
+export const getProductReviewCount = async (product_id: number) => {
     const res = await fetch(`${reviewOrigin}/count?product_id=${product_id}`, {
         cache: "no-cache",
     });
@@ -120,7 +120,7 @@ export const getProductReviewCount = async (product_id: string) => {
     return data;
 };
 
-export const getProductRatingAverage = async (product_id: string) => {
+export const getProductRatingAverage = async (product_id: number) => {
     const res = await fetch(
         `${reviewOrigin}/averagerating?product_id=${product_id}`,
         {
@@ -132,7 +132,7 @@ export const getProductRatingAverage = async (product_id: string) => {
 };
 
 export const getTenProductReviewsByPage = async (
-    product_id: string,
+    product_id: number,
     page: number
 ) => {
     const res = await fetch(
@@ -177,7 +177,7 @@ export const getPopularProducts = async () => {
     return data;
 };
 
-export const getQuantitySold = async (productId: string) => {
+export const getQuantitySold = async (productId: number) => {
     const res = await fetch(`${cartOrigin}/purchased?product_id=${productId}`, {
         cache: "no-cache",
     });

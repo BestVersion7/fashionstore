@@ -25,7 +25,7 @@ import {
 } from "../utils/apiCallsClient";
 import { formatCurrency } from "../utils/format";
 import { CartType } from "../types";
-import { getCookieClient } from "../utils/getCookieClient";
+import { getCookie } from "cookies-next";
 
 export function StripeForm(props: {
     totalAmount: number;
@@ -98,7 +98,7 @@ export function StripeForm(props: {
             } else if (paymentIntent && paymentIntent.status === "succeeded") {
                 // create the order
                 await createOrder({
-                    cookie_id: getCookieClient() || "",
+                    cookie_id: getCookie("cookiecart") || "",
                     order_total: props.totalAmount,
                     payment_intent: paymentIntent.id,
                     email: emailRef.current?.value || "",

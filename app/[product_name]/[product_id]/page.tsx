@@ -37,12 +37,12 @@ export default async function CategoryShop({
 }: {
     params: { product_name: string; product_id: string };
 }) {
-    const product = await getProductById(params.product_id);
+    const product = await getProductById(Number(params.product_id));
 
     // get the prices and availability
     const prices = await getPriceById(product.default_price);
     const availableQuantity = await getProductAvailableQuantity(
-        params.product_id
+        Number(params.product_id)
     );
 
     // pass down username
@@ -56,8 +56,10 @@ export default async function CategoryShop({
     ));
 
     // get reviews
-    const reviewCount = await getProductReviewCount(params.product_id);
-    const reviewRating = await getProductRatingAverage(params.product_id);
+    const reviewCount = await getProductReviewCount(Number(params.product_id));
+    const reviewRating = await getProductRatingAverage(
+        Number(params.product_id)
+    );
 
     // limit 10 reviews per page so get the page crumbs
 
@@ -120,7 +122,10 @@ export default async function CategoryShop({
 
             {/* Reviews */}
             <section className="max-w-4xl">
-                <ProductReview product_id={params.product_id} email={email} />
+                <ProductReview
+                    product_id={Number(params.product_id)}
+                    email={email}
+                />
             </section>
         </main>
     );

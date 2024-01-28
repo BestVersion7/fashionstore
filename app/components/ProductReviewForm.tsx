@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export const ProductReviewForm = (props: {
     email: string | undefined | null;
-    product_id: string;
+    product_id: number;
     setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [reviewStar, setReviewStar] = useState(0);
