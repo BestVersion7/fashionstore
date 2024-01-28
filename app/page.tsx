@@ -117,7 +117,7 @@ export default async function Home() {
             </section>
 
             <section>
-                <div className="flex items-center text-xl py-1 text-white  bg-orange-600">
+                <div className="flex items-center text-xl px-3 py-1 text-white  bg-orange-600">
                     <GiClothes />
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />
