@@ -103,13 +103,7 @@ export default async function CategoryShop({
                             product_price={prices.unit_amount}
                         />
                     ) : (
-                        <span className="mb-4 ">
-                            <StockLabel
-                                quantity={Number(
-                                    availableQuantity.available_quantity
-                                )}
-                            />
-                        </span>
+                        <StockLabel />
                     )}
                 </div>
             </div>
