@@ -92,3 +92,8 @@ export type UserType = {
     email: string;
     image: string;
 };
+
+export type PopularProductType = {
+    _sum: { quantity: number };
+    product_id: string;
+};

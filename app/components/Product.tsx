@@ -27,7 +27,7 @@ export const Product = async (props: ProductType) => {
                 href={`/${formatProductNameToUrl(props.name)}/${
                     props.product_id
                 }`}
-                className="relative h-56 "
+                className="relative h-44 "
             >
                 <Image
                     // object-top

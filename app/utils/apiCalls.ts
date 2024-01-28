@@ -7,6 +7,7 @@ import {
     UserType,
     ProductAvailabilityType,
     PriceType,
+    PopularProductType,
 } from "../types";
 import { BASE_URL } from "../lib/constants";
 
@@ -166,8 +167,7 @@ export const getPopularProducts = async () => {
             revalidate: revalidateTime,
         },
     });
-    const data: { _sum: { quantity: number }; product_id: string }[] =
-        await res.json();
+    const data: PopularProductType[] = await res.json();
     return data;
 };
 

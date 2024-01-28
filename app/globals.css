@@ -4,7 +4,7 @@
 
 @layer base {
     main {
-        @apply m-auto max-w-[1550px] px-4 py-2 md:px-8;
+        @apply m-auto max-w-[1550px] px-1 py-3 sm:px-2 md:px-3;
     }
 
     header {
@@ -15,9 +15,10 @@
         @apply bg-slate-50
     }
 
-    /* body {
-        @apply m-auto max-w-[1440px] bg-purple-50;
-    } */
+    .swiper-wrapper {
+        display: none !important;
+        flex-direction: row !important
+    }
 }
 
 @layer components {
@@ -28,26 +29,16 @@
     .dropdown:hover .dropdown-menu {
         display: block
     }
-
-    #hot-3 {
-        @apply hidden sm:flex
-    }
-
-    #hot-4 {
-        @apply hidden md:flex
-    }
-
-    #hot-5 {
-        @apply hidden lg:flex
-    }
-
-    /* .dropdown:hover .dropdown-bg {
-        display: block;
-    } */
 }
 
 @layer utilities {
     /* h2 {
         @apply text-xl;
     } */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: white !important;
+    border: 2px solid white !important
 }

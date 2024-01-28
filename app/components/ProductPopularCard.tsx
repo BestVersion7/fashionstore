@@ -13,12 +13,9 @@ import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";
 import { AddCartBtn } from "./AddCartBtn";
 import { FaFire } from "react-icons/fa";
+import { PopularProductType } from "../types";
 
-export const ProductPopularCard = async (props: {
-    _sum: { quantity: number };
-    product_id: string;
-    index: number;
-}) => {
+export const ProductPopularCard = async (props: PopularProductType) => {
     const productInfo = await getProductById(props.product_id);
     const prices = await getPriceById(productInfo.default_price);
     const availability = await getProductAvailableQuantity(props.product_id);
@@ -31,10 +28,7 @@ export const ProductPopularCard = async (props: {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article
-            id={`hot-${props.index}`}
-            className=" border border-black pb-2 flex flex-col bg-green-100 "
-        >
+        <article className=" pb-2 flex flex-col bg-green-50 border border-black">
             <Link
                 href={`/${formatProductNameToUrl(productInfo.name)}/${
                     props.product_id
@@ -51,29 +45,31 @@ export const ProductPopularCard = async (props: {
                     priority
                 />
             </Link>
-            <div className="px-1 pt-1 flex flex-col gap-1">
-                <p className="flex italic bg-orange-200 font-semibold rounded-lg items-center justify-center">
+            <div className="px-1 pt-1 flex flex-col gap-1 text-center items-center">
+                <div className="flex italic bg-orange-200 font-semibold rounded-lg items-center">
                     <FaFire className="text-red-600" />
-                    <span> {quantitySold} sold past month</span>
+                    {quantitySold} sold past month
                     <FaFire className="text-red-600" />
-                </p>
+                </div>
                 <Link
                     href={`/${formatProductNameToUrl(productInfo.name)}/${
                         props.product_id
                     }`}
-                    className=" hover:text-violet-600 hidden sm:block"
+                    className=" hover:text-violet-600 hidden"
                 >
                     {productInfo.name}
                 </Link>
 
-                <ProductReviewStar
-                    count={reviewCount}
-                    average={reviewRating}
-                    link={`/${formatProductNameToUrl(productInfo.name)}/${
-                        productInfo.product_id
-                    }`}
-                />
-                <p className=" font-medium tracking-wide">
+                <div className="hidden ">
+                    <ProductReviewStar
+                        count={reviewCount}
+                        average={reviewRating}
+                        link={`/${formatProductNameToUrl(productInfo.name)}/${
+                            productInfo.product_id
+                        }`}
+                    />
+                </div>
+                <p className="text-lg font-medium tracking-wide">
                     {formatCurrency(prices.unit_amount)}
                 </p>
 

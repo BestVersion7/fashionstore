@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
                         },
                     },
                 ],
-                take: 6,
+                take: 8,
             });
             return NextResponse.json(data);
         }

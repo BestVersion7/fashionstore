@@ -2,11 +2,15 @@ import { HomeProductCard } from "./components/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
 import { getPopularProducts } from "./utils/apiCalls";
-import { ProductPopularCard } from "./components/ProductPopularCard";
 import { GiClothes } from "react-icons/gi";
+import { PopularProductMap } from "./components/PopularProductMap";
+import { ProductPopularCard } from "./components/ProductPopularCard";
 
 export default async function Home() {
     const popularProducts = await getPopularProducts();
+    const mappedProducts = popularProducts.map((item, index) => (
+        <ProductPopularCard key={index} {...item} />
+    ));
 
     return (
         <main className="px-0 py-0">
@@ -112,21 +116,13 @@ export default async function Home() {
                 </div>
             </section>
 
-            <section className="  p-2">
-                <div className="flex items-center text-red-600 ">
-                    <GiClothes className=" text-2xl" />
-                    <h3 className="text-2xl font-bold ">New & Hot</h3>
-                    <GiClothes className=" text-2xl" />
+            <section>
+                <div className="flex items-center text-xl py-1 text-white  bg-orange-600">
+                    <GiClothes />
+                    <h3 className=" font-medium ">Popular & Trending</h3>
+                    <GiClothes />
                 </div>
-                <div className=" grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 overflow-hidden">
-                    {popularProducts.map((item, index) => (
-                        <ProductPopularCard
-                            key={index}
-                            {...item}
-                            index={index}
-                        />
-                    ))}
-                </div>
+                <PopularProductMap cards={mappedProducts} />
             </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">

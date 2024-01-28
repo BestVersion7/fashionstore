@@ -22,6 +22,7 @@ import { SearchInput } from "@/app/components/SearchInput";
 import { ProductPopularCard } from "@/app/components/ProductPopularCard";
 import { GiClothes } from "react-icons/gi";
 import { SignInBtn } from "@/app/components/SignInBtn";
+import { PopularProductMap } from "@/app/components/PopularProductMap";
 
 export async function generateMetadata({
     params,
@@ -58,6 +59,9 @@ export default async function CategoryShop({
 
     // popular products
     const popularProducts = await getPopularProducts();
+    const mappedProducts = popularProducts.map((item, index) => (
+        <ProductPopularCard key={index} {...item} />
+    ));
 
     return (
         <main>
@@ -69,7 +73,7 @@ export default async function CategoryShop({
             </div>
             <ProductFilter />
 
-            <div className="px-2 my-3 grid grid-rows-[200px,auto] gap-2 sm:flex">
+            <div className="my-3 grid grid-rows-[200px,auto] gap-2 sm:flex">
                 <div className="relative sm:w-40">
                     <Image
                         className="object-contain object-left sm:object-top"
@@ -112,21 +116,13 @@ export default async function CategoryShop({
             </div>
 
             {/* popular */}
-            <section className="  p-2">
-                <div className="flex items-center text-red-600 ">
-                    <GiClothes className=" text-2xl" />
-                    <h3 className="text-2xl font-bold ">New & Hot</h3>
-                    <GiClothes className=" text-2xl" />
+            <section>
+                <div className="flex items-center text-xl py-1 text-white  bg-orange-600">
+                    <GiClothes />
+                    <h3 className=" font-medium ">Popular & Trending</h3>
+                    <GiClothes />
                 </div>
-                <div className=" grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 overflow-hidden">
-                    {popularProducts.map((item, index) => (
-                        <ProductPopularCard
-                            key={index}
-                            {...item}
-                            index={index}
-                        />
-                    ))}
-                </div>
+                <PopularProductMap cards={mappedProducts} />
             </section>
 
             {/* Reviews */}
