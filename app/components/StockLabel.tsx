@@ -1,24 +1,9 @@
-export const StockLabel = ({ quantity }: { quantity: number }) => {
-    let label;
-    let bgColour;
-
-    if (quantity === 0) {
-        label = "Temporarily out of stock.";
-        bgColour = "bg-orange-500";
-    }
-    // else if (quantity < 10) {
-    //     label = "Almost.";
-    //     bgColour = "bg-yellow-500 bg-opacity-50";
-    // }
+export const StockLabel = () => {
     return (
-        <>
-            {label && (
-                <div
-                    className={`text-sm text-center py-1 ${bgColour} text-white font-medium`}
-                >
-                    {label}
-                </div>
-            )}
-        </>
+        <div
+            className={`py-1 px-3 font-medium rounded-md bg-red-600 text-white `}
+        >
+            Sold out
+        </div>
     );
 };

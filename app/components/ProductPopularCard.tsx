@@ -45,8 +45,8 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                     priority
                 />
             </Link>
-            <div className="px-1 pt-1 flex flex-col gap-1 text-center items-center">
-                <div className="flex italic bg-orange-200 font-semibold rounded-lg items-center">
+            <div className="px-1 pt-1 flex flex-col gap-1 text-center items-center text-sm">
+                <div className="flex italic px-1 bg-orange-200 font-semibold rounded-lg items-center">
                     <FaFire className="text-red-600" />
                     {quantitySold} sold past month
                     <FaFire className="text-red-600" />
@@ -59,7 +59,6 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                 >
                     {productInfo.name}
                 </Link>
-
                 <div className="hidden ">
                     <ProductReviewStar
                         count={reviewCount}
@@ -73,20 +72,30 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                     {formatCurrency(prices.unit_amount)}
                 </p>
 
-                {availability.available_quantity > 0 ? (
-                    <AddCartBtn
-                        price_id={productInfo.default_price}
-                        product_id={props.product_id}
-                        product_price={prices.unit_amount}
-                        quantity={1}
-                    />
-                ) : (
-                    <span className="mb-4 ">
-                        <StockLabel
-                            quantity={Number(availability.available_quantity)}
+                <div className="">
+                    {availability.available_quantity > 0 ? (
+                        <AddCartBtn
+                            price_id={productInfo.default_price}
+                            product_id={props.product_id}
+                            product_price={prices.unit_amount}
+                            quantity={1}
                         />
-                    </span>
-                )}
+                    ) : (
+                        <StockLabel />
+                    )}
+                </div>
+                {/* <div className="text-3xl">
+                    {availability.available_quantity > 0 ? (
+                        <AddCartBtn
+                            price_id={productInfo.default_price}
+                            product_id={props.product_id}
+                            product_price={prices.unit_amount}
+                            quantity={1}
+                        />
+                    ) : (
+                        <StockLabel />
+                    )}
+                </div> */}
             </div>
         </article>
     );

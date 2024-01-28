@@ -43,7 +43,7 @@ export const AddCartBtn = (
     return (
         <button
             type="button"
-            className="bg-yellow-400 border rounded-2xl text-sm px-3 font-medium py-1 hover:bg-yellow-500"
+            className="bg-yellow-400  rounded-2xl px-3 font-medium py-1 hover:bg-yellow-500"
             onClick={handleAddCart}
             disabled={disableAdd}
         >

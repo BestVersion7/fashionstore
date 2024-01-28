@@ -22,16 +22,16 @@ export const Product = async (props: ProductType) => {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article className="rounded-md border shadow-sm  my-3 flex flex-col">
+        <article className="border grid grid-rows-[210px,auto]">
             <Link
                 href={`/${formatProductNameToUrl(props.name)}/${
                     props.product_id
                 }`}
-                className="relative h-44 "
+                className="relative h-52 "
             >
                 <Image
                     // object-top
-                    className="object-cover "
+                    className=" object-contain"
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     src={props.images[0]}
@@ -39,7 +39,7 @@ export const Product = async (props: ProductType) => {
                     priority
                 />
             </Link>
-            <div className=" px-4 py-1 flex flex-col gap-1">
+            <div className=" flex flex-col gap-1 items-center">
                 <Link
                     href={`/${formatProductNameToUrl(props.name)}/${
                         props.product_id
@@ -60,22 +60,17 @@ export const Product = async (props: ProductType) => {
                         props.product_id
                     }`}
                 />
-                {/* <p>{props.product_id}</p> */}
-                {productAvailability.available_quantity > 0 ? (
-                    <CartQPost
-                        product_id={props.product_id}
-                        price_id={props.default_price}
-                        product_price={prices.unit_amount}
-                    />
-                ) : (
-                    <span className="mb-4 ">
-                        <StockLabel
-                            quantity={Number(
-                                productAvailability.available_quantity
-                            )}
+                <div>
+                    {productAvailability.available_quantity > 0 ? (
+                        <CartQPost
+                            product_id={props.product_id}
+                            price_id={props.default_price}
+                            product_price={prices.unit_amount}
                         />
-                    </span>
-                )}
+                    ) : (
+                        <StockLabel />
+                    )}
+                </div>
             </div>
         </article>
     );

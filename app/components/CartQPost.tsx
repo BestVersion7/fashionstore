@@ -32,11 +32,11 @@ export const CartQPost = (
     };
 
     return (
-        <div className="relative flex flex-col">
+        <div className="relative flex flex-col items-center">
             <button
                 type="button"
                 onClick={() => setShowDropdown((val) => !val)}
-                className="flex w-20 justify-center items-center border border-black border-solid bg-gray-200 shadow-md rounded-md px-1"
+                className="flex w-20  justify-center items-center border border-black border-solid bg-gray-200 shadow-md rounded-md px-1"
             >
                 Qty: {quantity} <FaAngleDown />
             </button>
@@ -45,7 +45,7 @@ export const CartQPost = (
                 <div className="absolute top-0 z-10" ref={dropdownRef}>
                     {quantity > 5 ? (
                         <input
-                            className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
+                            className=" w-20   border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
                             onChange={handleQuantityChange}
                             title="quantity"
                             defaultValue={quantity}
@@ -53,7 +53,7 @@ export const CartQPost = (
                         />
                     ) : showInput ? (
                         <input
-                            className=" w-20 border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
+                            className=" w-20   border border-slate-500  pl-2 rounded-sm  focus:outline-none focus:shadow-[0px_1px_3px_0px] focus:shadow-yellow-500"
                             onChange={handleQuantityChange}
                             title="quantity"
                             defaultValue={quantity}
@@ -66,7 +66,7 @@ export const CartQPost = (
                                     key={item}
                                     value={item}
                                     onClick={handleDropDownChangeQuantity}
-                                    className="bg-slate-200 w-20 justify-between border border-b-slate-600 pl-2 hover:cursor-pointer hover:bg-green-200"
+                                    className="bg-slate-200   w-20 justify-between border border-b-slate-600 pl-2 hover:cursor-pointer hover:bg-green-200"
                                 >
                                     {item}
                                 </li>
