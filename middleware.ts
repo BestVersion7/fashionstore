@@ -9,26 +9,19 @@ import { getToken } from "next-auth/jwt";
 //     limiter: Ratelimit.slidingWindow(20, "1 s"),
 // });
 
-let availableOrigins = "http://localhost:3000";
-if (process.env.NODE_ENV === "production") {
-    availableOrigins = "https://afashionstore.vercel.app";
-}
+// let availableOrigins = "http://localhost:3000";
+// if (process.env.NODE_ENV === "production") {
+//     availableOrigins = "https://afashionstore.vercel.app";
+// }
 
 export async function middleware(req: NextRequest) {
     const apiKey = req.headers.get("authorization");
 
-    if (req.nextUrl.pathname.startsWith("/api")) {
-        if (req.nextUrl.origin !== availableOrigins) {
-            return NextResponse.json("Origin not allowed", { status: 405 });
-        } else if (
-            req.nextUrl.pathname.startsWith("/api/order") &&
-            req.method === "GET"
-        ) {
-            if (apiKey !== process.env.API_KEY) {
-                return NextResponse.json("unauthorized", { status: 401 });
-            } else {
-                return NextResponse.next();
-            }
+    if (req.nextUrl.pathname.startsWith("/api/order") && req.method === "GET") {
+        if (apiKey !== process.env.API_KEY) {
+            return NextResponse.json("unauthorized", { status: 401 });
+        } else {
+            return NextResponse.next();
         }
     }
 
