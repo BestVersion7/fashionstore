@@ -4,22 +4,30 @@ import prisma from "@/app/lib/prisma";
 export async function GET(req: NextRequest) {
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
-        let data;
+        let data2;
 
         if (productId) {
-            data = await prisma.productInfo.findUnique({
+            data2 = await prisma.productInfo.findUnique({
                 where: {
-                    product_id: productId,
+                    product_id: Number(productId),
                 },
             });
         } else {
-            data = await prisma.productInfo.findMany({
+            data2 = await prisma.productInfo.findMany({
                 take: 10,
                 orderBy: {
                     created_at: "desc",
                 },
             });
         }
+
+        const data = JSON.parse(
+            JSON.stringify(
+                data2,
+                (_, value) =>
+                    typeof value === "bigint" ? value.toString() : value // return everything else unchanged
+            )
+        );
 
         return NextResponse.json(data);
     } catch (err) {

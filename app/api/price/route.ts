@@ -6,7 +6,10 @@ export async function GET(req: NextRequest) {
         const priceId = req.nextUrl.searchParams.get("price_id");
         const data = await prisma.priceInfo.findUnique({
             where: {
-                price_id: `${priceId}`,
+                price_id: Number(priceId),
+            },
+            select: {
+                unit_amount: true,
             },
         });
         return NextResponse.json(data);

@@ -10,11 +10,7 @@ export type ProductType = {
 };
 
 export type PriceType = {
-    price_id: string;
-    created_at: Date;
     unit_amount: number;
-    updated_at: Date;
-    product_id: string;
 };
 
 export type PaymentIntentType = {
@@ -74,7 +70,6 @@ export type OrderType = {
 };
 
 export type ProductAvailabilityType = {
-    product_id: string;
     available_quantity: number;
 };
 

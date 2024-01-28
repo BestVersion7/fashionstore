@@ -14,7 +14,7 @@ export async function GET(req: NextRequest) {
                     quantity: true,
                 },
                 where: {
-                    product_id: productId,
+                    product_id: Number(productId),
                     purchased: true,
                     created_at: {
                         gte: monthLimit,

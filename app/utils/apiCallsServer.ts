@@ -1,6 +1,11 @@
 import { CartType } from "../types";
 import { BASE_URL } from "../lib/constants";
-import { getCookieServer } from "./getCookieServer";
+import { cookies } from "next/headers";
+
+export const getCookieServer = () => {
+    const cookieId = cookies().get("cookiecart")?.value;
+    return cookieId;
+};
 
 const stripeOrigin = `${BASE_URL}/api/stripe`;
 const cartOrigin = `${BASE_URL}/api/cart`;

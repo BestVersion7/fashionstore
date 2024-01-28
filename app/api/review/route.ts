@@ -2,17 +2,17 @@ import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    const product_id = req.nextUrl.searchParams.get("product_id");
+    const productId = req.nextUrl.searchParams.get("product_id");
     const page = req.nextUrl.searchParams.get("page");
 
     try {
-        if (!product_id || !page) {
+        if (!productId || !page) {
             return NextResponse.json(0);
         }
 
         const data2 = await prisma.productReviewInfo.findMany({
             where: {
-                product_id,
+                product_id: Number(productId),
             },
             orderBy: {
                 created_at: "desc",
@@ -36,11 +36,11 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-    const product_id = req.nextUrl.searchParams.get("product_id");
+    const productId = req.nextUrl.searchParams.get("product_id");
     const { user_email, review_message, review_star } = await req.json();
 
     try {
-        if (!product_id) {
+        if (!productId) {
             return NextResponse.json({ message: "No User id." });
         }
 
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 
         await prisma.productReviewInfo.create({
             data: {
-                product_id,
+                product_id: Number(productId),
                 user_email,
                 review_message,
                 review_star,

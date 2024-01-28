@@ -7,7 +7,12 @@ import {
 } from "../types";
 import { BASE_URL } from "../lib/constants";
 import { notificationsArray } from "./notifications";
-import { getCookieClient } from "./getCookieClient";
+import { getCookie } from "cookies-next";
+
+export const getCookieClient = () => {
+    const cookieId = getCookie("cookiecart");
+    return cookieId;
+};
 
 const emailOrigin = `${BASE_URL}/api/contact`;
 const stripeOrigin = `${BASE_URL}/api/stripe`;

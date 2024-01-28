@@ -3,20 +3,20 @@ import prisma from "@/app/lib/prisma";
 
 export async function GET(req: NextRequest) {
     try {
-        let data;
+        let data2;
 
         const productName = req.nextUrl.searchParams.get("product_name");
 
         const productCategtory =
             req.nextUrl.searchParams.get("product_category");
         if (productCategtory) {
-            data = await prisma.productInfo.findMany({
+            data2 = await prisma.productInfo.findMany({
                 where: {
                     category: productCategtory,
                 },
             });
         } else if (productName) {
-            data = await prisma.productInfo.findMany({
+            data2 = await prisma.productInfo.findMany({
                 where: {
                     name: {
                         contains: productName,
@@ -25,6 +25,14 @@ export async function GET(req: NextRequest) {
                 },
             });
         }
+
+        const data = JSON.parse(
+            JSON.stringify(
+                data2,
+                (_, value) =>
+                    typeof value === "bigint" ? value.toString() : value // return everything else unchanged
+            )
+        );
 
         return NextResponse.json(data);
     } catch (err) {

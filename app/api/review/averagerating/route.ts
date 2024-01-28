@@ -2,11 +2,11 @@ import prisma from "@/app/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-    const product_id = req.nextUrl.searchParams.get("product_id");
+    const productId = req.nextUrl.searchParams.get("product_id");
 
     try {
         // check for cookies
-        if (!product_id) {
+        if (!productId) {
             return NextResponse.json(0);
         }
 
@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
                 review_star: true,
             },
             where: {
-                product_id,
+                product_id: Number(productId),
             },
         });
 

@@ -9,7 +9,10 @@ export async function GET(req: NextRequest) {
         if (productId) {
             data = await prisma.productAvailabilityInfo.findUnique({
                 where: {
-                    product_id: productId,
+                    product_id: Number(productId),
+                },
+                select: {
+                    available_quantity: true,
                 },
             });
             return NextResponse.json(data);
@@ -29,7 +32,7 @@ export async function PUT(req: NextRequest) {
         if (productId) {
             const searchQuantity =
                 await prisma.productAvailabilityInfo.findUnique({
-                    where: { product_id: productId },
+                    where: { product_id: Number(productId) },
                     select: {
                         available_quantity: true,
                     },
@@ -52,7 +55,7 @@ export async function PUT(req: NextRequest) {
                         available_quantity: availQuantity - Number(quantity),
                     },
                     where: {
-                        product_id: productId,
+                        product_id: Number(productId),
                     },
                 });
             }
