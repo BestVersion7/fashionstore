@@ -5,8 +5,9 @@ import { createProductReview } from "../utils/apiCallsClient";
 import { useRouter } from "next/navigation";
 
 export const ProductReviewForm = (props: {
-    email: string;
+    email: string | undefined | null;
     product_id: string;
+    setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [reviewStar, setReviewStar] = useState(0);
     const [reviewMsg, setReviewMsg] = useState("");
@@ -18,7 +19,7 @@ export const ProductReviewForm = (props: {
         const data = await createProductReview(props.product_id, {
             product_id: props.product_id,
             review_message: reviewMsg,
-            user_email: props.email,
+            user_email: props.email ?? "",
             review_star: reviewStar,
         });
 
@@ -28,6 +29,7 @@ export const ProductReviewForm = (props: {
             setReviewMsg("");
             setReviewStar(0);
             router.refresh();
+            props.setReload((val) => !val);
         }
     };
 
@@ -58,13 +60,6 @@ export const ProductReviewForm = (props: {
                             />
                         </button>
                     ))}
-                    {/* {reviewStar < 1 ? (
-                        ""
-                    ) : (
-                        <span className="text-lg text-orange-500 font-bold">
-                            {reviewStar}
-                        </span>
-                    )} */}
                 </div>
             </div>
 

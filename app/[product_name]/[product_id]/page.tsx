@@ -1,6 +1,5 @@
 import { ProductFilter } from "@/app/components/ProductFilter";
 import {
-    getProductReviews,
     getProductAvailableQuantity,
     getProductRatingAverage,
     getProductReviewCount,
@@ -13,16 +12,13 @@ import { StockLabel } from "@/app/components/StockLabel";
 import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";
 import { ProductReviewStar } from "@/app/components/ProductReviewStar";
 import { CartQPost } from "@/app/components/CartQPost";
-import { ProductReview } from "@/app/components/ProductReview";
-import { FaStar } from "react-icons/fa";
-import { ProductReviewForm } from "@/app/components/ProductReviewForm";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { SearchInput } from "@/app/components/SearchInput";
 import { ProductPopularCard } from "@/app/components/ProductPopularCard";
 import { GiClothes } from "react-icons/gi";
-import { SignInBtn } from "@/app/components/SignInBtn";
-import { PopularProductMap } from "@/app/components/PopularProductMap";
+import { ProductSwiper } from "@/app/components/ProductSwiper";
+import { ProductReview } from "@/app/components/ProductReview";
 
 export async function generateMetadata({
     params,
@@ -48,10 +44,6 @@ export default async function CategoryShop({
     const availableQuantity = await getProductAvailableQuantity(
         params.product_id
     );
-    // get reviews
-    const reviewCount = await getProductReviewCount(params.product_id);
-    const reviewRating = await getProductRatingAverage(params.product_id);
-    const reviews = await getProductReviews(params.product_id);
 
     // pass down username
     const user = await getServerSession(authOptions);
@@ -63,6 +55,12 @@ export default async function CategoryShop({
         <ProductPopularCard key={index} {...item} />
     ));
 
+    // get reviews
+    const reviewCount = await getProductReviewCount(params.product_id);
+    const reviewRating = await getProductRatingAverage(params.product_id);
+
+    // limit 10 reviews per page so get the page crumbs
+
     return (
         <main>
             <h2 className="text-2xl mb-3 font-semibold  text-orange-600">
@@ -73,10 +71,11 @@ export default async function CategoryShop({
             </div>
             <ProductFilter />
 
-            <div className="my-3 grid grid-rows-[200px,auto] gap-2 sm:flex">
-                <div className="relative sm:w-40">
+            {/* product desc */}
+            <div className="my-3 flex flex-col items-center text-center gap-2 md:flex-row md:items-start md:text-left">
+                <div className="relative h-60 w-60 md:w-80 md:h-80">
                     <Image
-                        className="object-contain object-left sm:object-top"
+                        className="object-contain object-top"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         src={product.images[0]}
@@ -84,8 +83,8 @@ export default async function CategoryShop({
                         priority
                     />
                 </div>
-                <div className="  flex flex-col gap-1">
-                    <h2 className="leading-4 text-lg font-medium ">
+                <div className="  flex flex-col gap-1 items-center md:items-start">
+                    <h2 className="leading-4 text-2xl font-medium ">
                         {product.name}
                     </h2>
                     <p className="">{product.description}</p>
@@ -122,51 +121,12 @@ export default async function CategoryShop({
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />
                 </div>
-                <PopularProductMap cards={mappedProducts} />
+                <ProductSwiper cards={mappedProducts} />
             </section>
 
             {/* Reviews */}
-            <section className="max-w-lg">
-                <div>
-                    <p className="flex gap-1 text-xl font-bold">
-                        <span>Average Rating: </span>
-                        <span className="flex items-center">
-                            {reviewRating > 1
-                                ? Number(reviewRating).toFixed(2)
-                                : "Be the first to review."}
-                            <span className="text-orange-400">
-                                <FaStar />
-                            </span>
-                        </span>
-                    </p>
-                </div>
-
-                {!email ? (
-                    <>
-                        <textarea
-                            placeholder="Please sign in to comment."
-                            rows={1}
-                            className="border border-black px-2 w-full"
-                            disabled={true}
-                        />
-                        <SignInBtn />
-                    </>
-                ) : (
-                    <>
-                        <ProductReviewForm
-                            email={email}
-                            product_id={params.product_id}
-                        />
-                    </>
-                )}
-                <h2 className="text-lg font-semibold">
-                    Reviews ({reviewCount}):
-                </h2>
-                <div>
-                    {reviews.map((item, index) => (
-                        <ProductReview key={index} {...item} />
-                    ))}
-                </div>
+            <section className="max-w-2xl">
+                <ProductReview product_id={params.product_id} email={email} />
             </section>
         </main>
     );

@@ -3,7 +3,6 @@ import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
 import { formatCurrency, formatProductNameToUrl } from "../utils/format";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";
-import Link from "next/link";
 import { CartType } from "../types";
 
 export const CartProducts = async (props: CartType) => {
@@ -15,12 +14,7 @@ export const CartProducts = async (props: CartType) => {
     return (
         <>
             <div className="grid grid-cols-[150px,_1fr]  gap-4 my-2 md:grid-cols-[220px,_1fr] md:h-44  ">
-                <Link
-                    href={`/${formatProductNameToUrl(productInfo.name)}/${
-                        props.product_id
-                    }`}
-                    className="relative "
-                >
+                <div className="relative ">
                     <Image
                         className="object-cover "
                         fill
@@ -30,7 +24,7 @@ export const CartProducts = async (props: CartType) => {
                         alt={productInfo.name}
                         src={productInfo.images[0]}
                     />
-                </Link>
+                </div>
                 <div className="md:justify-between md:flex mr-3">
                     <div>
                         <p className="font-bold">{productInfo.name}</p>

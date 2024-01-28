@@ -131,10 +131,16 @@ export const getProductRatingAverage = async (product_id: string) => {
     return data;
 };
 
-export const getProductReviews = async (product_id: string) => {
-    const res = await fetch(`${reviewOrigin}?product_id=${product_id}`, {
-        cache: "no-cache",
-    });
+export const getTenProductReviewsByPage = async (
+    product_id: string,
+    page: number
+) => {
+    const res = await fetch(
+        `${reviewOrigin}?product_id=${product_id}&page=${page}`,
+        {
+            cache: "no-cache",
+        }
+    );
     const data: ProductReviewType[] = await res.json();
     return data;
 };
@@ -144,9 +150,9 @@ export const getUserInfoByEmail = async (email: string) => {
         // next: {
         //     revalidate: revalidateTime,
         // },
-        headers: {
-            authorization: `${process.env.API_KEY}`,
-        },
+        // headers: {
+        //     authorization: `${process.env.API_KEY}`,
+        // },
         cache: "no-cache",
     });
     const data: UserType = await res.json();

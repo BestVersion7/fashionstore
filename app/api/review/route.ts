@@ -3,9 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
     const product_id = req.nextUrl.searchParams.get("product_id");
+    const page = req.nextUrl.searchParams.get("page");
 
     try {
-        if (!product_id) {
+        if (!product_id || !page) {
             return NextResponse.json(0);
         }
 
@@ -16,6 +17,8 @@ export async function GET(req: NextRequest) {
             orderBy: {
                 created_at: "desc",
             },
+            take: 10,
+            skip: (Number(page) - 1) * 10,
         });
 
         const data = JSON.parse(

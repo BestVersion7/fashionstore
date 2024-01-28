@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getPopularProducts } from "./utils/apiCalls";
 import { GiClothes } from "react-icons/gi";
-import { PopularProductMap } from "./components/PopularProductMap";
+import { ProductSwiper } from "./components/ProductSwiper";
 import { ProductPopularCard } from "./components/ProductPopularCard";
 
 export default async function Home() {
@@ -122,7 +122,7 @@ export default async function Home() {
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />
                 </div>
-                <PopularProductMap cards={mappedProducts} />
+                <ProductSwiper cards={mappedProducts} />
             </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">

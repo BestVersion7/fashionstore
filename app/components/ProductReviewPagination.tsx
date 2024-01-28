@@ -8,15 +8,12 @@ import {
 import { ProductReviewComments } from "./ProductReviewComments";
 import { ProductReviewType } from "../types";
 import { FaStar } from "react-icons/fa";
-import { ProductReviewForm } from "./ProductReviewForm";
-import { SignInBtn } from "./SignInBtn";
 
 type props = {
     product_id: string;
-    email: string | undefined | null;
 };
 
-export const ProductReview = (props: props) => {
+export const ProductReviewPagination = (props: props) => {
     const [reviews, setReviews] = useState<ProductReviewType[]>([]);
     const [reviewCount, setReviewCount] = useState(0);
     const [reviewRating, setReviewRating] = useState(0);
@@ -41,36 +38,20 @@ export const ProductReview = (props: props) => {
     let reviewPagination: number[] = [];
 
     const loopCount = Math.ceil(reviewCount / 10) + 1;
-    for (let i = 1; i < loopCount; i++) {
-        reviewPagination.push(i);
+    if (reviewCount > 10) {
+        for (let i = 1; i < loopCount; i++) {
+            reviewPagination.push(i);
+        }
     }
 
     const handlePaginate = (e: React.MouseEvent<HTMLButtonElement>) => {
         setPage(Number(e.currentTarget.value));
         setReload((val) => !val);
+        // router.refresh();
     };
 
     return (
         <>
-            {!props.email ? (
-                <>
-                    <textarea
-                        placeholder="Please sign in to comment."
-                        rows={1}
-                        className="border border-black px-2 w-full"
-                        disabled={true}
-                    />
-                    <SignInBtn />
-                </>
-            ) : (
-                <>
-                    <ProductReviewForm
-                        email={props.email}
-                        product_id={props.product_id}
-                        setReload={setReload}
-                    />
-                </>
-            )}
             <div>
                 <div>
                     <p className="flex gap-1 text-xl font-bold">
@@ -87,24 +68,22 @@ export const ProductReview = (props: props) => {
                 </div>
                 <div className="text-lg font-semibold flex justify-between">
                     <div className="">Reviews ({reviewCount}):</div>
-                    {reviewCount > 0 && (
-                        <div>
-                            Page:
-                            {reviewPagination.map((item) => (
-                                <button
-                                    onClick={handlePaginate}
-                                    type="button"
-                                    key={item}
-                                    value={item}
-                                    className={`${
-                                        item === page && "underline"
-                                    } px-2 hover:underline`}
-                                >
-                                    {item}
-                                </button>
-                            ))}
-                        </div>
-                    )}
+                    <div>
+                        Page:
+                        {reviewPagination.map((item) => (
+                            <button
+                                onClick={handlePaginate}
+                                type="button"
+                                key={item}
+                                value={item}
+                                className={`${
+                                    item === page && "underline"
+                                } px-2 hover:underline`}
+                            >
+                                {item}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
