@@ -67,8 +67,8 @@ export function StripeForm(props: {
                     orderItems[i].product_id
                 );
                 if (
-                    orderItems[i].quantity >
-                    productAvailability.available_quantity
+                    Number(orderItems[i].quantity) >
+                    Number(productAvailability.available_quantity)
                 ) {
                     setErrorMessage(
                         "An item in your cart exceeds availability."
