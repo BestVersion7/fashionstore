@@ -11,7 +11,7 @@ import { getToken } from "next-auth/jwt";
 
 let availableOrigins = "http://localhost:3000";
 if (process.env.NODE_ENV === "production") {
-    availableOrigins = "http://afashionstore.vercel.app";
+    availableOrigins = "https://afashionstore.vercel.app";
 }
 
 export async function middleware(req: NextRequest) {
