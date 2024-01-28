@@ -35,7 +35,7 @@ export const ProductReviewForm = (props: {
 
     return (
         <form onSubmit={handleSubmitReview} className="grid gap-2">
-            <div>
+            <div className="text-xl font-medium">
                 <h3>Product Rating:</h3>
                 <div className="flex items-center gap-1 ">
                     {[1, 2, 3, 4, 5].map((item) => (
@@ -56,7 +56,7 @@ export const ProductReviewForm = (props: {
                             <FaStar
                                 className={`${
                                     item <= reviewStar ? "block" : "hidden"
-                                } absolute text-sm top-[1px] left-[1px] text-orange-400`}
+                                } absolute  top-0 left-0 text-orange-500`}
                             />
                         </button>
                     ))}

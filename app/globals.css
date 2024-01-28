@@ -39,6 +39,10 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-    color: white !important;
-    border: 2px solid white !important
+    color: black !important;
+    /* transform: scaleX(.8) !important; */
+    transform: scale(.8) !important;
+    top: 40% !important;
+    border: 1px solid black !important;
+    background-color: lightpink !important
 }

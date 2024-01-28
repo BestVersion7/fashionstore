@@ -125,7 +125,7 @@ export default async function CategoryShop({
             </section>
 
             {/* Reviews */}
-            <section className="max-w-2xl">
+            <section className="max-w-4xl">
                 <ProductReview product_id={params.product_id} email={email} />
             </section>
         </main>
