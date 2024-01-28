@@ -40,7 +40,6 @@ export default async function CategoryShop({
     params: { category: string };
 }) {
     const products = await getProductBySearchCategory(params.category);
-
     return (
         <>
             <ProductFilter category={params.category} />
