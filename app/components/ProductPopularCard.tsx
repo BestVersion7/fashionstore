@@ -28,7 +28,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article className=" pb-2 flex flex-col bg-green-50 border border-black">
+        <article className=" pb-2 flex flex-col bg-green-50 border border-black hover:bg-gray-200">
             <Link
                 href={`/${formatProductNameToUrl(productInfo.name)}/${
                     props.product_id
