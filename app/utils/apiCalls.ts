@@ -20,7 +20,7 @@ const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-const revalidateTime = 1;
+const revalidateTime = 60 * 60 * 24 * 1;
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
