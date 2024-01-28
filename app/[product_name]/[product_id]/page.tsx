@@ -38,7 +38,6 @@ export default async function CategoryShop({
     params: { product_name: string; product_id: string };
 }) {
     const product = await getProductById(Number(params.product_id));
-
     // get the prices and availability
     const prices = await getPriceById(product.default_price);
     const availableQuantity = await getProductAvailableQuantity(

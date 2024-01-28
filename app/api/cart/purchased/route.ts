@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
 
             return NextResponse.json(data._sum.quantity || 0);
         } else {
-            const data = await prisma.cartInfo.groupBy({
+            const data2 = await prisma.cartInfo.groupBy({
                 by: "product_id",
                 _sum: {
                     quantity: true,
@@ -44,6 +44,14 @@ export async function GET(req: NextRequest) {
                 ],
                 take: 8,
             });
+
+            const data = JSON.parse(
+                JSON.stringify(
+                    data2,
+                    (_, value) =>
+                        typeof value === "bigint" ? value.toString() : value // return everything else unchanged
+                )
+            );
             return NextResponse.json(data);
         }
     } catch (err) {
