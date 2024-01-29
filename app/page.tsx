@@ -13,7 +13,7 @@ export default async function Home() {
     ));
 
     return (
-        <main className="px-0 py-0">
+        <main className="max-w-[1500px] px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
                 <p className="">
                     Sign up for our newsletter and <b>Buy Two Get One FREE</b>.
@@ -116,13 +116,17 @@ export default async function Home() {
                 </div>
             </section>
 
-            <section>
+            <section className="">
                 <div className="flex items-center text-xl px-3 py-1 text-white  bg-orange-600">
                     <GiClothes />
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />
                 </div>
-                <ProductSwiper cards={mappedProducts} />
+                <div className=" mx-2 sm:mx-3 md:mx-4">
+                    {mappedProducts.length > 5 && (
+                        <ProductSwiper cards={mappedProducts} />
+                    )}
+                </div>
             </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">

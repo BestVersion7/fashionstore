@@ -37,8 +37,8 @@ export default async function CheckoutPage() {
     }
 
     return (
-        <div>
-            <div className="flex justify-around text-3xl py-3 font-semibold bg-blue-50">
+        <main>
+            <div className="flex justify-around text-3xl py-3 font-semibold bg-orange-300">
                 <span>
                     Checkout ({totalQ ? totalQ : 0}{" "}
                     {totalQ === 1 ? "item" : "items"})
@@ -47,8 +47,7 @@ export default async function CheckoutPage() {
                     <FaLock />
                 </span>
             </div>
-            <main>
-                {/* <main className="lg:grid lg:grid-cols-[700px,_1fr]"> */}
+            <>
                 {totalAmount > 0 && (
                     <Checkout
                         totalAmount={totalAmount}
@@ -63,8 +62,8 @@ export default async function CheckoutPage() {
                         <CartProducts key={index} {...item} />
                     ))}
                 </div>
-            </main>
+            </>
             <br />
-        </div>
+        </main>
     );
 }

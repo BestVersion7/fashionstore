@@ -9,7 +9,6 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             <div className="border border-solid border-black bg-white py-1">
                 <SearchInput />
             </div>
-
             {props.children}
         </main>
     );

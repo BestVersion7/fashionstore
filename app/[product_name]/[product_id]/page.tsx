@@ -116,7 +116,9 @@ export default async function CategoryShop({
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />
                 </div>
-                <ProductSwiper cards={mappedProducts} />
+                {mappedProducts.length > 5 && (
+                    <ProductSwiper cards={mappedProducts} />
+                )}
             </section>
 
             {/* Reviews */}

@@ -27,7 +27,7 @@ export default async function CartPage() {
             </Link>
 
             <div>
-                <div className="  lg:gap-7 lg:grid lg:grid-cols-[680px,_1fr] xl:grid-cols-[950px,_1fr] 2xl:grid-cols-[1100px,_1fr]">
+                <div className="lg:gap-7 lg:grid lg:grid-cols-[780px,_1fr] xl:grid-cols-[850px,_1fr] 2xl:grid-cols-[900px,_1fr]">
                     {cartItems.length === 0 ? (
                         <span className="text-red-400">
                             You have no items in your cart
@@ -45,7 +45,7 @@ export default async function CartPage() {
                             ))}
                         </div>
                     )}
-                    <div className="text-center px-4 py-7 bg-white shadow-md lg:h-52">
+                    <div className="text-center px-2 py-2 bg-white shadow-md lg:h-52">
                         <p className="italic text-sm text-green-600 ">
                             All orders greater than $50.00 qualify for free
                             shipping.
@@ -58,7 +58,7 @@ export default async function CartPage() {
                         </p>{" "}
                         <br />
                         <Link
-                            className="py-2 px-3 rounded-xl w-full bg-yellow-300  hover:cursor-pointer hover:bg-yellow-400"
+                            className="py-2 px-3 rounded-xl w-52 bg-yellow-300  hover:cursor-pointer hover:bg-yellow-400"
                             type="button"
                             href="/checkout"
                         >

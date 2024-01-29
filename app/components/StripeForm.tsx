@@ -134,7 +134,7 @@ export function StripeForm(props: {
 
     return (
         <form onSubmit={onSubmit} name="checkout-form">
-            <div className="lg:grid lg:grid-cols-[800px,_1fr] xl:grid-cols-[950px,_1fr] lg:gap-5">
+            <div className="lg:grid lg:grid-cols-[600px,_1fr] xl:grid-cols-[750px,_1fr] lg:gap-5">
                 <div>
                     <div id="address"></div>
                     <h2 className="stripe-h2">1. Enter your email</h2>

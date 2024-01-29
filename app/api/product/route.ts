@@ -4,6 +4,8 @@ import prisma from "@/app/lib/prisma";
 export async function GET(req: NextRequest) {
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
+        const page = req.nextUrl.searchParams.get("page");
+
         let data2;
 
         if (productId) {
@@ -14,10 +16,11 @@ export async function GET(req: NextRequest) {
             });
         } else {
             data2 = await prisma.productInfo.findMany({
-                take: 10,
                 orderBy: {
                     created_at: "desc",
                 },
+                take: 50,
+                skip: (Number(page) - 1) * 50,
             });
         }
 
