@@ -85,9 +85,7 @@ export default async function CategoryShop({
                     />
                 </div>
                 <div className="  flex flex-col gap-1 items-center md:items-start">
-                    <h2 className="leading-4 text-2xl font-medium ">
-                        {product.name}
-                    </h2>
+                    <h2 className=" text-xl font-medium ">{product.name}</h2>
                     <p className="">
                         {product.description && product.description}
                     </p>

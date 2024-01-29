@@ -20,7 +20,8 @@ const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-const revalidateTime = 60 * 60 * 24 * 1;
+const revalidateTime = 1;
+// const revalidateTime = 60 * 60 * 24 * 1;
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
@@ -36,8 +37,8 @@ export const getProductBySearchName = async (input: string | undefined) => {
     return data;
 };
 
-export const getAllProducts = async () => {
-    const res = await fetch(productOrigin, {
+export const get24Products = async (page: number) => {
+    const res = await fetch(`${productOrigin}?page=${page}`, {
         next: { revalidate: revalidateTime },
     });
     const data: ProductType[] = await res.json();
@@ -68,9 +69,12 @@ export const getCartByCookieProp = async (cookieId: string) => {
     return data;
 };
 
-export const getProductBySearchCategory = async (input: string | undefined) => {
+export const get24ProductsBySearchCategory = async (
+    input: string | undefined,
+    page: number
+) => {
     const res = await fetch(
-        `${productOrigin}/search?product_category=${input}`,
+        `${productOrigin}/search?product_category=${input}&page=${page}`,
         {
             next: { revalidate: revalidateTime },
         }

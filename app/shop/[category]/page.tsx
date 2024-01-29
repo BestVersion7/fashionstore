@@ -1,4 +1,4 @@
-import { getProductBySearchCategory } from "@/app/utils/apiCalls";
+import { get24ProductsBySearchCategory } from "@/app/utils/apiCalls";
 import { ProductFilter } from "@/app/components/ProductFilter";
 import { ProductMapped } from "@/app/components/ProductMapped";
 
@@ -36,10 +36,13 @@ export async function generateMetadata({
 
 export default async function CategoryShop({
     params,
+    searchParams,
 }: {
     params: { category: string };
+    searchParams: { page: number };
 }) {
-    const products = await getProductBySearchCategory(params.category);
+    const page = searchParams.page || 1;
+    const products = await get24ProductsBySearchCategory(params.category, page);
     return (
         <>
             <ProductFilter category={params.category} />

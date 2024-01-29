@@ -67,6 +67,14 @@ export async function POST() {
                         default_price: priceInfo.price_id,
                         images: [`${imageArrayMapped[i]}`],
                     },
+                    select: {
+                        product_id: true,
+                    },
+                });
+                await prisma.productAvailabilityInfo.create({
+                    data: {
+                        available_quantity: 3,
+                    },
                 });
             }
         }

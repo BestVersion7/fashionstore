@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
         let data2;
 
         const productName = req.nextUrl.searchParams.get("product_name");
+        const page = req.nextUrl.searchParams.get("page");
 
         const productCategtory =
             req.nextUrl.searchParams.get("product_category");
@@ -14,6 +15,8 @@ export async function GET(req: NextRequest) {
                 where: {
                     category: productCategtory,
                 },
+                take: 24,
+                skip: (Number(page) - 1) * 24,
             });
         } else if (productName) {
             data2 = await prisma.productInfo.findMany({
@@ -23,6 +26,7 @@ export async function GET(req: NextRequest) {
                         mode: "insensitive",
                     },
                 },
+                take: 8,
             });
         }
 

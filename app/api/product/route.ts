@@ -19,8 +19,8 @@ export async function GET(req: NextRequest) {
                 orderBy: {
                     created_at: "desc",
                 },
-                take: 50,
-                skip: (Number(page) - 1) * 50,
+                take: 24,
+                skip: (Number(page) - 1) * 24,
             });
         }
 
@@ -31,7 +31,6 @@ export async function GET(req: NextRequest) {
                     typeof value === "bigint" ? value.toString() : value // return everything else unchanged
             )
         );
-
         return NextResponse.json(data);
     } catch (err) {
         return NextResponse.json(err, { status: 500 });

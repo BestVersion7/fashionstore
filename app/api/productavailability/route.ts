@@ -24,6 +24,18 @@ export async function GET(req: NextRequest) {
     }
 }
 
+// export async function POST() {
+//     for (let i = 62; i < 113; i++) {
+//         await prisma.productAvailabilityInfo.create({
+//             data: {
+//                 // product_id: i,
+//                 available_quantity: 3,
+//             },
+//         });
+//     }
+//     return NextResponse.json("yes");
+// }
+
 export async function PUT(req: NextRequest) {
     try {
         const { quantity } = await req.json();

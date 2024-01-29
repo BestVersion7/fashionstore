@@ -42,7 +42,7 @@ export async function GET(req: NextRequest) {
                         },
                     },
                 ],
-                take: 8,
+                take: 10,
             });
 
             const data = JSON.parse(
