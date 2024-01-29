@@ -2,7 +2,7 @@ export type ProductType = {
     product_id: number;
     created_at: Date;
     default_price: number;
-    description: string;
+    description?: string;
     images: string[];
     name: string;
     category: "tops" | "dress";

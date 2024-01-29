@@ -88,7 +88,9 @@ export default async function CategoryShop({
                     <h2 className="leading-4 text-2xl font-medium ">
                         {product.name}
                     </h2>
-                    <p className="">{product.description}</p>
+                    <p className="">
+                        {product.description && product.description}
+                    </p>
                     <p className="text-2xl  font-medium tracking-wide">
                         {formatCurrency(prices.unit_amount)}
                     </p>

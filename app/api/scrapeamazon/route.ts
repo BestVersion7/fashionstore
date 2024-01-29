@@ -3,34 +3,8 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 const url = "https://afashionstore.vercel.app/shop/tops";
-// const url = "https://www.amazon.com/s?k=dress";
-
-export async function GET() {
-    try {
-        // const data2 = await prisma.scrapeProductInfo.findFirst({
-        //     where: {
-        //         name: "rispy Creme",
-        //     },
-        // });
-        // const data = JSON.parse(
-        //     JSON.stringify(
-        //         data2,
-        //         (_, value) =>
-        //             typeof value === "bigint" ? value.toString() : value // return everything else unchanged
-        //     )
-        // );
-        // for (let i = 0; i < 4; i++) {
-        //     if (!data) {
-        //         console.log("f");
-        //     } else {
-        //         console.log("g");
-        //     }
-        // }
-        return NextResponse.json("cav");
-    } catch (err) {
-        return NextResponse.json(err, { status: 500 });
-    }
-}
+const category = "";
+// const url = `https://www.amazon.com/s?k=${category}`;
 
 export async function POST() {
     try {
@@ -71,21 +45,13 @@ export async function POST() {
         const length = amountArrayMapped.length;
 
         for (let i = 0; i < length; i++) {
-            const findProductName = await prisma.scrapeProductInfo.findFirst({
+            const findProductName = await prisma.productInfo.findFirst({
                 where: {
                     name: nameArrayMapped[i],
                 },
             });
 
             if (!findProductName) {
-                await prisma.priceInfo.update({
-                    data: {
-                        unit_amount: Number(amountArrayMapped[i]) * 100,
-                    },
-                    where: {
-                        price_id: i + 11,
-                    },
-                });
                 const priceInfo = await prisma.priceInfo.create({
                     data: {
                         unit_amount: Number(amountArrayMapped[i]) * 100,
@@ -97,7 +63,7 @@ export async function POST() {
                 await prisma.productInfo.create({
                     data: {
                         name: nameArrayMapped[i],
-                        category: "tops",
+                        category,
                         default_price: priceInfo.price_id,
                         images: [`${imageArrayMapped[i]}`],
                     },
