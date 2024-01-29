@@ -3,6 +3,7 @@
 import { IoIosText } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ContactForm } from "../forms/ContactForm";
+import { Modal } from "./Modal";
 
 export const ContactBtn = () => {
     const router = useRouter();
@@ -15,16 +16,9 @@ export const ContactBtn = () => {
     return (
         <>
             {modal === "t" && (
-                <div
-                    className="relative z-20"
-                    aria-labelledby="modal-title"
-                    role="dialog"
-                    aria-modal="true"
-                >
-                    <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
-
+                <Modal height={80} width={72}>
                     <ContactForm />
-                </div>
+                </Modal>
             )}
 
             <button

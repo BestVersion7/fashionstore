@@ -25,7 +25,7 @@ export const FooterInput = () => {
 
     if (showModal) {
         return (
-            <Modal height={24} width={80}>
+            <Modal height={24} width={64}>
                 <div className="text-black text-center">
                     <p>Thanks for subscribing.</p>
                     <button

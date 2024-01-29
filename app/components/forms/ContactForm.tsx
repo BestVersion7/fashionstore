@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { createEmail } from "../../utils/apiCallsClient";
 import { useOnClickOutside } from "../../utils/customHooks";
-import { Modal } from "../helpers/Modal";
 
 export const ContactForm = () => {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -36,7 +35,7 @@ export const ContactForm = () => {
         router.push(window.location.pathname, { scroll: false });
     };
     return (
-        <Modal height={80} width={80}>
+        <>
             {completeForm ? (
                 <div className=" text-center">
                     <p>
@@ -111,6 +110,6 @@ export const ContactForm = () => {
                     </div>
                 </form>
             )}
-        </Modal>
+        </>
     );
 };

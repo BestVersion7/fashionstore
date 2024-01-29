@@ -7,9 +7,18 @@ export const Modal = (props: {
 }) => {
     return (
         <div
-            className={`h-${props.height} w-${props.width} fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-violet-100  shadow-xl rounded-md`}
+            className="relative z-20"
+            aria-labelledby="modal-title"
+            role="dialog"
+            aria-modal="true"
         >
-            {props.children}
+            <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+
+            <div
+                className={`h-${props.height} w-${props.width} fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-violet-100  shadow-xl rounded-md`}
+            >
+                {props.children}
+            </div>
         </div>
     );
 };
