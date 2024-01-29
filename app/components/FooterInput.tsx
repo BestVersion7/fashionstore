@@ -1,12 +1,44 @@
 "use client";
 
 import { IoMailUnreadOutline } from "react-icons/io5";
+import { createEmail } from "../utils/apiCallsClient";
+import { useRef, useState } from "react";
+import { Modal } from "./Modal";
 
 export const FooterInput = () => {
-    const handleSubmitEmail = (e: React.FormEvent) => {
+    const emailRef = useRef<HTMLInputElement>(null);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleSubmitEmail = async (e: React.FormEvent) => {
         e.preventDefault();
-        // server call to create a customer
+        try {
+            await createEmail({
+                name: "random",
+                email: emailRef.current?.value,
+                message: "Footer email input",
+            });
+            setShowModal(true);
+        } catch (err) {
+            alert(err);
+        }
     };
+
+    if (showModal) {
+        return (
+            <Modal height={24} width={80}>
+                <div className="text-black text-center">
+                    <p>Thanks for subscribing.</p>
+                    <button
+                        onClick={() => setShowModal(false)}
+                        type="button"
+                        className=" rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 hover:cursor-pointer"
+                    >
+                        Close
+                    </button>
+                </div>
+            </Modal>
+        );
+    }
 
     return (
         <form
@@ -22,6 +54,7 @@ export const FooterInput = () => {
                 type="text"
                 name="email"
                 autoComplete="on"
+                ref={emailRef}
             />
             <button
                 className="px-2 bg-green-200 text-slate-800 font-medium hover:bg-green-400"

@@ -9,7 +9,7 @@ export const ProductFilter = (props: { category?: string }) => {
         "border border-solid rounded-lg bg-green-300 border-black font-medium px-4 py-1 hover:bg-green-300 ";
 
     return (
-        <div className="flex items-center gap-4 mt-3">
+        <div className="flex items-center gap-2">
             Filters:
             {["bags", "tops", "dress"].map((item) => (
                 <Link

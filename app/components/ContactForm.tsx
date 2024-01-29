@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
 import { createEmail } from "../utils/apiCallsClient";
 import { useOnClickOutside } from "../utils/customHooks";
+import { Modal } from "./Modal";
 
 export const ContactForm = () => {
     const nameRef = useRef<HTMLInputElement>(null);
@@ -35,12 +36,9 @@ export const ContactForm = () => {
         router.push(window.location.pathname, { scroll: false });
     };
     return (
-        <div
-            ref={formRef}
-            className="fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-violet-100  shadow-xl rounded-md h-[340px] w-80"
-        >
+        <Modal height={80} width={80}>
             {completeForm ? (
-                <div className="text-center">
+                <div className=" text-center">
                     <p>
                         Your message has been sent. Please expect a response in
                         2-3 days.
@@ -113,6 +111,6 @@ export const ContactForm = () => {
                     </div>
                 </form>
             )}
-        </div>
+        </Modal>
     );
 };

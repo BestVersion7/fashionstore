@@ -15,8 +15,8 @@ export const Pagination = (props: { page: number }) => {
 
     let pageButtons: (number | string)[] = [];
     // 1,2,4
-    if (ceiling > 4) {
-        pageButtons = [1, 2, "...", ceiling - 1];
+    if (ceiling > 5) {
+        pageButtons = [1, 2, 3, "...", ceiling - 1];
     } else {
         pageButtons = page;
     }
@@ -32,23 +32,23 @@ export const Pagination = (props: { page: number }) => {
     };
 
     return (
-        <div className="text-2xl flex gap-2 items-center py-1">
+        <div className="text-xl flex gap-2 items-center py-1">
             Page:
-            {Number(pageParam) > 1 && (
+            {/* {Number(pageParam) > 1 && (
                 <button
-                    className="px-2 py-1 border border-gray-200 bg-white hover:bg-gray-200"
+                    className="pagination-button"
                     onClick={handlePagination}
                     value={Number(pageParam) - 1}
                     type="button"
                 >
                     Prev
                 </button>
-            )}
+            )} */}
             {pageButtons.map((item) => (
                 <button
                     className={`${
-                        item == Number(pageParam) ? "bg-gray-300" : "bg-white"
-                    } px-2 py-1 border border-gray-200 hover:bg-gray-200`}
+                        item == Number(pageParam) && "bg-gray-300 underline"
+                    } pagination-button`}
                     onClick={handlePagination}
                     value={item}
                     type="button"
@@ -59,7 +59,7 @@ export const Pagination = (props: { page: number }) => {
             ))}
             {Number(pageParam) < ceiling - 1 && (
                 <button
-                    className="px-2 py-1 border border-gray-200 bg-white hover:bg-gray-200"
+                    className="pagination-button"
                     onClick={handlePagination}
                     value={Number(pageParam) + 1}
                     type="button"

@@ -1,9 +1,10 @@
 import { CartQUpdate } from "./CartQUpdate";
 import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
-import { formatCurrency, formatProductNameToUrl } from "../utils/format";
+import { formatCurrency } from "../utils/format";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";
 import { CartType } from "../types";
+import { shortenTitle } from "../utils/format";
 
 export const CartProducts = async (props: CartType) => {
     const productInfo = await getProductById(props.product_id);
@@ -16,7 +17,7 @@ export const CartProducts = async (props: CartType) => {
             <div className="grid grid-cols-[150px,_1fr]  gap-4 my-2 md:grid-cols-[220px,_1fr] md:h-44  ">
                 <div className="relative ">
                     <Image
-                        className="object-cover "
+                        className="object-contain "
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         // height={"200"}
@@ -27,7 +28,9 @@ export const CartProducts = async (props: CartType) => {
                 </div>
                 <div className="md:justify-between md:flex mr-3">
                     <div>
-                        <p className="font-bold">{productInfo.name}</p>
+                        <p className="font-bold">
+                            {shortenTitle(productInfo.name)}
+                        </p>
                         <div className=" ">
                             <CartQUpdate {...props} />
                             <CartDeleteBtn product_id={props.product_id} />
