@@ -2,7 +2,7 @@ export default async function App() {
     const fire = [1, 2, 3, 4, 5, 6];
     return (
         <main>
-            <nav aria-label="Page navigation example">
+            {/* <nav aria-label="Page navigation example">
                 <ul className="inline-flex items-center bg-white">
                     <li className="border px-3 py-1">Previous</li>
                     {fire.map((item) => (
@@ -132,7 +132,7 @@ export default async function App() {
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
         </main>
     );
 }
