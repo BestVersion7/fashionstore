@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
-import { AccountForm } from "../components/forms/AccountForm";
+import { AccountForm } from "../components/account/AccountForm";
 import { getUserInfoByEmail } from "../utils/apiCalls";
 import { UserType } from "../types";
 

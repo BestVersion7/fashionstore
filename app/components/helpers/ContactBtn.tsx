@@ -2,7 +2,7 @@
 
 import { IoIosText } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ContactForm } from "../forms/ContactForm";
+import { ContactForm } from "../cart/ContactForm";
 import { Modal } from "./Modal";
 
 export const ContactBtn = () => {

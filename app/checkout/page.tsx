@@ -1,4 +1,4 @@
-import { Checkout } from "../components/forms/Checkout";
+import { Checkout } from "../components/cart/Checkout";
 import { getCartByCookie } from "../utils/apiCallsServer";
 import { CartType } from "../types";
 import { CartProducts } from "../components/cart/CartProducts";

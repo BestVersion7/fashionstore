@@ -9,7 +9,7 @@ import {
     getProductRatingAverage,
 } from "../../utils/apiCalls";
 import { StockLabel } from "../helpers/StockLabel";
-import { ProductReviewStar } from "./ProductReviewStar";
+import { ProductReviewStar } from "../review/ProductReviewStar";
 import Link from "next/link";
 import { shortenTitle } from "../../utils/format";
 

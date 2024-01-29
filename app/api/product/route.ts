@@ -12,6 +12,7 @@ export async function GET(req: NextRequest) {
             data2 = await prisma.productInfo.findUnique({
                 where: {
                     product_id: Number(productId),
+                    active: true,
                 },
             });
         } else {
@@ -20,6 +21,9 @@ export async function GET(req: NextRequest) {
                     created_at: "desc",
                 },
                 take: 24,
+                where: {
+                    active: true,
+                },
                 skip: (Number(page) - 1) * 24,
             });
         }

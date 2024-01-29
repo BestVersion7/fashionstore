@@ -15,6 +15,7 @@ export async function GET(req: NextRequest) {
             data2 = await prisma.productInfo.findMany({
                 where: {
                     category: productCategtory,
+                    active: true,
                 },
                 orderBy: {
                     created_at: "desc",
@@ -29,6 +30,7 @@ export async function GET(req: NextRequest) {
                         contains: productName,
                         mode: "insensitive",
                     },
+                    active: true,
                 },
                 orderBy: {
                     created_at: "desc",

@@ -181,12 +181,14 @@ export const getProductRatingAverage = async (product_id: number) => {
 
 export const getTenProductReviewsByPage = async (
     product_id: number,
-    page: number
+    page: number,
+    signal: AbortSignal
 ) => {
     const res = await fetch(
         `${reviewOrigin}?product_id=${product_id}&page=${page}`,
         {
             cache: "no-cache",
+            signal,
         }
     );
     const data: ProductReviewType[] = await res.json();

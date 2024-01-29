@@ -9,14 +9,21 @@ import {
     getQuantitySold,
 } from "../../utils/apiCalls";
 import { StockLabel } from "../helpers/StockLabel";
-import { ProductReviewStar } from "./ProductReviewStar";
+import { ProductReviewStar } from "../review/ProductReviewStar";
 import Link from "next/link";
 import { AddCartBtn } from "../cart/AddCartBtn";
 import { FaFire } from "react-icons/fa";
 import { PopularProductType } from "../../types";
+import { CgUnavailable } from "react-icons/cg";
 
 export const ProductPopularCard = async (props: PopularProductType) => {
     const productInfo = await getProductById(props.product_id);
+
+    // remove inactive products
+    if (!productInfo) {
+        return <CgUnavailable className="text-3xl" />;
+    }
+
     const prices = await getPriceById(productInfo.default_price);
     const availability = await getProductAvailableQuantity(props.product_id);
 
@@ -45,11 +52,11 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                     priority
                 />
             </Link>
-            <div className="px-1 pt-1 flex flex-col gap-1 text-center items-center text-sm">
-                <div className="flex italic px-1 bg-orange-200 font-medium rounded-lg items-center">
-                    <FaFire className="text-red-600" />
+            <div className="px-1 pt-1 flex flex-col  text-center items-center text-sm">
+                <div className="flex italic px-1 bg-red-700 text-white font-medium rounded-lg items-center">
+                    <FaFire />
                     {quantitySold} sold past month
-                    <FaFire className="text-red-600" />
+                    <FaFire />
                 </div>
                 <Link
                     href={`/${formatProductNameToUrl(productInfo.name)}/${
@@ -59,7 +66,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                 >
                     {productInfo.name}
                 </Link>
-                <div className=" ">
+                <div className="text-base">
                     <ProductReviewStar
                         count={reviewCount}
                         average={reviewRating}
@@ -84,18 +91,6 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                         <StockLabel />
                     )}
                 </div>
-                {/* <div className="text-3xl">
-                    {availability.available_quantity > 0 ? (
-                        <AddCartBtn
-                            price_id={productInfo.default_price}
-                            product_id={props.product_id}
-                            product_price={prices.unit_amount}
-                            quantity={1}
-                        />
-                    ) : (
-                        <StockLabel />
-                    )}
-                </div> */}
             </div>
         </article>
     );

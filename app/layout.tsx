@@ -5,7 +5,7 @@ import { SearchInput } from "./components/helpers/SearchInput";
 import { CartTotal } from "./components/cart/CartTotal";
 import { PiShootingStarBold } from "react-icons/pi";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FooterInput } from "./components/forms/FooterInput";
+import { FooterInput } from "./components/misc/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import GoogleAnalytics from "./components/misc/GoogleAnalytics";
 import { AccountHover } from "./components/account/AccountHover";

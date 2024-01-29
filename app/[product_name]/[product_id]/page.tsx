@@ -5,20 +5,17 @@ import {
     getProductReviewCount,
     getPriceById,
     getProductById,
-    getPopularProducts,
 } from "@/app/utils/apiCalls";
 import Image from "next/image";
 import { StockLabel } from "@/app/components/helpers/StockLabel";
 import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";
-import { ProductReviewStar } from "@/app/components/product/ProductReviewStar";
+import { ProductReviewStar } from "@/app/components/review/ProductReviewStar";
 import { CartQPost } from "@/app/components/cart/CartQPost";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { SearchInput } from "@/app/components/helpers/SearchInput";
-import { ProductPopularCard } from "@/app/components/product/ProductPopularCard";
-import { GiClothes } from "react-icons/gi";
-import { ProductSwiper } from "@/app/components/product/ProductSwiper";
-import { ProductReview } from "@/app/components/product/ProductReview";
+import { ProductReview } from "@/app/components/review/ProductReview";
+import { Trending } from "@/app/components/product/Trending";
 
 export async function generateMetadata({
     params,
@@ -47,12 +44,6 @@ export default async function CategoryShop({
     // pass down username
     const user = await getServerSession(authOptions);
     const email = user?.user?.email;
-
-    // popular products
-    const popularProducts = await getPopularProducts();
-    const mappedProducts = popularProducts.map((item, index) => (
-        <ProductPopularCard key={index} {...item} />
-    ));
 
     // get reviews
     const reviewCount = await getProductReviewCount(Number(params.product_id));
@@ -112,15 +103,8 @@ export default async function CategoryShop({
             </div>
 
             {/* popular */}
-            <section className="bg-yellow-400">
-                <div className="flex px-3 items-center text-2xl py-2  ">
-                    <GiClothes />
-                    <h3 className=" font-medium ">Popular & Trending</h3>
-                    <GiClothes />
-                </div>
-                {mappedProducts.length > 5 && (
-                    <ProductSwiper cards={mappedProducts} />
-                )}
+            <section>
+                <Trending />
             </section>
 
             {/* Reviews */}

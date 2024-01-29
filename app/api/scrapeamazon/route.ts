@@ -60,7 +60,7 @@ export async function POST() {
                         price_id: true,
                     },
                 });
-                await prisma.productInfo.create({
+                const newProduct = await prisma.productInfo.create({
                     data: {
                         name: nameArrayMapped[i],
                         category,
@@ -73,6 +73,7 @@ export async function POST() {
                 });
                 await prisma.productAvailabilityInfo.create({
                     data: {
+                        product_id: newProduct.product_id,
                         available_quantity: 3,
                     },
                 });

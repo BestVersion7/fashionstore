@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
                 _count: true,
                 where: {
                     category: productCategtory,
+                    active: true,
                 },
             });
         } else if (productName) {
@@ -24,6 +25,7 @@ export async function GET(req: NextRequest) {
                         contains: productName,
                         mode: "insensitive",
                     },
+                    active: true,
                 },
             });
         } else {

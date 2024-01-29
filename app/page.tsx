@@ -1,17 +1,9 @@
 import { HomeProductCard } from "./components/product/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
-import { getPopularProducts } from "./utils/apiCalls";
-import { GiClothes } from "react-icons/gi";
-import { ProductSwiper } from "./components/product/ProductSwiper";
-import { ProductPopularCard } from "./components/product/ProductPopularCard";
+import { Trending } from "./components/product/Trending";
 
 export default async function Home() {
-    const popularProducts = await getPopularProducts();
-    const mappedProducts = popularProducts.map((item, index) => (
-        <ProductPopularCard key={index} {...item} />
-    ));
-
     return (
         <main className="max-w-[1500px] px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
@@ -117,16 +109,7 @@ export default async function Home() {
             </section>
 
             <section className="">
-                <div className="flex items-center text-xl px-3 py-1 text-white  bg-orange-600">
-                    <GiClothes />
-                    <h3 className=" font-medium ">Popular & Trending</h3>
-                    <GiClothes />
-                </div>
-                <div className=" mx-2 sm:mx-3 md:mx-4">
-                    {mappedProducts.length > 5 && (
-                        <ProductSwiper cards={mappedProducts} />
-                    )}
-                </div>
+                <Trending />
             </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">
