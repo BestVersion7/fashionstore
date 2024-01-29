@@ -19,7 +19,7 @@ export function useOnClickOutside(
                 handler(event);
             };
 
-            console.log("custom");
+            // console.log("custom");
             document.addEventListener("mousedown", listener);
             document.addEventListener("touchstart", listener);
             return () => {

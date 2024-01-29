@@ -29,10 +29,26 @@ export const getPaymentIntent = async (id: string) => {
     return data;
 };
 
-export const getProductBySearchName = async (input: string | undefined) => {
-    const res = await fetch(`${productOrigin}/search?product_name=${input}`, {
-        next: { revalidate: revalidateTime },
-    });
+export const get24ProductsBySearchName = async (
+    input: string | undefined,
+    page: number
+) => {
+    const res = await fetch(
+        `${productOrigin}/search?product_name=${input}&count=24&page=${page}`,
+        {
+            next: { revalidate: revalidateTime },
+        }
+    );
+    const data: ProductType[] = await res.json();
+    return data;
+};
+export const get5ProductsBySearchName = async (input: string | undefined) => {
+    const res = await fetch(
+        `${productOrigin}/search?product_name=${input}&count=5&page=1`,
+        {
+            next: { revalidate: revalidateTime },
+        }
+    );
     const data: ProductType[] = await res.json();
     return data;
 };
@@ -42,6 +58,34 @@ export const get24Products = async (page: number) => {
         next: { revalidate: revalidateTime },
     });
     const data: ProductType[] = await res.json();
+    return data;
+};
+
+export const getCountProduct = async () => {
+    const res = await fetch(`${productOrigin}/count`, {
+        cache: "no-cache",
+    });
+    const data: number = await res.json();
+    return data;
+};
+export const getCountProductBySearchName = async (productName: string) => {
+    const res = await fetch(
+        `${productOrigin}/count?product_name=${productName}`,
+        {
+            cache: "no-cache",
+        }
+    );
+    const data: number = await res.json();
+    return data;
+};
+export const getCountProductBySearchCategory = async (category: string) => {
+    const res = await fetch(
+        `${productOrigin}/count?product_category=${category}`,
+        {
+            cache: "no-cache",
+        }
+    );
+    const data: number = await res.json();
     return data;
 };
 

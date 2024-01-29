@@ -1,6 +1,10 @@
-import { get24ProductsBySearchCategory } from "@/app/utils/apiCalls";
+import {
+    get24ProductsBySearchCategory,
+    getCountProductBySearchCategory,
+} from "@/app/utils/apiCalls";
 import { ProductFilter } from "@/app/components/ProductFilter";
 import { ProductMapped } from "@/app/components/ProductMapped";
+import { Pagination } from "@/app/components/Pagination";
 
 // All products not returned in the api call will be 404
 // export const dynamicParams = false;
@@ -43,10 +47,15 @@ export default async function CategoryShop({
 }) {
     const page = searchParams.page || 1;
     const products = await get24ProductsBySearchCategory(params.category, page);
+    const count = await getCountProductBySearchCategory(params.category);
     return (
         <>
+            <Pagination page={count} />
             <ProductFilter category={params.category} />
             <ProductMapped products={products} />
+            <div className="text-center">
+                <Pagination page={count} />
+            </div>
         </>
     );
 }

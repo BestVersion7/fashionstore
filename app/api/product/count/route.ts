@@ -6,35 +6,29 @@ export async function GET(req: NextRequest) {
         let data2;
 
         const productName = req.nextUrl.searchParams.get("product_name");
-        const page = req.nextUrl.searchParams.get("page");
-        const count = req.nextUrl.searchParams.get("count");
-
         const productCategtory =
             req.nextUrl.searchParams.get("product_category");
+
         if (productCategtory) {
-            data2 = await prisma.productInfo.findMany({
+            data2 = await prisma.productInfo.aggregate({
+                _count: true,
                 where: {
                     category: productCategtory,
                 },
-                orderBy: {
-                    created_at: "desc",
-                },
-                take: 24,
-                skip: (Number(page) - 1) * 24,
             });
         } else if (productName) {
-            data2 = await prisma.productInfo.findMany({
+            data2 = await prisma.productInfo.aggregate({
+                _count: true,
                 where: {
                     name: {
                         contains: productName,
                         mode: "insensitive",
                     },
                 },
-                orderBy: {
-                    created_at: "desc",
-                },
-                take: Number(count),
-                skip: (Number(page) - 1) * 24,
+            });
+        } else {
+            data2 = await prisma.productInfo.aggregate({
+                _count: true,
             });
         }
 
@@ -46,7 +40,7 @@ export async function GET(req: NextRequest) {
             )
         );
 
-        return NextResponse.json(data);
+        return NextResponse.json(Number(data._count));
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }

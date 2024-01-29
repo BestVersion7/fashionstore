@@ -1,7 +1,7 @@
 "use client";
 import { IoSearchOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
-import { getProductBySearchName } from "../utils/apiCalls";
+import { get5ProductsBySearchName } from "../utils/apiCalls";
 import Link from "next/link";
 import { ProductType } from "../types";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
 import { useOnClickOutside } from "../utils/customHooks";
 import { useSearchParams } from "next/navigation";
-import { formatProductNameToUrl } from "../utils/format";
+import { formatProductNameToUrl, shortenTitle } from "../utils/format";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);
@@ -28,7 +28,9 @@ export const SearchInput = () => {
             return setProductMap([]);
         }
         setShowSearch(() => true);
-        const products = await getProductBySearchName(searchRef.current?.value);
+        const products = await get5ProductsBySearchName(
+            searchRef.current?.value
+        );
         setProductMap(products);
     };
 
@@ -85,7 +87,7 @@ export const SearchInput = () => {
                                 highlightClassName="YourHighlightClass"
                                 searchWords={[`${searchRef.current?.value}`]}
                                 autoEscape={true}
-                                textToHighlight={item.name}
+                                textToHighlight={shortenTitle(item.name)}
                                 // highlightStyle={{
                                 // color: "rgb(234 88 12)",
                                 // backgroundColor: "yellow",

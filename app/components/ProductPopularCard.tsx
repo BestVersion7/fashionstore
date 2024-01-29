@@ -33,7 +33,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                 href={`/${formatProductNameToUrl(productInfo.name)}/${
                     props.product_id
                 }`}
-                className="relative h-48"
+                className="relative h-40 sm:h-44"
             >
                 <Image
                     // object-top

@@ -37,7 +37,7 @@ export const ContactForm = () => {
     return (
         <div
             ref={formRef}
-            className="fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-blue-100 h-[340px] w-80"
+            className="fixed px-3 flex flex-col justify-center inset-0 m-auto z-10 bg-violet-100  shadow-xl rounded-md h-[340px] w-80"
         >
             {completeForm ? (
                 <div className="text-center">
@@ -59,7 +59,7 @@ export const ContactForm = () => {
                     // className="flex flex-col justify-between"
                 >
                     <h3
-                        className="text-xl text-center font-semibold  text-gray-900"
+                        className="text-xl text-center font-semibold"
                         id="modal-title"
                     >
                         Contact me
