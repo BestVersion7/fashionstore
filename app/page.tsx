@@ -1,10 +1,10 @@
-import { HomeProductCard } from "./components/HomeProductCard";
+import { HomeProductCard } from "./components/product/HomeProductCard";
 import Link from "next/link";
 import Image from "next/image";
 import { getPopularProducts } from "./utils/apiCalls";
 import { GiClothes } from "react-icons/gi";
-import { ProductSwiper } from "./components/ProductSwiper";
-import { ProductPopularCard } from "./components/ProductPopularCard";
+import { ProductSwiper } from "./components/product/ProductSwiper";
+import { ProductPopularCard } from "./components/product/ProductPopularCard";
 
 export default async function Home() {
     const popularProducts = await getPopularProducts();

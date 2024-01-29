@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { createProductReview } from "../utils/apiCallsClient";
+import { createProductReview } from "../../utils/apiCallsClient";
 import { useRouter } from "next/navigation";
 
 export const ProductReviewForm = (props: {

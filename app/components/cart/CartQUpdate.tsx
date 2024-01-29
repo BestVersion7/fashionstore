@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { updateCart } from "../utils/apiCallsClient";
-import { CartType } from "../types";
+import { updateCart } from "../../utils/apiCallsClient";
+import { CartType } from "../../types";
 import { useState, useRef } from "react";
 import { FaAngleDown } from "react-icons/fa";
-import { useOnClickOutside } from "../utils/customHooks";
+import { useOnClickOutside } from "../../utils/customHooks";
 
 export const CartQUpdate = (props: CartType) => {
     const [inputQuantity, setInputQuantity] = useState(Number(props.quantity));

@@ -15,19 +15,19 @@ export function ProductSwiper(props: { cards: JSX.Element[] }) {
             <Swiper
                 breakpoints={{
                     0: {
-                        slidesPerView: 3,
+                        slidesPerView: 2,
                         spaceBetween: 0,
                     },
                     640: {
-                        slidesPerView: 4,
+                        slidesPerView: 3,
                         spaceBetween: 1,
                     },
                     768: {
-                        slidesPerView: 5,
+                        slidesPerView: 4,
                         spaceBetween: 2,
                     },
                     1024: {
-                        slidesPerView: 6,
+                        slidesPerView: 5,
                         spaceBetween: 3,
                     },
                     1280: {

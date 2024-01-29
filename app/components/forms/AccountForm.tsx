@@ -1,8 +1,8 @@
 "use client";
-import { updateUserNameByEmail } from "../utils/apiCallsClient";
+import { updateUserNameByEmail } from "../../utils/apiCallsClient";
 import { useRef, useState } from "react";
 import { FaRegEdit } from "react-icons/fa";
-import { UserType } from "../types";
+import { UserType } from "../../types";
 import { useRouter } from "next/navigation";
 
 export const AccountForm = (props: UserType) => {

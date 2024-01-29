@@ -1,6 +1,6 @@
 "use client";
-import { CartType } from "../types";
-import { deleteCartItemByProductId } from "../utils/apiCallsClient";
+import { CartType } from "../../types";
+import { deleteCartItemByProductId } from "../../utils/apiCallsClient";
 import { useRouter } from "next/navigation";
 
 export function CartDeleteBtn(props: Pick<CartType, "product_id">) {

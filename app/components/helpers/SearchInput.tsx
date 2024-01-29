@@ -1,15 +1,15 @@
 "use client";
 import { IoSearchOutline } from "react-icons/io5";
 import { useRef, useState } from "react";
-import { get5ProductsBySearchName } from "../utils/apiCalls";
+import { get5ProductsBySearchName } from "../../utils/apiCalls";
 import Link from "next/link";
-import { ProductType } from "../types";
+import { ProductType } from "../../types";
 import { useRouter } from "next/navigation";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import Highlighter from "react-highlight-words";
-import { useOnClickOutside } from "../utils/customHooks";
+import { useOnClickOutside } from "../../utils/customHooks";
 import { useSearchParams } from "next/navigation";
-import { formatProductNameToUrl, shortenTitle } from "../utils/format";
+import { formatProductNameToUrl, shortenTitle } from "../../utils/format";
 
 export const SearchInput = () => {
     const searchRef = useRef<HTMLInputElement>(null);

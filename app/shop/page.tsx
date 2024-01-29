@@ -1,8 +1,8 @@
 import { get24Products, getCountProduct } from "../utils/apiCalls";
-import { ProductFilter } from "../components/ProductFilter";
+import { ProductFilter } from "../components/product/ProductFilter";
 import { Metadata } from "next";
-import { ProductMapped } from "../components/ProductMapped";
-import { Pagination } from "../components/Pagination";
+import { ProductMapped } from "../components/product/ProductMapped";
+import { Pagination } from "../components/helpers/Pagination";
 
 export const metadata: Metadata = {
     title: "Shop",

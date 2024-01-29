@@ -3,7 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { OrderType } from "@/app/types";
 import Link from "next/link";
-import { OrderPaper } from "@/app/components/OrderPaper";
+import { OrderPaper } from "@/app/components/account/OrderPaper";
 
 export const metadata = {
     title: "Orders",

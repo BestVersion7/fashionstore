@@ -1,10 +1,10 @@
 "use client";
 
-import { getUserInfoByEmail } from "../utils/apiCalls";
-import { ProductReviewType, UserType } from "../types";
+import { getUserInfoByEmail } from "../../utils/apiCalls";
+import { ProductReviewType, UserType } from "../../types";
 import { ProductReviewStar } from "./ProductReviewStar";
 import { FaCircleUser } from "react-icons/fa6";
-import { formatTimeDifference } from "../utils/format";
+import { formatTimeDifference } from "../../utils/format";
 import { useEffect, useState } from "react";
 
 export const ProductReviewComments = (props: ProductReviewType) => {

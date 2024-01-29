@@ -4,7 +4,7 @@ import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { createUser } from "../utils/apiCallsClient";
+import { createUser } from "../../utils/apiCallsClient";
 
 export const SignInBtn = () => {
     const emailRef = useRef<HTMLInputElement>(null);

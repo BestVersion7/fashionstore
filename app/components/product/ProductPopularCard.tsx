@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { formatCurrency, formatProductNameToUrl } from "../utils/format";
+import { formatCurrency, formatProductNameToUrl } from "../../utils/format";
 import {
     getPriceById,
     getProductReviewCount,
@@ -7,13 +7,13 @@ import {
     getProductById,
     getProductAvailableQuantity,
     getQuantitySold,
-} from "../utils/apiCalls";
-import { StockLabel } from "./StockLabel";
+} from "../../utils/apiCalls";
+import { StockLabel } from "../helpers/StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";
-import { AddCartBtn } from "./AddCartBtn";
+import { AddCartBtn } from "../cart/AddCartBtn";
 import { FaFire } from "react-icons/fa";
-import { PopularProductType } from "../types";
+import { PopularProductType } from "../../types";
 
 export const ProductPopularCard = async (props: PopularProductType) => {
     const productInfo = await getProductById(props.product_id);
@@ -28,12 +28,12 @@ export const ProductPopularCard = async (props: PopularProductType) => {
     const reviewRating = await getProductRatingAverage(props.product_id);
 
     return (
-        <article className=" pb-2 flex flex-col bg-green-50 border border-black hover:bg-gray-200">
+        <article className=" pb-2 flex flex-col  ">
             <Link
                 href={`/${formatProductNameToUrl(productInfo.name)}/${
                     props.product_id
                 }`}
-                className="relative h-40 sm:h-44"
+                className="relative h-44"
             >
                 <Image
                     // object-top
@@ -46,7 +46,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                 />
             </Link>
             <div className="px-1 pt-1 flex flex-col gap-1 text-center items-center text-sm">
-                <div className="flex italic px-1 bg-orange-200 font-semibold rounded-lg items-center">
+                <div className="flex italic px-1 bg-orange-200 font-medium rounded-lg items-center">
                     <FaFire className="text-red-600" />
                     {quantitySold} sold past month
                     <FaFire className="text-red-600" />

@@ -3,7 +3,7 @@ import {
     getPaymentIntent,
 } from "@/app/utils/apiCalls";
 import Link from "next/link";
-import { OrderPaper } from "@/app/components/OrderPaper";
+import { OrderPaper } from "@/app/components/account/OrderPaper";
 
 export default async function SuccessPage({
     params,

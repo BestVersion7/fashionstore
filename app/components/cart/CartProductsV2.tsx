@@ -1,6 +1,6 @@
-import { CartType } from "../types";
-import { getProductById } from "../utils/apiCalls";
-import { formatCurrency } from "../utils/format";
+import { CartType } from "../../types";
+import { getProductById } from "../../utils/apiCalls";
+import { formatCurrency } from "../../utils/format";
 import Image from "next/image";
 
 export const CartProductsV2 = async (

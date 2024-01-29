@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
-import { SearchInput } from "./components/SearchInput";
-import { CartTotal } from "./components/CartTotal";
+import { SearchInput } from "./components/helpers/SearchInput";
+import { CartTotal } from "./components/cart/CartTotal";
 import { PiShootingStarBold } from "react-icons/pi";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { FooterInput } from "./components/FooterInput";
+import { FooterInput } from "./components/forms/FooterInput";
 import { FaSquareXTwitter } from "react-icons/fa6";
-import GoogleAnalytics from "./components/GoogleAnalytics";
-import { AccountHover } from "./components/AccountHover";
-import { ContactBtn } from "./components/ContactBtn";
-import { NotificationMap } from "./components/NotificationMap";
+import GoogleAnalytics from "./components/misc/GoogleAnalytics";
+import { AccountHover } from "./components/account/AccountHover";
+import { ContactBtn } from "./components/helpers/ContactBtn";
+import { NotificationMap } from "./components/misc/NotificationMap";
 
 export const metadata: Metadata = {
     title: "Fashion Store",

@@ -15,16 +15,16 @@ import Link from "next/link";
 import {
     getPaymentIntentFromCookie,
     updateCartPurchased,
-} from "../utils/apiCallsClient";
-import { getProductAvailableQuantity } from "../utils/apiCalls";
+} from "../../utils/apiCallsClient";
+import { getProductAvailableQuantity } from "../../utils/apiCalls";
 import {
     deleteCartCookie,
     updatePaymentIntent,
     updateProductAvailableQuantity,
     createOrder,
-} from "../utils/apiCallsClient";
-import { formatCurrency } from "../utils/format";
-import { CartType } from "../types";
+} from "../../utils/apiCallsClient";
+import { formatCurrency } from "../../utils/format";
+import { CartType } from "../../types";
 import { getCookie } from "cookies-next";
 
 export function StripeForm(props: {

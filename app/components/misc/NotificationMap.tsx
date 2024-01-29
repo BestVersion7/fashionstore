@@ -1,7 +1,7 @@
 "use client";
 
 import { NotificationMsg } from "./NotificationMsg";
-import { notificationsArray } from "../utils/notifications";
+import { notificationsArray } from "../../utils/notifications";
 
 export const NotificationMap = () => {
     return (

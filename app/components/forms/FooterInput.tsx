@@ -1,9 +1,9 @@
 "use client";
 
 import { IoMailUnreadOutline } from "react-icons/io5";
-import { createEmail } from "../utils/apiCallsClient";
+import { createEmail } from "../../utils/apiCallsClient";
 import { useRef, useState } from "react";
-import { Modal } from "./Modal";
+import { Modal } from "../helpers/Modal";
 
 export const FooterInput = () => {
     const emailRef = useRef<HTMLInputElement>(null);

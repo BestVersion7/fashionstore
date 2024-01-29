@@ -4,12 +4,12 @@ import {
     getTenProductReviewsByPage,
     getProductReviewCount,
     getProductRatingAverage,
-} from "../utils/apiCalls";
+} from "../../utils/apiCalls";
 import { ProductReviewComments } from "./ProductReviewComments";
-import { ProductReviewType } from "../types";
+import { ProductReviewType } from "../../types";
 import { FaStar } from "react-icons/fa";
 import { ProductReviewForm } from "./ProductReviewForm";
-import { SignInBtn } from "./SignInBtn";
+import { SignInBtn } from "../account/SignInBtn";
 
 type props = {
     product_id: number;

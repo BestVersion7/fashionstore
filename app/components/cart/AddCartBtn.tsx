@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { getCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { createCart, createCartCookie } from "../utils/apiCallsClient";
-import { CartType } from "../types";
+import { createCart, createCartCookie } from "../../utils/apiCallsClient";
+import { CartType } from "../../types";
 import { FaCheck } from "react-icons/fa";
 
 export const AddCartBtn = (

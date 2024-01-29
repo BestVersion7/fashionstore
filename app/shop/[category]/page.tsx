@@ -2,9 +2,9 @@ import {
     get24ProductsBySearchCategory,
     getCountProductBySearchCategory,
 } from "@/app/utils/apiCalls";
-import { ProductFilter } from "@/app/components/ProductFilter";
-import { ProductMapped } from "@/app/components/ProductMapped";
-import { Pagination } from "@/app/components/Pagination";
+import { ProductFilter } from "@/app/components/product/ProductFilter";
+import { ProductMapped } from "@/app/components/product/ProductMapped";
+import { Pagination } from "@/app/components/helpers/Pagination";
 
 // All products not returned in the api call will be 404
 // export const dynamicParams = false;

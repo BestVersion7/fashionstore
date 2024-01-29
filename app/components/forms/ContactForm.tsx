@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useRef, useState } from "react";
-import { createEmail } from "../utils/apiCallsClient";
-import { useOnClickOutside } from "../utils/customHooks";
-import { Modal } from "./Modal";
+import { createEmail } from "../../utils/apiCallsClient";
+import { useOnClickOutside } from "../../utils/customHooks";
+import { Modal } from "../helpers/Modal";
 
 export const ContactForm = () => {
     const nameRef = useRef<HTMLInputElement>(null);

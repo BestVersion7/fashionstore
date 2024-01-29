@@ -1,4 +1,4 @@
-import { ProductFilter } from "@/app/components/ProductFilter";
+import { ProductFilter } from "@/app/components/product/ProductFilter";
 import {
     getProductAvailableQuantity,
     getProductRatingAverage,
@@ -8,17 +8,17 @@ import {
     getPopularProducts,
 } from "@/app/utils/apiCalls";
 import Image from "next/image";
-import { StockLabel } from "@/app/components/StockLabel";
+import { StockLabel } from "@/app/components/helpers/StockLabel";
 import { formatCurrency, formatUrlToProductName } from "@/app/utils/format";
-import { ProductReviewStar } from "@/app/components/ProductReviewStar";
-import { CartQPost } from "@/app/components/CartQPost";
+import { ProductReviewStar } from "@/app/components/product/ProductReviewStar";
+import { CartQPost } from "@/app/components/cart/CartQPost";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
-import { SearchInput } from "@/app/components/SearchInput";
-import { ProductPopularCard } from "@/app/components/ProductPopularCard";
+import { SearchInput } from "@/app/components/helpers/SearchInput";
+import { ProductPopularCard } from "@/app/components/product/ProductPopularCard";
 import { GiClothes } from "react-icons/gi";
-import { ProductSwiper } from "@/app/components/ProductSwiper";
-import { ProductReview } from "@/app/components/ProductReview";
+import { ProductSwiper } from "@/app/components/product/ProductSwiper";
+import { ProductReview } from "@/app/components/product/ProductReview";
 
 export async function generateMetadata({
     params,
@@ -112,8 +112,8 @@ export default async function CategoryShop({
             </div>
 
             {/* popular */}
-            <section>
-                <div className="flex px-3 items-center text-xl py-1 text-white  bg-orange-600">
+            <section className="bg-yellow-400">
+                <div className="flex px-3 items-center text-2xl py-2  ">
                     <GiClothes />
                     <h3 className=" font-medium ">Popular & Trending</h3>
                     <GiClothes />

@@ -1,10 +1,13 @@
 import { CartQUpdate } from "./CartQUpdate";
-import { getProductAvailableQuantity, getProductById } from "../utils/apiCalls";
-import { formatCurrency } from "../utils/format";
+import {
+    getProductAvailableQuantity,
+    getProductById,
+} from "../../utils/apiCalls";
+import { formatCurrency } from "../../utils/format";
 import Image from "next/image";
 import { CartDeleteBtn } from "./CartDeleteBtn";
-import { CartType } from "../types";
-import { shortenTitle } from "../utils/format";
+import { CartType } from "../../types";
+import { shortenTitle } from "../../utils/format";
 
 export const CartProducts = async (props: CartType) => {
     const productInfo = await getProductById(props.product_id);

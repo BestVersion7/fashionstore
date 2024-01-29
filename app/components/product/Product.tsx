@@ -1,17 +1,17 @@
 import Image from "next/image";
-import { CartQPost } from "./CartQPost";
-import { formatCurrency, formatProductNameToUrl } from "../utils/format";
-import { PriceType, ProductAvailabilityType, ProductType } from "../types";
+import { CartQPost } from "../cart/CartQPost";
+import { formatCurrency, formatProductNameToUrl } from "../../utils/format";
+import { PriceType, ProductAvailabilityType, ProductType } from "../../types";
 import {
     getProductAvailableQuantity,
     getPriceById,
     getProductReviewCount,
     getProductRatingAverage,
-} from "../utils/apiCalls";
-import { StockLabel } from "./StockLabel";
+} from "../../utils/apiCalls";
+import { StockLabel } from "../helpers/StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";
-import { shortenTitle } from "../utils/format";
+import { shortenTitle } from "../../utils/format";
 
 export const Product = async (props: ProductType) => {
     // get the prices and availability

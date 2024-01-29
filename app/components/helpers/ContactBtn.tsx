@@ -2,7 +2,7 @@
 
 import { IoIosText } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ContactForm } from "./ContactForm";
+import { ContactForm } from "../forms/ContactForm";
 
 export const ContactBtn = () => {
     const router = useRouter();

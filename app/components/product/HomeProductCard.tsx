@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HomeProductCardProps } from "../types";
+import { HomeProductCardProps } from "../../types";
 
 export const HomeProductCard = (props: HomeProductCardProps) => {
     return (

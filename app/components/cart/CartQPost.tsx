@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { CartType } from "../types";
+import { CartType } from "../../types";
 import { FaAngleDown } from "react-icons/fa";
-import { useOnClickOutside } from "../utils/customHooks";
+import { useOnClickOutside } from "../../utils/customHooks";
 import { AddCartBtn } from "./AddCartBtn";
 
 export const CartQPost = (

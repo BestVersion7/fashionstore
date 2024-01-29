@@ -2,9 +2,9 @@ import {
     get24ProductsBySearchName,
     getCountProductBySearchName,
 } from "@/app/utils/apiCalls";
-import { ProductMapped } from "@/app/components/ProductMapped";
-import { ProductFilter } from "@/app/components/ProductFilter";
-import { Pagination } from "@/app/components/Pagination";
+import { ProductMapped } from "@/app/components/product/ProductMapped";
+import { ProductFilter } from "@/app/components/product/ProductFilter";
+import { Pagination } from "@/app/components/helpers/Pagination";
 
 export default async function CategoryShop({
     searchParams,

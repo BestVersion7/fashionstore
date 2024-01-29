@@ -1,6 +1,6 @@
 import { SignOutBtn } from "./SignoutBtn";
 import { RiAccountCircleLine } from "react-icons/ri";
-import { authOptions } from "../api/auth/[...nextauth]/options";
+import { authOptions } from "../../api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 

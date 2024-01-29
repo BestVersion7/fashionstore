@@ -1,7 +1,7 @@
-import { Checkout } from "../components/Checkout";
+import { Checkout } from "../components/forms/Checkout";
 import { getCartByCookie } from "../utils/apiCallsServer";
 import { CartType } from "../types";
-import { CartProducts } from "../components/CartProducts";
+import { CartProducts } from "../components/cart/CartProducts";
 import { FaLock } from "react-icons/fa";
 import { createOrFindPaymentIntent } from "../utils/apiCallsServer";
 import { Metadata } from "next";

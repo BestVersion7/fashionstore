@@ -1,4 +1,4 @@
-import { ProductType } from "../types";
+import { ProductType } from "../../types";
 import { Product } from "./Product";
 
 export const ProductMapped = (props: { products: ProductType[] }) => {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { formatCurrency } from "../utils/format";
 import { getCartByCookie } from "../utils/apiCallsServer";
-import { CartProducts } from "../components/CartProducts";
+import { CartProducts } from "../components/cart/CartProducts";
 import { Metadata } from "next";
 // import { TestAdd } from "../components/TestAdd";
 

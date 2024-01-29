@@ -1,4 +1,4 @@
-import { SearchInput } from "../components/SearchInput";
+import { SearchInput } from "../components/helpers/SearchInput";
 
 export default function RootLayout(props: { children: React.ReactNode }) {
     return (
