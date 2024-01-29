@@ -11,6 +11,7 @@ import {
 import { StockLabel } from "./StockLabel";
 import { ProductReviewStar } from "./ProductReviewStar";
 import Link from "next/link";
+import { shortenTitle } from "../utils/format";
 
 export const Product = async (props: ProductType) => {
     // get the prices and availability
@@ -44,9 +45,9 @@ export const Product = async (props: ProductType) => {
                     href={`/${formatProductNameToUrl(props.name)}/${
                         props.product_id
                     }`}
-                    className="text-lg font-medium hover:text-violet-600"
+                    className="text-lg font-medium hover:text-violet-600 "
                 >
-                    {props.name}
+                    {shortenTitle(props.name)}
                 </Link>
 
                 {/* <p className="">{props.description}</p> */}

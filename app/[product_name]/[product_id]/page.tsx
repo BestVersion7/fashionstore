@@ -73,7 +73,7 @@ export default async function CategoryShop({
             <ProductFilter />
 
             {/* product desc */}
-            <div className="my-3 flex flex-col items-center text-center gap-2 md:flex-row md:items-start md:text-left">
+            <div className="my-3  flex flex-col items-center text-center gap-2 md:flex-row md:items-start md:text-left">
                 <div className="relative h-60 w-60 md:w-80 md:h-80">
                     <Image
                         className="object-contain object-top"
@@ -85,7 +85,9 @@ export default async function CategoryShop({
                     />
                 </div>
                 <div className="  flex flex-col gap-1 items-center md:items-start">
-                    <h2 className=" text-xl font-medium ">{product.name}</h2>
+                    <h2 className="max-w-lg text-xl font-medium ">
+                        {product.name}
+                    </h2>
                     <p className="">
                         {product.description && product.description}
                     </p>

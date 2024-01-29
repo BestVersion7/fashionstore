@@ -1,3 +1,8 @@
+export const shortenTitle = (title: string) => {
+    const limit = 60;
+    return title.length > limit ? `${title.slice(0, limit)}...` : title;
+};
+
 export const formatCurrency = (total: number) => {
     return `$${(total / 100).toFixed(2)}`;
 };
