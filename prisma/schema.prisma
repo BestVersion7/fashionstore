@@ -167,21 +167,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model ScrapeProductName {
-  product_id         BigInt               @id(map: "scraptable_pkey") @default(autoincrement())
-  created_at         DateTime             @default(now()) @db.Timestamptz(6)
-  product_name       String               @unique(map: "scraptable_product_name_key")
-  ScrapeProductPrice ScrapeProductPrice[]
-}
-
-model ScrapeProductPrice {
-  id                BigInt             @id @default(autoincrement())
-  created_at        DateTime           @default(now()) @db.Timestamptz(6)
-  product_name      String?
-  product_price     Decimal?           @db.Decimal
-  ScrapeProductName ScrapeProductName? @relation(fields: [product_name], references: [product_name], onDelete: Cascade)
-}
-
 model OrderInfo {
   order_number   BigInt     @id @default(autoincrement())
   created_at     DateTime   @default(now()) @db.Timestamptz(6)
@@ -235,4 +220,26 @@ model ProductReviewInfo {
   product_id     BigInt?
   ProductInfo    ProductInfo? @relation(fields: [product_id], references: [product_id], onDelete: Restrict)
   User           User?        @relation(fields: [user_email], references: [email], onDelete: SetDefault)
+}
+
+model ScrapePriceInfo {
+  price_id          BigInt              @id(map: "ScrapeProductPrice_pkey") @default(autoincrement())
+  created_at        DateTime            @default(now()) @db.Timestamptz(6)
+  unit_amount       Decimal?            @db.Decimal
+  updated_at        DateTime?           @db.Timestamptz(6)
+  currency          String?             @default("usd")
+  ScrapeProductInfo ScrapeProductInfo[]
+}
+
+model ScrapeProductInfo {
+  product_id      BigInt           @id(map: "scraptable_pkey") @default(autoincrement())
+  created_at      DateTime         @default(now()) @db.Timestamptz(6)
+  name            String           @unique(map: "scraptable_product_name_key")
+  description     String?
+  images          String[]
+  category        String?
+  updated_at      DateTime?        @default(now()) @db.Timestamptz(6)
+  active          Boolean?         @default(true)
+  default_price   BigInt?
+  ScrapePriceInfo ScrapePriceInfo? @relation(fields: [default_price], references: [price_id], onDelete: Restrict)
 }
