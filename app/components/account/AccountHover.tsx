@@ -8,7 +8,7 @@ export const AccountHover = async () => {
     const session = await getServerSession(authOptions);
 
     return (
-        <div className="relative dropdown flex items-center hover:cursor-pointer ">
+        <div className="relative py-4 dropdown flex items-center hover:cursor-pointer ">
             <span className="text-3xl">
                 <RiAccountCircleLine />
             </span>
@@ -17,35 +17,31 @@ export const AccountHover = async () => {
 
                 {/* this is to make bg gray */}
                 {/* <div className="dropdown-bg hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
-                <ul className="absolute top-7 dropdown-menu hidden text-black bg-violet-50 border border-solid border-violet-500 text-center w-40 py-2">
+                <div className="dropdown-menu hidden absolute top-[59px] z-20 px-5 font-semibold tracking-tight w-48 py-3 bg-cyan-600 shadow-xl rounded-md text-sm">
                     {/* check for session user different hover screen */}
 
                     {!session ? (
-                        <>
-                            <li className="text-sm">
-                                <Link
-                                    className="hover:underline"
-                                    href="/signin"
-                                >
-                                    Sign In / Sign Up
-                                </Link>
-                            </li>
-                        </>
+                        <div className="text-sm">
+                            <Link className="hover:underline" href="/signin">
+                                Sign In / Sign Up
+                            </Link>
+                        </div>
                     ) : (
-                        <>
-                            <li className="text-l font-bold">Your Account</li>
-                            <li className="text-sm hover:underline">
-                                <Link href="/account">Account</Link>
-                            </li>
-                            <li className="text-sm hover:underline">
-                                <Link href="/account/orders">Orders</Link>
-                            </li>
-                            <li className="text-sm ">
-                                <SignOutBtn />
-                            </li>
-                        </>
+                        <div className="flex flex-col items-start gap-2">
+                            <Link href="/account" className="hover:underline">
+                                Edit account details
+                            </Link>
+                            <Link
+                                href="/account/orders"
+                                className="hover:underline"
+                            >
+                                View past orders
+                            </Link>
+                            <br />
+                            <SignOutBtn />
+                        </div>
                     )}
-                </ul>
+                </div>
             </div>
         </div>
     );
