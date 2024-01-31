@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
         const findCart = await prisma.cartInfo.findMany({
             where: {
                 cookie_id: `${cartCookie}`,
-                product_id,
+                product_id: Number(product_id),
             },
         });
 

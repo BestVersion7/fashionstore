@@ -9,7 +9,7 @@ export default async function Home() {
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
                 <p className="">
                     Sign up for our newsletter and <b>Buy Two Get One FREE</b>.
-                    Ends 1/31.
+                    Ends 3/31.
                 </p>
                 <Link
                     className="bg-white rounded-lg px-4 py-2 border border-solid border-black hover:bg-green-100"
