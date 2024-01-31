@@ -171,7 +171,7 @@ model OrderInfo {
   order_number   BigInt     @id @default(autoincrement())
   created_at     DateTime   @default(now()) @db.Timestamptz(6)
   order_total    Decimal?   @db.Decimal
-  payment_intent String?
+  payment_intent String
   email          String
   cookie_id      String     @unique @db.Uuid
   tracking_id    String?
@@ -184,31 +184,33 @@ model PriceInfo {
   updated_at  DateTime?     @default(now()) @db.Timestamptz(6)
   currency    String        @default("usd")
   price_id    BigInt        @id @default(autoincrement())
+  product_id  BigInt?
   CartInfo    CartInfo[]
   ProductInfo ProductInfo[]
 }
 
 model ProductInfo {
-  created_at              DateTime                 @default(now()) @db.Timestamptz(6)
+  created_at              DateTime                  @default(now()) @db.Timestamptz(6)
   description             String?
   images                  String[]
-  name                    String                   @unique
-  updated_at              DateTime?                @default(now()) @db.Timestamptz(6)
-  active                  Boolean?                 @default(true)
+  name                    String                    @unique
+  updated_at              DateTime?                 @default(now()) @db.Timestamptz(6)
+  active                  Boolean?                  @default(true)
   category                String?
-  product_id              BigInt                   @id @default(autoincrement())
-  default_price           BigInt
+  product_id              BigInt                    @id @default(autoincrement())
+  default_price           BigInt?
   CartInfo                CartInfo[]
-  ProductAvailabilityInfo ProductAvailabilityInfo?
-  PriceInfo               PriceInfo                @relation(fields: [default_price], references: [price_id])
+  ProductAvailabilityInfo ProductAvailabilityInfo[]
+  PriceInfo               PriceInfo?                @relation(fields: [default_price], references: [price_id], onDelete: Restrict)
   ProductReviewInfo       ProductReviewInfo[]
 }
 
 model ProductAvailabilityInfo {
   updated_at         DateTime    @default(now()) @db.Timestamptz(6)
   available_quantity Decimal     @default(0) @db.Decimal
-  product_id         BigInt      @id @default(autoincrement())
-  ProductInfo        ProductInfo @relation(fields: [product_id], references: [product_id])
+  product_id         BigInt      @default(autoincrement())
+  id                 BigInt      @id @default(autoincrement())
+  ProductInfo        ProductInfo @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
 }
 
 model ProductReviewInfo {
@@ -226,7 +228,7 @@ model ScrapePriceInfo {
   price_id          BigInt              @id(map: "ScrapeProductPrice_pkey") @default(autoincrement())
   created_at        DateTime            @default(now()) @db.Timestamptz(6)
   unit_amount       Decimal?            @db.Decimal
-  updated_at        DateTime?           @db.Timestamptz(6)
+  updated_at        DateTime?           @default(now()) @db.Timestamptz(6)
   currency          String?             @default("usd")
   ScrapeProductInfo ScrapeProductInfo[]
 }

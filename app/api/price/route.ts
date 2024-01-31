@@ -3,7 +3,7 @@ import prisma from "@/app/lib/prisma";
 
 export async function GET(req: NextRequest) {
     try {
-        const priceId = req.nextUrl.searchParams.get("price_id");
+        const priceId = req.nextUrl.searchParams.get("product_id");
         const data = await prisma.priceInfo.findUnique({
             where: {
                 price_id: Number(priceId),

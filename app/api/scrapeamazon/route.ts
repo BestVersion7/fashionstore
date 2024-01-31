@@ -52,23 +52,31 @@ export async function POST() {
             });
 
             if (!findProductName) {
+                const newProduct = await prisma.productInfo.create({
+                    data: {
+                        name: nameArrayMapped[i],
+                        category,
+                        images: [`${imageArrayMapped[i]}`],
+                    },
+                    select: {
+                        product_id: true,
+                    },
+                });
                 const priceInfo = await prisma.priceInfo.create({
                     data: {
                         unit_amount: Number(amountArrayMapped[i]) * 100,
+                        product_id: newProduct.product_id,
                     },
                     select: {
                         price_id: true,
                     },
                 });
-                const newProduct = await prisma.productInfo.create({
+                await prisma.productInfo.update({
                     data: {
-                        name: nameArrayMapped[i],
-                        category,
                         default_price: priceInfo.price_id,
-                        images: [`${imageArrayMapped[i]}`],
                     },
-                    select: {
-                        product_id: true,
+                    where: {
+                        product_id: newProduct.product_id,
                     },
                 });
                 await prisma.productAvailabilityInfo.create({

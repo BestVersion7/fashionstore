@@ -24,7 +24,9 @@ const priceOrigin = `${BASE_URL}/api/price`;
 const revalidateTime = 60 * 60 * 24 * 1;
 
 export const getPaymentIntent = async (id: string) => {
-    const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`);
+    const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`, {
+        // next: {revalidate: revalidateTime}
+    });
     const data: PaymentIntentType = await res.json();
     return data;
 };
@@ -130,9 +132,9 @@ export const get24ProductsBySearchCategory = async (
 export const getOrderByPaymentIntent = async (paymentIntent: string) => {
     const res = await fetch(`${orderOrigin}?payment_intent=${paymentIntent}`, {
         next: { revalidate: revalidateTime },
-        headers: {
-            authorization: `${process.env.API_KEY}`,
-        },
+        // headers: {
+        //     authorization: `${process.env.API_KEY}`,
+        // },
     });
     const data: OrderType = await res.json();
     return data;

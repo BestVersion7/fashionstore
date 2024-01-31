@@ -23,6 +23,8 @@ const productAvailabilityOrigin = `${BASE_URL}/api/productavailability`;
 const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 
+// const revalidateTime = 60 * 60 * 24 * 1;
+
 export const createCart = async (
     cart: Pick<CartType, "price_id" | "product_id" | "quantity">
 ) => {
@@ -60,6 +62,7 @@ export const deleteCartItemByProductId = async (productId: number) => {
 export const getPaymentIntentFromCookie = async () => {
     const res = await fetch(
         `${cartCookieOrigin}?cookie_id=${getCookieClient()}`
+        // {next: {revalidate: revalidateTime}}
     );
     const data: string = await res.json();
     return data;
