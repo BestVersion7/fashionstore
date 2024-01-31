@@ -17,7 +17,7 @@ export const AccountHover = async () => {
 
                 {/* this is to make bg gray */}
                 {/* <div className="dropdown-bg hidden fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div> */}
-                <div className="dropdown-menu hidden absolute top-[59px] z-20 px-5 font-semibold tracking-tight w-48 py-3 bg-cyan-600 shadow-xl rounded-md text-sm">
+                <div className="dropdown-menu hidden  absolute top-[59px] z-20 px-5 font-medium tracking-wider w-48 py-3 bg-red-200 text-black shadow-xl rounded-md text-sm">
                     {/* check for session user different hover screen */}
 
                     {!session ? (
