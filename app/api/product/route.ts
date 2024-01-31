@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
             data2 = await prisma.productInfo.findUnique({
                 where: {
                     product_id: Number(productId),
-                    active: true,
                 },
             });
         } else {
