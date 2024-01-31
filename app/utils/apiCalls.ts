@@ -99,7 +99,7 @@ export const getProductById = async (id: number) => {
 
 export const getPriceById = async (id: number) => {
     const res = await fetch(`${priceOrigin}?price_id=${id}`, {
-        next: { revalidate: revalidateTime },
+        // next: { revalidate: revalidateTime },
     });
     const data: PriceType = await res.json();
     return data;
