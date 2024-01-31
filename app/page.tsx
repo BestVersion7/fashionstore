@@ -5,7 +5,7 @@ import { Trending } from "./components/product/Trending";
 
 export default async function Home() {
     return (
-        <main className="max-w-[1500px] px-0 py-0">
+        <main className="max-w-[1520px] px-0 py-0">
             <section className="bg-yellow-400 px-4 pt-2 pb-3 flex flex-col items-center md:flex-row md:justify-between">
                 <p className="">
                     Sign up for our newsletter and <b>Buy Two Get One FREE</b>.

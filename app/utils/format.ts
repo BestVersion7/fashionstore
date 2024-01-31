@@ -24,21 +24,6 @@ export const formatUrlToProductName = (name: string) => {
     return newString;
 };
 
-const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
-
 export const formatTimeDifference = (date: Date) => {
     let age: string;
     let divide: number;

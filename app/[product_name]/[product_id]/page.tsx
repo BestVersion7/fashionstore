@@ -61,7 +61,9 @@ export default async function CategoryShop({
             <div className="border border-solid border-black bg-white py-1">
                 <SearchInput />
             </div>
-            <ProductFilter />
+            <div className="py-2">
+                <ProductFilter />
+            </div>
 
             {/* product desc */}
             <div className="my-3  flex flex-col items-center text-center gap-2 md:flex-row md:items-start md:text-left">
