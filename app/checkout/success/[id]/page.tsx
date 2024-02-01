@@ -12,7 +12,6 @@ export default async function SuccessPage({
 }) {
     const paymentIntentData = await getPaymentIntent(params.id);
     const orderData = await getOrderByPaymentIntent(params.id);
-
     return (
         <main>
             <p className="text-xl font-bold">

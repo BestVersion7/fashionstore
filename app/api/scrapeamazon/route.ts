@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 const url = "https://afashionstore.vercel.app/shop/tops";
-const category = "";
+const category = "womens tops";
 // const url = `https://www.amazon.com/s?k=${category}`;
 
 export async function POST() {
@@ -55,7 +55,7 @@ export async function POST() {
                 const newProduct = await prisma.productInfo.create({
                     data: {
                         name: nameArrayMapped[i],
-                        category,
+                        category: "tops",
                         images: [`${imageArrayMapped[i]}`],
                     },
                     select: {

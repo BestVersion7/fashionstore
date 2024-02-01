@@ -132,9 +132,9 @@ export const get24ProductsBySearchCategory = async (
 export const getOrderByPaymentIntent = async (paymentIntent: string) => {
     const res = await fetch(`${orderOrigin}?payment_intent=${paymentIntent}`, {
         next: { revalidate: revalidateTime },
-        // headers: {
-        //     authorization: `${process.env.API_KEY}`,
-        // },
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
     });
     const data: OrderType = await res.json();
     return data;
