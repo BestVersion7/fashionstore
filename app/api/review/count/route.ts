@@ -19,6 +19,6 @@ export async function GET(req: NextRequest) {
 
         return NextResponse.json(data._count ?? 0);
     } catch (err) {
-        return NextResponse.json(err, { status: 500 });
+        return NextResponse.json(0, { status: 500 });
     }
 }
