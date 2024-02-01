@@ -18,9 +18,13 @@ export const Product = async (props: ProductType) => {
     const prices: PriceType = await getPriceById(props.default_price);
     const productAvailability: ProductAvailabilityType =
         await getProductAvailableQuantity(props.product_id);
-    // get reviews
     const reviewCount = await getProductReviewCount(props.product_id);
     const reviewRating = await getProductRatingAverage(props.product_id);
+
+    // let rCount = reviewCount;
+    // if (reviewCount?.name) {
+    //     rCount = 0;
+    // }
 
     return (
         <article className="border grid grid-rows-[210px,auto]">
@@ -50,10 +54,20 @@ export const Product = async (props: ProductType) => {
                     {shortenTitle(props.name)}
                 </Link>
 
-                {/* <p className="">{props.description}</p> */}
                 <p className="text-2xl  font-medium tracking-wide">
                     {formatCurrency(prices.unit_amount)}
                 </p>
+
+                {/* there is a bug here sometimes return {
+  name: 'PrismaClientKnownRequestError',
+  code: 'P1001',
+  clientVersion: '5.9.0',
+  meta: {
+    modelName: 'ProductReviewInfo',
+    database_host: 'aws-0-us-east-1.pooler.supabase.com',
+    database_port: 5432
+  }
+} */}
                 <ProductReviewStar
                     count={reviewCount}
                     average={reviewRating}
