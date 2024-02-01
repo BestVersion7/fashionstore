@@ -57,3 +57,5 @@ export const AddCartBtn = memo(
         );
     }
 );
+
+AddCartBtn.displayName = "AddCartBtn";
