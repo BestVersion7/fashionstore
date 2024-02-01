@@ -14,6 +14,8 @@ import { getToken } from "next-auth/jwt";
 //     availableOrigins = "https://afashionstore.vercel.app";
 // }
 
+const myEmail = "hunterkfan@gmail.com";
+
 export async function middleware(req: NextRequest) {
     const apiKey = req.headers.get("authorization");
 
@@ -25,12 +27,45 @@ export async function middleware(req: NextRequest) {
         }
     }
 
+    if (
+        req.nextUrl.pathname.startsWith("/api/product") &&
+        req.method === "PUT"
+    ) {
+        const session = await getToken({ req });
+        if (session?.email === myEmail) {
+            return NextResponse.next();
+        } else {
+            return NextResponse.json("unauthorized", { status: 401 });
+        }
+    }
+
+    if (
+        (req.nextUrl.pathname.startsWith("/api/price") &&
+            req.method === "PUT") ||
+        req.method === "POST"
+    ) {
+        const session = await getToken({ req });
+        if (session?.email === myEmail) {
+            return NextResponse.next();
+        } else {
+            return NextResponse.json("unauthorized", { status: 401 });
+        }
+    }
+
     if (req.nextUrl.pathname.startsWith("/account")) {
         const session = await getToken({ req });
         if (!session) {
             return NextResponse.redirect(new URL("/signin", req.url));
         } else if (session) {
             return NextResponse.next();
+        }
+    }
+    if (req.nextUrl.pathname.startsWith("/dashboard")) {
+        const session = await getToken({ req });
+        if (session?.email === myEmail) {
+            return NextResponse.next();
+        } else {
+            return NextResponse.redirect(new URL("/blocked", req.url));
         }
     }
 

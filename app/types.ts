@@ -7,10 +7,12 @@ export type ProductType = {
     name: string;
     category: "tops" | "dress";
     updated_at: string;
+    active: boolean;
 };
 
 export type PriceType = {
     unit_amount: number;
+    product_id: number;
 };
 
 export type PaymentIntentType = {

@@ -40,24 +40,30 @@ export async function GET(req: NextRequest) {
     }
 }
 
-// export async function POST() {
-//     try {
-//         const { data } = await stripe.products.list({ limit: 10 });
-//         for (let i = 0; i < data.length; i++) {
-//             await prisma.productInfo.create({
-//                 data: {
-//                     product_id: data[i].id,
-//                     default_price: data[i].default_price,
-//                     description: data[i].description,
-//                     images: data[i].images,
-//                     metadata: data[i].metadata,
-//                     name: data[i].name,
-//                 },
-//             });
-//         }
+export async function PUT(req: NextRequest) {
+    try {
+        const { name, category, description, default_price, active } =
+            await req.json();
+        const productId = req.nextUrl.searchParams.get("product_id");
 
-//         return NextResponse.json("created", { status: 201 });
-//     } catch (err) {
-//         return NextResponse.json(err, { status: 500 });
-//     }
-// }
+        let booleanActive = true;
+        if (active === "false") {
+            booleanActive = false;
+        }
+        await prisma.productInfo.update({
+            where: {
+                product_id: Number(productId),
+            },
+            data: {
+                name,
+                description,
+                default_price,
+                active: booleanActive,
+                category,
+            },
+        });
+        return NextResponse.json("Updated");
+    } catch (err) {
+        return NextResponse.json("Failed", { status: 500 });
+    }
+}
