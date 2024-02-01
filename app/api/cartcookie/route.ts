@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/app/lib/prisma";
 import { cookies } from "next/headers";
+import { randomUUID } from "crypto";
 
 export async function GET(req: NextRequest) {
     try {
@@ -18,7 +19,11 @@ export async function GET(req: NextRequest) {
 
 export async function POST() {
     try {
-        const data = await prisma.cookieInfo.create({});
+        const data = await prisma.cookieInfo.create({
+            data: {
+                cookie_id: randomUUID(),
+            },
+        });
 
         const response = NextResponse.json("cookie created");
         response.cookies.set({

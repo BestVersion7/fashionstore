@@ -12,27 +12,21 @@ export async function GET(req: NextRequest) {
                 unit_amount: true,
             },
         });
+
         return NextResponse.json(data);
     } catch (err) {
         return NextResponse.json(err, { status: 500 });
     }
 }
 
-// export async function POST() {
-//     try {
-//         const { data } = await stripe.prices.list({ limit: 10 });
-
-//         for (let i = 0; i < data.length; i++) {
-//             await prisma.priceInfo.create({
-//                 data: {
-//                     price_id: data[i].id,
-//                     product_id: data[i].product,
-//                     unit_amount: data[i].unit_amount,
-//                 },
-//             });
-//         }
-//         return NextResponse.json(data);
-//     } catch (err) {
-//         return NextResponse.json(err, { status: 500 });
-//     }
+// export async function PUT() {
+//     const data = await prisma.priceInfo.updateMany({
+//         where: {
+//             unit_amount: null,
+//         },
+//         data: {
+//             unit_amount: 0,
+//         },
+//     });
+//     return NextResponse.json("udpated price");
 // }

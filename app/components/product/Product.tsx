@@ -53,18 +53,8 @@ export const Product = async (props: ProductType) => {
                     {formatCurrency(prices.unit_amount)}
                 </p>
 
-                {/* there is a bug here sometimes return {
-  name: 'PrismaClientKnownRequestError',
-  code: 'P1001',
-  clientVersion: '5.9.0',
-  meta: {
-    modelName: 'ProductReviewInfo',
-    database_host: 'aws-0-us-east-1.pooler.supabase.com',
-    database_port: 5432
-  }
-} */}
                 <ProductReviewStar
-                    count={reviewCount ?? 0}
+                    count={reviewCount}
                     average={reviewRating}
                     link={`/${formatProductNameToUrl(props.name)}/${
                         props.product_id

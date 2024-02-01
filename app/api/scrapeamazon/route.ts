@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
 const url = "https://afashionstore.vercel.app/shop/tops";
-const category = "womens bag";
+const category = "womens dresses";
 // const url = `https://www.amazon.com/s?k=${category}`;
 
 export async function POST() {
@@ -41,8 +41,9 @@ export async function POST() {
         });
 
         const { amountArrayMapped, nameArrayMapped, imageArrayMapped } = data;
+
         // saving to db
-        const length = amountArrayMapped.length;
+        const length = nameArrayMapped.length;
 
         for (let i = 0; i < length; i++) {
             const findProductName = await prisma.productInfo.findFirst({
@@ -55,16 +56,19 @@ export async function POST() {
                 const newProduct = await prisma.productInfo.create({
                     data: {
                         name: nameArrayMapped[i],
-                        category: "bags",
+                        category: "dress",
                         images: [`${imageArrayMapped[i]}`],
                     },
                     select: {
                         product_id: true,
                     },
                 });
+
+                // sometimes amount returns null
+                const amt = Number(amountArrayMapped[i]) ?? 0;
                 const priceInfo = await prisma.priceInfo.create({
                     data: {
-                        unit_amount: Number(amountArrayMapped[i]) * 100,
+                        unit_amount: amt * 100,
                         product_id: newProduct.product_id,
                     },
                     select: {
