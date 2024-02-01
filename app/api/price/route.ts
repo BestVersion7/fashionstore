@@ -64,7 +64,7 @@ export async function PUT(req: NextRequest) {
             },
         });
 
-        return NextResponse.json("Created");
+        return NextResponse.json("Updated");
     } catch (err) {
         return NextResponse.json("Failed", { status: 500 });
     }

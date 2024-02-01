@@ -237,12 +237,20 @@ export const getQuantitySold = async (productId: number) => {
     return data;
 };
 
-// dashboard API calls
+// dashboard API calls !no cache
 export const get24ProductsAdmin = async (page: number) => {
     const res = await fetch(`${productOrigin}?page=${page}`, {
         cache: "no-cache",
     });
     const data: ProductType[] = await res.json();
+    return data;
+};
+
+export const getPriceByIdAdmin = async (id: number) => {
+    const res = await fetch(`${priceOrigin}?price_id=${id}`, {
+        cache: "no-cache",
+    });
+    const data: PriceType = await res.json();
     return data;
 };
 
@@ -269,5 +277,14 @@ export const createPrice = async (
         body: JSON.stringify(body),
     });
     const data: PriceType = await res.json();
+    return data;
+};
+
+export const updatePriceById = async (priceId: number, unit_amount: number) => {
+    const res = await fetch(`${priceOrigin}?price_id=${priceId}`, {
+        method: "put",
+        body: JSON.stringify({ unit_amount }),
+    });
+    const data = await res.json();
     return data;
 };
