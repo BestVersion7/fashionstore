@@ -5,10 +5,7 @@ import puppeteer from "puppeteer";
 const url = "https://afashionstore.vercel.app/shop/tops";
 const category = "womens bag";
 // const url = `https://www.amazon.com/s?k=${category}`;
-export async function GET() {
-    await prisma.efds.findMany();
-    return NextResponse.json("s");
-}
+
 export async function POST() {
     try {
         const browser = await puppeteer.launch({ headless: "new" });
