@@ -21,11 +21,6 @@ export const Product = async (props: ProductType) => {
     const reviewCount = await getProductReviewCount(props.product_id);
     const reviewRating = await getProductRatingAverage(props.product_id);
 
-    // let rCount = reviewCount;
-    // if (reviewCount?.name) {
-    //     rCount = 0;
-    // }
-
     return (
         <article className="border grid grid-rows-[210px,auto]">
             <Link
@@ -69,7 +64,7 @@ export const Product = async (props: ProductType) => {
   }
 } */}
                 <ProductReviewStar
-                    count={reviewCount}
+                    count={reviewCount ?? 0}
                     average={reviewRating}
                     link={`/${formatProductNameToUrl(props.name)}/${
                         props.product_id

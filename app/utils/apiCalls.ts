@@ -20,8 +20,8 @@ const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-// const revalidateTime = 1;
-const revalidateTime = 60 * 60 * 24 * 2;
+const revalidateTime = 1;
+// const revalidateTime = 60 * 60 * 24 * 2;
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`, {
@@ -166,8 +166,8 @@ export const getProductReviewCount = async (product_id: number) => {
     const res = await fetch(`${reviewOrigin}/count?product_id=${product_id}`, {
         cache: "no-cache",
     });
-    const data: number = await res.json();
-    return data;
+    const data: { _count: number } = await res.json();
+    return data._count;
 };
 
 export const getProductRatingAverage = async (product_id: number) => {
@@ -177,7 +177,7 @@ export const getProductRatingAverage = async (product_id: number) => {
             cache: "no-cache",
         }
     );
-    const data: number = await res.json();
+    const data = await res.json();
     return data;
 };
 
