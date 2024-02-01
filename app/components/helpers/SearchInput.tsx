@@ -1,6 +1,6 @@
 "use client";
 import { IoSearchOutline } from "react-icons/io5";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { get5ProductsBySearchName } from "../../utils/apiCalls";
 import Link from "next/link";
 import { ProductType } from "../../types";

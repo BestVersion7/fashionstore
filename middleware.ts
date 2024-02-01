@@ -42,7 +42,7 @@ export async function middleware(req: NextRequest) {
     if (
         (req.nextUrl.pathname.startsWith("/api/price") &&
             req.method === "PUT") ||
-        req.method === "POST"
+        (req.nextUrl.pathname.startsWith("/api/price") && req.method === "POST")
     ) {
         const session = await getToken({ req });
         if (session?.email === myEmail) {
