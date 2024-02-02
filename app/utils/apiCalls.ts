@@ -140,14 +140,25 @@ export const getOrderByPaymentIntent = async (paymentIntent: string) => {
     return data;
 };
 
-export const getOrdersByEmail = async (email: string) => {
-    const res = await fetch(`${orderOrigin}?email=${email}`, {
+export const getOrdersByEmail = async (email: string, page: number) => {
+    const res = await fetch(`${orderOrigin}?email=${email}&page=${page}`, {
         cache: "no-cache",
         headers: {
             authorization: `${process.env.API_KEY}`,
         },
     });
     const data: OrderType[] = await res.json();
+    return data;
+};
+
+export const getOrderCountByEmail = async (email: string) => {
+    const res = await fetch(`${orderOrigin}/count?email=${email}`, {
+        cache: "no-cache",
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
+    });
+    const data: number = await res.json();
     return data;
 };
 
@@ -286,5 +297,27 @@ export const updatePriceById = async (priceId: number, unit_amount: number) => {
         body: JSON.stringify({ unit_amount }),
     });
     const data = await res.json();
+    return data;
+};
+
+export const getAllOrdersByPage = async (page: number) => {
+    const res = await fetch(`${orderOrigin}?page=${page}`, {
+        cache: "no-cache",
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
+    });
+    const data: OrderType[] = await res.json();
+    return data;
+};
+
+export const getAllOrdersCount = async () => {
+    const res = await fetch(`${orderOrigin}/count`, {
+        cache: "no-cache",
+        headers: {
+            authorization: `${process.env.API_KEY}`,
+        },
+    });
+    const data: number = await res.json();
     return data;
 };

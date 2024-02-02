@@ -19,11 +19,11 @@ export default async function CategoryShop({
 
     return (
         <>
-            <Pagination page={count} />
+            <Pagination count={count} take={24} />
             <ProductFilter />
             <ProductMapped products={products} />
             <div className="text-center">
-                <Pagination page={count} />
+                <Pagination count={count} take={24} />
             </div>
         </>
     );

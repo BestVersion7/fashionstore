@@ -50,11 +50,11 @@ export default async function CategoryShop({
     const count = await getCountProductBySearchCategory(params.category);
     return (
         <>
-            <Pagination page={count} />
+            <Pagination count={count} take={24} />
             <ProductFilter category={params.category} />
             <ProductMapped products={products} />
             <div className="text-center">
-                <Pagination page={count} />
+                <Pagination count={count} take={24} />
             </div>
         </>
     );

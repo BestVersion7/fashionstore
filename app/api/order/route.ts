@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
     const paymentIntent = req.nextUrl.searchParams.get("payment_intent");
     const email = req.nextUrl.searchParams.get("email");
+    const page = req.nextUrl.searchParams.get("page");
+
     let data2;
     try {
         if (paymentIntent) {
@@ -12,7 +14,7 @@ export async function GET(req: NextRequest) {
                     payment_intent: paymentIntent,
                 },
             });
-        } else if (email) {
+        } else if (email && page) {
             data2 = await prisma.orderInfo.findMany({
                 where: {
                     email: `${email}`,
@@ -20,6 +22,16 @@ export async function GET(req: NextRequest) {
                 orderBy: {
                     order_number: "desc",
                 },
+                take: 2,
+                skip: (Number(page) - 1) * 2,
+            });
+        } else if (page) {
+            data2 = await prisma.orderInfo.findMany({
+                orderBy: {
+                    order_number: "desc",
+                },
+                take: 10,
+                skip: (Number(page) - 1) * 10,
             });
         }
 
@@ -41,29 +53,7 @@ export async function POST(req: NextRequest) {
 
     try {
         // check the quantity to real time availability
-        // const orderLength = order_items.length;
-        // for (let i = 0; i < orderLength; i++) {
-        //     const findAvailability =
-        //         await prisma.productAvailabilityInfo.findUnique({
-        //             where: {
-        //                 product_id: order_items[i].product_id,
-        //             },
-        //             select: {
-        //                 available_quantity: true,
-        //             },
-        //         });
-        //     const availability =
-        //         Number(findAvailability?.available_quantity) || 0;
-
-        //     if (Number(order_items[i].quantity) > availability) {
-        //         return NextResponse.json(
-        //             `An item in your cart exceeds availability.`,
-        //             {
-        //                 status: 400,
-        //             }
-        //         );
-        //     }
-        // }
+        //    this is already handled in the form
 
         await prisma.orderInfo.create({
             data: {

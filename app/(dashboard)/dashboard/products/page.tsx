@@ -29,7 +29,8 @@ export default function ProductsPage() {
 
     return (
         <main>
-            <Pagination page={count} />
+            <Pagination count={count} take={24} />
+
             <div className="grid grid-cols-2 gap-3 ">
                 {products.map((item, index) => (
                     <div key={index}>

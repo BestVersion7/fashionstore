@@ -1,19 +1,25 @@
-import { getOrdersByEmail } from "@/app/utils/apiCalls";
+import { getOrdersByEmail, getOrderCountByEmail } from "@/app/utils/apiCalls";
 import { authOptions } from "@/app/api/auth/[...nextauth]/options";
 import { getServerSession } from "next-auth";
 import { OrderType } from "@/app/types";
 import Link from "next/link";
 import { OrderPaper } from "@/app/components/account/OrderPaper";
+import { Pagination } from "@/app/components/helpers/Pagination";
 
 export const metadata = {
     title: "Orders",
     description: "Orders for Afashionstore",
 };
 
-export default async function OrdersPage() {
+export default async function OrdersPage(props: {
+    searchParams: { page: number };
+}) {
+    const page = props.searchParams.page || 1;
     const session = await getServerSession(authOptions);
+    const count = await getOrderCountByEmail(`${session?.user?.email}`);
     const orders: OrderType[] = await getOrdersByEmail(
-        `${session?.user?.email}`
+        `${session?.user?.email}`,
+        page
     );
 
     return (
@@ -25,10 +31,11 @@ export default async function OrdersPage() {
                 Back to Account
             </Link>
 
+            <Pagination count={count} take={2} />
             <h2 className="mt-2 text-center text-2xl font-bold text-violet-700 tracking-wider">
-                Past Orders ({orders.length}):
+                Past Orders ({count}):
             </h2>
-            {orders.length < 1 ? (
+            {count < 1 ? (
                 <p className="text-center">You have no past orders.</p>
             ) : (
                 <div className="flex flex-col items-center gap-3  ">

@@ -11,7 +11,7 @@ export const OrderPaper = async (props: OrderType) => {
     const totalQuantity = await getCartTotal(props.cookie_id);
 
     return (
-        <article className="border-2 border-slate-600 py-2 px-3 bg-orange-50 w-[80vw] md:w-[600px]">
+        <article className="border-2 border-slate-600 py-2 px-3 bg-orange-50 w-[330px] sm:w-[400px] md:w-[500px]">
             <div className="md:flex md:justify-between">
                 <div>
                     <h3>
@@ -37,6 +37,9 @@ export const OrderPaper = async (props: OrderType) => {
                         <span className="font-bold">
                             {formatCurrency(props.order_total)}
                         </span>
+                    </p>
+                    <p>
+                        Email: <span className="font-bold">{props.email}</span>
                     </p>
                 </div>
                 <div className="">

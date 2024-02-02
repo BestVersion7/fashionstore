@@ -1,14 +1,14 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export const Pagination = (props: { page: number }) => {
+export const Pagination = (props: { count: number; take: number }) => {
     const router = useRouter();
     let page: (number | string)[] = [];
     const params = useSearchParams();
     const pageParam = params.get("page") || 1;
     const queryParam = params.get("q");
 
-    const ceiling = Math.ceil(props.page / 24) + 1;
+    const ceiling = Math.ceil(props.count / props.take) + 1;
     for (let i = 1; i < ceiling; i++) {
         page.push(i);
     }

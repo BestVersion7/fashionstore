@@ -28,18 +28,8 @@ export async function middleware(req: NextRequest) {
     }
 
     if (
-        req.nextUrl.pathname.startsWith("/api/product") &&
-        req.method === "PUT"
-    ) {
-        const session = await getToken({ req });
-        if (session?.email === myEmail) {
-            return NextResponse.next();
-        } else {
-            return NextResponse.json("unauthorized", { status: 401 });
-        }
-    }
-
-    if (
+        (req.nextUrl.pathname.startsWith("/api/product") &&
+            req.method === "PUT") ||
         (req.nextUrl.pathname.startsWith("/api/price") &&
             req.method === "PUT") ||
         (req.nextUrl.pathname.startsWith("/api/price") && req.method === "POST")
