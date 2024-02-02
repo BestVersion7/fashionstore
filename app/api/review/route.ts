@@ -6,20 +6,28 @@ export async function GET(req: NextRequest) {
     const page = req.nextUrl.searchParams.get("page");
 
     try {
-        if (!productId || !page) {
-            return NextResponse.json(0);
-        }
+        let data2;
 
-        const data2 = await prisma.productReviewInfo.findMany({
-            where: {
-                product_id: Number(productId),
-            },
-            orderBy: {
-                created_at: "desc",
-            },
-            take: 10,
-            skip: (Number(page) - 1) * 10,
-        });
+        if (productId && page) {
+            data2 = await prisma.productReviewInfo.findMany({
+                where: {
+                    product_id: Number(productId),
+                },
+                orderBy: {
+                    created_at: "desc",
+                },
+                take: 10,
+                skip: (Number(page) - 1) * 10,
+            });
+        } else if (page) {
+            data2 = await prisma.productReviewInfo.findMany({
+                orderBy: {
+                    created_at: "desc",
+                },
+                take: 20,
+                skip: (Number(page) - 1) * 20,
+            });
+        }
 
         const data = JSON.parse(
             JSON.stringify(

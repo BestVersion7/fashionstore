@@ -321,3 +321,18 @@ export const getAllOrdersCount = async () => {
     const data: number = await res.json();
     return data;
 };
+
+export const getAllReviewsByPage = async (page: number) => {
+    const res = await fetch(`${reviewOrigin}?page=${page}`, {
+        cache: "no-cache",
+    });
+    const data: ProductReviewType[] = await res.json();
+    return data;
+};
+export const getAllReviewsCount = async () => {
+    const res = await fetch(`${reviewOrigin}/count`, {
+        cache: "no-cache",
+    });
+    const data: { _count: number } = await res.json();
+    return data._count;
+};

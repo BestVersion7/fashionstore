@@ -12,6 +12,7 @@ export default async function DashboardPage(props: {
     return (
         <main>
             <Pagination take={10} count={count} />
+            <p>Count: {count} </p>
             <div className="grid grid-cols-2 gap-3">
                 {orders.map((item, index) => (
                     <OrderPaper key={index} {...item} />
