@@ -8,21 +8,17 @@ import { notificationsArray } from "@/app/utils/notifications";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
-export const ProductUpdateForm = (props: {
-    data: ProductType;
-    setReload: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+export const ProductUpdateForm = (props: ProductType) => {
     const router = useRouter();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const data = await updateProductById(props.data.product_id, state);
+        const data = await updateProductById(props.product_id, state);
         notificationsArray.push({ message: data });
         router.refresh();
-        props.setReload((val) => !val);
     };
 
-    const [state, dispatch] = useReducer(productReducer, props.data);
+    const [state, dispatch] = useReducer(productReducer, props);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         dispatch({
@@ -34,19 +30,19 @@ export const ProductUpdateForm = (props: {
     // name, description, default_price, active
     return (
         <form onSubmit={handleSubmit} className="grid border  border-black">
-            <h3>ProductId: {props.data.product_id}</h3>
+            <h3>ProductId: {props.product_id}</h3>
             <div className="h-36 relative">
                 <Image
                     className="object-contain object-left"
                     fill
-                    src={props.data.images[0]}
+                    src={props.images[0]}
                     alt="d"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
             </div>
             <label>Name</label>
             <input
-                value={props.data.name}
+                defaultValue={props.name}
                 name="name"
                 onChange={handleChange}
                 type="text"
@@ -54,21 +50,31 @@ export const ProductUpdateForm = (props: {
             />
             <label>Category</label>
             <input
-                defaultValue={props.data.category}
+                defaultValue={props.category}
                 name="category"
                 onChange={handleChange}
                 type="text"
                 title="desc"
             />
+            <label>Default_Price</label>
+            <input
+                defaultValue={`${props.default_price}`}
+                name="default_price"
+                onChange={handleChange}
+                title="default_price"
+                type="text"
+            />
             <label>Active</label>
             <input
-                defaultValue={`${props.data.active}`}
+                defaultValue={`${props.active}`}
                 name="active"
                 onChange={handleChange}
                 title="active"
                 type="text"
             />
-            <button type="submit">Update</button>
+            <button className="submit-button" type="submit">
+                Update Product
+            </button>
         </form>
     );
 };

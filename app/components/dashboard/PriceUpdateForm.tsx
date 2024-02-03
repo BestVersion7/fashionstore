@@ -1,23 +1,32 @@
 "use client";
-import { getPriceByIdAdmin, updatePriceById } from "@/app/utils/apiCalls";
+import {
+    getPriceByIdAdmin,
+    updatePriceById,
+    getPricesByProductId,
+} from "@/app/utils/apiCalls";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { notificationsArray } from "@/app/utils/notifications";
+import { PriceType } from "@/app/types";
 
 export const PriceUpdateForm = (props: {
+    product_id: number;
     price_id: number;
-    setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
     const [price, setPrice] = useState(0);
+    const [prices, setPrices] = useState<PriceType[]>([]);
     const router = useRouter();
 
-    const getPrice = async () => {
+    const fetchPrice = async () => {
         const data = await getPriceByIdAdmin(props.price_id);
         setPrice(data.unit_amount);
+        const getAllPrices = await getPricesByProductId(props.product_id);
+        console.log(getAllPrices);
+        setPrices(getAllPrices);
     };
 
     useEffect(() => {
-        getPrice();
+        fetchPrice();
     }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -25,12 +34,17 @@ export const PriceUpdateForm = (props: {
         const data = await updatePriceById(props.price_id, price);
         notificationsArray.push({ message: data });
         router.refresh();
-        props.setReload((val) => !val);
     };
 
     return (
         <form onSubmit={handleSubmit} className="border border-red-400 grid">
-            <label>Price Id: {props.price_id}</label>
+            <section>
+                {prices.map((item, index) => (
+                    <p key={index}>
+                        Product Id: {item.price_id} Amount: {item.unit_amount}
+                    </p>
+                ))}
+            </section>
             <input
                 title="price"
                 type="number"
@@ -40,7 +54,9 @@ export const PriceUpdateForm = (props: {
                     setPrice(Number(e.target.value))
                 }
             />
-            <button type="submit">Update</button>
+            <button className="submit-button" type="submit">
+                Update Price
+            </button>
         </form>
     );
 };

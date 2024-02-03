@@ -11,6 +11,7 @@ export type ProductType = {
 };
 
 export type PriceType = {
+    price_id: number;
     unit_amount: number;
     product_id: number;
 };

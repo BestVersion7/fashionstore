@@ -47,7 +47,7 @@ export async function PUT(req: NextRequest) {
         const productId = req.nextUrl.searchParams.get("product_id");
 
         let booleanActive = true;
-        if (active === "false") {
+        if (active === "false" || active === false) {
             booleanActive = false;
         }
         await prisma.productInfo.update({

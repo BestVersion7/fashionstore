@@ -265,6 +265,22 @@ export const getPriceByIdAdmin = async (id: number) => {
     return data;
 };
 
+export const getPricesByProductId = async (productId: number) => {
+    const res = await fetch(`${priceOrigin}?product_id=${productId}`, {
+        cache: "no-cache",
+    });
+    const data: PriceType[] = await res.json();
+    return data;
+};
+
+export const getProductByIdAdmin = async (id: number) => {
+    const res = await fetch(`${productOrigin}?product_id=${id}`, {
+        cache: "no-cache",
+    });
+    const data: ProductType = await res.json();
+    return data;
+};
+
 export const updateProductById = async (
     productId: number,
     body: Pick<
@@ -351,7 +367,7 @@ export const updateProductAvailabilityAdmin = async (
 ) => {
     const res = await fetch(
         `${productAvailabilityOrigin}/admin?product_id=${productId}`,
-        { body: JSON.stringify({ available_quantity }) }
+        { method: "put", body: JSON.stringify({ available_quantity }) }
     );
     const data: string = await res.json();
     return data;

@@ -32,6 +32,10 @@
     .link-button {
         @apply bg-red-100 rounded-md px-4 py-1 text-center font-medium border text-lg border-black hover:bg-red-200
     }
+
+    .submit-button {
+        @apply w-40 bg-green-200 rounded-md px-4 py-1 text-center border border-black hover:bg-green-300
+    }
 }
 
 @layer utilities {

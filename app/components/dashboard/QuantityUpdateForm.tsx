@@ -7,10 +7,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { notificationsArray } from "@/app/utils/notifications";
 
-export const QuantityUpdateForm = (props: {
-    product_id: number;
-    setReload: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+export const QuantityUpdateForm = (props: { product_id: number }) => {
     const [quantity, setQuantity] = useState(0);
     const router = useRouter();
 
@@ -25,14 +22,12 @@ export const QuantityUpdateForm = (props: {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         const data = await updateProductAvailabilityAdmin(
             props.product_id,
             quantity
         );
         notificationsArray.push({ message: data });
         router.refresh();
-        props.setReload((val) => !val);
     };
 
     return (
@@ -47,7 +42,9 @@ export const QuantityUpdateForm = (props: {
                     setQuantity(Number(e.target.value))
                 }
             />
-            <button type="submit">Update</button>
+            <button className="submit-button" type="submit">
+                Update Quantity
+            </button>
         </form>
     );
 };
