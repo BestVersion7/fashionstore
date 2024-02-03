@@ -16,6 +16,9 @@ export default function Layout(props: { children: React.ReactNode }) {
                 <Link className="link-button" href="/dashboard/reviews">
                     Reviews
                 </Link>
+                <Link className="link-button" href="/dashboard/users">
+                    Users
+                </Link>
             </nav>
             {props.children}
         </main>

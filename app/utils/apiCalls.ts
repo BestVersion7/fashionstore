@@ -20,8 +20,8 @@ const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-// const revalidateTime = 1;
-const revalidateTime = 60 * 60 * 24 * 2;
+const revalidateTime = 1;
+// const revalidateTime = 60 * 60 * 24;
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`, {
@@ -250,7 +250,7 @@ export const getQuantitySold = async (productId: number) => {
 
 // dashboard API calls !no cache
 export const get24ProductsAdmin = async (page: number) => {
-    const res = await fetch(`${productOrigin}?page=${page}`, {
+    const res = await fetch(`${productOrigin}/admin?page=${page}`, {
         cache: "no-cache",
     });
     const data: ProductType[] = await res.json();
@@ -335,4 +335,12 @@ export const getAllReviewsCount = async () => {
     });
     const data: { _count: number } = await res.json();
     return data._count;
+};
+
+export const getAllUsers = async () => {
+    const res = await fetch(`${userOrigin}/admin`, {
+        cache: "no-cache",
+    });
+    const data: UserType[] = await res.json();
+    return data;
 };
