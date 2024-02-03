@@ -1,7 +1,7 @@
 "use client";
 import {
     getProductAvailableQuantity,
-    updatePriceById,
+    updateProductAvailabilityAdmin,
 } from "@/app/utils/apiCalls";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,7 +26,11 @@ export const QuantityUpdateForm = (props: {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // notificationsArray.push({ message: data });
+        const data = await updateProductAvailabilityAdmin(
+            props.product_id,
+            quantity
+        );
+        notificationsArray.push({ message: data });
         router.refresh();
         props.setReload((val) => !val);
     };

@@ -33,7 +33,10 @@ export async function middleware(req: NextRequest) {
             req.method === "PUT") ||
         (req.nextUrl.pathname.startsWith("/api/price") &&
             req.method === "PUT") ||
-        (req.nextUrl.pathname.startsWith("/api/price") && req.method === "POST")
+        (req.nextUrl.pathname.startsWith("/api/price") &&
+            req.method === "POST") ||
+        (req.nextUrl.pathname.startsWith("/api/productavailability/admin") &&
+            req.method === "PUT")
     ) {
         const session = await getToken({ req });
         if (session?.email === myEmail) {

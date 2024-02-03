@@ -20,8 +20,8 @@ const userOrigin = `${BASE_URL}/api/user`;
 const reviewOrigin = `${BASE_URL}/api/review`;
 const priceOrigin = `${BASE_URL}/api/price`;
 
-const revalidateTime = 1;
-// const revalidateTime = 60 * 60 * 24;
+// const revalidateTime = 1;
+const revalidateTime = 60 * 60 * 24;
 
 export const getPaymentIntent = async (id: string) => {
     const res = await fetch(`${stripeOrigin}/paymentintent?id=${id}`, {
@@ -342,5 +342,17 @@ export const getAllUsers = async () => {
         cache: "no-cache",
     });
     const data: UserType[] = await res.json();
+    return data;
+};
+
+export const updateProductAvailabilityAdmin = async (
+    productId: number,
+    available_quantity: number
+) => {
+    const res = await fetch(
+        `${productAvailabilityOrigin}/admin?product_id=${productId}`,
+        { body: JSON.stringify({ available_quantity }) }
+    );
+    const data: string = await res.json();
     return data;
 };
