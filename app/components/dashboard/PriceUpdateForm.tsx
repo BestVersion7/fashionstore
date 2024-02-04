@@ -21,7 +21,6 @@ export const PriceUpdateForm = (props: {
         const data = await getPriceByIdAdmin(props.price_id);
         setPrice(data.unit_amount);
         const getAllPrices = await getPricesByProductId(props.product_id);
-        console.log(getAllPrices);
         setPrices(getAllPrices);
     };
 
@@ -41,7 +40,7 @@ export const PriceUpdateForm = (props: {
             <section>
                 {prices.map((item, index) => (
                     <p key={index}>
-                        Product Id: {item.price_id} Amount: {item.unit_amount}
+                        Price Id: {item.price_id} Amount: {item.unit_amount}
                     </p>
                 ))}
             </section>

@@ -1,3 +1,3 @@
 export default function DashboardPage() {
-    return <div>Hello</div>;
+    return <div>Total quantity here in the future...</div>;
 }
