@@ -58,7 +58,7 @@ model CartInfo {
   created_at    DateTime    @default(now()) @db.Timestamptz(6)
   quantity      Decimal     @db.Decimal
   product_price Decimal     @db.Decimal
-  cookie_id     String      
+  cookie_id     String
   purchased     Boolean     @default(false)
   product_id    BigInt
   price_id      BigInt
@@ -82,7 +82,7 @@ model OrderInfo {
   order_total    Decimal?   @db.Decimal
   payment_intent String
   email          String
-  cookie_id      String     @unique 
+  cookie_id      String     @unique
   tracking_id    String?
   CookieInfo     CookieInfo @relation(fields: [cookie_id], references: [cookie_id])
 }

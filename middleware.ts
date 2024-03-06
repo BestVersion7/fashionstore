@@ -29,8 +29,8 @@ export async function middleware(req: NextRequest) {
 
     if (
         req.nextUrl.pathname.startsWith("/api/user/admin") ||
-        (req.nextUrl.pathname.startsWith("/api/product") &&
-            req.method === "PUT") ||
+        // (req.nextUrl.pathname.startsWith("/api/product") &&
+        //     req.method === "PUT") ||
         (req.nextUrl.pathname.startsWith("/api/price") &&
             req.method === "PUT") ||
         (req.nextUrl.pathname.startsWith("/api/price") &&
