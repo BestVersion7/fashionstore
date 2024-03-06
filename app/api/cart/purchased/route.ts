@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
     const month = 1000 * 60 * 60 * 24 * 30;
     // created 1/1 and now is 2/3 so created+30>now
-    const monthLimit = new Date(Date.now() - month);
+    // const monthLimit = new Date(Date.now() - month);
+    const monthLimit = new Date(Date.now() - month * 999);
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
 
