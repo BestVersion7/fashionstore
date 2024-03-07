@@ -112,9 +112,9 @@ export default async function Home() {
                 </div>
             </section>
 
-            {/* <section className="">
+            <section className="">
                 <Trending />
-            </section> */}
+            </section>
 
             <section className="flex flex-col text-center items-center gap-10 py-8 bg-red-50">
                 <h2 className="text-2xl tracking-wide font-extrabold ">
