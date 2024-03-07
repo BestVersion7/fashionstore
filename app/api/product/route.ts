@@ -14,6 +14,7 @@ export async function GET(req: NextRequest) {
                     product_id: Number(productId),
                 },
                 select: {
+                    product_id: true,
                     category: true,
                     default_price: true,
                     images: true,
@@ -46,6 +47,7 @@ export async function GET(req: NextRequest) {
                     active: true,
                 },
                 select: {
+                    product_id: true,
                     category: true,
                     default_price: true,
                     images: true,

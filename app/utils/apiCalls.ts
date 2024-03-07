@@ -39,7 +39,7 @@ export const get24ProductsBySearchName = async (
     const res = await fetch(
         `${productOrigin}/search?product_name=${input}&count=24&page=${page}`,
         {
-            next: { revalidate: revalidateTime },
+            cache: "no-cache",
         }
     );
     const data: Products24Type[] = await res.json();

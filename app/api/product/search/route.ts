@@ -21,6 +21,29 @@ export async function GET(req: NextRequest) {
                     created_at: "desc",
                 },
                 take: 24,
+                select: {
+                    product_id: true,
+                    category: true,
+                    default_price: true,
+                    images: true,
+                    name: true,
+                    active: true,
+                    PriceInfo_ProductInfo_default_priceToPriceInfo: {
+                        select: {
+                            unit_amount: true,
+                        },
+                    },
+                    ProductAvailabilityInfo: {
+                        select: {
+                            available_quantity: true,
+                        },
+                    },
+                    ProductReviewInfo: {
+                        select: {
+                            review_star: true,
+                        },
+                    },
+                },
                 skip: (Number(page) - 1) * 24,
             });
         } else if (productName) {
@@ -34,6 +57,29 @@ export async function GET(req: NextRequest) {
                 },
                 orderBy: {
                     created_at: "desc",
+                },
+                select: {
+                    product_id: true,
+                    category: true,
+                    default_price: true,
+                    images: true,
+                    name: true,
+                    active: true,
+                    PriceInfo_ProductInfo_default_priceToPriceInfo: {
+                        select: {
+                            unit_amount: true,
+                        },
+                    },
+                    ProductAvailabilityInfo: {
+                        select: {
+                            available_quantity: true,
+                        },
+                    },
+                    ProductReviewInfo: {
+                        select: {
+                            review_star: true,
+                        },
+                    },
                 },
                 take: Number(count),
                 skip: (Number(page) - 1) * 24,
