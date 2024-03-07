@@ -128,7 +128,7 @@ export const get24ProductsBySearchCategory = async (
     const res = await fetch(
         `${productOrigin}/search?product_category=${input}&page=${page}`,
         {
-            next: { revalidate: revalidateTime },
+            cache: "no-cache",
         }
     );
     const data: Products24Type[] = await res.json();
@@ -236,9 +236,7 @@ export const getCartTotal = async (cookieId: string) => {
 
 export const getPopularProducts = async () => {
     const res = await fetch(`${cartOrigin}/purchased`, {
-        next: {
-            revalidate: revalidateTime,
-        },
+        cache: "no-cache",
     });
     const data: PopularProductType[] = await res.json();
     return data;
