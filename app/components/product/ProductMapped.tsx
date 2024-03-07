@@ -1,7 +1,7 @@
-import { ProductType } from "../../types";
+import { Products24Type } from "../../types";
 import { Product } from "./Product";
 
-export const ProductMapped = async (props: { products: ProductType[] }) => {
+export const ProductMapped = (props: { products: Products24Type[] }) => {
     return (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  text-center py-3">
             {props.products.map((item, index) => (

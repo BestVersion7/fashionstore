@@ -23,6 +23,28 @@ export async function GET(req: NextRequest) {
                 where: {
                     active: true,
                 },
+                select: {
+                    category: true,
+                    default_price: true,
+                    images: true,
+                    name: true,
+                    active: true,
+                    PriceInfo_ProductInfo_default_priceToPriceInfo: {
+                        select: {
+                            unit_amount: true,
+                        },
+                    },
+                    ProductAvailabilityInfo: {
+                        select: {
+                            available_quantity: true,
+                        },
+                    },
+                    ProductReviewInfo: {
+                        select: {
+                            review_star: true,
+                        },
+                    },
+                },
                 skip: (Number(page) - 1) * 24,
             });
         }

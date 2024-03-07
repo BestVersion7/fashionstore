@@ -8,6 +8,7 @@ import {
     ProductAvailabilityType,
     PriceType,
     PopularProductType,
+    Products24Type,
 } from "../types";
 import { BASE_URL } from "../lib/constants";
 
@@ -57,9 +58,16 @@ export const get5ProductsBySearchName = async (input: string | undefined) => {
 
 export const get24Products = async (page: number) => {
     const res = await fetch(`${productOrigin}?page=${page}`, {
-        next: { revalidate: revalidateTime },
+        cache: "no-cache",
     });
-    const data: ProductType[] = await res.json();
+    const data: Products24Type[] = await res.json();
+    return data;
+};
+export const get24ProductsNoCache = async (page: number) => {
+    const res = await fetch(`${productOrigin}?page=${page}`, {
+        cache: "no-cache",
+    });
+    const data: Products24Type[] = await res.json();
     return data;
 };
 

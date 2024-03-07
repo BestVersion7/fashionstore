@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CartQPost } from "../cart/CartQPost";
 import { formatCurrency, formatProductNameToUrl } from "../../utils/format";
-import { PriceType, ProductAvailabilityType, ProductType } from "../../types";
+import { Products24Type } from "../../types";
 import {
     getProductAvailableQuantity,
     getPriceById,
@@ -13,13 +13,23 @@ import { ProductReviewStar } from "../review/ProductReviewStar";
 import Link from "next/link";
 import { shortenTitle } from "../../utils/format";
 
-export const Product = async (props: ProductType) => {
+export const Product = (props: Products24Type) => {
     // get the prices and availability
-    const prices: PriceType = await getPriceById(props.default_price);
-    const productAvailability: ProductAvailabilityType =
-        await getProductAvailableQuantity(props.product_id);
-    const reviewCount = await getProductReviewCount(props.product_id);
-    const reviewRating = await getProductRatingAverage(props.product_id);
+    // const prices: PriceType = await getPriceById(props.default_price);
+    // const productAvailability: ProductAvailabilityType =
+    //     await getProductAvailableQuantity(props.product_id);
+    // const reviewCount = props[0].ProductReviewInfo;
+    // const reviewRating = props[0].ProductReviewInfo;
+    const price =
+        props.PriceInfo_ProductInfo_default_priceToPriceInfo.unit_amount;
+    const productAvailability =
+        props.ProductAvailabilityInfo.available_quantity;
+    const reviewCount = props.ProductReviewInfo.length;
+    const reviewRating =
+        props.ProductReviewInfo.reduce(
+            (arr, val) => arr + Number(val.review_star),
+            0
+        ) / reviewCount || 0;
 
     return (
         <article className="border grid grid-rows-[210px,auto]">
@@ -51,7 +61,7 @@ export const Product = async (props: ProductType) => {
                 </Link>
 
                 <p className="text-2xl  font-medium tracking-wide">
-                    {formatCurrency(prices.unit_amount)}
+                    {formatCurrency(price)}
                 </p>
 
                 <ProductReviewStar
@@ -62,11 +72,11 @@ export const Product = async (props: ProductType) => {
                     }`}
                 />
                 <div>
-                    {Number(productAvailability.available_quantity) > 0 ? (
+                    {Number(productAvailability) > 0 ? (
                         <CartQPost
                             product_id={props.product_id}
                             price_id={props.default_price}
-                            product_price={prices.unit_amount}
+                            product_price={price}
                         />
                     ) : (
                         <StockLabel />

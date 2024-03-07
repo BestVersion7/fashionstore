@@ -16,6 +16,8 @@ export default async function Shop({
 }) {
     const page = searchParams.page || 1;
     const products = await get24Products(page);
+
+    // const productInfoNoCache = await get24Products(page);
     const count = await getCountProduct();
     return (
         <>

@@ -95,3 +95,9 @@ export type PopularProductType = {
     _sum: { quantity: number };
     product_id: number;
 };
+
+export type Products24Type = ProductType & {
+    PriceInfo_ProductInfo_default_priceToPriceInfo: { unit_amount: number };
+} & { ProductAvailabilityInfo: { available_quantity: number } } & {
+    ProductReviewInfo: { review_star?: number }[];
+};
