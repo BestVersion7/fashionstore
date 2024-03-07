@@ -37,6 +37,7 @@ export const Product = async (props: ProductType) => {
                     src={props.images[0]}
                     alt={props.name}
                     priority
+                    unoptimized
                 />
             </Link>
             <div className=" flex flex-col gap-1 items-center">

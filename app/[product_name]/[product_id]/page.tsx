@@ -75,6 +75,7 @@ export default async function CategoryShop({
                         src={product.images[0]}
                         alt={product.name}
                         priority
+                        unoptimized
                     />
                 </div>
                 <div className="  flex flex-col gap-1 items-center md:items-start">

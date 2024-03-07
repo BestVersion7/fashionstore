@@ -23,6 +23,7 @@ export const Product = async (props: ProductType) => {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     alt={props.name}
                     src={props.images[0]}
+                    unoptimized
                 />
             </div>
 

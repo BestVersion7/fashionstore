@@ -19,6 +19,7 @@ export const CartProductsV2 = async (
                         // width={"200"}
                         alt={productInfo.name}
                         src={productInfo.images[0]}
+                        unoptimized
                     />
                 </div>
 

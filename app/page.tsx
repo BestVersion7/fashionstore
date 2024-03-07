@@ -30,6 +30,7 @@ export default async function Home() {
                         src={
                             "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704864566/ecommerce/bg1new.png"
                         }
+                        unoptimized
                     />
                     <div className="absolute w-64 h-80 top-20 left-8">
                         <HomeProductCard
@@ -52,6 +53,7 @@ export default async function Home() {
                         src={
                             "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704864563/ecommerce/bg3new.png"
                         }
+                        unoptimized
                     />
                     <div className="absolute w-64 h-80 top-20 right-8">
                         <HomeProductCard
@@ -75,6 +77,7 @@ export default async function Home() {
                         src={
                             "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704868154/ecommerce/home1new.png"
                         }
+                        unoptimized
                     />
                     <div className="absolute w-64 h-80 top-20 left-8">
                         <HomeProductCard
@@ -96,6 +99,7 @@ export default async function Home() {
                         src={
                             "https://res.cloudinary.com/crimson-flamingo/image/upload/v1704868572/ecommerce/origin2new.png"
                         }
+                        unoptimized
                     />
                     <div className="absolute w-64 h-80 top-20 right-8">
                         <HomeProductCard

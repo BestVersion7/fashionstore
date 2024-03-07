@@ -27,6 +27,7 @@ export const CartProducts = async (props: CartType) => {
                         // width={"200"}
                         alt={productInfo.name}
                         src={productInfo.images[0]}
+                        unoptimized
                     />
                 </div>
                 <div className="md:justify-between md:flex mr-3">
