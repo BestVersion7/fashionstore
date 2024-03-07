@@ -14,12 +14,6 @@ import Link from "next/link";
 import { shortenTitle } from "../../utils/format";
 
 export const Product = (props: Products24Type) => {
-    // get the prices and availability
-    // const prices: PriceType = await getPriceById(props.default_price);
-    // const productAvailability: ProductAvailabilityType =
-    //     await getProductAvailableQuantity(props.product_id);
-    // const reviewCount = props[0].ProductReviewInfo;
-    // const reviewRating = props[0].ProductReviewInfo;
     const price =
         props.PriceInfo_ProductInfo_default_priceToPriceInfo.unit_amount;
     const productAvailability =

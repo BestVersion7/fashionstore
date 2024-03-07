@@ -13,6 +13,28 @@ export async function GET(req: NextRequest) {
                 where: {
                     product_id: Number(productId),
                 },
+                select: {
+                    category: true,
+                    default_price: true,
+                    images: true,
+                    name: true,
+                    active: true,
+                    PriceInfo_ProductInfo_default_priceToPriceInfo: {
+                        select: {
+                            unit_amount: true,
+                        },
+                    },
+                    ProductAvailabilityInfo: {
+                        select: {
+                            available_quantity: true,
+                        },
+                    },
+                    ProductReviewInfo: {
+                        select: {
+                            review_star: true,
+                        },
+                    },
+                },
             });
         } else {
             data2 = await prisma.productInfo.findMany({

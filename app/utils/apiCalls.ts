@@ -101,16 +101,14 @@ export const getCountProductBySearchCategory = async (category: string) => {
 
 export const getProductById = async (id: number) => {
     const res = await fetch(`${productOrigin}?product_id=${id}`, {
-        next: { revalidate: revalidateTime },
+        cache: "no-cache",
     });
-    const data: ProductType = await res.json();
+    const data: Products24Type = await res.json();
     return data;
 };
 
 export const getPriceById = async (id: number) => {
-    const res = await fetch(`${priceOrigin}?price_id=${id}`, {
-        // next: { revalidate: revalidateTime },
-    });
+    const res = await fetch(`${priceOrigin}?price_id=${id}`, {});
     const data: PriceType = await res.json();
     return data;
 };

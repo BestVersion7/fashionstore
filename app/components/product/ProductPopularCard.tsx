@@ -24,15 +24,14 @@ export const ProductPopularCard = async (props: PopularProductType) => {
         return <CgUnavailable className="text-3xl" />;
     }
 
-    const prices = await getPriceById(productInfo.default_price);
-    const availability = await getProductAvailableQuantity(props.product_id);
-
-    // the quantity sold no cache so run again
-    const quantitySold = await getQuantitySold(props.product_id);
-
-    // get reviews
-    const reviewCount = await getProductReviewCount(props.product_id);
-    const reviewRating = await getProductRatingAverage(props.product_id);
+    const prices = productInfo.PriceInfo_ProductInfo_default_priceToPriceInfo;
+    const availability = productInfo.ProductAvailabilityInfo;
+    const reviewCount = productInfo.ProductReviewInfo.length;
+    const reviewRating =
+        productInfo.ProductReviewInfo.reduce(
+            (arr, val) => arr + Number(val.review_star),
+            0
+        ) / reviewCount || 0;
 
     return (
         <article className=" pb-2 flex flex-col  ">
@@ -56,7 +55,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
             <div className="px-1 pt-1 flex flex-col  text-center items-center text-sm">
                 <div className="flex italic px-1 bg-red-700 text-white font-medium rounded-lg items-center">
                     <FaFire />
-                    {quantitySold} sold past month
+                    {props._sum.quantity} sold past month
                     <FaFire />
                 </div>
                 <Link
@@ -81,7 +80,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                 </p>
 
                 <div className="">
-                    {availability.available_quantity > 0 ? (
+                    {Number(availability.available_quantity) > 0 ? (
                         <AddCartBtn
                             price_id={productInfo.default_price}
                             product_id={props.product_id}
