@@ -24,11 +24,10 @@ export const ProductReview = (props: props) => {
     const [reload, setReload] = useState(false);
 
     useEffect(() => {
-        async function getReviews(signal: AbortSignal) {
+        async function getReviews() {
             const reviewsData = await getTenProductReviewsByPage(
                 props.product_id,
-                page,
-                signal
+                page
             );
             const countData = await getProductReviewCount(props.product_id);
             const ratingData = await getProductRatingAverage(props.product_id);
@@ -36,11 +35,7 @@ export const ProductReview = (props: props) => {
             setReviewCount(countData);
             setReviewRating(ratingData);
         }
-        const controller = new AbortController();
-        getReviews(controller.signal);
-        return () => {
-            controller.abort();
-        };
+        getReviews();
     }, [reload]);
 
     let reviewPagination: number[] = [];

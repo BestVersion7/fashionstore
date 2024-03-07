@@ -5,7 +5,7 @@ export async function GET(req: NextRequest) {
     const month = 1000 * 60 * 60 * 24 * 30;
     // created 1/1 and now is 2/3 so created+30>now
     // const monthLimit = new Date(Date.now() - month);
-    const monthLimit = new Date(Date.now() - month * 999);
+    const monthLimit = new Date(Date.now() - month);
     try {
         const productId = req.nextUrl.searchParams.get("product_id");
 
@@ -17,12 +17,11 @@ export async function GET(req: NextRequest) {
                 where: {
                     product_id: Number(productId),
                     purchased: true,
-                    created_at: {
-                        gte: monthLimit,
-                    },
+                    // created_at: {
+                    //     gte: monthLimit,
+                    // },
                 },
             });
-
             return NextResponse.json(data._sum.quantity || 0);
         } else {
             const data2 = await prisma.cartInfo.groupBy({
@@ -32,9 +31,9 @@ export async function GET(req: NextRequest) {
                 },
                 where: {
                     purchased: true,
-                    created_at: {
-                        gte: monthLimit,
-                    },
+                    // created_at: {
+                    //     gte: monthLimit,
+                    // },
                 },
                 orderBy: [
                     {

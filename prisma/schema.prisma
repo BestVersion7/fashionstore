@@ -54,7 +54,6 @@ model VerificationToken {
 }
 
 model CartInfo {
-  cart_id       BigInt      @id @default(autoincrement())
   created_at    DateTime    @default(now()) @db.Timestamptz(6)
   quantity      Decimal     @db.Decimal
   product_price Decimal     @db.Decimal
@@ -62,6 +61,7 @@ model CartInfo {
   purchased     Boolean     @default(false)
   product_id    BigInt
   price_id      BigInt
+  cart_id       BigInt      @id @default(autoincrement())
   CookieInfo    CookieInfo  @relation(fields: [cookie_id], references: [cookie_id], onDelete: Cascade)
   PriceInfo     PriceInfo   @relation(fields: [price_id], references: [price_id], onDelete: Cascade)
   ProductInfo   ProductInfo @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
@@ -77,13 +77,13 @@ model CookieInfo {
 }
 
 model OrderInfo {
-  order_number   BigInt     @id @default(autoincrement())
   created_at     DateTime   @default(now()) @db.Timestamptz(6)
   order_total    Decimal?   @db.Decimal
   payment_intent String
   email          String
   cookie_id      String     @unique
   tracking_id    String?
+  order_number   BigInt     @id @default(autoincrement())
   CookieInfo     CookieInfo @relation(fields: [cookie_id], references: [cookie_id])
 }
 
@@ -92,8 +92,8 @@ model PriceInfo {
   unit_amount                                      Decimal?      @db.Decimal
   updated_at                                       DateTime?     @default(now()) @db.Timestamptz(6)
   currency                                         String        @default("usd")
-  price_id                                         BigInt        @id @default(autoincrement())
   product_id                                       BigInt
+  price_id                                         BigInt        @id @default(autoincrement())
   CartInfo                                         CartInfo[]
   ProductInfo_PriceInfo_product_idToProductInfo    ProductInfo   @relation("PriceInfo_product_idToProductInfo", fields: [product_id], references: [product_id], onDelete: Cascade)
   ProductInfo_ProductInfo_default_priceToPriceInfo ProductInfo[] @relation("ProductInfo_default_priceToPriceInfo")
@@ -115,8 +115,8 @@ model ProductInfo {
   updated_at                                     DateTime?                @default(now()) @db.Timestamptz(6)
   active                                         Boolean?                 @default(true)
   category                                       String?
-  product_id                                     BigInt                   @id @default(autoincrement())
   default_price                                  BigInt?
+  product_id                                     BigInt                   @id @default(autoincrement())
   CartInfo                                       CartInfo[]
   PriceInfo_PriceInfo_product_idToProductInfo    PriceInfo[]              @relation("PriceInfo_product_idToProductInfo")
   ProductAvailabilityInfo                        ProductAvailabilityInfo?
@@ -125,12 +125,12 @@ model ProductInfo {
 }
 
 model ProductReviewInfo {
-  review_id      BigInt       @id @default(autoincrement())
   created_at     DateTime     @default(now()) @db.Timestamptz(6)
   review_message String?
   review_star    Decimal      @default(5) @db.Decimal
   user_email     String?
   product_id     BigInt?
+  review_id      BigInt       @id @default(autoincrement())
   ProductInfo    ProductInfo? @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   User           User?        @relation(fields: [user_email], references: [email], onDelete: Cascade)
 }

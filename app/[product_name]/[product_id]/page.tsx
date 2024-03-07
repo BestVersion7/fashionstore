@@ -85,7 +85,7 @@ export default async function CategoryShop({
                         {product.description && product.description}
                     </p>
                     <p className="text-2xl  font-medium tracking-wide">
-                        {formatCurrency(prices.unit_amount)}
+                        {formatCurrency(Number(prices.unit_amount))}
                     </p>
                     <ProductReviewStar
                         count={reviewCount}
@@ -96,7 +96,7 @@ export default async function CategoryShop({
                         <CartQPost
                             product_id={product.product_id}
                             price_id={product.default_price}
-                            product_price={prices.unit_amount}
+                            product_price={Number(prices.unit_amount)}
                         />
                     ) : (
                         <StockLabel />
@@ -105,9 +105,9 @@ export default async function CategoryShop({
             </div>
 
             {/* popular */}
-            <section>
+            {/* <section>
                 <Trending />
-            </section>
+            </section> */}
 
             {/* Reviews */}
             <section className="max-w-4xl">
