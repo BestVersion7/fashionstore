@@ -17,9 +17,7 @@ export const Trending = async () => {
                 <GiClothes />
             </div>
             <div className=" mx-2 sm:mx-3 md:mx-4">
-                {mappedProducts.length > 5 && (
-                    <ItemSwiper cards={mappedProducts} />
-                )}
+                <ItemSwiper cards={mappedProducts} />
             </div>
         </div>
     );
