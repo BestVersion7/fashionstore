@@ -42,7 +42,7 @@ export const get24ProductsBySearchName = async (
             next: { revalidate: revalidateTime },
         }
     );
-    const data: ProductType[] = await res.json();
+    const data: Products24Type[] = await res.json();
     return data;
 };
 export const get5ProductsBySearchName = async (input: string | undefined) => {
