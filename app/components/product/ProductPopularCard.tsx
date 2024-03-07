@@ -50,6 +50,7 @@ export const ProductPopularCard = async (props: PopularProductType) => {
                     src={productInfo.images[0]}
                     alt={productInfo.name}
                     priority
+                    unoptimized
                 />
             </Link>
             <div className="px-1 pt-1 flex flex-col  text-center items-center text-sm">
