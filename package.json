@@ -25,7 +25,6 @@
     "react-dom": "^18.2.0",
     "react-highlight-words": "^0.20.0",
     "react-icons": "^4.12.0",
-    "sharp": "0.33.2",
     "stripe": "^14.19.0",
     "swiper": "^11.0.7"
   },
