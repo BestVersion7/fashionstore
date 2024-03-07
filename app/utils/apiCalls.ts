@@ -131,7 +131,7 @@ export const get24ProductsBySearchCategory = async (
             next: { revalidate: revalidateTime },
         }
     );
-    const data: ProductType[] = await res.json();
+    const data: Products24Type[] = await res.json();
     return data;
 };
 
