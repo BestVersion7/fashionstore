@@ -51,14 +51,14 @@ export async function POST() {
         for (let i = 0; i < length; i++) {
             const findProductName = await prisma.productInfo.findFirst({
                 where: {
-                    name: nameArrayMapped[i],
+                    name: <any>nameArrayMapped[i],
                 },
             });
 
             if (!findProductName) {
                 const newProduct = await prisma.productInfo.create({
                     data: {
-                        name: nameArrayMapped[i],
+                        name: <any>nameArrayMapped[i],
                         category: "bags",
                         images: [`${imageArrayMapped[i]}`],
                     },
