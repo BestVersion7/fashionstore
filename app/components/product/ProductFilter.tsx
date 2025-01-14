@@ -11,7 +11,7 @@ export const ProductFilter = (props: { category?: string }) => {
     return (
         <div className="flex items-center gap-2">
             Filters:
-            {["bags", "tops", "dress"].map((item) => (
+            {["tops", "dress"].map((item) => (
                 <Link
                     href={`/shop/${item}`}
                     key={item}

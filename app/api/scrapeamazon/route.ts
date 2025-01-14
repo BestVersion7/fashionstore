@@ -2,8 +2,9 @@ import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
-const url = "https://afashionstore.vercel.app/shop/tops";
-const category = "womens dresses";
+// const url = "https://afashionstore.vercel.app/shop/tops";
+const category = "bags";
+const url = "";
 // const url = `https://www.amazon.com/s?k=${category}`;
 
 export async function POST() {
@@ -21,7 +22,8 @@ export async function POST() {
 
             // amazon tags
             const unit_amount2 = "span.a-price-whole";
-            const pName2 = "span.a-size-base-plus.a-color-base.a-text-normal";
+            const pName2 =
+                "h2.a-size-base-plus.a-color-base.a-text-normal[aria-label]";
             const images2 = "img.s-image";
 
             const amountArray = Array.from(
@@ -31,7 +33,9 @@ export async function POST() {
                 item.innerHTML.slice(0, 2)
             );
             const nameArray = Array.from(document.querySelectorAll(pName2));
-            const nameArrayMapped = nameArray.map((item) => item.innerHTML);
+            const nameArrayMapped = nameArray.map((item) =>
+                item.getAttribute("aria-label")
+            );
             const imageArray = Array.from(document.querySelectorAll(images2));
             const imageArrayMapped = imageArray.map((item) =>
                 item.getAttribute("src")
@@ -56,7 +60,7 @@ export async function POST() {
                 const newProduct = await prisma.productInfo.create({
                     data: {
                         name: nameArrayMapped[i],
-                        category: "dress",
+                        category: "bags",
                         images: [`${imageArrayMapped[i]}`],
                     },
                     select: {
@@ -99,3 +103,21 @@ export async function POST() {
         return NextResponse.json(error, { status: 500 });
     }
 }
+
+// import prisma from "@/app/lib/prisma";
+// import { NextResponse } from "next/server";
+
+// export async function POST() {
+//     try {
+//         // const data2 = await prisma.productInfo.findMany({});
+//         const data2 = await prisma.productInfo.create({
+//             data: {
+//                 name: "george",
+//             },
+//         });
+
+//         return NextResponse.json("created");
+//     } catch (err) {
+//         return NextResponse.json("fail");
+//     }
+// }
