@@ -2,14 +2,13 @@ import prisma from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
-// const url = "https://afashionstore.vercel.app/shop/tops";
+const url = "https://afashionstore.vercel.app/shop/tops";
 const category = "bags";
-const url = "";
 // const url = `https://www.amazon.com/s?k=${category}`;
 
 export async function POST() {
     try {
-        const browser = await puppeteer.launch({ headless: "new" });
+        const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
 
         await page.goto(url);
